@@ -3,6 +3,7 @@ import { GlobalState, selectState } from '../state/state';
 
 const id = '#screen2'
 export function main() {
+
     document.querySelector(`${id} button`).addEventListener('click', () => {
         console.log('clicked 2');
     })

@@ -43,9 +43,6 @@ if (parcelRequire == null) {
 parcelRequire.register("ix1dx", function(module, exports) {
 
 $parcel$export(module.exports, "onDomReady", function () { return $f9c3f774c17381db$export$537b54b30f329b90; });
-function $f9c3f774c17381db$export$e0969da9b8fb378d() {
-    console.log("test");
-}
 function $f9c3f774c17381db$export$537b54b30f329b90(fn) {
     document.addEventListener("DOMContentLoaded", fn);
 }

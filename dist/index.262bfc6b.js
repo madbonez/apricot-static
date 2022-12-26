@@ -42,9 +42,6 @@ if (parcelRequire == null) {
 parcelRequire.register("jbrIz", function(module, exports) {
 
 $parcel$export(module.exports, "onDomReady", function () { return $95a056f974859800$export$537b54b30f329b90; });
-function $95a056f974859800$export$e0969da9b8fb378d() {
-    console.log("test");
-}
 function $95a056f974859800$export$537b54b30f329b90(fn) {
     document.addEventListener("DOMContentLoaded", fn);
 }
