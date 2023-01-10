@@ -284,10 +284,6 @@
   }
 }
 
-#screen3 {
-  display: none;
-}
-
 #screen3 .screen3_container {
   width: 100%;
   z-index: 20;

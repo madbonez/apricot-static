@@ -2,36 +2,45 @@
 <link rel="stylesheet" href="./Slider/index.scss"/>
 
 <div id="slider">
-    <div class="fixedContainer" id="scrollerRef">
-        <div class="slider trigger" id="sliderRef">
-            <div class="drag"/>
-            <include src="./src/Slider/Slide/index.html" locals='{
-                    "key": "0",
-                    "text": "{{slides[0].text}}",
-                    "image": "{{slides[0].image}}"
-    }'></include>
-            <include src="./src/Slider/Slide/index.html" locals='{
-                    "key": "1",
-                    "text": "Apart from the design of solutions \r\nand technical support, we also provide our customers services in consulting and strategic planning in the field  of emerging technologies.",
-                    "image": "././public/image/screen3/02.png"
-    }'></include>
-            <include src="./src/Slider/Slide/index.html" locals='{
-                   "key": "2",
-                   "text": "We are a team of highly qualified experts \r\nin immersive technologies with vast experience and an impressive portfolio of successfully implemented projects in various industries, including defense, education, and entertainment.",
-                   "image": "././public/image/screen3/03.png"
-    }'></include>
+    <extends src="./src/Slider/Slide/index.html">
+        <block name="content">Read the documentation</block>
+    </extends>
 
+    <each loop="item, index in slides">
+        asd
+    </each>
+<!--    <div class="fixedContainer" id="scrollerRef">-->
+<!--        <div class="slider trigger" id="sliderRef">-->
+<!--            <div class="drag"/>-->
+<!--            <include src="./src/Slider/Slide/index.html">-->
+<!--                {-->
+<!--                "key": "0",-->
+<!--                "text": "{{slides[0].text}}",-->
+<!--                "image": "{{slides[0].image}}"-->
+<!--                }-->
+<!--            </include>-->
+<!--            &lt;!&ndash;            <include src="./src/Slider/Slide/index.html" locals='{&ndash;&gt;-->
+<!--            &lt;!&ndash;                    "key": "1",&ndash;&gt;-->
+<!--            &lt;!&ndash;                    "text": "{{slides[1].text}}",&ndash;&gt;-->
+<!--            &lt;!&ndash;                    "image": "sad"&ndash;&gt;-->
+<!--            &lt;!&ndash;            }'></include>&ndash;&gt;-->
+<!--            &lt;!&ndash;            <include src="./src/Slider/Slide/index.html" locals='{&ndash;&gt;-->
+<!--            &lt;!&ndash;                   "key": "2",&ndash;&gt;-->
+<!--            &lt;!&ndash;                   "text": "We are a team of highly qualified experts \r\nin immersive technologies with vast experience and an impressive portfolio of successfully implemented projects in various industries, including defense, education, and entertainment.",&ndash;&gt;-->
+<!--            &lt;!&ndash;                   "image": "././public/image/screen3/03.png"&ndash;&gt;-->
+<!--            &lt;!&ndash;            }'></include>&ndash;&gt;-->
 
-            <div class="indicatorBox">
+<!--            <div class="indicatorBox">-->
 
-                <div>
-                    <!--onMouseEnter={() => handlerIndicatorMouseEnter(index)}
-               onMouseLeave={() => handlerIndicatorMouseLeave(index)}
-               onClick={() => handlerIndicatorClick(index)}-->
+<!--                <div>-->
+<!--                    &lt;!&ndash;onMouseEnter={() => handlerIndicatorMouseEnter(index)}-->
+<!--               onMouseLeave={() => handlerIndicatorMouseLeave(index)}-->
+<!--               onClick={() => handlerIndicatorClick(index)}&ndash;&gt;-->
 
-                    <div class="indicatorItem"/>
-                    <div class="indicatorItemOrange indicator-0"/>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--                    <div class="indicatorItem"/>-->
+<!--                    <div class="indicatorItemOrange indicator-0"/>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+</div>

@@ -1,7 +1,8 @@
 <script type="module" src="./Slider/Slide/index.ts"></script>
 <link rel="stylesheet" href="./Slider/Slide/index.scss"/>
 
-<div id="slide">
+<block name="content"></block>
+<div class="slide">
             <div class="circle circle-text circle-text-0">
                 <svg viewBox="0 0 560 560">
                     <circle cx="280" cy="280" r="278" class="circleDotted"/>
@@ -17,8 +18,9 @@
                             <circle cx="280" cy="280" r="280"/>
                         </clipPath>
                     </defs>
-                 <image class="imageAnimation" x="`${-50 - index * 15}%`" href={{image}}
-                           height="560" clip-path="url(#myClipCircle)"/>
+                    {{image}}
+<!--                 <image class="imageAnimation" x="`${-50 - index * 15}%`" href={{image}}-->
+<!--                           height="560" clip-path="url(#myClipCircle)"/>-->
                 </svg>
             </div>
 </div>

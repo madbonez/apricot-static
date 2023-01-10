@@ -297,7 +297,6 @@ let globalState: GlobalState = {
             "to_top_button_title": "Back to top"
         }
     }
-
 };
 const listeners = [];
 

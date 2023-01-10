@@ -16,8 +16,11 @@
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.0",
     "parcel": "^2.8.0",
-    "posthtml-doctype": "^1.1.1",
-    "posthtml-include": "^1.7.4",
+    "post-sequence": "0.3.0",
+    "posthtml-doctype": "1.1.1",
+    "posthtml-expressions": "1.1.1",
+    "posthtml-extend": "0.6.5",
+    "posthtml-include": "1.2.0",
     "rimraf": "3.0.2"
   },
   "dependencies": {

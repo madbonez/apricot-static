@@ -1,27 +1,6 @@
 @import "./src/styles/utils";
 
-#screen4 {
-  .screen4_container {
-    width: 100%;
-    h2 {
-      @extend .header2;
-    }
-    background-color: $white;
-    position: absolute;
-    z-index: 20;
-    height: 475px;
-  }
+#screen5 {
 
-  @media all and (max-width: 1200px) {
-    .screen4_container {
-      height: 415px;
-    }
-  }
-
-  @media all and (max-width: 800px) {
-    .screen4_container {
-      height: 345px;
-    }
-  }
 
 }
