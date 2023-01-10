@@ -1,0 +1,21 @@
+<script type="module" src="./Screen3/index.ts"></script>
+<link rel="stylesheet" href="./Screen3/index.scss" />
+
+<div id="screen3">
+    <div class="`$container light-gray">
+        <div class="not-Overflow-x  container" >
+            <ContentBlock
+                    scrollTrigger={enterScrollTrigger}
+                    title={cmsData.block_2.block_name}
+                    text={cmsData.block_2.title}
+            />
+        </div>
+        <Slider slides={cmsData.block_2.elements}
+                sliderRef={sliderRef}
+                globalScroll={globalScroll}
+                scrollTrigger={scrollTrigger}
+                enterScrollTrigger={enterScrollTrigger}
+                callbackChangeCursorState = {callbackChangeCursorState}
+        />
+    </div>
+</div>

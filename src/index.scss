@@ -1,4 +1,176 @@
+@import "./styles/normalize.css";
+@import "./styles/fonts.css";
+@import "./styles/variables.scss";
+@import "./styles/mixins.scss";
+@import "./styles/reset.scss";
+@import "./styles/typography.scss";
+
 body {
-    background-color: lightyellow;
+    height: 100%;
+    min-height: 100%;
+    width: 100vw;
+    color: $black;
+    background-color: $white;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+    -webkit-text-size-adjust: none;
+    .scrollbar-track, &::-webkit-scrollbar-track {
+        background: rgb(0,0,0,0);
+        &:hover {
+            opacity: 0;
+        }
+    }
+    .scrollbar-thumb, &::-webkit-scrollbar-thumb {
+        background: $black !important;
+        opacity: 50% !important;
+    }
 }
+
+html {
+    overflow-x: hidden;
+    .scrollbar-track, &::-webkit-scrollbar-track {
+        background: rgb(0,0,0,0);
+        &:hover {
+            opacity: 0;
+        }
+    }
+    .scrollbar-thumb, &::-webkit-scrollbar-thumb {
+        background: black !important;
+        opacity: 50% !important;
+    }
+}
+.not-Overflow-x{
+    overflow-x: hidden;
+}
+.container {
+    @include padding-x(120px,56px, 20px);
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+// для отладки анимации блоков
+.screen {
+    background-color: #e5e5f7;
+    opacity: 1;
+    background: radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #e5e5f7 20%, #e5e5f7 80%, transparent 80%, transparent) 42.5px 42.5px, linear-gradient(#484949 3.4000000000000004px, transparent 3.4000000000000004px) 0 -1.7000000000000002px, linear-gradient(90deg, #484949 3.4000000000000004px, #e5e5f7 3.4000000000000004px) -1.7000000000000002px 0;
+    background-size: 85px 85px, 85px 85px, 42.5px 42.5px, 42.5px 42.5px;
+}
+
+//цвет фона
+.light-gray {
+    background-color: $light-gray;
+}
+
+.orange {
+    background-color: $orange;
+}
+
+.black {
+    background-color: $black;
+}
+
+.white {
+    background-color: $white;
+}
+
+//шрифты
+h1 {
+    @extend .header1;
+    margin: 0;
+}
+
+.logo {
+    font-family: $inter-semiBold;
+    @extend .logo-text;
+    color: $orange;
+}
+
+h2 {
+    @extend .header2;
+}
+
+h3{
+    @extend .header3;
+}
+
+h4 {
+    @extend .header4;
+}
+
+p, input, label, textarea{
+    @extend .normal-text;
+}
+
+
+.imageContainer {
+    width:100%;
+    margin: 0 auto;
+    cursor: pointer;
+    img{
+        display: inline-block;
+        height: auto;
+        width: 100%;
+    }
+}
+
+a {
+    cursor: pointer;
+}
+.dragging {
+    opacity: 0;
+}
+
+body {
+    --orange: #{$orange};
+    --white: #{$white};
+    --gray: #{$gray};
+    --black: #{$black};
+}
+
+#cms-data {
+    display: none;
+}
+
+.cursorText, .cursorArrow {
+    font-family: $inter-semiBold;
+    @include fluidFontSize(18px, 20px, 18px, 20px, 18px, 20px);
+    color: $white;
+    font-weight: 600;
+}
+
+.cursorArrow {
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 10px;
+    opacity: 0;
+}
+
+.cursorText {
+    display: none;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.follow-cursor {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    background-color: $orange;
+    border-radius: 50%;
+    transform: translateY(-50%) translateX(-50%); /* центрируем кружок */
+    position: absolute; /* задаём абсолютное позиционирование, чтобы элемент не влиял на остальные элементы и его можно было бы позиционировать следом за курсором */
+    z-index: 998; /* чтобы элемент был над остальными элементами */
+    pointer-events: none; /* чтобы сквозь элемент можно было взаимодействовать с элементами, находящимися под ним */
+}
+
+
+
 

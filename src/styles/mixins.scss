@@ -1,0 +1,400 @@
+@import "./variables";
+// Responsive font-size
+/* use @include fluidFontSize(40px, 56px, 20px, 28px);*/
+@function calcFluidFontSize($f-min, $f-max, $min , $max) {
+  $k: ($f-max - $f-min)/($max - $min);
+  $b: $f-min - $k * $min;
+  @return calc( #{$k} * 100vw + #{$b} );
+}
+@function calcFluidLineHeight($h-min, $h-max, $min , $max) {
+  $k: ($h-max - $h-min)/($max - $min);
+  $b: $h-min - $k * $min;
+  @return calc( #{$k} * 100vw + #{$b} );
+}
+@mixin fluidFontSize($f-max, $h-max, $f-mid, $h-mid, $f-min, $h-min) {
+    font-size: $f-min;
+    line-height: $h-min;
+    @media (min-width: $w-min ) {
+      font-size: calcFluidFontSize($f-min, $f-mid, $w-min, $w-mid);
+      line-height: calcFluidLineHeight($h-min, $h-mid, $w-min, $w-mid);
+    }
+    @media (min-width: $w-mid ) {
+    font-size: calcFluidFontSize($f-mid, $f-max, $w-mid, $w-max);
+    line-height: calcFluidLineHeight($h-mid, $h-max, $w-mid, $w-max);
+    }
+    @media (min-width: $w-max) {
+      font-size: $f-max;
+      line-height: $h-max;
+    }
+}
+
+// Responsive paddings
+/* use @include fluidPadding(80px, 40px, / /t/r/l/b/x/y);*/
+/* use @include fluidMargin(80px, 40px, / /t/r/l/b/x/y);*/
+@function calcfluidSizes($m-min, $m-max, $min, $max) {
+  $k: ($m-max - $m-min)/($max - $min);
+  $b: $m-min - $k * $min;
+  @return calc( #{$k} * 100vw + #{$b} );
+}
+@function calcfluidSizes2($m-min2, $m-max2) {
+  $k: ($m-max2 - $m-min2)/($w-max - $w-min);
+  $b: $m-min2 - $k * $w-min;
+  @return calc( #{$k} * 100vw + #{$b} );
+}
+@mixin fluidPadding($m-max, $m-min, $m-max2: '', $m-min2: '', $prefix: '') {
+  @if($prefix == ''){
+    padding: $m-min;
+    @media (min-width: $w-min) {
+      padding: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      padding: $m-max;
+    }
+  }
+  @if($prefix == 'x'){
+    padding: 0 $m-min;
+    @media (min-width: $w-min) {
+      padding: 0 calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      padding: 0 $m-max;
+    }
+  }
+  @if($prefix == 'y'){
+    padding: $m-min 0;
+    @media (min-width: $w-min) {
+      padding: calcfluidSizes($m-min, $m-max) 0;
+    }
+    @media (min-width: $w-max) {
+      padding: $m-max 0;
+    }
+  }
+  @if($prefix == 'l'){
+    padding-left: $m-min;
+    @media (min-width: $w-min) {
+      padding-left: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      padding-left: $m-max;
+    }
+  }
+  @if($prefix == 'r'){
+    padding-right: $m-min;
+    @media (min-width: $w-min) {
+      padding-right: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      padding-right: $m-max;
+    }
+  }
+  @if($prefix == 't'){
+    padding-top: $m-min;
+    @media (min-width: $w-min) {
+      padding-top: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      padding-top: $m-max;
+    }
+  }
+  @if($prefix == 'b'){
+    padding-bottom: $m-min;
+    @media (min-width: $w-min) {
+      padding-bottom: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      padding-bottom: $m-max;
+    }
+  }
+  @if($prefix == 'xy'){
+    padding: $m-min $m-min2;
+    @media (min-width: $w-min) {
+      padding-top: calcfluidSizes($m-min, $m-max);
+      padding-bottom: calcfluidSizes($m-min, $m-max);
+      padding-right: calcfluidSizes2($m-min2, $m-max2);
+      padding-left: calcfluidSizes2($m-min2, $m-max2);
+    }
+    @media (min-width: $w-max) {
+      padding: $m-max $m-max2;
+    }
+  }
+}
+@mixin fluidMargin($m-max, $m-min, $m-max2: '', $m-min2: '', $prefix: '') {
+  @if($prefix == ''){
+    margin: $m-min;
+    @media (min-width: $w-min) {
+      margin: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      margin: $m-max;
+    }
+  }
+  @if($prefix == 'x'){
+    margin: 0 $m-min;
+    @media (min-width: $w-min) {
+      margin: 0 calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      margin: 0 $m-max;
+    }
+  }
+  @if($prefix == 'y'){
+    margin: $m-min 0;
+    @media (min-width: $w-min) {
+      margin: calcfluidSizes($m-min, $m-max) 0;
+    }
+    @media (min-width: $w-max) {
+      margin: $m-max 0;
+    }
+  }
+  @if($prefix == 'l'){
+    margin-left: $m-min;
+    @media (min-width: $w-min) {
+      margin-left: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      margin-left: $m-max;
+    }
+  }
+  @if($prefix == 'r'){
+    margin-right: $m-min;
+    @media (min-width: $w-min) {
+      margin-right: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      margin-right: $m-max;
+    }
+  }
+  @if($prefix == 't'){
+    margin-top: $m-min;
+    @media (min-width: $w-min) {
+      margin-top: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      margin-top: $m-max;
+    }
+  }
+  @if($prefix == 'b'){
+    margin-bottom: $m-min;
+    @media (min-width: $w-min) {
+      margin-bottom: calcfluidSizes($m-min, $m-max);
+    }
+    @media (min-width: $w-max) {
+      margin-bottom: $m-max;
+    }
+  }
+  @if($prefix == 'xy'){
+    margin: $m-min $m-min2;
+    @media (min-width: $w-min) {
+      margin-top: calcfluidSizes($m-min, $m-max);
+      margin-bottom: calcfluidSizes($m-min, $m-max);
+      margin-right: calcfluidSizes2($m-min2, $m-max2);
+      margin-left: calcfluidSizes2($m-min2, $m-max2);
+    }
+    @media (min-width: $w-max) {
+      margin: $m-max $m-max2;
+    }
+  }
+}
+
+
+//**-- use @include MixinName(80px, 40px);*/
+@function calcResponsSizes($s-max, $s-min){
+  $k: ($s-max - $s-min)/($w-max - $w-min);
+  $b: $s-min - $k * $w-min;
+  @return calc( #{$k} * 100vw + #{$b} );
+}
+//**----------padding------------**//
+@mixin padding($s-max,$s-mid, $s-min){
+  padding: $s-min;
+  @media (min-width: $w-min) {
+    padding: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    padding: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    padding: $s-max;
+  }
+}
+@mixin padding-t($s-max,$s-mid, $s-min){
+  padding-top: $s-min;
+  @media (min-width: $w-min) {
+    padding-top: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    padding-top: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    padding-top: $s-max;
+  }
+}
+@mixin padding-r($s-max,$s-mid, $s-min){
+  padding-right: $s-min;
+  @media (min-width: $w-min) {
+    padding-right: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    padding-right: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    padding-right: $s-max;
+  }
+}
+@mixin padding-b($s-max,$s-mid, $s-min){
+  padding-bottom: $s-min;
+  @media (min-width: $w-min) {
+    padding-bottom: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    padding-bottom: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    padding-bottom: $s-max;
+  }
+}
+@mixin padding-l($s-max,$s-mid, $s-min){
+  padding-left: $s-min;
+  @media (min-width: $w-min) {
+    padding-left: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    padding-left: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    padding-left: $s-max;
+  }
+}
+@mixin padding-x($s-max,$s-mid, $s-min){
+  padding-right: $s-min;
+  padding-left: $s-min;
+  @media (min-width: $w-min) {
+    padding-right: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+    padding-left: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    padding-right: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+    padding-left: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    padding-right: $s-max;
+    padding-left: $s-max;
+  }
+}
+@mixin padding-y($s-max,$s-mid, $s-min){
+  padding-top: $s-min;
+  padding-bottom: $s-min;
+  @media (min-width: $w-min) {
+    padding-top: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+    padding-bottom: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    padding-top: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+    padding-bottom: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    padding-top: $s-max;
+    padding-bottom: $s-max;
+  }
+}
+//**----------margin------------**//
+@mixin margin($s-max,$s-mid, $s-min){
+  margin: $s-min;
+  @media (min-width: $w-min) {
+    margin: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    margin: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    margin: $s-max;
+  }
+}
+@mixin margin-t($s-max,$s-mid, $s-min){
+  margin-top: $s-min;
+  @media (min-width: $w-min) {
+    margin-top: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    margin-top: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    margin-top: $s-max;
+  }
+}
+@mixin margin-r($s-max,$s-mid, $s-min){
+  margin-right: $s-min;
+  @media (min-width: $w-min) {
+    margin-right: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    margin-right: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    margin-right: $s-max;
+  }
+}
+@mixin margin-b($s-max,$s-mid, $s-min){
+  margin-bottom: $s-min;
+  @media (min-width: $w-min) {
+    margin-bottom: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    margin-bottom: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    margin-bottom: $s-max;
+  }
+}
+@mixin margin-l($s-max,$s-mid, $s-min){
+  margin-left: $s-min;
+  @media (min-width: $w-min) {
+    margin-left: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    margin-left: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    margin-left: $s-max;
+  }
+}
+@mixin margin-x($s-max,$s-mid, $s-min){
+  margin-right: $s-min;
+  margin-left: $s-min;
+  @media (min-width: $w-min) {
+    margin-right: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+    margin-left: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    margin-right: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+    margin-left: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    margin-right: $s-max;
+    margin-left: $s-max;
+  }
+}
+@mixin margin-y($s-max,$s-mid, $s-min){
+  margin-top: $s-min;
+  margin-bottom: $s-min;
+  @media (min-width: $w-min) {
+    margin-top: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+    margin-bottom: calcfluidSizes($s-min, $s-mid,$w-min, $w-mid);
+  }
+  @media (min-width: $w-mid) {
+    margin-top: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+    margin-bottom: calcfluidSizes($s-mid, $s-max,$w-mid, $w-max);
+  }
+  @media (min-width: $w-max) {
+    margin-top: $s-max;
+    margin-bottom: $s-max;
+  }
+}
+@mixin max-h($s-max, $s-min){
+  max-height: $s-min;
+  @media (min-width: $w-min) {
+    max-height: calcfluidSizes($s-min, $s-max);
+  }
+  @media (min-width: $w-max) {
+    max-height: $s-max;
+  }
+}

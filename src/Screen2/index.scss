@@ -1,5 +1,38 @@
+@import "./src/styles/utils";
+
+$videoWidth: 1080;
+$videoHeight: 1920;
+$videoRatio: calc(1080 / 1920);
+$videoCoverHeight: calc(var(--vh, 1vh) * 100);
+$videoCoverWidth: 100vw;
+
 #screen2 {
-    h1 {
-        background-color: blue;
+    .container {
+        position: absolute;
+        z-index: 10;
+        max-width: 100%;
+        height: auto;
+        padding-right: unset;
+        padding-left: unset;
+    }
+
+    .videoContainer {
+        overflow: hidden;
+        position: relative;
+    }
+
+    @media (orientation: portrait) {
+        .video {
+            height: $videoCoverHeight;
+            transform: translateX(calc(100vw / 2 - $videoCoverHeight / $videoRatio / 2));
+            width: calc($videoCoverHeight / $videoRatio);
+        }
+    }
+
+    @media (orientation: landscape) {
+        .video {
+            height: $videoCoverWidth * $videoRatio;
+            width: $videoCoverWidth;
+        }
     }
 }

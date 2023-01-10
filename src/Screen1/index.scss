@@ -1,5 +1,111 @@
+@import "./src/styles/utils";
+
+$height: 50vh;
+
 #screen1 {
-    h1 {
-        background-color: red;
+    &.container {
+        @include padding-t(200px, 138px, 120px);
+        position: absolute;
+        width: 100%;
+        background-color: $white;
+        z-index: 20;
+        padding-left: unset;
+        padding-right: unset;
+        h1 {
+            @include margin-b(100px, 40px, 28px);
+        }
+
+        height: $height;
+    }
+
+    .container2 {
+        height: 100%;
+        // position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .content {
+        @include padding-x(134px, 42px, 15px);
+        .title {
+            display: inline-block;
+        }
+    }
+    .arc {
+        width: 100%;
+        max-height: 100%;
+        object-fit: cover;
+        overflow: hidden;
+        background-color: $white;
+        height: 100px;
+        fill: $white;
+    }
+
+    .arcBox {
+        position: absolute;
+        z-index: 19;
+        width: 100%;
+        top: calc($height - 1px);
+    }
+
+    .title {
+        // margin-top: 100px;
+    }
+
+    .arcBoxContainer {
+        position: relative;
+    }
+
+    .buttonArrow {
+        display: none;
+    }
+}
+
+@media all and (max-width: 1060px) {
+    #screen1 {
+        .buttonArrow {
+            display: flex;
+            @include margin-y(60px, 40px, 28px);
+            @include margin-b(60px, 60px, 60px);
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
+
+@media all and (max-width: 800px) {
+    #screen1 {
+        &.container {
+            height: max(50vh, 400px);
+        }
+
+        .arcBox {
+            top: calc(max(50vh, 400px) - 1px);
+        }
+    }
+}
+
+@media all and (max-width: 660px) {
+    #screen1 {
+        &.container {
+            height: max(50vh, 350px);
+        }
+
+        .arcBox {
+            top: calc(max(50vh, 350px) - 1px);
+        }
+    }
+}
+
+@media all and (max-width: 400px) {
+    #screen1 {
+        &.container {
+            height: max(50vh, 250px);
+        }
+
+        .arcBox {
+            top: calc(max(50vh, 250px) - 1px);
+        }
     }
 }

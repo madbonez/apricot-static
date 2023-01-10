@@ -1,7 +1,18 @@
-<script type="module" src="Screen2/index.ts"></script>
-<link rel="stylesheet" href="Screen2/index.scss" />
+<script type="module" src="./Screen2/index.ts"></script>
+<link rel="stylesheet" href="./Screen2/index.scss" />
 
 <div id="screen2">
-    <h1>Screen2</h1>
-    <button>Click me</button>
+    <div class="container">
+        <div class="videoContainer">
+            <video class="video" data-text="play"
+                   data-video={cmsData.block_1.video_link}
+                   loop
+                   muted
+                   autoPlay
+                   playsInline
+                   poster="./public/image/screen2/1.png"
+                   src="https://player.vimeo.com/progressive_redirect/playback/764937143/rendition/1080p/file.mp4?loc=external&signature=4388a208c86b8a90f77a44e530be9a0d5226ac93ec8a0598c6b0008e535d2d5b"
+                   type="video/mp4"></video>
+        </div>
+    </div>
 </div>

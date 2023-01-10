@@ -1,0 +1,68 @@
+.header1 {
+  font-family: $inter-semiBold;
+  @include fluidFontSize(160px, 194px, 92px, 90px, 46px, 55px);
+  text-align: center;
+  letter-spacing: -0.06em;
+}
+
+.header2 {
+  font-family: $inter-semiBold;
+  @include fluidFontSize(96px, 100px, 64px, 72px, 36px, 44px);
+  text-align: left;
+  letter-spacing: -0.05em;
+}
+
+.header3{
+  font-family: $inter-medium;
+  @include fluidFontSize(52px, 58px, 40px, 46px, 26px, 32px);
+  text-align: left;
+  letter-spacing: -0.03em;
+}
+
+.header4 {
+  font-family: $inter-semiBold;
+  @include fluidFontSize(36px, 44px, 28px, 36px, 18px, 20px);
+  text-align: left;
+}
+
+.logo-text {
+  font-family: $inter-semiBold;
+  @include fluidFontSize(30px, 48px, 21px, 26px, 16px, 20px);
+}
+
+.block-name {
+  font-family: $inter-semiBold;
+  @include fluidFontSize(24px, 30px, 16px, 16px, 14px, 14px);
+  text-align: left;
+  letter-spacing: -0.03em;
+  color: $gray;
+}
+
+.menu-text {
+  font-family: $inter-regular;
+  @include fluidFontSize(16px, 24px, 16px, 24px, 12px, 18px);
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.button-text {
+  font-family: $inter-medium;
+  @include fluidFontSize(16px, 24px, 16px, 24px, 12px, 18px);
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+.normal-text{
+  font-family: $inter-regular;
+  @include fluidFontSize(22px, 30px, 16px, 24px, 12px, 18px);
+  letter-spacing: -0.03em;
+}
+
+.small-text {
+  font-family: $inter-regular;
+  @include fluidFontSize(16px, 24px, 12px, 18px, 10px, 16px);
+  text-align: center;
+}
+
+
+

@@ -1,7 +1,30 @@
-<script type="module" src="Screen1/index.ts"></script>
-<link rel="stylesheet" href="Screen1/index.scss" />
+<script type="module" src="./Screen1/index.ts"></script>
+<link rel="stylesheet" href="./Screen1/index.scss" />
 
-<div id="screen1">
-    <h1>Screen1</h1>
-    <button>Click me</button>
+<div id="screen1" class="container">
+        <div class="container2">
+            <div class="content">
+                <h1>
+                    <div class="title" id="word1Ref">Own</div>
+                    <span> </span>
+                    <div class="title" id="word2Ref">your</div>
+                    <span> </span>
+                    <div class="title" id="word3Ref">reality</div>
+                </h1>
+                <div class="buttonArrow">
+                    <include src="./src/ButtonArrow/index.html"></include>
+                </div> <!--onClick=()=>callback('form')-->
+            </div>
+        </div>
+        <div class="arcBox" id=chelkaRef>
+            <svg viewBox="0 0 1440 100">
+                <defs>
+                    <clipPath id="myClipPath">
+                        <path d="M0,0 A740,100,0,0,0,1440,0"/>
+                    </clipPath>
+                </defs>
+                <rect height="100" width="1440" clip-path="url(#myClipPath)" class="arc"/>
+            </svg>
+        </div>
+    </div>
 </div>
