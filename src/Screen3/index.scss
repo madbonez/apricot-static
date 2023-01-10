@@ -1,5 +1,36 @@
 @import "./src/styles/utils";
 
 #screen3 {
+  display: none;
+  .screen3_container {
+    width: 100%;
+    @include padding-b(120px,60px,60px);
+    position: absolute;
+    z-index: 20;
+    height: calc(590px + min(560px,55vh));
+  }
 
+  @media all and (max-width: 1200px) {
+    .screen3_container {
+      height: calc(480px + min(460px,55vh));
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    .screen3_container {
+      height: calc(400px + min(350px,55vh));
+    }
+  }
+
+  @media all and (max-width: 640px) {
+    .screen3_container {
+      height: 650px;
+    }
+  }
+
+  @media all and (max-width: 450px) {
+    .screen3_container {
+      height: 700px;
+    }
+  }
 }

@@ -171,6 +171,24 @@ body {
     pointer-events: none; /* чтобы сквозь элемент можно было взаимодействовать с элементами, находящимися под ним */
 }
 
+.scrollContainer {
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-color: $black;
+}
 
+.topContainer {
+    position: relative;
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.ghost {
+    position: relative;
+    width: 100%;
+}
 
 

@@ -284,195 +284,301 @@
   }
 }
 
-#screen1.screen1_container {
-  width: 100%;
-  z-index: 20;
-  height: 50vh;
-  background-color: #fff;
-  padding-top: 120px;
+#slider .fixedContainer {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  cursor: none;
+  overflow: scroll;
+}
+
+#slider .fixedContainer::-webkit-scrollbar {
   display: none;
+}
+
+#slider .slider {
+  min-height: 320px;
+  max-height: 560px;
+  height: min(560px, 55vh);
+  margin-left: calc(50vw - 600px);
+  position: relative;
+  cursor: none !important;
+}
+
+#slider .circle {
+  width: min(560px, 55vh);
+  height: min(560px, 55vh);
+  min-height: 320px;
+  min-width: 320px;
+  -webkit-user-select: none;
+  user-select: none;
   position: absolute;
+  left: 0;
+}
+
+#slider .circleText {
+  text-align: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  position: absolute;
+  top: 50%;
+  transform: translate(0%, -50%);
 }
 
 @media (min-width: 360px) {
-  #screen1.screen1_container {
-    padding-top: calc(4.6875vw + 103.125px);
+  #slider .circleText {
+    padding-left: calc(59.375px - 2.60417vw);
+    padding-right: calc(59.375px - 2.60417vw);
   }
 }
 
 @media (min-width: 744px) {
-  #screen1.screen1_container {
-    padding-top: calc(8.90805vw + 71.7241px);
+  #slider .circleText {
+    padding-left: calc(2.44253vw + 21.8276px);
+    padding-right: calc(2.44253vw + 21.8276px);
   }
 }
 
 @media (min-width: 1440px) {
-  #screen1.screen1_container {
-    padding-top: 200px;
+  #slider .circleText {
+    padding-left: 57px;
+    padding-right: 57px;
   }
 }
 
-#screen1.screen1_container h1 {
-  margin-bottom: 28px;
+#slider .circleDotted {
+  stroke: #04000a;
+  fill: none;
+  stroke-dasharray: 22;
 }
 
-@media (min-width: 360px) {
-  #screen1.screen1_container h1 {
-    margin-bottom: calc(3.125vw + 16.75px);
-  }
+#slider .circleImage {
+  z-index: 10;
 }
 
-@media (min-width: 744px) {
-  #screen1.screen1_container h1 {
-    margin-bottom: calc(8.62069vw - 24.1379px);
-  }
-}
-
-@media (min-width: 1440px) {
-  #screen1.screen1_container h1 {
-    margin-bottom: 100px;
-  }
-}
-
-#screen1 .container2 {
-  height: 100%;
-  flex-direction: column;
+#slider .indicatorBox {
+  width: 100%;
   justify-content: center;
+  margin-top: 50px;
   display: flex;
-}
-
-#screen1 .content {
-  padding-left: 15px;
-  padding-right: 15px;
-}
-
-@media (min-width: 360px) {
-  #screen1 .content {
-    padding-left: calc(7.03125vw - 10.3125px);
-    padding-right: calc(7.03125vw - 10.3125px);
-  }
-}
-
-@media (min-width: 744px) {
-  #screen1 .content {
-    padding-left: calc(13.2184vw - 56.3448px);
-    padding-right: calc(13.2184vw - 56.3448px);
-  }
-}
-
-@media (min-width: 1440px) {
-  #screen1 .content {
-    padding-left: 134px;
-    padding-right: 134px;
-  }
-}
-
-#screen1 .content .title {
-  display: inline-block;
-}
-
-#screen1 .arc {
-  width: 100%;
-  max-height: 100%;
-  object-fit: cover;
-  height: 100px;
-  fill: #fff;
-  background-color: #fff;
-  overflow: hidden;
-}
-
-#screen1 .arcBox {
-  z-index: 19;
-  width: 100%;
-  position: absolute;
-  top: calc(50vh - 1px);
-}
-
-#screen1 .arcBoxContainer {
   position: relative;
 }
 
-#screen1 .buttonArrow {
-  display: none;
-}
-
-@media (max-width: 1060px) {
-  #screen1 .buttonArrow {
-    justify-content: center;
-    align-items: center;
-    margin-top: 28px;
-    margin-bottom: 60px;
-    display: flex;
+@media (min-width: 360px) {
+  #slider .indicatorBox {
+    margin-top: calc(75.3125px - 7.03125vw);
   }
 }
 
-@media (max-width: 1060px) and (min-width: 360px) {
-  #screen1 .buttonArrow {
-    margin-top: calc(3.125vw + 16.75px);
-    margin-bottom: calc(3.125vw + 16.75px);
+@media (min-width: 744px) {
+  #slider .indicatorBox {
+    margin-top: calc(3.16092vw - .517241px);
   }
 }
 
-@media (max-width: 1060px) and (min-width: 744px) {
-  #screen1 .buttonArrow {
-    margin-top: calc(2.87356vw + 18.6207px);
-    margin-bottom: calc(2.87356vw + 18.6207px);
+@media (min-width: 1440px) {
+  #slider .indicatorBox {
+    margin-top: 45px;
   }
 }
 
-@media (max-width: 1060px) and (min-width: 1440px) {
-  #screen1 .buttonArrow {
-    margin-top: 60px;
-    margin-bottom: 60px;
+#slider .indicatorItem {
+  background-color: #dfdde3;
+  border-radius: 50%;
+  margin-left: 4px;
+  margin-right: 4px;
+  padding: 4px;
+}
+
+@media (min-width: 360px) {
+  #slider .indicatorItem {
+    padding: 4px;
   }
 }
 
-@media (max-width: 1060px) and (min-width: 360px) {
-  #screen1 .buttonArrow {
-    margin-bottom: 60px;
+@media (min-width: 744px) {
+  #slider .indicatorItem {
+    padding: calc(.143678vw + 2.93103px);
   }
 }
 
-@media (max-width: 1060px) and (min-width: 744px) {
-  #screen1 .buttonArrow {
-    margin-bottom: 60px;
+@media (min-width: 1440px) {
+  #slider .indicatorItem {
+    padding: 5px;
   }
 }
 
-@media (max-width: 1060px) and (min-width: 1440px) {
-  #screen1 .buttonArrow {
-    margin-bottom: 60px;
+@media (min-width: 360px) {
+  #slider .indicatorItem {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}
+
+@media (min-width: 744px) {
+  #slider .indicatorItem {
+    margin-left: calc(.287356vw + 1.86207px);
+    margin-right: calc(.287356vw + 1.86207px);
+  }
+}
+
+@media (min-width: 1440px) {
+  #slider .indicatorItem {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+}
+
+#slider .indicatorItemOrange {
+  opacity: 0;
+  background-color: #ff9300;
+  border-radius: 50%;
+  margin-left: 4px;
+  margin-right: 4px;
+  padding: 4px;
+  position: absolute;
+  top: 0;
+}
+
+@media (min-width: 360px) {
+  #slider .indicatorItemOrange {
+    padding: 4px;
+  }
+}
+
+@media (min-width: 744px) {
+  #slider .indicatorItemOrange {
+    padding: calc(.143678vw + 2.93103px);
+  }
+}
+
+@media (min-width: 1440px) {
+  #slider .indicatorItemOrange {
+    padding: 5px;
+  }
+}
+
+@media (min-width: 360px) {
+  #slider .indicatorItemOrange {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+}
+
+@media (min-width: 744px) {
+  #slider .indicatorItemOrange {
+    margin-left: calc(.287356vw + 1.86207px);
+    margin-right: calc(.287356vw + 1.86207px);
+  }
+}
+
+@media (min-width: 1440px) {
+  #slider .indicatorItemOrange {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+}
+
+@media (max-height: 800px) and (min-width: 640px) {
+  #slider .circleText {
+    font-size: min(22px, 2.57vh);
+    line-height: min(30px, 3.5vh);
+  }
+}
+
+@media (max-width: 1200px) {
+  #slider .slider {
+    height: min(460px, 55vh);
+    margin-left: 20px;
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 360px) {
+  #slider .slider {
+    margin-left: calc(9.375vw - 13.75px);
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 744px) {
+  #slider .slider {
+    margin-left: calc(9.1954vw - 12.4138px);
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 1440px) {
+  #slider .slider {
+    margin-left: 120px;
+  }
+}
+
+@media (max-width: 1200px) {
+  #slider .circle {
+    width: min(460px, 55vh);
+    height: min(460px, 55vh);
+  }
+}
+
+@media (max-width: 900px) {
+  #slider .fixedContainer {
+    cursor: auto !important;
+  }
+
+  #slider .slider {
+    cursor: move !important;
   }
 }
 
 @media (max-width: 800px) {
-  #screen1.screen1_container {
-    height: max(50vh, 400px);
-  }
-
-  #screen1 .arcBox {
-    top: calc(max(50vh, 400px) - 1px);
+  #slider .indicatorBox {
+    justify-content: flex-start;
+    margin-left: 20px;
   }
 }
 
-@media (max-width: 660px) {
-  #screen1.screen1_container {
-    height: max(50vh, 350px);
-  }
-
-  #screen1 .arcBox {
-    top: calc(max(50vh, 350px) - 1px);
+@media (max-width: 800px) and (min-width: 360px) {
+  #slider .indicatorBox {
+    margin-left: calc(9.375vw - 13.75px);
   }
 }
 
-@media (max-width: 400px) {
-  #screen1.screen1_container {
-    height: max(50vh, 250px);
-  }
-
-  #screen1 .arcBox {
-    top: calc(max(50vh, 250px) - 1px);
+@media (max-width: 800px) and (min-width: 744px) {
+  #slider .indicatorBox {
+    margin-left: calc(9.1954vw - 12.4138px);
   }
 }
 
-/*# sourceMappingURL=index.c06b6ec9.css.map */
+@media (max-width: 800px) and (min-width: 1440px) {
+  #slider .indicatorBox {
+    margin-left: 120px;
+  }
+}
+
+@media (max-width: 800px) {
+  #slider .slider {
+    height: min(350px, 55vh);
+  }
+
+  #slider .circle {
+    width: min(350px, 55vh);
+    height: min(350px, 55vh);
+  }
+}
+
+@media (max-width: 640px) {
+  #slider .slider {
+    height: min(300px, 50vh);
+  }
+
+  #slider .circle {
+    width: min(300px, 50vh);
+    height: min(300px, 50vh);
+  }
+}
+
+@media (max-width: 500px) {
+  #slider .indicatorBox {
+    margin-left: unset;
+    justify-content: center;
+  }
+}
+
+/*# sourceMappingURL=index.84481560.css.map */

@@ -1,21 +1,24 @@
 <script type="module" src="./Screen3/index.ts"></script>
 <link rel="stylesheet" href="./Screen3/index.scss" />
 
-<div id="screen3">
-    <div class="`$container light-gray">
-        <div class="not-Overflow-x  container" >
-            <ContentBlock
-                    scrollTrigger={enterScrollTrigger}
-                    title={cmsData.block_2.block_name}
-                    text={cmsData.block_2.title}
-            />
-        </div>
-        <Slider slides={cmsData.block_2.elements}
-                sliderRef={sliderRef}
-                globalScroll={globalScroll}
-                scrollTrigger={scrollTrigger}
-                enterScrollTrigger={enterScrollTrigger}
-                callbackChangeCursorState = {callbackChangeCursorState}
-        />
+<div id="screen3" class="screen3_container light-gray">
+    <div id="headerScreen" class="not-Overflow-x  container" >
+        <include src="./src/ContentBlock/index.html" locals='{
+        "title": "About us",
+        "text": "Apricot is a startup in the field of Immersive Technologies"
+    }'></include>
     </div>
+        <include src="./src/Slider/index.html" locals='{
+       "slides": [{
+                    "text": "We develop solutions for heavy and light industries, armed forces, as well as civil engineering solutions, based on the technologies of virtual and augmented reality",
+                    "image": "././public/image/screen3/01.png"
+                },{
+                    "text": "Apart from the design of solutions \r\nand technical support, we also provide our customers services in consulting and strategic planning in the field  of emerging technologies.",
+                    "image": "././public/image/screen3/02.png"
+                },{
+                    "text": "We are a team of highly qualified experts \r\nin immersive technologies with vast experience and an impressive portfolio of successfully implemented projects in various industries, including defense, education, and entertainment.",
+                    "image": "././public/image/screen3/03.png"
+                }]
+    }'></include>
+
 </div>

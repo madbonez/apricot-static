@@ -27,7 +27,7 @@
   }
 }
 
-.header2 {
+.header2, #screen4 .screen4_container h2 {
   text-align: left;
   letter-spacing: -.05em;
   font-family: Inter-SemiBold, "sans-serif";
@@ -36,21 +36,21 @@
 }
 
 @media (min-width: 360px) {
-  .header2 {
+  .header2, #screen4 .screen4_container h2 {
     font-size: calc(7.29167vw + 9.75px);
     line-height: calc(7.29167vw + 17.75px);
   }
 }
 
 @media (min-width: 744px) {
-  .header2 {
+  .header2, #screen4 .screen4_container h2 {
     font-size: calc(4.5977vw + 29.7931px);
     line-height: calc(4.02299vw + 42.069px);
   }
 }
 
 @media (min-width: 1440px) {
-  .header2 {
+  .header2, #screen4 .screen4_container h2 {
     font-size: 96px;
     line-height: 100px;
   }
@@ -284,32 +284,24 @@
   }
 }
 
-#screen2 .screen2_container {
-  z-index: 10;
-  max-width: 100%;
-  height: auto;
-  display: none;
+#screen4 .screen4_container {
+  width: 100%;
+  z-index: 20;
+  height: 475px;
+  background-color: #fff;
   position: absolute;
 }
 
-#screen2 .videoContainer {
-  position: relative;
-  overflow: hidden;
-}
-
-@media (orientation: portrait) {
-  #screen2 .video {
-    height: calc(var(--vh, 1vh) * 100);
-    transform: translateX(calc(50vw - var(--vh, 1vh) * 100 / .5625 / 2));
-    width: calc(var(--vh, 1vh) * 100 / .5625);
+@media (max-width: 1200px) {
+  #screen4 .screen4_container {
+    height: 415px;
   }
 }
 
-@media (orientation: landscape) {
-  #screen2 .video {
-    height: 56.25vw;
-    width: 100vw;
+@media (max-width: 800px) {
+  #screen4 .screen4_container {
+    height: 345px;
   }
 }
 
-/*# sourceMappingURL=index.01df09b9.css.map */
+/*# sourceMappingURL=index.a0fee1c4.css.map */

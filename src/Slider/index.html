@@ -1,0 +1,37 @@
+<script type="module" src="./Slider/index.ts"></script>
+<link rel="stylesheet" href="./Slider/index.scss"/>
+
+<div id="slider">
+    <div class="fixedContainer" id="scrollerRef">
+        <div class="slider trigger" id="sliderRef">
+            <div class="drag"/>
+            <include src="./src/Slider/Slide/index.html" locals='{
+                    "key": "0",
+                    "text": "{{slides[0].text}}",
+                    "image": "{{slides[0].image}}"
+    }'></include>
+            <include src="./src/Slider/Slide/index.html" locals='{
+                    "key": "1",
+                    "text": "Apart from the design of solutions \r\nand technical support, we also provide our customers services in consulting and strategic planning in the field  of emerging technologies.",
+                    "image": "././public/image/screen3/02.png"
+    }'></include>
+            <include src="./src/Slider/Slide/index.html" locals='{
+                   "key": "2",
+                   "text": "We are a team of highly qualified experts \r\nin immersive technologies with vast experience and an impressive portfolio of successfully implemented projects in various industries, including defense, education, and entertainment.",
+                   "image": "././public/image/screen3/03.png"
+    }'></include>
+
+
+            <div class="indicatorBox">
+
+                <div>
+                    <!--onMouseEnter={() => handlerIndicatorMouseEnter(index)}
+               onMouseLeave={() => handlerIndicatorMouseLeave(index)}
+               onClick={() => handlerIndicatorClick(index)}-->
+
+                    <div class="indicatorItem"/>
+                    <div class="indicatorItemOrange indicator-0"/>
+                </div>
+            </div>
+        </div>
+    </div>

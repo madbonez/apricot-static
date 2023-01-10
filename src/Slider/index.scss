@@ -1,0 +1,145 @@
+@import "./src/styles/utils";
+
+#slider {
+  .fixedContainer {
+    // @include padding-x(270px,56px, 20px);
+    overflow: scroll;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    cursor: none;
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .fixedContainer::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slider {
+    min-height: 320px;
+    max-height: 560px;
+    height: min(560px, 55vh);
+    position: relative;
+    margin-left: calc(100vw / 2 - 600px);
+ //   transform: translateX(100%);
+    cursor: none !important;
+  }
+
+  .circle {
+    width: min(560px, 55vh);
+    height: min(560px, 55vh);
+    min-height: 320px;
+    min-width: 320px;
+    position: absolute;
+    left: 0;
+    user-select: none;
+
+  }
+
+  .circleText {
+    position: absolute;
+    top: 50%;
+    transform: translate(0%, -50%);
+    @include padding-x(57px, 40px, 50px);
+    text-align: center;
+  }
+
+  .circleDotted {
+    stroke: $black;
+    fill: none;
+    stroke-dasharray: 22;
+  }
+
+  .circleImage {
+    z-index: 10;
+  }
+
+
+  .indicatorBox {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    @include margin-t(45px,23px,50px);
+    // @include padding-b(60px,60px, 60px);
+    position: relative;
+  }
+
+  .indicatorItem {
+    border-radius: 50%;
+    @include padding(5px,4px,4px);
+    @include margin-x(6px,4px,4px);
+    background-color: $medium-gray;
+  }
+
+  .indicatorItemOrange {
+    border-radius: 50%;
+    @include padding(5px,4px,4px);
+    @include margin-x(6px,4px,4px);
+    background-color: $orange;
+    position: absolute;
+    top:0;
+    opacity: 0;
+  }
+
+  @media all and (max-height: 800px) and (min-width: 640px) {
+    .circleText {
+      //  @include fluidFontSize(20px, 27px, 16px, 24px, 12px, 18px);
+      font-size: min(22px, 2.57vh);
+      line-height: min(30px, 3.5vh);
+    }
+  }
+
+
+  @media all and (max-width: 1200px) {
+    .slider {
+      height: min(460px, 55vh);
+      @include margin-l(120px, 56px,20px)
+    }
+    .circle {
+      width: min(460px, 55vh);
+      height: min(460px, 55vh);
+    }
+  }
+
+  @media all and (max-width: 900px) {
+    .fixedContainer {
+      cursor: auto !important;
+    }
+    .slider {
+      cursor: move !important;
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    .indicatorBox {
+      justify-content: flex-start;
+      @include margin-l(120px, 56px,20px)
+    }
+
+    .slider {
+      height: min(350px, 55vh);
+    }
+    .circle {
+      width: min(350px, 55vh);
+      height: min(350px, 55vh);
+    }
+  }
+
+  @media all and (max-width: 640px) {
+    .slider {
+      height: min(300px, 50vh);
+    }
+    .circle {
+      width: min(300px, 50vh);
+      height: min(300px, 50vh);
+    }
+  }
+
+  @media all and (max-width: 500px) {
+
+    .indicatorBox {
+      justify-content: center;
+      margin-left: unset;
+    }
+  }
+}

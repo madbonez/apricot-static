@@ -841,4 +841,24 @@ body {
   transform: translateY(-50%)translateX(-50%);
 }
 
+.scrollContainer {
+  width: 100%;
+  height: auto;
+  background-color: #04000a;
+  position: relative;
+}
+
+.topContainer {
+  width: 100%;
+  height: calc(var(--vh, 1vh) * 100);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.ghost {
+  width: 100%;
+  position: relative;
+}
+
 /*# sourceMappingURL=index.ce1d6491.css.map */

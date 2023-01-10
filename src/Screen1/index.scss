@@ -3,14 +3,13 @@
 $height: 50vh;
 
 #screen1 {
-    &.container {
+    &.screen1_container {
+        display: none;
         @include padding-t(200px, 138px, 120px);
         position: absolute;
         width: 100%;
         background-color: $white;
         z-index: 20;
-        padding-left: unset;
-        padding-right: unset;
         h1 {
             @include margin-b(100px, 40px, 28px);
         }
@@ -76,7 +75,7 @@ $height: 50vh;
 
 @media all and (max-width: 800px) {
     #screen1 {
-        &.container {
+        &.screen1_container {
             height: max(50vh, 400px);
         }
 
@@ -88,7 +87,7 @@ $height: 50vh;
 
 @media all and (max-width: 660px) {
     #screen1 {
-        &.container {
+        &.screen1_container {
             height: max(50vh, 350px);
         }
 
@@ -100,7 +99,7 @@ $height: 50vh;
 
 @media all and (max-width: 400px) {
     #screen1 {
-        &.container {
+        &.screen1_container {
             height: max(50vh, 250px);
         }
 
