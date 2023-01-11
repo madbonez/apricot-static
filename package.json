@@ -12,7 +12,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "outputFormat": "global",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.0",
     "parcel": "^2.8.0",
@@ -21,8 +20,10 @@
     "posthtml-expressions": "1.1.1",
     "posthtml-extend": "0.6.5",
     "posthtml-include": "1.2.0",
+    "posthtml-modules": "^0.9.0",
     "rimraf": "3.0.2"
   },
+  "outputFormat": "global",
   "dependencies": {
     "normalize.css": "^8.0.1"
   }

@@ -2,10 +2,10 @@
 <link rel="stylesheet" href="./Screen4/index.scss" />
 
 <div id="screen4" class="screen4_container white">
-        <div class="container">
-            <include src="./src/ContentBlock/index.html" locals='{
-        "title": "Our Goals",
-        "text": "Creation of breakthrough technologies in the field of training simulators and Industry 4.0"
-    }'></include>
-        </div>
+        <each loop="block, idx in block_4">
+                <div class="container">
+                        <include src="./src/ContentBlock/index.html"></include>
+                </div>
+        </each>
+
 </div>

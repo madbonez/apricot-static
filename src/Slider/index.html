@@ -2,45 +2,27 @@
 <link rel="stylesheet" href="./Slider/index.scss"/>
 
 <div id="slider">
-    <extends src="./src/Slider/Slide/index.html">
-        <block name="content">Read the documentation</block>
-    </extends>
 
-    <each loop="item, index in slides">
-        asd
-    </each>
-<!--    <div class="fixedContainer" id="scrollerRef">-->
-<!--        <div class="slider trigger" id="sliderRef">-->
-<!--            <div class="drag"/>-->
-<!--            <include src="./src/Slider/Slide/index.html">-->
-<!--                {-->
-<!--                "key": "0",-->
-<!--                "text": "{{slides[0].text}}",-->
-<!--                "image": "{{slides[0].image}}"-->
-<!--                }-->
-<!--            </include>-->
-<!--            &lt;!&ndash;            <include src="./src/Slider/Slide/index.html" locals='{&ndash;&gt;-->
-<!--            &lt;!&ndash;                    "key": "1",&ndash;&gt;-->
-<!--            &lt;!&ndash;                    "text": "{{slides[1].text}}",&ndash;&gt;-->
-<!--            &lt;!&ndash;                    "image": "sad"&ndash;&gt;-->
-<!--            &lt;!&ndash;            }'></include>&ndash;&gt;-->
-<!--            &lt;!&ndash;            <include src="./src/Slider/Slide/index.html" locals='{&ndash;&gt;-->
-<!--            &lt;!&ndash;                   "key": "2",&ndash;&gt;-->
-<!--            &lt;!&ndash;                   "text": "We are a team of highly qualified experts \r\nin immersive technologies with vast experience and an impressive portfolio of successfully implemented projects in various industries, including defense, education, and entertainment.",&ndash;&gt;-->
-<!--            &lt;!&ndash;                   "image": "././public/image/screen3/03.png"&ndash;&gt;-->
-<!--            &lt;!&ndash;            }'></include>&ndash;&gt;-->
 
-<!--            <div class="indicatorBox">-->
 
-<!--                <div>-->
-<!--                    &lt;!&ndash;onMouseEnter={() => handlerIndicatorMouseEnter(index)}-->
-<!--               onMouseLeave={() => handlerIndicatorMouseLeave(index)}-->
-<!--               onClick={() => handlerIndicatorClick(index)}&ndash;&gt;-->
+    <div class="fixedContainer" id="scrollerRef">
+        <div class="slider trigger" id="sliderRef">
+            <div class="drag"/>
+            <each loop="item, index in block.slides">
+                <include src="./src/Slider/Slide/index.html">
+                </include>
+            </each>
+            </div>
+            <div class="indicatorBox">
+                <each loop="item, index in block.slides">
+                    <div class="key-{{index}}"></div>
+                     <!--       onMouseEnter={() => handlerIndicatorMouseEnter(index)}
+                            onMouseLeave={() => handlerIndicatorMouseLeave(index)}
+                            onClick={() => handlerIndicatorClick(index)}-->
+                        <div class="indicatorItem"/>
+                        <div class="indicatorItemOrange indicator-{{index}}"/>
+                </each>
+            </div>
+        </div>
 
-<!--                    <div class="indicatorItem"/>-->
-<!--                    <div class="indicatorItemOrange indicator-0"/>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
 </div>

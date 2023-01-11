@@ -13,7 +13,6 @@ $height: 50vh;
         h1 {
             @include margin-b(100px, 40px, 28px);
         }
-
         height: $height;
     }
 
@@ -90,7 +89,6 @@ $height: 50vh;
         &.screen1_container {
             height: max(50vh, 350px);
         }
-
         .arcBox {
             top: calc(max(50vh, 350px) - 1px);
         }
@@ -102,7 +100,6 @@ $height: 50vh;
         &.screen1_container {
             height: max(50vh, 250px);
         }
-
         .arcBox {
             top: calc(max(50vh, 250px) - 1px);
         }
