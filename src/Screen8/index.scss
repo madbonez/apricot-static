@@ -1,0 +1,40 @@
+@import "./src/styles/utils";
+
+#screen8 {
+  &.screen8_container {
+    width: 100%;
+    height: calc(420px + min(560px,55vh));
+    h2 {
+      @include padding-t(120px,90px, 60px);
+      @include padding-b(80px,40px, 40px);
+    }
+    @include padding-b(120px, 90px, 60px);
+    position: absolute;
+    z-index: 28;
+  }
+
+  @media all and (max-width: 1200px ) {
+    &.screen8_container {
+      height: calc(380px + min(460px,55vh));
+    }
+  }
+
+  @media all and (max-width: 800px ) {
+    &.screen8_container {
+      height: calc(315px + min(350px,55vh));
+    }
+  }
+
+  @media all and (max-width: 640px ) {
+    &.screen8_container {
+      height: 590px;
+    }
+  }
+
+  @media all and (max-width: 400px ) {
+    &.screen8_container {
+      height: 570px;
+    }
+  }
+
+}

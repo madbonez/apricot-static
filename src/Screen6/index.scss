@@ -1,0 +1,195 @@
+@import "./src/styles/utils";
+
+#screen6 {
+  &.screen6_container {
+    width: 100%;
+    color: $white;
+    position: absolute;
+    z-index: 24;
+    height: 1450px;
+  }
+
+  @media all and (max-width: 900px) {
+    &.screen6_container {
+      height: 1670px;
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    &.screen6_container {
+      height: 1590px;
+    }
+  }
+
+  @media all and (max-width: 640px) {
+    .container {
+      height: 1510px;
+    }
+  }
+
+  @media all and (max-width: 500px) {
+    &.screen6_container {
+      height: 1320px;
+    }
+  }
+
+  @media all and (max-width: 400px) {
+    &.screen6_container {
+      height: 1240px;
+    }
+  }
+
+  .content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    @include padding-y(120px,61px, 60px);
+  }
+
+  .leftBlock {
+    width: 35%;
+  }
+
+  .rightBlock {
+    max-width: 680px;
+    width: 57%;
+  }
+
+  .nameBlock {
+    color: $white;
+  }
+
+  .imageContainer {
+    @include padding-t(100px, 46px, 45px);
+    width: 100%;
+    max-width: 414px;
+    img {
+      max-width: unset;
+      width:100%;
+      height: 100%;
+    }
+  }
+
+  .accordion {
+    > li {
+      cursor: pointer;
+      user-select: none;
+
+      &:not(:first-child) {
+        border-top: 1px solid $white;
+      }
+
+      > h4 {
+        position: relative;
+        display: block;
+        margin-bottom: initial;
+        @include padding-y(40px,39px, 20px);
+        padding-right: 45px;
+
+        &::before, &::after {
+          content: "";
+          transition: 0.4s;
+          cursor: pointer;
+        }
+
+        .minusPlus {
+          position: absolute;
+          right: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        &::before {
+          position: absolute;
+          right: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 2px;
+          height: 18px;
+          background-color: $white;
+        }
+
+        &::after {
+          position: absolute;
+          right: 0;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 18px;
+          height: 2px;
+          background-color: $white;
+        }
+      }
+
+      > ul {
+        //   max-height: 0;
+        overflow: hidden;
+        height: 0;
+        transition: 0.6s $jump;
+        list-style: disc;
+        @include padding-l(18px,17px, 16px );
+
+        &.itemlistactive{
+          height: auto;
+        }
+
+        > li {
+          @include padding-b(30px,22px, 16px);
+        }
+
+      }
+    }
+
+    > li.active {
+      > h4 {
+        &:before {
+          display: none;
+        }
+
+        &::after {
+
+        }
+      }
+
+      > ul {
+        //   height: auto;
+        overflow: hidden;
+        max-height: unset;
+        @include padding-b(10px,1px, 1px );
+      }
+    }
+  }
+
+  @media all and (max-width: 900px) {
+    .content {
+      flex-direction: column;
+    }
+
+    .leftBlock {
+      width: 100%;
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .nameBlock {
+        align-self: flex-start;
+      }
+    }
+
+    .rightBlock {
+      max-width: unset;
+      width: 100%;
+    }
+
+    .imageContainer {
+      padding-top: 45px;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 40px;
+      width: 100%;
+      max-width: min(414px, 62vw);
+    }
+
+
+  }
+
+}

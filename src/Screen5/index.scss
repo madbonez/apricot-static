@@ -1,6 +1,121 @@
 @import "./src/styles/utils";
 
 #screen5 {
+  &.screen5_container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    height: calc(var(--vh, 1vh) * 100);
+    position: absolute;
+    z-index: 22;
+  }
 
+  .stickyContainer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+    overflow: hidden;
+  }
+
+  .nameBlock {
+    color: $white;
+    @include padding-t(120px, 100px, 60px);
+  }
+
+  .line {
+
+    display: flex;
+  }
+
+  .wrapperText {
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+
+  .text {
+    font-family: 'Noto Sans Armenian','Arial', 'sans-serif';
+    color: $white;
+    @include fluidFontSize(160px, 192px, 108px, 130px, 60px, 72px);
+    white-space: nowrap;
+    animation: textLine 10s infinite linear;
+    text-rendering: geometricPrecision;
+  }
+
+  .text:after {
+    content: "y — Technology — Technology — Technolog";
+  }
+
+  @keyframes textLine {
+    0% {
+      transform: translateX(0%)
+    }
+    100% {
+      transform: translateX(-50%)
+    }
+  }
+
+  .wrapperCard {
+
+  }
+
+  .wrapperCard::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .cardContainer {
+    @include padding-t(200px, 150px, 100px);
+    min-width: 272px;
+    width: 40vw;
+    max-width: 580px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .card {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    color: $white;
+    background-color: $black;
+    @include margin-b (40px,35px, 28px);
+
+    .cardImageContainer {
+      height: 47vw;
+      max-height: 500px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    img {
+      max-width: unset;
+      height: 100%;
+      width: auto;
+    }
+
+    h4 {
+      @include padding-x (28px,24px, 16px);
+      @include padding-t (23px, 23px, 15px);
+    }
+
+    p {
+      @include padding-x(24px,24px,  16px);
+      @include padding-t(24px,20px, 16px);
+      @include padding-b(32px,24px, 20px);
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    .cardContainer {
+      width:55vw;
+    }
+  }
 
 }

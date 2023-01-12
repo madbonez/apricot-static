@@ -1,0 +1,28 @@
+<script type="module" src="./Screen10/index.ts"></script>
+<link rel="stylesheet" href="./Screen10/index.scss"/>
+
+<div id="screen10" class="screen10_container light-gray">
+    <each loop="block, idx in block_10">
+        <div class="container">
+            <div id="borderContainerRef">
+                <include src="./src/ContentBlock/index.html"></include>
+            </div>
+        </div>
+        <div id="contentRef" class="content not-Overflow-x">
+            <div class="empty"/>
+            <div id="stepContainer" class="stepContainer drag">
+                <each loop="item, index in block.elements">
+                    <div key={{index}} class="stepBlock" id="stepBlock">
+                        <div>
+                            <p class="circle {{0 === index ? 'active' : ''}}">
+                                {{index + 1}}
+                            </p>
+                            <div class="line"/>
+                        </div>
+                        <p class="text">{{item.text}}</p>
+                    </div>
+                </each>
+            </div>
+        </div>
+    </each>
+</div>

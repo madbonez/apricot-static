@@ -1,0 +1,11 @@
+<script type="module" src="./Screen8/index.ts"></script>
+<link rel="stylesheet" href="./Screen8/index.scss"/>
+
+<div id="screen8" class="screen8_container light-gray">
+    <each loop="block, idx in block_8">
+                <div class="container">
+                    <h2>{{block.title}}</h2>
+                </div>
+                <include src="./src/Slider/index.html"></include>
+    </each>
+</div>

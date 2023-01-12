@@ -1,0 +1,148 @@
+@import "./src/styles/utils";
+
+#screen10 {
+   &screen10_container {
+    width: 100%;
+    position: absolute;
+    z-index: 32;
+    height: 910px;
+    cursor: none !important;
+  }
+
+  .content {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .empty {
+    max-width: 35%;
+  }
+
+  .stepContainer {
+    @include margin-x(120px,56px, 20px);
+    max-width: 680px;
+    width: 47vw;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    right: 0;
+    cursor: none !important;
+
+    @include padding-b(240px, 200px, 160px);
+  }
+
+  @media all and (min-width: 1440px) {
+    .stepContainer {
+      margin-right: calc((100vw - 1200px) /2 ) ;
+    }
+
+  }
+
+  .stepBlock {
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    &:last-child {
+      .line {
+        display: none;
+      }
+    }
+  }
+
+  .circle {
+    width: 48px;
+    height: 48px;
+    background-color: $black;
+    color: $white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    @include margin-r(320px,206px, 156px);
+    @include margin-b(32px,32px, 16px);
+    &.active {
+      background-color: $orange;
+    }
+  }
+  .circle.active {
+    background-color: $orange;
+  }
+
+  .text {
+    padding-right: 40px;
+  }
+
+  .line {
+    position: absolute;
+    width: calc(100% - 48px);
+    background-color: $black;
+    height: 2px;
+    right: 0;
+    top: 24px;
+  }
+
+  @media all and (max-width: 900px) {
+     &screen10_container {
+      cursor: auto !important;
+    }
+    .stepContainer {
+      cursor: move !important;
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    .stepContainer {
+      @include padding-t(40px,40px,1px);
+      width: 100%;
+
+    }
+  }
+
+  @media all and (max-width: 640px) {
+    .circle {
+      width: 24px;
+      height: 24px;
+    }
+    .line {
+      width: calc(100% - 24px);
+      height: 1px;
+      right: 0;
+      top: 12px;
+    }
+  }
+
+
+  @media all and (max-width: 1200px ) {
+     &screen10_container {
+      height: 900px;
+    }
+  }
+
+  @media all and (max-width: 1000px ) {
+     &screen10_container {
+      height: 865px;
+    }
+  }
+
+  @media all and (max-width: 800px ) {
+     &screen10_container {
+      height: 770px;
+    }
+  }
+
+  @media all and (max-width: 640px ) {
+     &screen10_container {
+      height: 700px;
+    }
+  }
+
+  @media all and (max-width: 400px ) {
+     &screen10_container {
+      height: 600px;
+    }
+  }
+
+}

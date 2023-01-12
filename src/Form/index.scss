@@ -1,0 +1,181 @@
+@import "./src/styles/utils";
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .containerImage {
+    width: 100%;
+    img {
+      width: 100%;
+      height: auto;
+    }
+    margin-bottom: 50px;
+  }
+
+  .thanks {
+    padding-top: 13px;
+    @extend .header3;
+    display: none;
+    max-width: 456px;
+    align-self : center;
+    .orange {
+      color: $orange
+    }
+    .thanksText {
+      display: inline-block;
+    }
+  }
+
+  .thanks.thanksVisible  {
+    display: block;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+
+  .formSended {
+    display:none !important;
+  }
+
+  .formInputBox {
+    &:not(:first-child) {
+      @include margin-t(60px,40px, 20px);
+    }
+    position: relative;
+
+
+    > label {
+      color: $gray;
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+
+      &.hover {
+        @include padding-t(32px,28px, 24px);
+        @extend .small-text;
+      }
+    }
+
+    > input, > textarea {
+      width: 100%;
+      @include padding-y(18px, 14px, 10px);
+      border-bottom: 1px solid $medium-gray;
+    }
+
+    input::-webkit-contacts-auto-fill-button {
+      visibility: hidden;
+      position: absolute;
+      right: 0;
+    }
+
+    > input:focus, input.checked, > textarea:focus, textarea.checked {
+      font-weight: 500;
+      @include padding-y(18px, 14px, 10px);
+
+      & + label {
+        @include fluidFontSize(12px, 12px, 10px, 10px, 8px, 8px);
+      }
+    }
+    .errorMessage.show {
+      visibility: visible;
+    }
+
+    .errorMessage {
+      @include margin-t(8px, 6px, 4px);
+      color: $gray;
+      text-align: left;
+      display: flex;
+      visibility: hidden;
+    }
+
+    .right, .wrong {
+      position: absolute;
+      right: 0;
+      @include padding-y(18px, 14px, 12px);
+    }
+
+  }
+
+  .policy {
+    @extend .menu-text;
+    color: $gray;
+    @include padding-t(60px,40px, 20px);
+    width: 290px;
+    font-family: $inter-regular;
+    text-align: left;
+    a {
+      color: $black;
+    }
+  }
+
+  .submitButton {
+    cursor: pointer;
+    width: 240px;
+    height: 240px;
+    background-color: $orange;
+    color: $white;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: -310px;
+    @extend .header4;
+    display: none;
+  }
+
+  @media all and (max-width: 1000px) {
+    .containerImage {
+      width: 80%;
+    }
+  }
+
+  @media all and (max-width: 900px) {
+    .containerImage {
+      align-self: center;
+      display: block!important;
+      width: 60%;
+    }
+
+    .submitButton {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      bottom: -160px;
+      display: none;
+    }
+
+    .thanks.thanksVisible {
+      display: flex;
+      justify-content: center;
+      max-width: unset;
+      align-self : flex-start;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+
+  @media all and (max-width: 640px) {
+    .containerImage {
+      width: 80%;
+    }
+
+    .submitButton {
+      width: 132px;
+      height: 132px;
+      position: relative;
+      right: unset;
+      bottom: 0;
+      display:  flex;
+      left: 50%;
+      top:9px;
+      transform: translate(-50%, 0);
+    }
+  }
+
+

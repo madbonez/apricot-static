@@ -1,0 +1,81 @@
+@import "./src/styles/utils";
+
+#screen11 {
+  &.screen11_container {
+    width: 100%;
+    position: absolute;
+    overflow-y: hidden;
+    z-index: 34;
+    height: 1090px;
+  }
+
+  .content {
+    @include padding-t(120px, 40px, 60px);
+    @include padding-b(120px, 40px, 60px);
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .title {
+    width: 37%;
+  }
+
+  .formWrapper {
+    width: 57%;
+    position: relative;
+  }
+
+
+
+  @media all and (max-width: 1200px ) {
+    &.screen11_container {
+      height: 960px;
+    }
+  }
+
+  @media all and (max-width: 900px) {
+    .content {
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    &.screen11_container {
+      height: 1060px;
+    }
+    .title {
+      width: 50%;
+      @include margin-b(60px,60px,40px);
+    }
+
+    .formWrapper {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @media all and (max-width: 800px ) {
+    &.screen11_container {
+      height: 965px;
+    }
+  }
+
+  @media all and (max-width: 640px ) {
+    &.screen11_container {
+      height: 1030px;
+    }
+  }
+
+  @media all and (max-width: 500px ) {
+    &.screen11_container {
+      height: 920px;
+    }
+  }
+
+  @media all and (max-width: 400px ) {
+    &.screen11_container {
+      height: 840px;
+    }
+  }
+
+}

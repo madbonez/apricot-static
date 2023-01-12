@@ -1,0 +1,161 @@
+@import "./src/styles/utils";
+
+#screen9 {
+  &.screen9_container {
+    width: 100%;
+    @include padding-y(120px, 60px, 60px);
+    position: absolute;
+    z-index: 30;
+    height: 1025px;
+  }
+
+  .nameTagWrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+  }
+
+  .nameBlock {
+    max-width: 35%;
+    padding-right: 40px;
+  }
+
+  .tagBlock {
+    margin-right: 103px;
+    max-width: 580px;
+    width: 48%;
+    @include padding-b(100px, 60px, 60px);
+  }
+
+  .tag {
+    cursor: pointer;
+    text-decoration: underline;
+    font-family: $inter-regular;
+    @extend .normal-text;
+    color: $black;
+  }
+
+  .projectWrapper {
+    display:flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  .projectBlock {
+    width: 48%;
+    min-width: 400px;
+    padding-bottom: 44px;
+    @include padding-b (44px, 60px, 44px);
+  }
+
+  .titleTagContainer {
+    position: relative;
+    h4 {
+      cursor: pointer;
+      @include padding-t(20px, 15px, 10px);
+    }
+  }
+  .projectTags {
+    padding-top: 9px;
+    color: $gray;
+  }
+
+  .buttonContainer {
+    @include padding-t(100px,45px, 40px);
+    display: flex;
+    justify-content: center;
+  }
+
+  .video {
+    max-width: 100% ;
+  }
+
+  @media all and (max-width: 1000px) {
+    .nameTagWrapper {
+      flex-direction: column;
+    }
+    .nameBlock {
+      max-width: unset;
+      padding-right: unset;
+      @include padding-b(24px, 24px ,40px)
+    }
+    .tagBlock {
+      width:100%;
+      margin-right: unset;
+    }
+    .projectWrapper {
+      flex-wrap: nowrap;
+      flex-direction: column;
+    }
+
+    .projectBlock {
+      width: 100%;
+      min-width: 320px;
+    }
+
+    .projectTags {
+      padding-right: 0;
+      @include padding-l(12px, 12px, 8px)
+    }
+
+    .titleTagContainer {
+      flex-direction: row;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .arrow {
+    width: 20px;
+    height: 20px;
+    svg:first-child {
+
+    }
+    @include margin-t(30px, 22px, 12px);
+    overflow: hidden;
+    cursor: pointer;
+    position: absolute;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    top: 0;
+    right: 0;
+  }
+
+  @media all and (max-width: 1200px ) {
+    &.screen9_container {
+      height: 890px;
+    }
+  }
+
+  @media all and (max-width: 1000px ) {
+    &.screen9_container {
+      height: 1625px;
+    }
+  }
+
+  @media all and (max-width: 800px ) {
+    &.screen9_container {
+      height: 1375px;
+    }
+  }
+
+  @media all and (max-width: 640px ) {
+    &.screen9_container {
+      height: 1185px;
+    }
+  }
+
+  @media all and (max-width: 500px ) {
+    &.screen9_container {
+      height: 1000px;
+    }
+  }
+
+  @media all and (max-width: 400px ) {
+    &.screen9_container {
+      height: 910px;
+    }
+  }
+
+}

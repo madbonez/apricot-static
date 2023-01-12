@@ -2,19 +2,18 @@
 <link rel="stylesheet" href="./Screen1/index.scss" />
 
 <div id="screen1" class="screen1_container">
+    <each loop="block, idx in block_1">
         <div class="container2">
             <div class="content">
                 <h1>
-                    <div class="title" id="word1Ref">Own</div>
+                    <div class="title" id="word1Ref">{{block.title_1}}</div>
                     <span> </span>
-                    <div class="title" id="word2Ref">your</div>
+                    <div class="title" id="word2Ref">{{block.title_2}}</div>
                     <span> </span>
-                    <div class="title" id="word3Ref">reality</div>
+                    <div class="title" id="word3Ref">{{block.title_3}}</div>
                 </h1>
                 <div class="buttonArrow">
-                    <include src="./src/ButtonArrow/index.html" locals='{
-        "text": "Get in touch"
-    }'></include>
+                    <include src="./src/ButtonArrow/index.html"></include>
                 </div> <!--onClick=()=>callback('form')-->
             </div>
         </div>
@@ -28,5 +27,5 @@
                 <rect height="100" width="1440" clip-path="url(#myClipPath)" class="arc"/>
             </svg>
         </div>
-    </div>
+    </each>
 </div>

@@ -4,7 +4,6 @@ $height: 50vh;
 
 #screen1 {
     &.screen1_container {
-        display: none;
         @include padding-t(200px, 138px, 120px);
         position: absolute;
         width: 100%;

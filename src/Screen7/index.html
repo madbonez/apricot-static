@@ -1,0 +1,95 @@
+<script type="module" src="./Screen7/index.ts"></script>
+<link rel="stylesheet" href="./Screen7/index.scss"/>
+
+<div id="screen7" class="screen7_container white">
+    <each loop="block, idx in block_7">
+        <div class="content container">
+            <div class="nameBlock block-name">
+                {{block.block_name}}
+            </div>
+            <div class="wrapper contentBlockAnimation">
+                <div class="contentBlock">
+                    <each loop=" item, index in block.elements.slice(0, 3)">
+
+                    <div       class="block blockAnimation">
+                      <!--  onClick={() => callback(index, 7)}
+                    onMouseEnter={() => onMouseOverButton(index)}
+                    onMouseLeave={() => onMouseLeaveButton(index)}
+
+                    key={index} -->
+                    <div class="arrow">
+                        <div>
+                            <svg class="arrow-{{index}}" width="18" height="18" viewBox="0 0 18 18"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                        d="M1.92886 16.0709L16.071 1.92872M16.071 1.92872H3.34307M16.071 1.92872V14.6566"
+                                        stroke="#04000A"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <svg class="arrow2-{{index}}" width="18" height="18" viewBox="0 0 18 18"
+                                 fill="none"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                        d="M1.92886 16.0709L16.071 1.92872M16.071 1.92872H3.34307M16.071 1.92872V14.6566"
+                                        stroke="#04000A"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+
+                    </div>
+
+
+                    <h3>
+                        {{item.preview.title}}
+                    </h3>
+                    <div class="line line-{{index}}"/>
+                    <p>{{item.preview.text}}</p>
+                </div>
+                    </each>
+
+            </div>
+            <div class="contentBlock">
+                <each loop="item, index in block.elements.slice(-2)">
+                    <div class="block blockAnimation">
+                        <!--        onClick={()=> callback(index + 3, 7)}
+                                onMouseEnter={() => onMouseOverButton(index + 3)}
+                                onMouseLeave={() => onMouseLeaveButton(index + 3)}
+                                 key={index}-->
+                        <div class="arrow">
+                            <div>
+                                <svg class="arrow-{{index + 3}}" width="18" height="18" viewBox="0 0 18 18"
+                                     fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                            d="M1.92886 16.0709L16.071 1.92872M16.071 1.92872H3.34307M16.071 1.92872V14.6566"
+                                            stroke="#04000A"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <svg class="arrow2-{{index + 3}}" width="18" height="18"
+                                     viewBox="0 0 18 18" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                            d="M1.92886 16.0709L16.071 1.92872M16.071 1.92872H3.34307M16.071 1.92872V14.6566"
+                                            stroke="#04000A"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+
+                        </div>
+                        <h3>
+                            {{item.preview.title}}
+                        </h3>
+                        <div class="line line-{{index + 3}}"/>
+                        <p>{{item.preview.text}}</p>
+                    </div>
+                </each>
+        </div>
+</div>
+</div>
+</each>
+</div>
