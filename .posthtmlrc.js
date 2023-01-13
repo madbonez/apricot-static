@@ -7,11 +7,41 @@ const plugins = {
     "posthtml-include": {},
     "posthtml-expressions": {
         "locals": {
+            "popup_active": 1,
+            "lang": "En",
+            "path_to_image": "./public/image",
+            "cursor": "Drag",
+            "header": [{
+                "logo": "A|Apricot",
+
+                "menu": [{",title": "About us", "link": "about"}, {"title": "Technology", "link": "technology"}, {
+                    "title": "Applying",
+                    "link": "applying"
+                }, {"title": "Bennefits", "link": "bennefits"}, {"title": "Projects", "link": "projects"}, {
+                    "title": "Steps",
+                    "link": "steps"
+                }, {"title": "Contacts", "link": "contacts"}],
+                "languages": [{
+                    "title": "English",
+                    "link": "\/"
+                },
+                    {
+                        "title": "\u0420\u0443\u0441\u0441\u043a\u0438\u0439",
+                        "link": "\/ru\/"
+                    },
+                    {
+                        "title": "\u0570\u0561\u0575\u0565\u0580\u0565\u0576",
+                        "link": "\/hy\/"
+                    }
+                ],
+                "button_title": "Get in touch",
+                "button_title_mobile": "Get <br\/> in touch"
+            }],
             "block_1": [{
                 "title_1": "Own",
                 "title_2": "your",
                 "title_3": "reality",
-                "button_text": "Get in touch",
+                "button_title": "Get in touch",
             }],
             "block_2": [{
                 "video_link": "https:\/\/player.vimeo.com\/progressive_redirect\/playback\/764937143\/rendition\/1080p\/file.mp4?loc=external&signature=4388a208c86b8a90f77a44e530be9a0d5226ac93ec8a0598c6b0008e535d2d5b",
@@ -252,7 +282,30 @@ const plugins = {
                 "thanks_text_1": "Thanks for the application,",
                 "thanks_text_2": "we will contact you soon!"
             }],
-        }
+            "footer": [{
+                "title": "Get in touch",
+                "email": "Info@apricotxr.com",
+                "email_href": "mailto:Info@apricotxr.com",
+                "address_region": "Armenia, Yerevan",
+                "phone": "+374 94 282499",
+                "phone_href": "tel:+374 94 282499",
+                "address_detail": "Abelyan st. 6\/1, B 302",
+                "copyright_text": "\u00a9 2022, Apicot",
+                "policy_text": "Privacy policy",
+                "policy_link": "",
+                "social_links": [{
+                    "id":"instagram",
+                    "link":"https://instagram.com/apricot_xr?igshid=YmMyMTA2M2Y="
+                }, {
+                    "id":"whatsapp",
+                    "link":"https://api.whatsapp.com/send?phone=79032296363"
+                }, {
+                    "id":"linkedin",
+                    "link":"https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Aorganization%3A82477794&keywords=apricot&origin=RICH_QUERY_SUGGESTION&position=0&searchId=f07d22a6-2365-469c-96d2-73ee219d0076&sid=a8D"
+                }],
+                "to_top_button_title": "Back to top"
+            }
+]        }
     }
 }
 

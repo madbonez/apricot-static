@@ -1,0 +1,109 @@
+<script type="module" src="./Popup/index.ts"></script>
+<link rel="stylesheet" href="./Popup/index.scss"/>
+
+<div id="popup" class="popup black {{popup_active !== null ? 'active' : ''}}" >
+    <each loop="content, popup_index in popup">
+   
+    <!--    {active !== null && screen === 7 &&
+        <div className={styles.popupContainer}>
+            <div ref={popupContentRef} className={`${styles.popupContent} ${styles.active}`}>
+                    <span ref={popupCloseRef} className={styles.popupClose}/>
+                    <div className={styles.popupTopBlock}>
+                        <h2 className={styles.popupTitle}>{cmsData.block_6.elements[active].detail.title}</h2>
+                        <div
+                                className={styles.popupSmallRightTopText}>{cmsData.block_6.elements[active].detail.topText}</div>
+                    </div>
+                    <div className={styles.popupImage}>
+                        <img src={cmsData.block_6.elements[active].detail.image}
+                             alt={cmsData.block_6.elements[active].detail.title}/>
+                    </div>
+                    <div className={styles.popupMainText}>{cmsData.block_6.elements[active].detail.sub_title}</div>
+                    <div className={styles.popupBottomBlock}>
+                        <div
+                                className={styles.popupSmallLeftBottomText}
+                                dangerouslySetInnerHTML={{__html: cmsData.block_6.elements[active].detail.leftBottomText}}/>
+                        <div
+                                className={styles.popupSmallRightBottomText}
+                                dangerouslySetInnerHTML={{__html: cmsData.block_6.elements[active].detail.rightBottomText}}/>
+                        <ol className={styles.popupSmallRightBottomList}>
+                            {cmsData.block_6.elements[active].detail.list
+                                ? cmsData.block_6.elements[active].detail.list.filter(Boolean).map((elem, idx) =>
+                                    <li key={idx}>
+                                        {elem}
+                                    </li>
+                                ) :
+                                ''}
+                        </ol>
+                    </div>
+            </div>
+        </div>
+        }
+        {active !== null && screen === 9 &&
+        <div className={styles.popupContainer}>
+            <div ref={popupContentRef} className={`${styles.popupContent2} ${styles.active}`}>
+                <span ref={popupCloseRef} className={styles.popupClose} onClick={(e) => {
+                setActive(null);
+                }}/>
+                <div className={styles.popupTopBlock2}>
+                    <h3 className={styles.popupTitle2}>{cmsData.block_8.elements[active].detail.title}</h3>
+                    <div className={styles.tagsBlock2}>
+                        <div className={styles.tagBox2}>
+                                <span
+                                        className={styles.tagTittle2}>{`${cmsData.block_8.elements[active].detail.characteristics[0].name}: `}</span>
+                            <span
+                                    className={styles.tagText2}>{cmsData.block_8.elements[active].detail.characteristics[0].value}</span>
+                        </div>
+                        <div>
+                                <span
+                                        className={styles.tagTittle2}>{`${cmsData.block_8.elements[active].detail.characteristics[1].name}: `}</span>
+                            <span
+                                    className={styles.tagText2}>{cmsData.block_8.elements[active].detail.characteristics[1].value}</span>
+                        </div>
+                    </div>
+                </div>
+                <div className={styles.videoContainer}>
+                    <video className={styles.video} data-text="play"
+                           data-video={cmsData.block_8.elements[active].detail.video_link_1}
+                           loop
+                           muted
+                           autoPlay
+                           playsInline
+                           src={cmsData.block_8.elements[active].detail.video_link_1}
+                           type="video/mp4">
+                    </video>
+                </div>
+                <div className={styles.subTitle2}>{cmsData.block_8.elements[active].detail.sub_title}</div>
+                <div className={styles.smallVideoContainer}>
+                    <video className={styles.video} data-text="play"
+                           data-video={cmsData.block_8.elements[active].detail.video_link_2}
+                           muted
+                           playsInline
+                           controls
+                           src={cmsData.block_8.elements[active].detail.video_link_2}
+                           type="video/mp4">
+                    </video>
+                </div>
+                <div className={styles.bottomBlock2}>
+                    <ul className={styles.list2}>
+                        {cmsData.block_8.elements[active].detail.list ? cmsData.block_8.elements[active].detail.list.map((elem, idx) =>
+                        <li key={idx}>
+                            {elem}
+                        </li>
+                        ) : ''}
+                    </ul>
+                    <div className={styles.ButtonBlock}>
+                        <ButtonGrey text={cmsData.block_8.button_previous_text} buttonColor={'grey'}
+                                    onClick={(e) => {
+                        previousPopup(active);
+                        }}/>
+                        <ButtonArrow text={cmsData.block_8.button_next_title}
+                                     onClick={(e) => {
+                        nextPopup(active);
+                        }}/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }-->
+    </each>
+</div>

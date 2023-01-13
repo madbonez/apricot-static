@@ -1,0 +1,63 @@
+<script type="module" src="./Header/index.ts"></script>
+<link rel="stylesheet" href="./Header/index.scss"/>
+
+<div id="header" class="headerBorder">
+    <each loop="block, idx in header">
+        <div class="header container {{false ? 'navActive' : ''}}">
+            <div  class="logo">
+                {{block.logo}}
+            </div>
+            <div class="nav">
+                <nav class="navbar">
+                    <ul class="navbarList">
+                        <each loop="item, index in block.menu">
+                            <li class="navbarItem"  key="{{index}}">
+                                <div  class="navbarLink">
+                                    <span class="navbarInner">{{item.title}}</span>
+                                    <span class="navbarRoller">{{item.title}}</span>
+                                </div>
+                            </li>
+                        </each>
+                        <div class="buttonWhite" >
+                            <p class="buttonText">
+                                {{block.button_title_mobile}}
+                            </p>
+                        </div>
+                    </ul>
+                </nav>
+            </div>
+            <div class="action">
+                <div class="lang">
+                    <div class="lang__btn">
+            <span>
+{{lang}}
+            </span>
+                        <svg class="langArrow" viewBox="0 0 9 6" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                  d="M0.21967 0.21967C0.512563 -0.0732233 0.987437 -0.0732233 1.28033 0.21967L4.5 3.43934L7.71967 0.21967C8.01256 -0.0732233 8.48744 -0.0732233 8.78033 0.21967C9.07322 0.512563 9.07322 0.987437 8.78033 1.28033L5.03033 5.03033C4.73744 5.32322 4.26256 5.32322 3.96967 5.03033L0.21967 1.28033C-0.0732233 0.987437 -0.0732233 0.512563 0.21967 0.21967Z"/>
+                        </svg>
+                    </div>
+                    <div class="langDropdown">
+                        <ul class="langList">
+                            <each loop="item, index in block.languages">
+                                <li class="langItem" key="{{index}}">
+                                    <a href='#' class="langLink + menu-text">{{item.title}}</a>
+                                </li>
+                            </each>
+                        </ul>
+                    </div>
+                </div>
+                <div class="buttonArrow">
+                    <include src="./src/ButtonArrow/index.html"></include>
+                </div>
+                <div  class="mobileBtn">
+
+                    {{false ? <img src="{{path_to_image}}/header/2.svg"/> : <img src="{{path_to_image}}/header/1.svg"/>}}
+
+                </div>
+            </div>
+        </div>
+
+    </each>
+</div>

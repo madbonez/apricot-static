@@ -1,0 +1,53 @@
+@import "./src/styles/utils";
+
+#submit-button {
+  &.submit-button_container {
+    position: absolute;
+    //   top: calc(var(--vh, 1vh) * 100);
+    z-index: 100;
+    width: 400px;
+    height: 400px;
+    right: 120px;
+  }
+
+  .submitButton {
+    width: 240px;
+    height: 240px;
+    background-color: $orange;
+    color: $white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    @extend .header4;
+    right: 0;
+    background: linear-gradient(180deg, $orange 170px, $white 171px);
+    h4 {
+      background-color: $white;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .formSended {
+    display: none !important;
+  }
+
+  @media all and (max-width: 1440px) {
+     &.submit-button_container{
+      right:  0px
+    }
+  }
+
+  @media all and (max-width: 640px) {
+     &.submit-button_container{
+      display: none;
+    }
+    .submitButton {
+      display: none;
+    }
+  }
+
+
+}
