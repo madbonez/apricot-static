@@ -25,6 +25,7 @@
   },
   "outputFormat": "global",
   "dependencies": {
+    "gsap": "^3.11.4",
     "normalize.css": "^8.0.1"
   }
 }

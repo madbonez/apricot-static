@@ -1,17 +1,18 @@
 import {onDomReady} from "../utils/utils";
-import { getState, GlobalState, selectState, updateState } from '../state/state';
+import {gsap} from "gsap";
+
 
 const id = '#screen1'
 export function main() {
-/*    document.querySelector(`${id} button`).addEventListener('click', () => {
-        console.log('clicked 1');
 
-        const state: GlobalState = getState();
-        updateState({
-            counter: (state.counter ?? 0) + 1,
-        })
-    });*/
+    const word1Ref = document.querySelector("#word1Ref")
+    const word2Ref = document.querySelector("#word2Ref")
+    const word3Ref = document.querySelector("#word3Ref")
 
+    let tl = gsap.timeline();
+    tl.from(word1Ref, {y: 120, opacity: 0, ease: 'power4.Out', duration: 1, delay: 0.15});
+    tl.from(word2Ref, {y: 120, opacity: 0, ease: 'power4.Out', duration: 1}, "<0.15");
+    tl.from(word3Ref, {y: 120, opacity: 0, ease: 'power4.Out', duration: 1}, "<0.15");
 
 }
 
