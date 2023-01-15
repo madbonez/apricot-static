@@ -7,7 +7,7 @@ $videoCoverHeight: calc(var(--vh, 1vh) * 100);
 $videoCoverWidth: 100vw;
 
 #screen2 {
-    .screen2_container {
+    &.screen2_container {
         position: absolute;
         z-index: 10;
         max-width: 100%;

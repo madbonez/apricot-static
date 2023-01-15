@@ -85,7 +85,7 @@
   }
 }
 
-.header4 {
+.header4, #submit-button .submitButton {
   text-align: left;
   font-family: Inter-SemiBold, "sans-serif";
   font-size: 18px;
@@ -93,21 +93,21 @@
 }
 
 @media (min-width: 360px) {
-  .header4 {
+  .header4, #submit-button .submitButton {
     font-size: calc(2.60417vw + 8.625px);
     line-height: calc(4.16667vw + 5px);
   }
 }
 
 @media (min-width: 744px) {
-  .header4 {
+  .header4, #submit-button .submitButton {
     font-size: calc(1.14943vw + 19.4483px);
     line-height: calc(1.14943vw + 27.4483px);
   }
 }
 
 @media (min-width: 1440px) {
-  .header4 {
+  .header4, #submit-button .submitButton {
     font-size: 36px;
     line-height: 44px;
   }
@@ -284,31 +284,47 @@
   }
 }
 
-#screen2.screen2_container {
-  z-index: 10;
-  max-width: 100%;
-  height: auto;
+#submit-button.submit-button_container {
+  z-index: 100;
+  width: 400px;
+  height: 400px;
   position: absolute;
+  right: 120px;
 }
 
-#screen2 .videoContainer {
-  position: relative;
-  overflow: hidden;
+#submit-button .submitButton {
+  width: 240px;
+  height: 240px;
+  color: #fff;
+  background: linear-gradient(#ff9300 170px, #fff 171px);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  right: 0;
 }
 
-@media (orientation: portrait) {
-  #screen2 .video {
-    height: calc(var(--vh, 1vh) * 100);
-    transform: translateX(calc(50vw - var(--vh, 1vh) * 100 / .5625 / 2));
-    width: calc(var(--vh, 1vh) * 100 / .5625);
+#submit-button .submitButton h4 {
+  background-color: #fff;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#submit-button .formSended {
+  display: none !important;
+}
+
+@media (max-width: 1440px) {
+  #submit-button.submit-button_container {
+    right: 0;
   }
 }
 
-@media (orientation: landscape) {
-  #screen2 .video {
-    height: 56.25vw;
-    width: 100vw;
+@media (max-width: 640px) {
+  #submit-button.submit-button_container, #submit-button .submitButton {
+    display: none;
   }
 }
 
-/*# sourceMappingURL=index.01df09b9.css.map */
+/*# sourceMappingURL=index.e354fa1c.css.map */

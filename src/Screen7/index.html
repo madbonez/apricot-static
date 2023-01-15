@@ -11,7 +11,7 @@
                 <div class="contentBlock">
                     <each loop=" item, index in block.elements.slice(0, 3)">
 
-                    <div       class="block blockAnimation">
+                    <div       class="block blockAnimation" data-index="{{index}}">
                       <!--  onClick={() => callback(index, 7)}
                     onMouseEnter={() => onMouseOverButton(index)}
                     onMouseLeave={() => onMouseLeaveButton(index)}

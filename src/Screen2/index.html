@@ -1,9 +1,9 @@
 <script type="module" src="./Screen2/index.ts"></script>
 <link rel="stylesheet" href="./Screen2/index.scss"/>
 
-<div id="screen2">
+<div id="screen2" class="screen2_container">
     <each loop="block, idx in block_2">
-        <div class="screen2_container">
+
             <div class="videoContainer">
                 <video class="video" data-text="play"
                        data-video={{block.video_link}}
@@ -15,6 +15,6 @@
                        src={{block.video_link}}
                        type="video/mp4"></video>
             </div>
-        </div>
+
     </each>
 </div>

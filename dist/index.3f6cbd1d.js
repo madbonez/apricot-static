@@ -537,7 +537,12 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
 var _utils = require("../utils/utils");
 const id = "#screen7";
-function main() {}
+function main() {
+// el('sd').addEventListener('click', (event: MouseEvent) => {
+//     const popup: HTMLDivElement = event.target as HTMLDivElement;
+//     console.log(popup.dataset.index)
+// })
+}
 (0, _utils.onDomReady)(main);
 
 },{"../utils/utils":"ea5wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["484nF","3eEGw"], "3eEGw", "parcelRequireb921")

@@ -1,7 +1,7 @@
 @import "./src/styles/utils";
 
 #screen10 {
-   &screen10_container {
+   &.screen10_container {
     width: 100%;
     position: absolute;
     z-index: 32;
@@ -85,7 +85,7 @@
   }
 
   @media all and (max-width: 900px) {
-     &screen10_container {
+     &.screen10_container {
       cursor: auto !important;
     }
     .stepContainer {
@@ -116,31 +116,31 @@
 
 
   @media all and (max-width: 1200px ) {
-     &screen10_container {
+     &.screen10_container {
       height: 900px;
     }
   }
 
   @media all and (max-width: 1000px ) {
-     &screen10_container {
+     &.screen10_container {
       height: 865px;
     }
   }
 
   @media all and (max-width: 800px ) {
-     &screen10_container {
+     &.screen10_container {
       height: 770px;
     }
   }
 
   @media all and (max-width: 640px ) {
-     &screen10_container {
+     &.screen10_container {
       height: 700px;
     }
   }
 
   @media all and (max-width: 400px ) {
-     &screen10_container {
+     &.screen10_container {
       height: 600px;
     }
   }

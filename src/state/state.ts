@@ -1,9 +1,12 @@
 export interface GlobalState {
+    scrollTriggers: object;
     counter?: number;
     cmsData: any;
+    activePopupId: string | null;
 }
 
 let globalState: GlobalState = {
+    scrollTriggers: {},
     cmsData: {
         "path_to_image": "/image",
         "cursor": "Drag",
@@ -296,7 +299,8 @@ let globalState: GlobalState = {
             }],
             "to_top_button_title": "Back to top"
         }
-    }
+    },
+    activePopupId: null,
 };
 const listeners = [];
 
@@ -308,16 +312,26 @@ export function updateState(newState: GlobalState) {
     listeners.forEach(fn => fn(globalState))
 }
 
+export function updateOneState(key: string, object :object) {
+    globalState[key] = object,
+
+    listeners.forEach(fn => fn(globalState))
+}
+
 export function getState(): GlobalState {
     return globalState;
 }
 
-export function selectState(fn: (newState: GlobalState) => void) {
+export function selectState(fn: (newState: GlobalState) => void, key?: string) {
     if (listeners.indexOf(fn) === -1) {
         listeners.push(fn);
     }
 
-    fn(globalState);
+    if (key) {
+        fn(globalState[key]);
+    } else {
+        fn(globalState);
+    }
 }
 
 export function unsubscribe(fn) {

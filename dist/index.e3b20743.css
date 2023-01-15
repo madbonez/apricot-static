@@ -284,7 +284,7 @@
   }
 }
 
-#screen10screen10_container {
+#screen10.screen10_container {
   width: 100%;
   z-index: 32;
   height: 910px;
@@ -433,7 +433,7 @@
 }
 
 @media (max-width: 900px) {
-  #screen10screen10_container {
+  #screen10.screen10_container {
     cursor: auto !important;
   }
 
@@ -482,31 +482,31 @@
 }
 
 @media (max-width: 1200px) {
-  #screen10screen10_container {
+  #screen10.screen10_container {
     height: 900px;
   }
 }
 
 @media (max-width: 1000px) {
-  #screen10screen10_container {
+  #screen10.screen10_container {
     height: 865px;
   }
 }
 
 @media (max-width: 800px) {
-  #screen10screen10_container {
+  #screen10.screen10_container {
     height: 770px;
   }
 }
 
 @media (max-width: 640px) {
-  #screen10screen10_container {
+  #screen10.screen10_container {
     height: 700px;
   }
 }
 
 @media (max-width: 400px) {
-  #screen10screen10_container {
+  #screen10.screen10_container {
     height: 600px;
   }
 }

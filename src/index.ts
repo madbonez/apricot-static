@@ -1,9 +1,9 @@
+import {calcOverflowOffset, height, isTouchDevice, onDomReady, scrollWidth} from "./utils/utils";
 import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
 import {initSmoothScrollbar} from "./utils/initSmoothScrollbar";
 import {scrollDebug, scrollTriggerFactory} from "./utils/scrollTrigger";
 import {resizeDetector} from "./utils/heights";
-import {calcOverflowOffset, element, height, isTouchDevice, onDomReady, scrollWidth} from "./utils/utils";
-import { getState, GlobalState, selectState, updateState } from './state/state';
+import {updateOneState} from './state/state';
 import {el} from "./utils/dom";
 import {gsap} from "gsap";
 
@@ -65,7 +65,9 @@ let setIsHeaderVisibleGlobal;
 let scrollDistance = new Map();
 let startScreenNavigationPositions = new Map();
 
+
 export function main() {
+
     function addScreenNavigationPosition(id, height) {
         startScreenNavigationPositions.set(id, height);
     }
@@ -80,17 +82,10 @@ export function main() {
     }
 
     function scrollAnimationHandler(trigger) {
-        if (trigger.vars.id === 'screen11') {
-            setIsHeaderVisibleGlobal(false);
-        } else {
-            setIsHeaderVisibleGlobal(trigger.direction === -1);
-        }
-
-
         if (trigger.vars.id === 'screen1') {
             if (!screen1Tween.length) {
                 screen1Tween.push(
-                    gsap.to(element(screen2Ref), {
+                    gsap.to(screen2Ref, {
                         top: `+=${scrollDistance.get('screen1') - videoOverlap}px`,
                         paused: true,
                         ease: 'none',
@@ -98,7 +93,6 @@ export function main() {
                 );
 
                 [screen3Ref, ...commonScreens, ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen1Tween.push(
                             gsap.to(screen, {
@@ -115,7 +109,6 @@ export function main() {
         if (trigger.vars.id === 'screen3Horizontal') {
             if (!screen3HorizontalTween.length) {
                 [screen3Ref, ...commonScreens, ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen3HorizontalTween.push(
                             gsap.to(screen, {
@@ -132,7 +125,6 @@ export function main() {
         if (trigger.vars.id === 'screen3') {
             if (!screen3Tween.length) {
                 [...commonScreens, ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen3Tween.push(
                             gsap.to(screen, {
@@ -149,7 +141,6 @@ export function main() {
         if (trigger.vars.id === 'screen4') {
             if (!screen4Tween.length) {
                 [...commonScreens.slice(1), ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen4Tween.push(
                             gsap.to(screen, {
@@ -166,7 +157,6 @@ export function main() {
         if (trigger.vars.id === 'screen5Horizontal') {
             if (!screen5HorizontalTween.length) {
                 [...commonScreens.slice(1), ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen5HorizontalTween.push(
                             gsap.to(screen, {
@@ -183,7 +173,6 @@ export function main() {
         if (trigger.vars.id === 'screen5') {
             if (!screen5Tween.length) {
                 [...commonScreens.slice(2), ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen5Tween.push(
                             gsap.to(screen, {
@@ -200,7 +189,6 @@ export function main() {
         if (trigger.vars.id === 'screen6') {
             if (!screen6Tween.length) {
                 [...commonScreens.slice(3), ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen6Tween.push(
                             gsap.to(screen, {
@@ -217,7 +205,6 @@ export function main() {
         if (trigger.vars.id === 'screen7') {
             if (!screen7Tween.length) {
                 [...commonScreens.slice(4), ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen7Tween.push(
                             gsap.to(screen, {
@@ -234,7 +221,6 @@ export function main() {
         if (trigger.vars.id === 'screen8Horizontal') {
             if (!screen8HorizontalTween.length) {
                 [...commonScreens.slice(4), ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen8HorizontalTween.push(
                             gsap.to(screen, {
@@ -251,7 +237,6 @@ export function main() {
         if (trigger.vars.id === 'screen8') {
             if (!screen8Tween.length) {
                 [...commonScreens.slice(5), ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen8Tween.push(
                             gsap.to(screen, {
@@ -268,7 +253,6 @@ export function main() {
         if (trigger.vars.id === 'screen9') {
             if (!screen9Tween.length) {
                 [...commonScreens.slice(6), ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen9Tween.push(
                             gsap.to(screen, {
@@ -285,7 +269,6 @@ export function main() {
         if (trigger.vars.id === 'screen10') {
             if (!screen10Tween.length) {
                 [...commonScreens.slice(7), ...footerScreens]
-                    .map(ref => element(ref))
                     .forEach(screen => {
                         screen10Tween.push(
                             gsap.to(screen, {
@@ -302,7 +285,7 @@ export function main() {
         if (trigger.vars.id === 'screen11') {
             if (!screen11Tween.length) {
                 screen11Tween.push(
-                    gsap.to(element(footerRef), {
+                    gsap.to(footerRef, {
                         top: `+=${height(footerRef)}px`,
                         paused: true,
                         ease: 'none',
@@ -310,25 +293,25 @@ export function main() {
                 )
             }
 
-            if (trigger.progress < 0.3 && window.innerWidth>1440) {
-                gsap.set(element(screen10Ref), {
-                    backgroundColor:  '' ,
+            if (trigger.progress < 0.3 && window.innerWidth > 1440) {
+                gsap.set(screen10Ref, {
+                    backgroundColor: '',
                 })
             }
 
             if (trigger.progress > 0.6) {
 
-                if (window.innerWidth>1440){
-                    gsap.set(element(screen10Ref), {
+                if (window.innerWidth > 1440) {
+                    gsap.set(screen10Ref, {
                         backgroundColor: getComputedStyle(window.document.body).getPropertyValue('--black'),
                     })
                 }
 
-                gsap.to(element(screen11Ref), {
+                gsap.to(screen11Ref, {
                     scale: trigger.direction === 1 ? 0.9 : 1,
                     ease: 'power2.out',
                 })
-                gsap.to(element(submitButtonRef), {
+                gsap.to(submitButtonRef, {
                     xPercent: trigger.direction === 1 ? -5 : 5,
                     y: trigger.direction === 1 ? -(height(screen11Ref) * 0.1) / 2 : 0,
                     ease: 'power2.out',
@@ -340,10 +323,10 @@ export function main() {
         }
     }
 
-    function initScrollTriggers(setScrollTriggers) {
+    function initScrollTriggers() {
         let scrollTriggers = {}
 
-        const createScrollTrigger = scrollTriggerFactory(element(topContainerRef), element(scrollContainerRef), scrollAnimationHandler);
+        const createScrollTrigger = scrollTriggerFactory(topContainerRef, scrollContainerRef, scrollAnimationHandler);
         let viewportDiff = 0;
 
         // -----------video wrappers screens--------------
@@ -492,29 +475,28 @@ export function main() {
             [screenId]: screen11Trigger,
         };
 
-
-        setScrollTriggers(scrollTriggers);
+        updateOneState('scrollTriggers', scrollTriggers)
+        // setScrollTriggers(scrollTriggers);
     }
 
     function initScreensPositions() {
         let offsetAccumulator = 0;
-        gsap.set(element(screen1Ref), {
+        gsap.set(screen1Ref, {
             top: offsetAccumulator,
         });
 
         offsetAccumulator = videoOverlap;
-        gsap.set(element(screen2Ref), {
+        gsap.set(screen2Ref, {
             top: `${offsetAccumulator}px`,
         });
 
         offsetAccumulator += height(screen2Ref) - videoOverlap / 3;
-        gsap.set(element(screen3Ref), {
+        gsap.set(screen3Ref, {
             top: `${offsetAccumulator}px`,
         });
 
         offsetAccumulator += height(screen3Ref);
         [...commonScreens, screen11Ref]
-            .map(ref => element(ref))
             .forEach((screen, index) => {
                 gsap.set(screen, {
                     top: `${offsetAccumulator}px`,
@@ -522,21 +504,21 @@ export function main() {
                 offsetAccumulator += screen.offsetHeight;
             });
 
-        gsap.set(element(submitButtonRef), {
-            top: window.innerWidth>1400 ? `${offsetAccumulator - 340}px` : window.innerWidth>1000 ? `${offsetAccumulator - 280}px` : `${offsetAccumulator - 230}px`,
+        gsap.set(submitButtonRef, {
+            top: window.innerWidth > 1400 ? `${offsetAccumulator - 340}px` : window.innerWidth > 1000 ? `${offsetAccumulator - 280}px` : `${offsetAccumulator - 230}px`,
         })
 
         // put under form
-        gsap.set(element(footerRef), {
+        gsap.set(footerRef, {
             top: `${offsetAccumulator - height(footerRef)}px`,
         })
 
-        gsap.set(element(ghostRef), {
+        gsap.set(ghostRef, {
             height: `${getScreenNavigationPosition('screen11') + height(screen11Ref) + height(footerRef)}px`,
         });
     }
 
-    export const Page = () => {
+
         // const [isHeaderVisible, setIsHeaderVisible] = useState(true);
         // const [popupId, setPopupId] = useState(null);
         // const [cursorState, setCursorState] = useState(null);
@@ -562,26 +544,26 @@ export function main() {
         topContainerRef = el("#topContainerRef");
         scrollContainerRef = el("#scrollContainerRef");
         ghostRef = el("#ghostRef");
-        headerRef = el("#headerRef");
+        headerRef = el("#header");
         chelkaRef = el("#chelkaRef");
         screen1Ref = el("#screen1");
         screen2Ref = el("#screen2");
         screen3Ref = el("#screen3");
-        screen3SliderRef = el("#screen3SliderRef");
-        headerScreen3Ref = el("#headerScreen3Ref");
+        screen3SliderRef = el("#screen3 .slider");
+        headerScreen3Ref = el("#screen3 #headerScreen");
         screen4Ref = el("#screen4");
         screen5Ref = el("#screen5");
-        screen5SliderRef = el("#screen5SliderRef");
+        screen5SliderRef = el("#screen5 #sliderRef");
         screen6Ref = el("#screen6");
         screen7Ref = el("#screen7");
         screen8Ref = el("#screen8");
-        screen8SliderRef = el("#screen8SliderRef");
+        screen8SliderRef = el("#screen8 .slider");
         screen9Ref = el("#screen9");
         screen10Ref = el("#screen10");
         screen11Ref = el("#screen11");
         footerRef = el("#footer");
-        submitButtonRef = el("#submitButtonRef");
-        followCursorRef = el("#followCursorRef")
+        submitButtonRef = el("#submit-button");
+     /*   followCursorRef = el("#followCursorRef")*/
 
         // const changeCursorState = (state) => {
         //     setCursorState(state);
@@ -592,27 +574,27 @@ export function main() {
         //     setPopupScreen(screen);
         // }
 
-        const nextPopupId = (screen) => {
-            setPopupId((id) => {
-                if (id + 1 < cmsData.block_8.elements.length) {
-                    return id + 1;
-                } else {
-                    return 0;
-                }
-            });
-            setPopupScreen(screen);
-        }
+        /*     const nextPopupId = (screen) => {
+                 setPopupId((id) => {
+                     if (id + 1 < cmsData.block_8.elements.length) {
+                         return id + 1;
+                     } else {
+                         return 0;
+                     }
+                 });
+                 setPopupScreen(screen);
+             }
 
-        const previousPopupId = (screen) => {
-            setPopupId((id) => {
-                if (id === 0) {
-                    return cmsData.block_8.elements.length - 1;
-                } else {
-                    return id - 1;
-                }
-            });
-            setPopupScreen(screen);
-        }
+             const previousPopupId = (screen) => {
+                 setPopupId((id) => {
+                     if (id === 0) {
+                         return cmsData.block_8.elements.length - 1;
+                     } else {
+                         return id - 1;
+                     }
+                 });
+                 setPopupScreen(screen);
+             }*/
 
         onScrollToSection = (section) => {
             const duration = 2000;
@@ -648,15 +630,14 @@ export function main() {
         }
 
 
+      /*  topContainerRef.current.addEventListener('mousemove', (e) => handleCursorFolowMove(e), false);*/
 
-        topContainerRef.current.addEventListener('mousemove', (e) => handleCursorFolowMove(e), false);
-
-        const handleCursorFolowMove = (e) => {
+   /*     const handleCursorFolowMove = (e) => {
             const target = e.target
             if (!target) return
             followCursorRef.current.style.left = +e.pageX + 'px'
             followCursorRef.current.style.top = ghostRef.current.scrollTop + e.pageY + 'px'
-        }
+        }*/
 
         initWindowStaff();
         bodyScrollBar = initSmoothScrollbar(topContainerRef);
@@ -686,15 +667,16 @@ export function main() {
         ];
 
         let ctx = gsap.context(() => {
-            viewportHeight = window.innerHeight;
-            initScrollTriggers(setScrollTriggers);
-            initScreensPositions();
-            scrollDebug(bodyScrollBar);
-        }, topContainerRef.current);
+               viewportHeight = window.innerHeight;
+               initScrollTriggers();
+               initScreensPositions();
+               scrollDebug(bodyScrollBar);
+           }, topContainerRef.current);
 
-        resizeDetector(allScreens.map(screenRef => element(screenRef)));
-        bodyScrollBar.updatePluginOptions('modal', {open: false});
-        bodyScrollBar.updatePluginOptions('screenStop', {points: Array.from(startScreenNavigationPositions.values())});
-    }
+        resizeDetector(allScreens.map(screenRef => screenRef));
+        // bodyScrollBar.updatePluginOptions('modal', {open: false});
+      /*  bodyScrollBar.updatePluginOptions('screenStop', {points: Array.from(startScreenNavigationPositions.values())});
+*/
+}
 
 onDomReady(main);

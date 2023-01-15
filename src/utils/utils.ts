@@ -2,20 +2,17 @@ export function onDomReady(fn) {
     document.addEventListener("DOMContentLoaded", fn);
 }
 
-export function element(ref) {
-    return ref.current;
-}
 
 export function height(ref) {
-    return ref.current.offsetHeight;
+    return ref.offsetHeight;
 }
 
 export function width(ref) {
-    return ref.current.offsetWidth;
+    return ref.offsetWidth;
 }
 
 export function scrollWidth(ref) {
-    return ref.current.scrollWidth;
+    return ref.scrollWidth;
 }
 
 
