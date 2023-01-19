@@ -3,7 +3,7 @@
 
 <div id="header" class="headerBorder">
     <each loop="block, idx in header">
-        <div class="header container {{false ? 'navActive' : ''}}">
+        <div class="header container">
             <div  class="logo">
                 {{block.logo}}
             </div>
@@ -12,7 +12,7 @@
                     <ul class="navbarList">
                         <each loop="item, index in block.menu">
                             <li class="navbarItem"  key="{{index}}">
-                                <div  class="navbarLink">
+                                <div  class="navbarLink" data-link="{{item.link}}">
                                     <span class="navbarInner">{{item.title}}</span>
                                     <span class="navbarRoller">{{item.title}}</span>
                                 </div>
@@ -48,11 +48,12 @@
                         </ul>
                     </div>
                 </div>
-                <div class="buttonArrow">
+                <div class="header__buttonArrow">
                     <include src="./src/ButtonArrow/index.html"></include>
                 </div>
                 <div  class="mobileBtn">
-                    <img src="{{path_to_image}}/header/1.svg"/>
+                    <img class="burger-icon visible" src="{{path_to_image}}/header/1.svg"/>
+                    <img class="close-icon" src="{{path_to_image}}/header/2.svg"/>
                 </div>
             </div>
         </div>

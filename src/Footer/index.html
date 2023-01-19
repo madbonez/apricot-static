@@ -3,29 +3,29 @@
 
 <div id="footer" class="footer_container black">
     <each loop="block, idx in footer">
-            <div class="footerWrapper container">
-                <div class="footerTitle">
-                    <h2 class="whiteText">{{block.title}}</h2>
-                    <h2 class="orangeText">
-                        <a href="mailto:{{block.email}}">{{block.email}}</a>
-                    </h2>
+        <div class="footerWrapper container">
+            <div class="footerTitle">
+                <h2 class="whiteText">{{block.title}}</h2>
+                <h2 class="orangeText">
+                    <a href="mailto:{{block.email}}">{{block.email}}</a>
+                </h2>
+            </div>
+            <div class="contactsBox">
+                <div class="addressBox">
+                    <p class="location small-text">{{block.address_region}}</p>
+                    <h4 class="phone">
+                        <a href="tel:{{block.phone.replace(/[^0-9]/g, '')}}">{{block.phone}}</a>
+                    </h4>
+                    <h4 class="address">{{block.address_detail}}</h4>
                 </div>
-                <div class="contactsBox">
-                    <div class="addressBox">
-                        <p class="location small-text">{{block.address_region}}</p>
-                        <h4 class="phone">
-                            <a href="tel:{{block.phone.replace(/[^0-9]/g, '')}}">{{block.phone}}</a>
-                        </h4>
-                        <h4 class="address">{{block.address_detail}}</h4>
-                    </div>
-                    <div class="social">
-                        <each loop="item, index in block.social_links">
-                            <div key="{index}}" class="socialAnimation{{index}}">
-                                <svg width="32" height="56">
-                                    <use xlink:href="{{path_to_image}}/footer/social-icons.svg#{{item.id}}"/>
-                                </svg>
-                            </div>
-                        </each>
+                <div class="social">
+                    <each loop="item, index in block.social_links">
+                        <div key="{index}}" class="socialAnimation socialAnimation{{index}}" data-index="{{index}}">
+                            <svg width="32" height="56">
+                                <use xlink:href="{{path_to_image}}/footer/social-icons.svg#{{item.id}}"/>
+                            </svg>
+                        </div>
+                    </each>
                 </div>
             </div>
             <div class="infoLinksBox">
@@ -33,32 +33,32 @@
                     <a href="#">
                         {{block.copyright_text}}
                     </a>
-                    <div>
-                    <div class="infoLink">
-                        <a href="{{block.policy_link}}"> {{block.policy_text}} </a>
+                    <div class="infoLinksInnerDiv">
+                        <div class="infoLink">
+                            <a href="{{block.policy_link}}"> {{block.policy_text}} </a>
+                        </div>
+                        <a class="actionInfoLinks" href="{{block.policy_link}}">
+                            {{block.policy_text}}
+                        </a>
                     </div>
-                    <a class="actionInfoLinks" href="{{block.policy_link}}">
-                        {{block.policy_text}}
-                    </a>
+                </div>
+                <div class="buttonBack small-text">
+                    <span class="textToTop">{{block.to_top_button_title}}</span>
+                    <!-- {/*  <img alt='arrow' class="arrow} arrow`} src='/image/footer/4.svg'
+
+                 />*/}-->
+                    <svg class="arrow" width="32" height="32" viewBox="0 0 32 32" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 26V6M16 6L7 15M16 6L25 15" stroke="white" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                    <svg class="arrow action arrowAnimation" width="32" height="32"
+                         viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M16 26V6M16 6L7 15M16 6L25 15" stroke="white" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
                 </div>
             </div>
-            <div class="buttonBack small-text">
-            <span class="textToTop">{{block.to_top_button_title}}</span>
-           <!-- {/*  <img alt='arrow' class="arrow} arrow`} src='/image/footer/4.svg'
-
-        />*/}-->
-            <svg class="arrow" width="32" height="32" viewBox="0 0 32 32" fill="none"
-                 xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 26V6M16 6L7 15M16 6L25 15" stroke="white" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round"/>
-            </svg>
-            <svg class="arrow action arrowAnimation" width="32" height="32"
-                 viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M16 26V6M16 6L7 15M16 6L25 15" stroke="white" stroke-width="2" stroke-linecap="round"
-                      stroke-linejoin="round"/>
-            </svg>
         </div>
-</div>
-</div>
     </each>
 </div>

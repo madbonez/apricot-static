@@ -1,7 +1,7 @@
 import {onDomReady} from "../utils/utils";
 import { GlobalState, selectState } from '../state/state';
 
-const id = '#screen7'
+const id = '#screen8'
 export function main() {
 
 }

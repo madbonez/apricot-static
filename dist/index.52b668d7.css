@@ -56,7 +56,7 @@
   }
 }
 
-.header3, .thanks {
+.header3, #formRef .thanks {
   text-align: left;
   letter-spacing: -.03em;
   font-family: Inter-Medium, "sans-serif";
@@ -65,27 +65,27 @@
 }
 
 @media (min-width: 360px) {
-  .header3, .thanks {
+  .header3, #formRef .thanks {
     font-size: calc(3.64583vw + 12.875px);
     line-height: calc(3.64583vw + 18.875px);
   }
 }
 
 @media (min-width: 744px) {
-  .header3, .thanks {
+  .header3, #formRef .thanks {
     font-size: calc(1.72414vw + 27.1724px);
     line-height: calc(1.72414vw + 33.1724px);
   }
 }
 
 @media (min-width: 1440px) {
-  .header3, .thanks {
+  .header3, #formRef .thanks {
     font-size: 52px;
     line-height: 58px;
   }
 }
 
-.header4, .submitButton {
+.header4, #formRef .submitButton {
   text-align: left;
   font-family: Inter-SemiBold, "sans-serif";
   font-size: 18px;
@@ -93,21 +93,21 @@
 }
 
 @media (min-width: 360px) {
-  .header4, .submitButton {
+  .header4, #formRef .submitButton {
     font-size: calc(2.60417vw + 8.625px);
     line-height: calc(4.16667vw + 5px);
   }
 }
 
 @media (min-width: 744px) {
-  .header4, .submitButton {
+  .header4, #formRef .submitButton {
     font-size: calc(1.14943vw + 19.4483px);
     line-height: calc(1.14943vw + 27.4483px);
   }
 }
 
 @media (min-width: 1440px) {
-  .header4, .submitButton {
+  .header4, #formRef .submitButton {
     font-size: 36px;
     line-height: 44px;
   }
@@ -170,7 +170,7 @@
   }
 }
 
-.menu-text, .policy {
+.menu-text, #formRef .policy {
   text-align: center;
   letter-spacing: -.02em;
   font-family: Inter-Regular, "sans-serif";
@@ -179,21 +179,21 @@
 }
 
 @media (min-width: 360px) {
-  .menu-text, .policy {
+  .menu-text, #formRef .policy {
     font-size: calc(1.04167vw + 8.25px);
     line-height: calc(1.5625vw + 12.375px);
   }
 }
 
 @media (min-width: 744px) {
-  .menu-text, .policy {
+  .menu-text, #formRef .policy {
     font-size: 16px;
     line-height: 24px;
   }
 }
 
 @media (min-width: 1440px) {
-  .menu-text, .policy {
+  .menu-text, #formRef .policy {
     font-size: 16px;
     line-height: 24px;
   }
@@ -256,7 +256,7 @@
   }
 }
 
-.small-text, .formInputBox > label.hover {
+.small-text, #formRef .formInputBox > label.hover {
   text-align: center;
   font-family: Inter-Regular, "sans-serif";
   font-size: 10px;
@@ -264,95 +264,95 @@
 }
 
 @media (min-width: 360px) {
-  .small-text, .formInputBox > label.hover {
+  .small-text, #formRef .formInputBox > label.hover {
     font-size: calc(.520833vw + 8.125px);
     line-height: calc(.520833vw + 14.125px);
   }
 }
 
 @media (min-width: 744px) {
-  .small-text, .formInputBox > label.hover {
+  .small-text, #formRef .formInputBox > label.hover {
     font-size: calc(.574713vw + 7.72414px);
     line-height: calc(.862069vw + 11.5862px);
   }
 }
 
 @media (min-width: 1440px) {
-  .small-text, .formInputBox > label.hover {
+  .small-text, #formRef .formInputBox > label.hover {
     font-size: 16px;
     line-height: 24px;
   }
 }
 
-.form {
+#formRef.form {
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
   display: flex;
 }
 
-.containerImage {
+#formRef .containerImage {
   width: 100%;
   margin-bottom: 50px;
 }
 
-.containerImage img {
+#formRef .containerImage img {
   width: 100%;
   height: auto;
 }
 
-.thanks {
+#formRef .thanks {
   max-width: 456px;
   align-self: center;
   padding-top: 13px;
   display: none;
 }
 
-.thanks .orange {
+#formRef .thanks .orange {
   color: #ff9300;
 }
 
-.thanks .thanksText {
+#formRef .thanks .thanksText {
   display: inline-block;
 }
 
-.thanks.thanksVisible {
+#formRef .thanks.thanksVisible {
   flex-direction: column;
   justify-content: flex-start;
   display: block;
 }
 
-.formSended {
+#formRef .formSended {
   display: none !important;
 }
 
-.formInputBox {
+#formRef .formInputBox {
   position: relative;
 }
 
-.formInputBox:not(:first-child) {
+#formRef .formInputBox:not(:first-child) {
   margin-top: 20px;
 }
 
 @media (min-width: 360px) {
-  .formInputBox:not(:first-child) {
+  #formRef .formInputBox:not(:first-child) {
     margin-top: calc(5.20833vw + 1.25px);
   }
 }
 
 @media (min-width: 744px) {
-  .formInputBox:not(:first-child) {
+  #formRef .formInputBox:not(:first-child) {
     margin-top: calc(2.87356vw + 18.6207px);
   }
 }
 
 @media (min-width: 1440px) {
-  .formInputBox:not(:first-child) {
+  #formRef .formInputBox:not(:first-child) {
     margin-top: 60px;
   }
 }
 
-.formInputBox > label {
+#formRef .formInputBox > label {
   color: #afabba;
   pointer-events: none;
   position: absolute;
@@ -360,29 +360,29 @@
   left: 0;
 }
 
-.formInputBox > label.hover {
+#formRef .formInputBox > label.hover {
   padding-top: 24px;
 }
 
 @media (min-width: 360px) {
-  .formInputBox > label.hover {
+  #formRef .formInputBox > label.hover {
     padding-top: calc(1.04167vw + 20.25px);
   }
 }
 
 @media (min-width: 744px) {
-  .formInputBox > label.hover {
+  #formRef .formInputBox > label.hover {
     padding-top: calc(.574713vw + 23.7241px);
   }
 }
 
 @media (min-width: 1440px) {
-  .formInputBox > label.hover {
+  #formRef .formInputBox > label.hover {
     padding-top: 32px;
   }
 }
 
-.formInputBox > input, .formInputBox > textarea {
+#formRef .formInputBox > input, #formRef .formInputBox > textarea {
   width: 100%;
   border-bottom: 1px solid #dfdde3;
   padding-top: 10px;
@@ -390,90 +390,90 @@
 }
 
 @media (min-width: 360px) {
-  .formInputBox > input, .formInputBox > textarea {
+  #formRef .formInputBox > input, #formRef .formInputBox > textarea {
     padding-top: calc(1.04167vw + 6.25px);
     padding-bottom: calc(1.04167vw + 6.25px);
   }
 }
 
 @media (min-width: 744px) {
-  .formInputBox > input, .formInputBox > textarea {
+  #formRef .formInputBox > input, #formRef .formInputBox > textarea {
     padding-top: calc(.574713vw + 9.72414px);
     padding-bottom: calc(.574713vw + 9.72414px);
   }
 }
 
 @media (min-width: 1440px) {
-  .formInputBox > input, .formInputBox > textarea {
+  #formRef .formInputBox > input, #formRef .formInputBox > textarea {
     padding-top: 18px;
     padding-bottom: 18px;
   }
 }
 
-.formInputBox input::-webkit-contacts-auto-fill-button {
+#formRef .formInputBox input::-webkit-contacts-auto-fill-button {
   visibility: hidden;
   position: absolute;
   right: 0;
 }
 
-.formInputBox > input:focus, .formInputBox input.checked, .formInputBox > textarea:focus, .formInputBox textarea.checked {
+#formRef .formInputBox > input:focus, #formRef .formInputBox input.checked, #formRef .formInputBox > textarea:focus, #formRef .formInputBox textarea.checked {
   padding-top: 10px;
   padding-bottom: 10px;
   font-weight: 500;
 }
 
 @media (min-width: 360px) {
-  .formInputBox > input:focus, .formInputBox input.checked, .formInputBox > textarea:focus, .formInputBox textarea.checked {
+  #formRef .formInputBox > input:focus, #formRef .formInputBox input.checked, #formRef .formInputBox > textarea:focus, #formRef .formInputBox textarea.checked {
     padding-top: calc(1.04167vw + 6.25px);
     padding-bottom: calc(1.04167vw + 6.25px);
   }
 }
 
 @media (min-width: 744px) {
-  .formInputBox > input:focus, .formInputBox input.checked, .formInputBox > textarea:focus, .formInputBox textarea.checked {
+  #formRef .formInputBox > input:focus, #formRef .formInputBox input.checked, #formRef .formInputBox > textarea:focus, #formRef .formInputBox textarea.checked {
     padding-top: calc(.574713vw + 9.72414px);
     padding-bottom: calc(.574713vw + 9.72414px);
   }
 }
 
 @media (min-width: 1440px) {
-  .formInputBox > input:focus, .formInputBox input.checked, .formInputBox > textarea:focus, .formInputBox textarea.checked {
+  #formRef .formInputBox > input:focus, #formRef .formInputBox input.checked, #formRef .formInputBox > textarea:focus, #formRef .formInputBox textarea.checked {
     padding-top: 18px;
     padding-bottom: 18px;
   }
 }
 
-.formInputBox > input:focus + label, .formInputBox input.checked + label, .formInputBox > textarea:focus + label, .formInputBox textarea.checked + label {
+#formRef .formInputBox > input:focus + label, #formRef .formInputBox input.checked + label, #formRef .formInputBox > textarea:focus + label, #formRef .formInputBox textarea.checked + label {
   font-size: 8px;
   line-height: 8px;
 }
 
 @media (min-width: 360px) {
-  .formInputBox > input:focus + label, .formInputBox input.checked + label, .formInputBox > textarea:focus + label, .formInputBox textarea.checked + label {
+  #formRef .formInputBox > input:focus + label, #formRef .formInputBox input.checked + label, #formRef .formInputBox > textarea:focus + label, #formRef .formInputBox textarea.checked + label {
     font-size: calc(.520833vw + 6.125px);
     line-height: calc(.520833vw + 6.125px);
   }
 }
 
 @media (min-width: 744px) {
-  .formInputBox > input:focus + label, .formInputBox input.checked + label, .formInputBox > textarea:focus + label, .formInputBox textarea.checked + label {
+  #formRef .formInputBox > input:focus + label, #formRef .formInputBox input.checked + label, #formRef .formInputBox > textarea:focus + label, #formRef .formInputBox textarea.checked + label {
     font-size: calc(.287356vw + 7.86207px);
     line-height: calc(.287356vw + 7.86207px);
   }
 }
 
 @media (min-width: 1440px) {
-  .formInputBox > input:focus + label, .formInputBox input.checked + label, .formInputBox > textarea:focus + label, .formInputBox textarea.checked + label {
+  #formRef .formInputBox > input:focus + label, #formRef .formInputBox input.checked + label, #formRef .formInputBox > textarea:focus + label, #formRef .formInputBox textarea.checked + label {
     font-size: 12px;
     line-height: 12px;
   }
 }
 
-.formInputBox .errorMessage.show {
+#formRef .formInputBox .errorMessage.show {
   visibility: visible;
 }
 
-.formInputBox .errorMessage {
+#formRef .formInputBox .errorMessage {
   color: #afabba;
   text-align: left;
   visibility: hidden;
@@ -482,52 +482,57 @@
 }
 
 @media (min-width: 360px) {
-  .formInputBox .errorMessage {
+  #formRef .formInputBox .errorMessage {
     margin-top: calc(.520833vw + 2.125px);
   }
 }
 
 @media (min-width: 744px) {
-  .formInputBox .errorMessage {
+  #formRef .formInputBox .errorMessage {
     margin-top: calc(.287356vw + 3.86207px);
   }
 }
 
 @media (min-width: 1440px) {
-  .formInputBox .errorMessage {
+  #formRef .formInputBox .errorMessage {
     margin-top: 8px;
   }
 }
 
-.formInputBox .right, .formInputBox .wrong {
+#formRef .formInputBox .right, #formRef .formInputBox .wrong {
   padding-top: 12px;
   padding-bottom: 12px;
+  display: none;
   position: absolute;
   right: 0;
 }
 
+#formRef .formInputBox .right.visible, #formRef .formInputBox .wrong.visible {
+  display: inline-block;
+}
+
 @media (min-width: 360px) {
-  .formInputBox .right, .formInputBox .wrong {
+  #formRef .formInputBox .right, #formRef .formInputBox .wrong {
     padding-top: calc(.520833vw + 10.125px);
     padding-bottom: calc(.520833vw + 10.125px);
   }
 }
 
 @media (min-width: 744px) {
-  .formInputBox .right, .formInputBox .wrong {
+  #formRef .formInputBox .right, #formRef .formInputBox .wrong {
     padding-top: calc(.574713vw + 9.72414px);
     padding-bottom: calc(.574713vw + 9.72414px);
   }
 }
 
 @media (min-width: 1440px) {
-  .formInputBox .right, .formInputBox .wrong {
+  #formRef .formInputBox .right, #formRef .formInputBox .wrong {
     padding-top: 18px;
     padding-bottom: 18px;
   }
 }
 
-.policy {
+#formRef .policy {
   color: #afabba;
   width: 290px;
   text-align: left;
@@ -536,28 +541,28 @@
 }
 
 @media (min-width: 360px) {
-  .policy {
+  #formRef .policy {
     padding-top: calc(5.20833vw + 1.25px);
   }
 }
 
 @media (min-width: 744px) {
-  .policy {
+  #formRef .policy {
     padding-top: calc(2.87356vw + 18.6207px);
   }
 }
 
 @media (min-width: 1440px) {
-  .policy {
+  #formRef .policy {
     padding-top: 60px;
   }
 }
 
-.policy a {
+#formRef .policy a {
   color: #04000a;
 }
 
-.submitButton {
+#formRef .submitButton {
   cursor: pointer;
   width: 240px;
   height: 240px;
@@ -573,19 +578,19 @@
 }
 
 @media (max-width: 1000px) {
-  .containerImage {
+  #formRef .containerImage {
     width: 80%;
   }
 }
 
 @media (max-width: 900px) {
-  .containerImage {
+  #formRef .containerImage {
     width: 60%;
     align-self: center;
     display: block !important;
   }
 
-  .submitButton {
+  #formRef .submitButton {
     width: 200px;
     height: 200px;
     border-radius: 50%;
@@ -593,7 +598,7 @@
     bottom: -160px;
   }
 
-  .thanks.thanksVisible {
+  #formRef .thanks.thanksVisible {
     max-width: unset;
     height: 100%;
     width: 100%;
@@ -604,11 +609,11 @@
 }
 
 @media (max-width: 640px) {
-  .containerImage {
+  #formRef .containerImage {
     width: 80%;
   }
 
-  .submitButton {
+  #formRef .submitButton {
     width: 132px;
     height: 132px;
     right: unset;

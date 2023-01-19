@@ -3,7 +3,7 @@ import {ScrollTrigger} from "gsap/dist/ScrollTrigger";
 import {initSmoothScrollbar} from "./utils/initSmoothScrollbar";
 import {scrollDebug, scrollTriggerFactory} from "./utils/scrollTrigger";
 import {resizeDetector} from "./utils/heights";
-import {updateOneState} from './state/state';
+import {getState, GlobalState, selectState, updateOneState} from './state/state';
 import {el} from "./utils/dom";
 import {gsap} from "gsap";
 
@@ -42,7 +42,7 @@ let screen1Ref;
 let screen2Ref;
 let screen3Ref;
 let screen3SliderRef;
-let headerScreen3Ref
+let headerScreen3Ref;
 let screen4Ref;
 let screen5Ref;
 let screen5SliderRef;
@@ -476,7 +476,6 @@ export function main() {
         };
 
         updateOneState('scrollTriggers', scrollTriggers)
-        // setScrollTriggers(scrollTriggers);
     }
 
     function initScreensPositions() {
@@ -519,164 +518,172 @@ export function main() {
     }
 
 
-        // const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-        // const [popupId, setPopupId] = useState(null);
-        // const [cursorState, setCursorState] = useState(null);
-        // const [popupScreen, setPopupScreen] = useState(null);
-        // const [burger, setBurger] = useState(false);
-        // const [formValid, setFormValid] = useState(false);
-        // const [buttonClick, setButtonClick] = useState(0);
-        // const [scrollTriggers, setScrollTriggers] = useState({});
-        // const [formSended, setFormSended] = useState(false)
+    // const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+    // const [popupId, setPopupId] = useState(null);
+    // const [cursorState, setCursorState] = useState(null);
+    // const [popupScreen, setPopupScreen] = useState(null);
+    // const [burger, setBurger] = useState(false);
+    // const [formValid, setFormValid] = useState(false);
+    // const [buttonClick, setButtonClick] = useState(0);
+    // const [scrollTriggers, setScrollTriggers] = useState({});
+    // const [formSended, setFormSended] = useState(false)
 
-        let vh = window.innerHeight * 0.01;
-        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
 
-        // if (!bodyScrollBar) {
-        //     return
-        // }
-        // if (burger) {
-        //     bodyScrollBar.updatePluginOptions('modal', {open: true})
-        // } else {
-        //     bodyScrollBar.updatePluginOptions('modal', {open: false})
-        // }
+/*     if (!bodyScrollBar) {
+        return
+     }
+     if (getState().burger) {
+         bodyScrollBar.updatePluginOptions('modal', {open: true})
+     } else {
+         bodyScrollBar.updatePluginOptions('modal', {open: false})
+   }*/
 
-        topContainerRef = el("#topContainerRef");
-        scrollContainerRef = el("#scrollContainerRef");
-        ghostRef = el("#ghostRef");
-        headerRef = el("#header");
-        chelkaRef = el("#chelkaRef");
-        screen1Ref = el("#screen1");
-        screen2Ref = el("#screen2");
-        screen3Ref = el("#screen3");
-        screen3SliderRef = el("#screen3 .slider");
-        headerScreen3Ref = el("#screen3 #headerScreen");
-        screen4Ref = el("#screen4");
-        screen5Ref = el("#screen5");
-        screen5SliderRef = el("#screen5 #sliderRef");
-        screen6Ref = el("#screen6");
-        screen7Ref = el("#screen7");
-        screen8Ref = el("#screen8");
-        screen8SliderRef = el("#screen8 .slider");
-        screen9Ref = el("#screen9");
-        screen10Ref = el("#screen10");
-        screen11Ref = el("#screen11");
-        footerRef = el("#footer");
-        submitButtonRef = el("#submit-button");
-     /*   followCursorRef = el("#followCursorRef")*/
+    topContainerRef = el("#topContainerRef");
+    scrollContainerRef = el("#scrollContainerRef");
+    ghostRef = el("#ghostRef");
+    headerRef = el("#header");
+    chelkaRef = el("#chelkaRef");
+    screen1Ref = el("#screen1");
+    screen2Ref = el("#screen2");
+    screen3Ref = el("#screen3");
+    screen3SliderRef = el("#screen3 .sliderRef");
+    let screen3circle = el("#screen3 .circle");
+    headerScreen3Ref = el("#screen3 #headerScreen");
+    screen4Ref = el("#screen4");
+    screen5Ref = el("#screen5");
+    screen5SliderRef = el("#screen5 #sliderRef");
+    screen6Ref = el("#screen6");
+    screen7Ref = el("#screen7");
+    screen8Ref = el("#screen8");
+    screen8SliderRef = el("#screen8 .sliderRef");
+    screen9Ref = el("#screen9");
+    screen10Ref = el("#screen10");
+    screen11Ref = el("#screen11");
+    footerRef = el("#footer");
+    submitButtonRef = el("#submit-button");
+    /*   followCursorRef = el("#followCursorRef")*/
 
-        // const changeCursorState = (state) => {
-        //     setCursorState(state);
-        // }
-        //
-        // const changePopupId = (id, screen) => {
-        //     setPopupId(id);
-        //     setPopupScreen(screen);
-        // }
+    // const changeCursorState = (state) => {
+    //     setCursorState(state);
+    // }
+    //
+    // const changePopupId = (id, screen) => {
+    //     setPopupId(id);
+    //     setPopupScreen(screen);
+    // }
 
-        /*     const nextPopupId = (screen) => {
-                 setPopupId((id) => {
-                     if (id + 1 < cmsData.block_8.elements.length) {
-                         return id + 1;
-                     } else {
-                         return 0;
-                     }
-                 });
-                 setPopupScreen(screen);
-             }
+    /*     const nextPopupId = (screen) => {
+             setPopupId((id) => {
+                 if (id + 1 < cmsData.block_8.elements.length) {
+                     return id + 1;
+                 } else {
+                     return 0;
+                 }
+             });
+             setPopupScreen(screen);
+         }
 
-             const previousPopupId = (screen) => {
-                 setPopupId((id) => {
-                     if (id === 0) {
-                         return cmsData.block_8.elements.length - 1;
-                     } else {
-                         return id - 1;
-                     }
-                 });
-                 setPopupScreen(screen);
-             }*/
+         const previousPopupId = (screen) => {
+             setPopupId((id) => {
+                 if (id === 0) {
+                     return cmsData.block_8.elements.length - 1;
+                 } else {
+                     return id - 1;
+                 }
+             });
+             setPopupScreen(screen);
+         }*/
 
-        onScrollToSection = (section) => {
-            const duration = 2000;
-            switch (section) {
-                case 'about':
-                    bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen3'), false)
-                    break;
-                case 'technology':
-                    bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen5'), false)
-                    break;
-                case 'applying':
-                    bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen7'), false)
-                    break;
-                case 'bennefits':
-                    bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen8'), false)
-                    break;
-                case 'projects':
-                    bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen9'), false)
-                    break;
-                case 'steps':
-                    bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen10'), false)
-                    break;
-                case 'contacts':
-                    bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen11'), false)
-                    break;
-                case 'form':
-                    bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen11'), false)
-                    break;
-                case 'top':
-                    bodyScrollBar.scrollTo(0, 0, duration)
-                    break;
-            }
+    onScrollToSection = (section) => {
+        const duration = 2000;
+        switch (section) {
+            case 'about':
+                bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen3'), false)
+                break;
+            case 'technology':
+                bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen5'), false)
+                break;
+            case 'applying':
+                bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen7'), false)
+                break;
+            case 'bennefits':
+                bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen8'), false)
+                break;
+            case 'projects':
+                bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen9'), false)
+                break;
+            case 'steps':
+                bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen10'), false)
+                break;
+            case 'contacts':
+                bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen11'), false)
+                break;
+            case 'form':
+                bodyScrollBar.scrollTo(0, getScreenNavigationPosition('screen11'), false)
+                break;
+            case 'top':
+                bodyScrollBar.scrollTo(0, 0, duration)
+                break;
         }
+    }
+
+       selectState((newState: GlobalState) =>  {
+           onScrollToSection(getState().scrollPage)
+    }, 'scrollPage')
 
 
-      /*  topContainerRef.current.addEventListener('mousemove', (e) => handleCursorFolowMove(e), false);*/
+  /*    topContainerRef.addEventListener('mousemove', (e) => handleCursorFolowMove(e), false);*/
 
-   /*     const handleCursorFolowMove = (e) => {
-            const target = e.target
-            if (!target) return
-            followCursorRef.current.style.left = +e.pageX + 'px'
-            followCursorRef.current.style.top = ghostRef.current.scrollTop + e.pageY + 'px'
-        }*/
+    /*     const handleCursorFolowMove = (e) => {
+             const target = e.target
+             if (!target) return
+             followCursorRef.style.left = +e.pageX + 'px'
+             followCursorRef.style.top = ghostRef.scrollTop + e.pageY + 'px'
+         }*/
 
-        initWindowStaff();
-        bodyScrollBar = initSmoothScrollbar(topContainerRef);
 
-        footerScreens = [
-            screen11Ref,
-            footerRef,
-            submitButtonRef,
-        ];
 
-        commonScreens = [
-            screen4Ref,
-            screen5Ref,
-            screen6Ref,
-            screen7Ref,
-            screen8Ref,
-            screen9Ref,
-            screen10Ref,
-        ]
+    footerScreens = [
+        screen11Ref,
+        footerRef,
+        submitButtonRef,
+    ];
 
-        allScreens = [
-            screen1Ref,
-            screen2Ref,
-            screen3Ref,
-            ...commonScreens,
-            ...footerScreens,
-        ];
+    commonScreens = [
+        screen4Ref,
+        screen5Ref,
+        screen6Ref,
+        screen7Ref,
+        screen8Ref,
+        screen9Ref,
+        screen10Ref,
+    ]
 
-        let ctx = gsap.context(() => {
-               viewportHeight = window.innerHeight;
-               initScrollTriggers();
-               initScreensPositions();
-               scrollDebug(bodyScrollBar);
-           }, topContainerRef.current);
+    allScreens = [
+        screen1Ref,
+        screen2Ref,
+        screen3Ref,
+        ...commonScreens,
+        ...footerScreens,
+    ];
 
-        resizeDetector(allScreens.map(screenRef => screenRef));
-        // bodyScrollBar.updatePluginOptions('modal', {open: false});
-      /*  bodyScrollBar.updatePluginOptions('screenStop', {points: Array.from(startScreenNavigationPositions.values())});
-*/
+
+
+    initWindowStaff();
+    bodyScrollBar = initSmoothScrollbar(topContainerRef);
+        gsap.context(() => {
+            viewportHeight = window.innerHeight;
+            initScrollTriggers();
+            initScreensPositions();
+            scrollDebug(bodyScrollBar);
+        }, topContainerRef.current);
+
+
+    resizeDetector(allScreens.map(screenRef => screenRef));
+     bodyScrollBar.updatePluginOptions('modal', {open: false});
+      bodyScrollBar.updatePluginOptions('screenStop', {points: Array.from(startScreenNavigationPositions.values())});
 }
 
 onDomReady(main);

@@ -537,11 +537,14 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
 var _utils = require("../utils/utils");
 var _gsap = require("gsap");
+var _dom = require("../utils/dom");
+var _state = require("../state/state");
 const id = "#screen1";
 function main() {
     const word1Ref = document.querySelector("#word1Ref");
     const word2Ref = document.querySelector("#word2Ref");
     const word3Ref = document.querySelector("#word3Ref");
+    const buttonArrow = (0, _dom.el)("#screen1 .buttonArrow");
     let tl = (0, _gsap.gsap).timeline();
     tl.from(word1Ref, {
         y: 120,
@@ -562,9 +565,12 @@ function main() {
         ease: "power4.Out",
         duration: 1
     }, "<0.15");
+    buttonArrow.addEventListener("click", ()=>{
+        (0, _state.updateOneState)("scrollPage", "form");
+    });
 }
 (0, _utils.onDomReady)(main);
 
-},{"../utils/utils":"ea5wt","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["i3BHy","9zBhD"], "9zBhD", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","gsap":"fPSuC","../utils/dom":"8THqZ","../state/state":"8LIzr","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["i3BHy","9zBhD"], "9zBhD", "parcelRequireb921")
 
 //# sourceMappingURL=index.f7439773.js.map

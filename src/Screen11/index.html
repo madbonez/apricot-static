@@ -4,19 +4,11 @@
 <div id="screen11" class="screen11_container white">
     <each loop="block, idx in block_11">
             <div class="content container">
-                <h2 id="titleFormRef" class="title title-form">
+                <h2 class="title titleFormRef title-form">
                     {{block.title}}
                 </h2>
                 <div class="formWrapper">
                     <include src="./src/Form/index.html"></include>
-                 <!--   <Form
-                            formValid={formValid}
-                            setFormValid={setFormValid}
-                            buttonClick={buttonClick}
-                            formSended={formSended}
-                            setFormSended={setFormSended}
-                            scrollTrigger={scrollTrigger}
-                    />-->
                 </div>
             </div>
     </each>

@@ -63,6 +63,12 @@
     @include padding-t(100px, 46px, 45px);
     width: 100%;
     max-width: 414px;
+    .imageRef {
+      display: none;
+      &.visible{
+        display: block
+      }
+    }
     img {
       max-width: unset;
       width:100%;
@@ -121,21 +127,15 @@
       }
 
       > ul {
-        //   max-height: 0;
         overflow: hidden;
         height: 0;
         transition: 0.6s $jump;
         list-style: disc;
         @include padding-l(18px,17px, 16px );
 
-        &.itemlistactive{
-          height: auto;
-        }
-
         > li {
           @include padding-b(30px,22px, 16px);
         }
-
       }
     }
 
@@ -151,7 +151,7 @@
       }
 
       > ul {
-        //   height: auto;
+        height: auto;
         overflow: hidden;
         max-height: unset;
         @include padding-b(10px,1px, 1px );
@@ -188,8 +188,6 @@
       width: 100%;
       max-width: min(414px, 62vw);
     }
-
-
   }
 
 }

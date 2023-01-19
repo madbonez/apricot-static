@@ -536,10 +536,31 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
 var _utils = require("../utils/utils");
-const id = "#screen7";
-function main() {}
+var _state = require("../state/state");
+var _gsap = require("gsap");
+var _dom = require("../utils/dom");
+const id = "#screen11";
+function main() {
+    const innerRef = (0, _dom.el)("#screen11");
+    const scrollTrigger = (0, _state.getState)().scrollTriggers[`screen11Enter`];
+    const titleFormRef = (0, _dom.el)("#screen11 .titleFormRef");
+    if (!scrollTrigger) return;
+    (0, _gsap.gsap).context(()=>{
+        scrollTrigger.toggleActions = "play none none reset";
+        const tl = (0, _gsap.gsap).timeline({
+            scrollTrigger,
+            paused: true
+        }).from(`.title-form`, {
+            marginTop: 70,
+            duration: 1,
+            lineHeight: 50 + parseInt(window.getComputedStyle(titleFormRef).lineHeight) + "px",
+            ease: "power4.out",
+            opacity: 0
+        });
+    }, innerRef);
+}
 (0, _utils.onDomReady)(main);
 
-},{"../utils/utils":"ea5wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["eljhe","jsGqe"], "jsGqe", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["eljhe","jsGqe"], "jsGqe", "parcelRequireb921")
 
 //# sourceMappingURL=index.3087b32a.js.map

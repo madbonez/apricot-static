@@ -1,6 +1,7 @@
 @import "./src/styles/utils";
 
-  .form {
+#formRef{
+  &.form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -93,6 +94,10 @@
     }
 
     .right, .wrong {
+      &.visible {
+        display: inline-block;
+      }
+      display: none;
       position: absolute;
       right: 0;
       @include padding-y(18px, 14px, 12px);
@@ -177,5 +182,7 @@
       transform: translate(-50%, 0);
     }
   }
+}
+
 
 

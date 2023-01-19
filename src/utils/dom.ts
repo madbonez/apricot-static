@@ -1,4 +1,4 @@
-export function el(selector: string) {
+export function el<T extends HTMLElement>(selector: string): T {
     return document.querySelector(selector);
 }
 

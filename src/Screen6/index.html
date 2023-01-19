@@ -8,16 +8,18 @@
                 <div class="leftBlock">
                     <div class="nameBlock block-name">{{block.block_name}}</div>
                     <div class="imageContainer">
-                        <img id="imageRef" src={{block.random_images[0].image}} alt='Sectors'/>
+                        <img class="imageRef visible" src={{block.random_images[0].image}} alt='Sectors'/>
+                        <img class="imageRef" src={{block.random_images[1].image}} alt='Sectors'/>
+                        <img class="imageRef" src={{block.random_images[2].image}} alt='Sectors'/>
+                        <img class="imageRef" src={{block.random_images[3].image}} alt='Sectors'/>
                     </div>
                 </div>
                 <div class="rightBlock">
                     <ul class="accordion">
                         <each loop="item, index in block.elements">
-                            <li onClick="handleClick(index)"
-                                class="{{ 0 === index ? 'active' : '' }}">
+                            <li class="accordion-element {{ 0 === index ? 'active' : '' }}">
                                 <h4> {{item.title}}</h4>
-                                <ul class="{{ 0 === index ? 'itemlistactive' : 'item-list'}}">
+                                <ul class="element-ul {{ 0 === index ? 'itemlistactive' : 'item-list'}}">
                                     <each loop="paragraph, id in item.texts">
                                         <li key={{id}}><p>{{paragraph}}</p></li>
                                     </each>

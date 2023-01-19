@@ -151,6 +151,12 @@
 
   .mobileBtn {
     display: none;
+    .burger-icon, .close-icon {
+      display:none;
+      &.visible {
+        display:block;
+      }
+    }
   }
 
   .navActive {
@@ -186,7 +192,7 @@
       }
     }
 
-    .buttonArrow {
+    .header__buttonArrow {
       display: none;
     }
 

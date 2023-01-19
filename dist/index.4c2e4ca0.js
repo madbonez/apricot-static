@@ -536,10 +536,30 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
 var _utils = require("../utils/utils");
+var _state = require("../state/state");
+var _gsap = require("gsap");
+var _scrollTrigger = require("gsap/dist/ScrollTrigger");
+var _dom = require("../utils/dom");
 const id = "#screen5";
-function main() {}
+function main() {
+    (0, _gsap.gsap).registerPlugin((0, _scrollTrigger.ScrollTrigger));
+    const scrollTrigger = (0, _state.getState)().scrollTriggers[`screen5Horizontal`];
+    const sliderRef = (0, _dom.el)("#screen5 #sliderRef");
+    const innerRef = (0, _dom.el)("#screen5");
+    if (!scrollTrigger) return;
+    const offset = sliderRef.offsetHeight - innerRef.offsetHeight + 150;
+    scrollTrigger.scrub = true;
+    (0, _gsap.gsap).context(()=>{
+        const timeline = (0, _gsap.gsap).timeline({
+            paused: true,
+            scrollTrigger
+        }).to(sliderRef, {
+            y: `-=${offset}px`
+        });
+    }, innerRef);
+}
 (0, _utils.onDomReady)(main);
 
-},{"../utils/utils":"ea5wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8hnWm","6cz8c"], "6cz8c", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","gsap/dist/ScrollTrigger":"CiOCQ","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["8hnWm","6cz8c"], "6cz8c", "parcelRequireb921")
 
 //# sourceMappingURL=index.4c2e4ca0.js.map

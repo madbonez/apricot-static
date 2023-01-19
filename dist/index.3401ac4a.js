@@ -536,10 +536,68 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
 var _utils = require("../utils/utils");
-const id = "#screen7";
-function main() {}
+var _state = require("../state/state");
+var _gsap = require("gsap");
+var _dom = require("../utils/dom");
+var _draggable = require("gsap/dist/Draggable");
+const id = "#screen10";
+function main() {
+    const innerRef = (0, _dom.el)("#screen10");
+    const scrollTrigger = (0, _state.getState)().scrollTriggers[`screen10Enter`];
+    const stepBlock = (0, _dom.els)("#screen10 .stepBlock");
+    const stepContainer = (0, _dom.el)("#screen10 .stepContainer");
+    let activeStep = 0;
+    const xStart = stepContainer.getBoundingClientRect().x;
+    const changeActiveStep = ()=>{
+        (0, _state.updateOneState)("cursorState", "toSmall");
+        if (activeStep <= Math.floor((xStart + 20 - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width)) activeStep = Math.floor((xStart + 20 - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width);
+        if (activeStep > Math.floor((xStart - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width)) activeStep = Math.floor((xStart - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width) + 1;
+        if (xStart - stepContainer.getBoundingClientRect().x < 1) activeStep = 0;
+        changeAtiveClass();
+    };
+    const changeAtiveClass = ()=>{
+        for(let i = 0; i < stepBlock.length; i++){
+            stepBlock[activeStep].querySelector(".circle").classList.add("active");
+            if (i !== activeStep) stepBlock[i].querySelector(".circle").classList.remove("active");
+        }
+    };
+    (0, _gsap.gsap).registerPlugin((0, _draggable.Draggable));
+    (0, _draggable.Draggable).create(stepContainer, {
+        type: "x",
+        duration: 0.4,
+        ease: "power4.out",
+        lockAxis: true,
+        bounds: {
+            minX: -stepBlock[0].getBoundingClientRect().width * (stepBlock.length - 1),
+            maxX: 0
+        },
+        onDrag: changeActiveStep
+    });
+    if (!scrollTrigger) return;
+    if (window.innerWidth > 900 && !(0, _utils.isTouchDevice)()) {
+        innerRef.addEventListener("mouseenter", (e)=>handleCursorFolowMove(e), false);
+        innerRef.addEventListener("mouseleave", (e)=>handleCursorFolowLeave(e), false);
+    }
+    const handleCursorFolowMove = (e)=>{
+        (0, _state.updateOneState)("cursorState", "enter");
+    };
+    const handleCursorFolowLeave = (e)=>{
+        (0, _state.updateOneState)("cursorState", "leave");
+    };
+    (0, _gsap.gsap).context(()=>{
+        scrollTrigger.toggleActions = "play none none reset";
+        const tl = (0, _gsap.gsap).timeline({
+            scrollTrigger,
+            paused: true
+        }).from(stepContainer, {
+            xPercent: 100,
+            ease: "back.out(1.7)",
+            duration: 0.8
+        });
+    }, innerRef);
+}
 (0, _utils.onDomReady)(main);
 
-},{"../utils/utils":"ea5wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["6G8QV","hzrPS"], "hzrPS", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","../utils/dom":"8THqZ","gsap/dist/Draggable":"ibRNG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["6G8QV","hzrPS"], "hzrPS", "parcelRequireb921")
 
 //# sourceMappingURL=index.3401ac4a.js.map

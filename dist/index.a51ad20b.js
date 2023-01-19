@@ -536,10 +536,234 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
 var _utils = require("../utils/utils");
-const id = "#screen7";
-function main() {}
+var _state = require("../state/state");
+var _gsap = require("gsap");
+var _dom = require("../utils/dom");
+const id = "form";
+function main() {
+    /*    formValid,
+        buttonClick,
+        formSended,*/ const scrollTrigger = (0, _state.getState)().scrollTriggers[`screen11Enter`];
+    const formRef = (0, _dom.el)("#form");
+    const inputNames = (0, _dom.el)("#inputName");
+    const inputCompany = (0, _dom.el)("#inputCompany");
+    const inputEmail = (0, _dom.el)("#inputEmail");
+    const inputPhone = (0, _dom.el)("#inputPhone");
+    const inputProjectDetails = (0, _dom.el)("#inputProjectDetails");
+    inputNames.addEventListener("input", (e)=>nameHandler(e));
+    inputNames.addEventListener("blur", (e)=>blurHandler(e));
+    inputCompany.addEventListener("input", (e)=>companyHandler(e));
+    inputCompany.addEventListener("blur", (e)=>blurHandler(e));
+    inputEmail.addEventListener("input", (e)=>emailHandler(e));
+    inputEmail.addEventListener("blur", (e)=>blurHandler(e));
+    inputPhone.addEventListener("input", (e)=>phoneHandler(e));
+    inputPhone.addEventListener("blur", (e)=>blurHandler(e));
+    inputProjectDetails.addEventListener("input", (e)=>projectDetailsHandler(e));
+    inputProjectDetails.addEventListener("blur", (e)=>blurHandler(e));
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().nameDirty) inputNames.classList.add("checked");
+        else inputNames.classList.remove("checked");
+    }, "nameDirty");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().companyDirty) inputCompany.classList.add("checked");
+        else inputCompany.classList.remove("checked");
+    }, "companyDirty");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().emailDirty) inputEmail.classList.add("checked");
+        else inputEmail.classList.remove("checked");
+    }, "emailDirty");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().phoneDirty) inputPhone.classList.add("checked");
+        else inputPhone.classList.remove("checked");
+    }, "phoneDirty");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().projectDetailsDirty) inputProjectDetails.classList.add("checked");
+        else inputProjectDetails.classList.remove("checked");
+    }, "projectDetailsDirty");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().nameDirty && (0, _state.getState)().nameError) {
+            (0, _dom.el)(".wrongName").classList.add("visible");
+            (0, _dom.el)(".rightName").classList.remove("visible");
+            (0, _dom.el)(".errorMessageName").classList.add("show");
+        } else {
+            (0, _dom.el)(".errorMessageName").classList.remove("show");
+            if ((0, _state.getState)().nameDirty && !(0, _state.getState)().nameError) {
+                (0, _dom.el)(".rightName").classList.add("visible");
+                (0, _dom.el)(".wrongName").classList.remove("visible");
+            } else {
+                (0, _dom.el)(".rightName").classList.remove("visible");
+                (0, _dom.el)(".wrongName").classList.remove("visible");
+            }
+        }
+    }, "nameDirty", "nameError");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().companyDirty && (0, _state.getState)().companyError) {
+            (0, _dom.el)(".wrongCompany").classList.add("visible");
+            (0, _dom.el)(".rightCompany").classList.remove("visible");
+            (0, _dom.el)(".errorMessageCompany").classList.add("show");
+        } else {
+            (0, _dom.el)(".errorMessageCompany").classList.remove("show");
+            if ((0, _state.getState)().companyDirty && !(0, _state.getState)().companyError) {
+                (0, _dom.el)(".rightCompany").classList.add("visible");
+                (0, _dom.el)(".wrongCompany").classList.remove("visible");
+            } else {
+                (0, _dom.el)(".rightCompany").classList.remove("visible");
+                (0, _dom.el)(".wrongCompany").classList.remove("visible");
+            }
+        }
+    }, "companyDirty", "companyError");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().emailDirty && (0, _state.getState)().emailError) {
+            (0, _dom.el)(".wrongEmail").classList.add("visible");
+            (0, _dom.el)(".rightEmail").classList.remove("visible");
+            (0, _dom.el)(".errorMessageEmail").classList.add("show");
+        } else {
+            (0, _dom.el)(".errorMessageEmail").classList.remove("show");
+            if ((0, _state.getState)().emailDirty && !(0, _state.getState)().emailError) {
+                (0, _dom.el)(".rightEmail").classList.add("visible");
+                (0, _dom.el)(".wrongEmail").classList.remove("visible");
+            } else {
+                (0, _dom.el)(".rightEmail").classList.remove("visible");
+                (0, _dom.el)(".wrongEmail").classList.remove("visible");
+            }
+        }
+    }, "emailDirty", "emailError");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().phoneDirty && (0, _state.getState)().phoneError) {
+            (0, _dom.el)(".wrongPhone").classList.add("visible");
+            (0, _dom.el)(".rightPhone").classList.remove("visible");
+            (0, _dom.el)(".errorMessagePhone").classList.add("show");
+        } else {
+            (0, _dom.el)(".errorMessagePhone").classList.remove("show");
+            if ((0, _state.getState)().phoneDirty && !(0, _state.getState)().phoneError) {
+                (0, _dom.el)(".rightPhone").classList.add("visible");
+                (0, _dom.el)(".wrongPhone").classList.remove("visible");
+            } else {
+                (0, _dom.el)(".rightPhone").classList.remove("visible");
+                (0, _dom.el)(".wrongPhone").classList.remove("visible");
+            }
+        }
+    }, "phoneDirty", "phoneError");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().projectDetailsDirty && (0, _state.getState)().projectDetails) (0, _dom.el)(".rightProjectDetails").classList.add("visible");
+        else (0, _dom.el)(".rightProjectDetails").classList.remove("visible");
+    }, "projectDetailsDirty", "projectDetails");
+    if (!scrollTrigger) return;
+    (0, _gsap.gsap).context(()=>{
+        scrollTrigger.toggleActions = "play none none reset";
+        const tl = (0, _gsap.gsap).timeline({
+            scrollTrigger,
+            paused: true
+        }).from(formRef, {
+            y: 70,
+            duration: 1,
+            ease: "power4.out",
+            opacity: 0
+        }).from([
+            `.input-animation`,
+            ".policy-animation"
+        ], {
+            duration: 1,
+            ease: "power4.out",
+            marginTop: "+=50"
+        }, "<0.4");
+    }, formRef);
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().nameError || (0, _state.getState)().companyError || (0, _state.getState)().emailError || (0, _state.getState)().phoneError) (0, _state.updateOneState)("formValid", false);
+        else (0, _state.updateOneState)("formValid", true);
+    }, "nameError", "companyError", "emailError", "phoneError");
+    (0, _state.selectState)((newState)=>{
+        if ((0, _state.getState)().buttonClick > 0) formSend();
+    }, "buttonClick");
+    const formSend = async ()=>{
+        if ((0, _state.getState)().formValid) {
+            let formData = {
+                name: (0, _state.getState)().name,
+                company: (0, _state.getState)().company,
+                email: (0, _state.getState)().email,
+                phone: (0, _state.getState)().phone,
+                project_details: (0, _state.getState)().projectDetails,
+                action: "callback_action",
+                nonce: window["callback_object"]?.nonce
+            };
+            const fd = new FormData();
+            Object.keys(formData).forEach((key)=>{
+                fd.append(key, formData[key]);
+            });
+            let response = await fetch(window["callback_object"]?.url, {
+                method: "POST",
+                body: fd
+            });
+            if (response.ok) {
+                (0, _state.updateOneState)("formSended", true);
+                (0, _state.updateOneState)("name", "");
+                (0, _state.updateOneState)("company", "");
+                (0, _state.updateOneState)("email", "");
+                (0, _state.updateOneState)("phone", "");
+                (0, _state.updateOneState)("projectdetails", "");
+            }
+        } else {
+            (0, _state.updateOneState)("nameDirty", true);
+            (0, _state.updateOneState)("companyDirty", true);
+            (0, _state.updateOneState)("emailDirty", true);
+            (0, _state.updateOneState)("phoneDirty", true);
+            (0, _state.updateOneState)("projectdetailsDirty", true);
+        }
+    };
+    const nameHandler = (e)=>{
+        (0, _state.updateOneState)("name", e.target.value);
+        (0, _state.updateOneState)("nameDirty", true);
+        e.target.value ? (0, _state.updateOneState)("nameError", "") : (0, _state.updateOneState)("nameError", "Required field!");
+    };
+    const companyHandler = (e)=>{
+        (0, _state.updateOneState)("company", e.target.value);
+        (0, _state.updateOneState)("companyDirty", true);
+        e.target.value ? (0, _state.updateOneState)("companyError", "") : (0, _state.updateOneState)("companyError", "Required field!");
+    };
+    const emailHandler = (e)=>{
+        (0, _state.updateOneState)("email", e.target.value);
+        (0, _state.updateOneState)("emailDirty", true);
+        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+        if (e.target.value) {
+            if (!re.test(String(e.target.value).toLowerCase())) (0, _state.updateOneState)("emailError", "Wrong email, please enter a valid one");
+            else (0, _state.updateOneState)("emailError", "");
+        } else (0, _state.updateOneState)("emailError", "Required field!");
+    };
+    const phoneHandler = (e)=>{
+        (0, _state.updateOneState)("phone", e.target.value);
+        (0, _state.updateOneState)("phoneDirty", true);
+        const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        if (e.target.value) {
+            if (!re.test(String(e.target.value).toLowerCase())) (0, _state.updateOneState)("phoneError", "Wrong phone number, please enter a valid one");
+            else (0, _state.updateOneState)("phoneError", "");
+        } else (0, _state.updateOneState)("phoneError", "Required field!");
+    };
+    const projectDetailsHandler = (e)=>{
+        (0, _state.updateOneState)("projectDetails", e.target.value);
+        (0, _state.updateOneState)("projectDetailsDirty", true);
+    };
+    const blurHandler = (e)=>{
+        switch(e.target.name){
+            case "name":
+                (0, _state.updateOneState)("nameDirty", true);
+                break;
+            case "company":
+                (0, _state.updateOneState)("companyDirty", true);
+                break;
+            case "email":
+                (0, _state.updateOneState)("emailDirty", true);
+                break;
+            case "phone":
+                (0, _state.updateOneState)("phoneDirty", true);
+                break;
+            case "project details":
+                (0, _state.updateOneState)("projectDetailsDirty", true);
+                break;
+        }
+    };
+}
 (0, _utils.onDomReady)(main);
 
-},{"../utils/utils":"ea5wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["5pDXk","9tCfy"], "9tCfy", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["5pDXk","9tCfy"], "9tCfy", "parcelRequireb921")
 
 //# sourceMappingURL=index.a51ad20b.js.map

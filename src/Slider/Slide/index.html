@@ -2,8 +2,7 @@
 <link rel="stylesheet" href="./Slider/Slide/index.scss"/>
 
 <block name="content"></block>
-<div class="slide">
-            <div class="circle circle-text circle-text-0">
+            <div class="circle circle-text circle-text-{{index}}">
                 <svg viewBox="0 0 560 560">
                     <circle cx="280" cy="280" r="278" class="circleDotted"/>
                 </svg>
@@ -11,7 +10,7 @@
                     {{item.text}}
                 </p>
             </div>
-            <div class="circle circleImage circle-image circle-image-0">
+            <div class="circle circleImage circle-image circle-image-{{index}}">
                 <svg viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <clipPath id="myClipCircle">
@@ -22,5 +21,4 @@
                            height="560" clip-path="url(#myClipCircle)"/>
                 </svg>
             </div>
-</div>
 

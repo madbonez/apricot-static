@@ -536,10 +536,69 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
 var _utils = require("../utils/utils");
-const id = "#screen5";
-function main() {}
+var _state = require("../state/state");
+var _gsap = require("gsap");
+var _dom = require("../utils/dom");
+const id = "#screen6";
+function main() {
+    const innerRef = (0, _dom.el)("#screen6");
+    const scrollTrigger = (0, _state.getState)().scrollTriggers[`screen6Enter`];
+    const imageRef = (0, _dom.els)("#screen6 .imageRef");
+    const accordionElements = (0, _dom.els)("#screen6 .accordion-element");
+    for(let i = 0; i < accordionElements.length; i++)accordionElements[i].addEventListener("click", ()=>handleClick(i));
+    (0, _state.selectState)((newState)=>{
+        for(let i = 0; i < accordionElements.length; i++){
+            const accordionElementUl = accordionElements[i].querySelector(".element-ul");
+            if (i === (0, _state.getState)().activeRowIndex) {
+                accordionElements[i].classList.add("active");
+                accordionElementUl.classList.remove("item-list");
+                accordionElementUl.classList.add("itemlistactive");
+            } else {
+                accordionElements[i].classList.remove("active");
+                accordionElementUl.classList.remove("itemlistactive");
+                accordionElementUl.classList.add("item-list");
+            }
+        }
+        (0, _gsap.gsap).to(".item-list", {
+            height: 0,
+            duration: 0.6,
+            ease: "back.out(1.7)"
+        });
+        (0, _gsap.gsap).to(".itemlistactive", {
+            height: "auto",
+            duration: 0.6,
+            ease: "back.out(1.7)"
+        });
+    }, "activeRowIndex");
+    (0, _state.selectState)((newState)=>{
+        for(let i = 0; i < imageRef.length; i++)if (i === (0, _state.getState)().imageNumber) imageRef[i].classList.add("visible");
+        else imageRef[i].classList.remove("visible");
+    }, "imageNumber");
+    const handleClick = (index)=>{
+        console.log("click");
+        (0, _state.updateOneState)("imageNumber", (0, _utils.getRandomInt)(4));
+        index === (0, _state.getState)().activeRowIndex ? (0, _state.updateOneState)("activeRowIndex", undefined) : (0, _state.updateOneState)("activeRowIndex", index);
+    };
+    if (!scrollTrigger) return;
+    scrollTrigger.toggleActions = "play none none reset";
+    const tl = (0, _gsap.gsap).timeline({
+        scrollTrigger,
+        paused: true
+    }).from(imageRef, {
+        y: 70,
+        duration: 0.8,
+        opacity: 0,
+        ease: "power4.out"
+    }).from(".accordion-item", {
+        y: 70,
+        duration: 1,
+        marginBottom: 50,
+        ease: "power4.out",
+        opacity: 0
+    }, "<0.4");
+}
 (0, _utils.onDomReady)(main);
 
-},{"../utils/utils":"ea5wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["d09nV","keWGd"], "keWGd", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["d09nV","keWGd"], "keWGd", "parcelRequireb921")
 
 //# sourceMappingURL=index.feec6613.js.map

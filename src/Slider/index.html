@@ -1,25 +1,23 @@
 <script type="module" src="./Slider/index.ts"></script>
 <link rel="stylesheet" href="./Slider/index.scss"/>
 
-<div id="slider">
-    <div class="fixedContainer" id="scrollerRef">
-        <div class="slider trigger" >
-            <div class="drag"/>
+<div class="slider" data-block="{{block.block_index}}">
+    <div class="fixedContainer scrollerRef">
+        <div class="sliderRef trigger" >
+            <div class="drag"></div>
             <each loop="item, index in block.slides">
                 <include src="./src/Slider/Slide/index.html">
                 </include>
             </each>
-            </div>
+        </div>
             <div class="indicatorBox">
                 <each loop="item, index in block.slides">
-                    <div class="key-{{index}}"></div>
-                     <!--       onMouseEnter={() => handlerIndicatorMouseEnter(index)}
-                            onMouseLeave={() => handlerIndicatorMouseLeave(index)}
-                            onClick={() => handlerIndicatorClick(index)}-->
-                        <div class="indicatorItem"/>
+                    <div class="indicators key-{{index}}">
+                        <div class="indicatorItem"></div>
                         <div class="indicatorItemOrange indicator-{{index}}"/>
+                    </div>
                 </each>
             </div>
-        </div>
+
 
 </div>

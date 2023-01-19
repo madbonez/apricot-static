@@ -284,27 +284,28 @@
   }
 }
 
-#slider .fixedContainer {
+.slider .fixedContainer {
   -ms-overflow-style: none;
   scrollbar-width: none;
   cursor: none;
   overflow: scroll;
 }
 
-#slider .fixedContainer::-webkit-scrollbar {
+.slider .fixedContainer::-webkit-scrollbar {
   display: none;
 }
 
-#slider .slider {
+.slider .sliderRef {
   min-height: 320px;
   max-height: 560px;
   height: min(560px, 55vh);
   margin-left: calc(50vw - 600px);
   position: relative;
+  transform: translateX(100%);
   cursor: none !important;
 }
 
-#slider .circle {
+.slider .circle {
   width: min(560px, 55vh);
   height: min(560px, 55vh);
   min-height: 320px;
@@ -315,7 +316,7 @@
   left: 0;
 }
 
-#slider .circleText {
+.slider .circleText {
   text-align: center;
   padding-left: 50px;
   padding-right: 50px;
@@ -325,37 +326,37 @@
 }
 
 @media (min-width: 360px) {
-  #slider .circleText {
+  .slider .circleText {
     padding-left: calc(59.375px - 2.60417vw);
     padding-right: calc(59.375px - 2.60417vw);
   }
 }
 
 @media (min-width: 744px) {
-  #slider .circleText {
+  .slider .circleText {
     padding-left: calc(2.44253vw + 21.8276px);
     padding-right: calc(2.44253vw + 21.8276px);
   }
 }
 
 @media (min-width: 1440px) {
-  #slider .circleText {
+  .slider .circleText {
     padding-left: 57px;
     padding-right: 57px;
   }
 }
 
-#slider .circleDotted {
+.slider .circleDotted {
   stroke: #04000a;
   fill: none;
   stroke-dasharray: 22;
 }
 
-#slider .circleImage {
+.slider .circleImage {
   z-index: 10;
 }
 
-#slider .indicatorBox {
+.slider .indicatorBox {
   width: 100%;
   justify-content: center;
   margin-top: 50px;
@@ -364,24 +365,24 @@
 }
 
 @media (min-width: 360px) {
-  #slider .indicatorBox {
+  .slider .indicatorBox {
     margin-top: calc(75.3125px - 7.03125vw);
   }
 }
 
 @media (min-width: 744px) {
-  #slider .indicatorBox {
+  .slider .indicatorBox {
     margin-top: calc(3.16092vw - .517241px);
   }
 }
 
 @media (min-width: 1440px) {
-  #slider .indicatorBox {
+  .slider .indicatorBox {
     margin-top: 45px;
   }
 }
 
-#slider .indicatorItem {
+.slider .indicatorItem {
   background-color: #dfdde3;
   border-radius: 50%;
   margin-left: 4px;
@@ -390,45 +391,45 @@
 }
 
 @media (min-width: 360px) {
-  #slider .indicatorItem {
+  .slider .indicatorItem {
     padding: 4px;
   }
 }
 
 @media (min-width: 744px) {
-  #slider .indicatorItem {
+  .slider .indicatorItem {
     padding: calc(.143678vw + 2.93103px);
   }
 }
 
 @media (min-width: 1440px) {
-  #slider .indicatorItem {
+  .slider .indicatorItem {
     padding: 5px;
   }
 }
 
 @media (min-width: 360px) {
-  #slider .indicatorItem {
+  .slider .indicatorItem {
     margin-left: 4px;
     margin-right: 4px;
   }
 }
 
 @media (min-width: 744px) {
-  #slider .indicatorItem {
+  .slider .indicatorItem {
     margin-left: calc(.287356vw + 1.86207px);
     margin-right: calc(.287356vw + 1.86207px);
   }
 }
 
 @media (min-width: 1440px) {
-  #slider .indicatorItem {
+  .slider .indicatorItem {
     margin-left: 6px;
     margin-right: 6px;
   }
 }
 
-#slider .indicatorItemOrange {
+.slider .indicatorItemOrange {
   opacity: 0;
   background-color: #ff9300;
   border-radius: 50%;
@@ -440,142 +441,142 @@
 }
 
 @media (min-width: 360px) {
-  #slider .indicatorItemOrange {
+  .slider .indicatorItemOrange {
     padding: 4px;
   }
 }
 
 @media (min-width: 744px) {
-  #slider .indicatorItemOrange {
+  .slider .indicatorItemOrange {
     padding: calc(.143678vw + 2.93103px);
   }
 }
 
 @media (min-width: 1440px) {
-  #slider .indicatorItemOrange {
+  .slider .indicatorItemOrange {
     padding: 5px;
   }
 }
 
 @media (min-width: 360px) {
-  #slider .indicatorItemOrange {
+  .slider .indicatorItemOrange {
     margin-left: 4px;
     margin-right: 4px;
   }
 }
 
 @media (min-width: 744px) {
-  #slider .indicatorItemOrange {
+  .slider .indicatorItemOrange {
     margin-left: calc(.287356vw + 1.86207px);
     margin-right: calc(.287356vw + 1.86207px);
   }
 }
 
 @media (min-width: 1440px) {
-  #slider .indicatorItemOrange {
+  .slider .indicatorItemOrange {
     margin-left: 6px;
     margin-right: 6px;
   }
 }
 
 @media (max-height: 800px) and (min-width: 640px) {
-  #slider .circleText {
+  .slider .circleText {
     font-size: min(22px, 2.57vh);
     line-height: min(30px, 3.5vh);
   }
 }
 
 @media (max-width: 1200px) {
-  #slider .slider {
+  .slider .sliderRef {
     height: min(460px, 55vh);
     margin-left: 20px;
   }
 }
 
 @media (max-width: 1200px) and (min-width: 360px) {
-  #slider .slider {
+  .slider .sliderRef {
     margin-left: calc(9.375vw - 13.75px);
   }
 }
 
 @media (max-width: 1200px) and (min-width: 744px) {
-  #slider .slider {
+  .slider .sliderRef {
     margin-left: calc(9.1954vw - 12.4138px);
   }
 }
 
 @media (max-width: 1200px) and (min-width: 1440px) {
-  #slider .slider {
+  .slider .sliderRef {
     margin-left: 120px;
   }
 }
 
 @media (max-width: 1200px) {
-  #slider .circle {
+  .slider .circle {
     width: min(460px, 55vh);
     height: min(460px, 55vh);
   }
 }
 
 @media (max-width: 900px) {
-  #slider .fixedContainer {
+  .slider .fixedContainer {
     cursor: auto !important;
   }
 
-  #slider .slider {
+  .slider .sliderRef {
     cursor: move !important;
   }
 }
 
 @media (max-width: 800px) {
-  #slider .indicatorBox {
+  .slider .indicatorBox {
     justify-content: flex-start;
     margin-left: 20px;
   }
 }
 
 @media (max-width: 800px) and (min-width: 360px) {
-  #slider .indicatorBox {
+  .slider .indicatorBox {
     margin-left: calc(9.375vw - 13.75px);
   }
 }
 
 @media (max-width: 800px) and (min-width: 744px) {
-  #slider .indicatorBox {
+  .slider .indicatorBox {
     margin-left: calc(9.1954vw - 12.4138px);
   }
 }
 
 @media (max-width: 800px) and (min-width: 1440px) {
-  #slider .indicatorBox {
+  .slider .indicatorBox {
     margin-left: 120px;
   }
 }
 
 @media (max-width: 800px) {
-  #slider .slider {
+  .slider .sliderRef {
     height: min(350px, 55vh);
   }
 
-  #slider .circle {
+  .slider .circle {
     width: min(350px, 55vh);
     height: min(350px, 55vh);
   }
 }
 
 @media (max-width: 640px) {
-  #slider .slider {
+  .slider .sliderRef {
     height: min(300px, 50vh);
   }
 
-  #slider .circle {
+  .slider .circle {
     width: min(300px, 50vh);
     height: min(300px, 50vh);
   }
 }
 
 @media (max-width: 500px) {
-  #slider .indicatorBox {
+  .slider .indicatorBox {
     margin-left: unset;
     justify-content: center;
   }

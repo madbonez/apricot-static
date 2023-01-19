@@ -536,15 +536,101 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
 var _utils = require("../utils/utils");
+var _state = require("../state/state");
+var _gsap = require("gsap");
+var _dom = require("../utils/dom");
 const id = "#screen7";
 function main() {
-// el('sd').addEventListener('click', (event: MouseEvent) => {
-//     const popup: HTMLDivElement = event.target as HTMLDivElement;
-//     console.log(popup.dataset.index)
-// })
+    const innerRef = (0, _dom.el)("#screen7");
+    const scrollTrigger = (0, _state.getState)().scrollTriggers[`screen7Enter`];
+    const block = (0, _dom.els)("#screen7 .block");
+    for(let i = 0; i < block.length; i++){
+        block[i].addEventListener("click", ()=>{
+            (0, _state.updateOneState)("activePopupId", block[i].dataset.popup);
+            (0, _state.updateOneState)("activePopupScreen", "7");
+        });
+        block[i].addEventListener("mouseover", ()=>onMouseOverButton(block[i].dataset.popup));
+        block[i].addEventListener("mouseleave", ()=>onMouseLeaveButton(block[i].dataset.popup));
+    }
+    const onMouseOverButton = (id)=>{
+        const tl = (0, _gsap.gsap).timeline({}).fromTo(`#screen7 .arrow2-${id}`, {
+            x: -20,
+            y: 0,
+            duration: 0.5,
+            ease: "power4.Out"
+        }, {
+            duration: 0.5,
+            x: 0,
+            y: -20,
+            ease: "power4.Out"
+        }).fromTo(`#screen7 .arrow-${id}`, {
+            x: 0,
+            y: 0,
+            duration: 0.5,
+            visibility: "hidden",
+            ease: "power4.Out"
+        }, {
+            duration: 0.5,
+            x: 20,
+            visibility: "visible",
+            y: -20,
+            ease: "power4.Out"
+        }, "<");
+        (0, _gsap.gsap).to(`#screen7 .line-${id}`, {
+            background: "#04000A",
+            width: "50%",
+            height: 1,
+            duration: 0.5
+        });
+    };
+    const onMouseLeaveButton = (id)=>{
+        const tl = (0, _gsap.gsap).timeline({}).fromTo(`#screen7 .arrow2-${id}`, {
+            x: -20,
+            y: 0,
+            duration: 0.5,
+            ease: "power4.Out"
+        }, {
+            duration: 0.5,
+            x: 0,
+            y: -20,
+            ease: "power4.Out"
+        }).fromTo(`#screen7 .arrow-${id}`, {
+            x: 0,
+            y: 0,
+            duration: 0.5,
+            visibility: "hidden",
+            ease: "power4.Out"
+        }, {
+            duration: 0.5,
+            x: 20,
+            visibility: "visible",
+            y: -20,
+            ease: "power4.Out"
+        }, "<");
+        (0, _gsap.gsap).to(`#screen7 .line-${id}`, {
+            background: "#EEF1FA",
+            width: "100%",
+            duration: 0.5
+        });
+    };
+    if (!scrollTrigger) return;
+    scrollTrigger.toggleActions = "play none none reset";
+    const tl = (0, _gsap.gsap).timeline({
+        scrollTrigger,
+        paused: true
+    }).from("#screen7 .contentBlockAnimation", {
+        y: 208,
+        duration: 1,
+        opacity: 0,
+        ease: "power4.out"
+    }).from("#screen7  .blockAnimation", {
+        duration: 1,
+        ease: "power4.out",
+        marginBottom: "+=78"
+    }, "<0.4");
 }
 (0, _utils.onDomReady)(main);
 
-},{"../utils/utils":"ea5wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["484nF","3eEGw"], "3eEGw", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["484nF","3eEGw"], "3eEGw", "parcelRequireb921")
 
 //# sourceMappingURL=index.3f6cbd1d.js.map

@@ -1,13 +1,8 @@
 <script type="module" src="./SubmitButton/index.ts"></script>
 <link rel="stylesheet" href="./SubmitButton/index.scss"/>
 
-<div id="submit-button" class="submit-button_container">
-        <div
-                id="buttonRef"
-                onClick="{{() => {
-       <!-- setButtonClick(buttonClick + 1)-->
-        }}}"
-        >
-        <div id="lqButtonRef"/>
+<div id="submit-button" class="submit-button_container" data-text="{{block_11[0].submit_text}}">
+        <div id="buttonRef">
+                <div id="lqButtonRef"></div>
         </div>
 </div>

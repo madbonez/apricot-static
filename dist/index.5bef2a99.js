@@ -532,7 +532,46 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"deP7w":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "main", ()=>main);
+var _utils = require("../utils/utils");
+var _state = require("../state/state");
+var _gsap = require("gsap");
+var _dom = require("../utils/dom");
+const id = "#ContentBlock";
+function main() {
+    const contentBlockRefs = (0, _dom.els)(".contentBlockRef");
+    for(let i = 0; i < contentBlockRefs.length; i++){
+        const contentBlock = contentBlockRefs[i];
+        const blockTextRef = contentBlock.querySelector(".blockTextRef");
+        const scrollTrigger = (0, _state.getState)().scrollTriggers[`screen${contentBlock.dataset.block}Enter`];
+        (0, _gsap.gsap).context(()=>{
+            scrollTrigger.toggleActions = "play none none reset";
+            const tl = (0, _gsap.gsap).timeline({
+                scrollTrigger,
+                paused: true
+            }).from(blockTextRef, {
+                marginTop: 70,
+                duration: 1,
+                lineHeight: 50 + parseInt(window.getComputedStyle(blockTextRef).lineHeight) + "px",
+                ease: "power4.out",
+                opacity: 0
+            });
+        }, contentBlock);
+    }
+/*    let scrollTriggers = contentBlockRefs.forEach((elem) => {
+        return getState().scrollTriggers[`screen${elem.dataset.block}Enter`]
+    })
+    for (let elem in contentBlockRefs) {
+        const index = el('.contentBlock').dataset.block;
+    }
 
-},{}]},["cfvDB","deP7w"], "deP7w", "parcelRequireb921")
+    console.log(index)
+
+    const scrollTriggers = getState().scrollTriggers[`screen${index}Enter`]*/ }
+(0, _utils.onDomReady)(main);
+
+},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["cfvDB","deP7w"], "deP7w", "parcelRequireb921")
 
 //# sourceMappingURL=index.5bef2a99.js.map

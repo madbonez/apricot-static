@@ -9,15 +9,15 @@
             </div>
         </div>
         <div id="contentRef" class="content not-Overflow-x">
-            <div class="empty"/>
-            <div id="stepContainer" class="stepContainer drag">
+            <div class="empty"></div>
+            <div  class="stepContainer drag">
                 <each loop="item, index in block.elements">
-                    <div key={{index}} class="stepBlock" id="stepBlock">
+                    <div key={{index}} class="stepBlock">
                         <div>
                             <p class="circle {{0 === index ? 'active' : ''}}">
                                 {{index + 1}}
                             </p>
-                            <div class="line"/>
+                            <div class="line"></div>
                         </div>
                         <p class="text">{{item.text}}</p>
                     </div>

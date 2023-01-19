@@ -3,6 +3,33 @@ export interface GlobalState {
     counter?: number;
     cmsData: any;
     activePopupId: string | null;
+    activePopupScreen: string | null;
+    cursorState: null | 'leave' | 'enter' | 'toSmall';
+    scroll3width: number;
+    scroll8width: number;
+    burger: boolean;
+    scrollPage: string;
+    activeRowIndex: number | null;
+    imageNumber: number;
+    formValid: boolean;
+    buttonClick: number;
+    formSended: boolean;
+
+    name: string;
+    company: string;
+    email: string;
+    phone: string;
+    projectDetails: string;
+    nameDirty: boolean;
+    companyDirty: boolean;
+    emailDirty: boolean;
+    phoneDirty: boolean;
+    projectDetailsDirty: boolean;
+    nameError: string;
+    companyError: string;
+    emailError: string;
+    phoneError: string;
+
 }
 
 let globalState: GlobalState = {
@@ -288,55 +315,135 @@ let globalState: GlobalState = {
             "policy_text": "Privacy policy",
             "policy_link": "",
             "social_links": [{
-                "id":"instagram",
-                "link":"https://instagram.com/apricot_xr?igshid=YmMyMTA2M2Y="
+                "id": "instagram",
+                "link": "https://instagram.com/apricot_xr?igshid=YmMyMTA2M2Y="
             }, {
-                "id":"whatsapp",
-                "link":"https://api.whatsapp.com/send?phone=79032296363"
+                "id": "whatsapp",
+                "link": "https://api.whatsapp.com/send?phone=79032296363"
             }, {
-                "id":"linkedin",
-                "link":"https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Aorganization%3A82477794&keywords=apricot&origin=RICH_QUERY_SUGGESTION&position=0&searchId=f07d22a6-2365-469c-96d2-73ee219d0076&sid=a8D"
+                "id": "linkedin",
+                "link": "https://www.linkedin.com/search/results/all/?heroEntityKey=urn%3Ali%3Aorganization%3A82477794&keywords=apricot&origin=RICH_QUERY_SUGGESTION&position=0&searchId=f07d22a6-2365-469c-96d2-73ee219d0076&sid=a8D"
             }],
             "to_top_button_title": "Back to top"
         }
     },
     activePopupId: null,
+    activePopupScreen: null,
+    cursorState: null,
+    scroll3width: 0,
+    scroll8width: 0,
+    burger: false,
+    scrollPage: '',
+    activeRowIndex: 0,
+    imageNumber: 0,
+    formValid: true,
+    buttonClick: 0,
+    formSended: false,
+
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    projectDetails: '',
+    nameDirty:  false,
+    companyDirty:  false,
+    emailDirty:  false,
+    phoneDirty:  false,
+    projectDetailsDirty: false,
+    nameError: 'Required field!',
+    companyError: 'Required field!',
+    emailError: 'Required field!',
+    phoneError: 'Required field!',
+
 };
-const listeners = [];
+const listeners = {
+    all: [],
+    scrollTriggers: [],
+    counter: [],
+    cmsData: [],
+    activePopupId: [],
+    activePopupScreen: [],
+    cursorState: [],
+    scroll3width: [],
+    scroll8width: [],
+    burger: [],
+    scrollPage: [],
+    activeRowIndex: [],
+    imageNumber: [],
+    formValid: [],
+    buttonClick: [],
+    formSended: [],
+
+
+    name: [],
+    company: [],
+    email: [],
+    phone: [],
+    projectDetails: [],
+    nameDirty:   [],
+    companyDirty:   [],
+    emailDirty:   [],
+    phoneDirty:   [],
+    projectDetailsDirty:  [],
+    nameError: [],
+    companyError:[],
+    emailError: [],
+    phoneError: [],
+};
 
 export function updateState(newState: GlobalState) {
     globalState = {
         ...newState,
     }
 
-    listeners.forEach(fn => fn(globalState))
+    listeners.all.forEach(fn => fn(globalState))
 }
 
-export function updateOneState(key: string, object :object) {
+export function updateOneState(key: string, object: any) {
     globalState[key] = object,
-
-    listeners.forEach(fn => fn(globalState))
+        listeners[key].forEach(fn => fn(globalState))
 }
 
 export function getState(): GlobalState {
     return globalState;
 }
 
-export function selectState(fn: (newState: GlobalState) => void, key?: string) {
-    if (listeners.indexOf(fn) === -1) {
-        listeners.push(fn);
-    }
+export function selectState(fn: (newState: GlobalState) => void , ...keys:[string]) {
 
-    if (key) {
-        fn(globalState[key]);
+
+    if (keys) {
+        for (let item of keys) {
+            if (listeners[item].indexOf(fn) === -1) {
+                listeners[item].push(fn);
+            }
+            fn(globalState[item]);
+        }
+
     } else {
+        if (listeners.all.indexOf(fn) === -1) {
+            listeners.all.push(fn);
+        }
         fn(globalState);
     }
 }
 
-export function unsubscribe(fn) {
-    const index = listeners.indexOf(fn);
-    if (index !== -1) {
-        listeners.splice(index, 1);
+export function unsubscribe(fn, ...keys) {
+
+    if (keys) {
+        for (let key of keys) {
+            const index = listeners[key].indexOf(fn);
+            if (index !== -1) {
+                listeners[key].splice(index, 1);
+            }
+        }
+
+
+    } else {
+        const index = listeners.all.indexOf(fn);
+        if (index !== -1) {
+            listeners.all.splice(index, 1);
+        }
     }
+
+
 }

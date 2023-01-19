@@ -444,8 +444,12 @@
   margin-left: 5px;
 }
 
-#header .mobileBtn {
+#header .mobileBtn, #header .mobileBtn .burger-icon, #header .mobileBtn .close-icon {
   display: none;
+}
+
+#header .mobileBtn .burger-icon.visible, #header .mobileBtn .close-icon.visible {
+  display: block;
 }
 
 #header .navActive .lang, #header .navActive .logo {
@@ -487,7 +491,7 @@
     transform: translate(-75%, 100%)scaleY(0);
   }
 
-  #header .buttonArrow {
+  #header .header__buttonArrow {
     display: none;
   }
 

@@ -532,7 +532,89 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"2Xec8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "main", ()=>main);
+var _utils = require("../utils/utils");
+var _gsap = require("gsap");
+var _dom = require("../utils/dom");
+function main() {
+    let buttonArrows = (0, _dom.els)(".buttonArrowRef");
+    for(let i = 0; i < buttonArrows.length; i++){
+        const circle = buttonArrows[i].querySelector(".circle");
+        const arrow = buttonArrows[i].querySelector(".arrow");
+        const onMouseOverButton = ()=>{
+            (0, _gsap.gsap).to(circle, {
+                scale: 14,
+                duration: 0.6,
+                ease: "power4.Out"
+            });
+            (0, _gsap.gsap).to(arrow, {
+                duration: 0.6,
+                x: 38,
+                y: -46,
+                ease: "power4.Out"
+            });
+        };
+        const onMouseLeaveButton = ()=>{
+            (0, _gsap.gsap).to(circle, {
+                scale: 1,
+                duration: 0.6,
+                ease: "power4.Out"
+            });
+            (0, _gsap.gsap).fromTo(arrow, {
+                duration: 0.6,
+                x: -38,
+                y: 46,
+                ease: "power4.Out"
+            }, {
+                duration: 0.6,
+                x: 0,
+                y: 0,
+                ease: "power4.Out"
+            });
+        };
+        const onClickHandler = ()=>{
+            console.log("asdasd");
+            (0, _gsap.gsap).to(circle, {
+                scale: 12,
+                duration: 0.6,
+                ease: "power4.Out"
+            });
+            (0, _gsap.gsap).to(arrow, {
+                duration: 0.6,
+                x: 38,
+                y: -46,
+                ease: "power4.Out"
+            });
+            (0, _gsap.gsap).to(circle, {
+                delay: 1,
+                scale: 1,
+                duration: 0.6,
+                ease: "power4.Out"
+            });
+            (0, _gsap.gsap).fromTo(arrow, {
+                delay: 1,
+                duration: 0.6,
+                x: -38,
+                y: 46,
+                ease: "power4.Out"
+            }, {
+                duration: 0.6,
+                x: 0,
+                y: 0,
+                ease: "power4.Out"
+            });
+        };
+        buttonArrows[i].addEventListener("mouseleave", (e)=>onMouseLeaveButton());
+        buttonArrows[i].addEventListener("click", (e)=>onClickHandler(), {
+            capture: false
+        });
+        buttonArrows[i].addEventListener("mouseenter", (e)=>onMouseOverButton());
+    }
+}
+(0, _utils.onDomReady)(main);
 
-},{}]},["fS5XE","2Xec8"], "2Xec8", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","gsap":"fPSuC","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["fS5XE","2Xec8"], "2Xec8", "parcelRequireb921")
 
 //# sourceMappingURL=index.785bcf9d.js.map

@@ -1,11 +1,11 @@
 <script type="module" src="./ContentBlock/index.ts"></script>
 <link rel="stylesheet" href="./ContentBlock/index.scss"/>
 
-<div id="contentBlock" class="content">
+<div class="content contentBlockRef" data-block="{{block.block_index}}">
     <div class="title block-name">
         {{block.title}}
     </div>
-    <h3 id="blockTextRef" class="text block-text">
+    <h3 class="blockTextRef text block-text">
         {{block.text}}
     </h3>
 </div>

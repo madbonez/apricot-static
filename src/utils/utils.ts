@@ -15,7 +15,6 @@ export function scrollWidth(ref) {
     return ref.scrollWidth;
 }
 
-
 export function calcOverflowOffset(ref, viewport) {
     let h = height(ref);
     let ratioRel = h / viewport;

@@ -4,14 +4,14 @@ import {ScrollbarModalPlugin} from "./ScrollbarModalPlugin";
 import {ScrollbarScreenStopPlugin} from "./ScrollbarScreenStopPlugin";
 
 export function initSmoothScrollbar(topContainerRef, disabledFirst = true) {
-    if (!document || !topContainerRef.current) {
+    if (!document || !topContainerRef) {
         return;
     }
 
     Scrollbar.use(ScrollbarModalPlugin);
     Scrollbar.use(ScrollbarScreenStopPlugin);
 
-    const bodyScrollBar = Scrollbar.init(topContainerRef.current, {
+    const bodyScrollBar = Scrollbar.init(topContainerRef, {
         damping: 0.03,
         // delegateTo: document,
         alwaysShowTracks: true,
@@ -23,7 +23,7 @@ export function initSmoothScrollbar(topContainerRef, disabledFirst = true) {
             }
         }
     });
-    ScrollTrigger.scrollerProxy(topContainerRef.current, {
+    ScrollTrigger.scrollerProxy(topContainerRef, {
         scrollTop(value) {
             if (arguments.length) {
                 bodyScrollBar.scrollTop = value;
@@ -34,7 +34,7 @@ export function initSmoothScrollbar(topContainerRef, disabledFirst = true) {
 
     bodyScrollBar.addListener(ScrollTrigger.update);
 
-    ScrollTrigger.defaults({scroller: topContainerRef.current});
+    ScrollTrigger.defaults({scroller: topContainerRef});
 
     return bodyScrollBar;
 }

@@ -14,6 +14,7 @@
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.8.0",
+    "@types/node": "^18.11.18",
     "parcel": "^2.8.0",
     "post-sequence": "0.3.0",
     "posthtml-doctype": "1.1.1",
@@ -21,12 +22,16 @@
     "posthtml-extend": "0.6.5",
     "posthtml-include": "1.2.0",
     "posthtml-modules": "^0.9.0",
+    "punycode": "^1.4.1",
+    "querystring-es3": "^0.2.1",
     "rimraf": "3.0.2"
   },
   "outputFormat": "global",
   "dependencies": {
+    "fontfaceobserver": "^2.3.0",
     "gsap": "^3.11.4",
     "normalize.css": "^8.0.1",
+    "pixi.js": "^7.1.0",
     "smooth-scrollbar": "^8.8.1"
   }
 }

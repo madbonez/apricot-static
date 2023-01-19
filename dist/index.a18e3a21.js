@@ -536,10 +536,47 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
 var _utils = require("../utils/utils");
+var _state = require("../state/state");
+var _dom = require("../utils/dom");
 const id = "#header";
-function main() {}
+function main() {
+    const header = (0, _dom.el)(".header");
+    const burgerIcon = (0, _dom.el)(".burger-icon");
+    const closeIcon = (0, _dom.el)(".close-icon");
+    const navbarLink = (0, _dom.els)(".navbarLink");
+    const buttonArrow = (0, _dom.el)(".header__buttonArrow");
+    const logo = (0, _dom.el)("#header .logo");
+    const buttonWhite = (0, _dom.el)("#header .buttonWhite");
+    buttonArrow.addEventListener("click", ()=>{
+        (0, _state.updateOneState)("scrollPage", "form");
+    });
+    logo.addEventListener("click", ()=>{
+        (0, _state.updateOneState)("scrollPage", "top");
+    });
+    buttonWhite.addEventListener("click", ()=>{
+        burgerIcon.classList.add("visible");
+        closeIcon.classList.remove("visible");
+        header.classList.remove("navActive");
+        (0, _state.updateOneState)("scrollPage", "form");
+    });
+    //  const [lang, setlang] = useState('En');
+    for(let i = 0; i < navbarLink.length; i++)navbarLink[i].addEventListener("click", ()=>{
+        burgerIcon.classList.add("visible");
+        closeIcon.classList.remove("visible");
+        header.classList.remove("navActive");
+        (0, _state.updateOneState)("scrollPage", navbarLink[i].dataset.link);
+    });
+    const burgerChange = ()=>{
+        (0, _state.updateOneState)("burger", ()=>!(0, _state.getState)().burger);
+        header.classList.toggle("navActive");
+        burgerIcon.classList.toggle("visible");
+        closeIcon.classList.toggle("visible");
+    };
+    const mobileBtn = (0, _dom.el)(".mobileBtn");
+    mobileBtn.addEventListener("click", burgerChange);
+}
 (0, _utils.onDomReady)(main);
 
-},{"../utils/utils":"ea5wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["dbqdN","e3H7x"], "e3H7x", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","../state/state":"8LIzr","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["dbqdN","e3H7x"], "e3H7x", "parcelRequireb921")
 
 //# sourceMappingURL=index.a18e3a21.js.map

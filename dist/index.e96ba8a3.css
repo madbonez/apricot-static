@@ -199,7 +199,7 @@
   }
 }
 
-.button-text, #buttonArrow {
+.button-text, .buttonArrowRef {
   text-align: center;
   letter-spacing: -.02em;
   font-family: Inter-Medium, "sans-serif";
@@ -208,21 +208,21 @@
 }
 
 @media (min-width: 360px) {
-  .button-text, #buttonArrow {
+  .button-text, .buttonArrowRef {
     font-size: calc(1.04167vw + 8.25px);
     line-height: calc(1.5625vw + 12.375px);
   }
 }
 
 @media (min-width: 744px) {
-  .button-text, #buttonArrow {
+  .button-text, .buttonArrowRef {
     font-size: 16px;
     line-height: 24px;
   }
 }
 
 @media (min-width: 1440px) {
-  .button-text, #buttonArrow {
+  .button-text, .buttonArrowRef {
     font-size: 16px;
     line-height: 24px;
   }
@@ -284,7 +284,7 @@
   }
 }
 
-#buttonArrow {
+.buttonArrowRef {
   min-width: 127px;
   -khtml-border-radius: 25px;
   color: #fff;
@@ -299,15 +299,15 @@
   -webkit-mask-image: -webkit-radial-gradient(circle, #fff 100%, #04000a 100%);
 }
 
-#buttonArrow.light {
+.buttonArrowRef.light {
   background-color: #eef1fa;
 }
 
-#buttonArrow.grey {
+.buttonArrowRef.grey {
   background-color: #dfdde3;
 }
 
-#buttonArrow span {
+.buttonArrowRef span {
   width: 100%;
   z-index: 2;
   margin: 9px 44px 9px 16px;
@@ -315,95 +315,95 @@
 }
 
 @media (min-width: 360px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-top: calc(.78125vw + 6.1875px);
   }
 }
 
 @media (min-width: 744px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-top: 12px;
   }
 }
 
 @media (min-width: 1440px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-top: 12px;
   }
 }
 
 @media (min-width: 360px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-bottom: calc(.78125vw + 6.1875px);
   }
 }
 
 @media (min-width: 744px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-bottom: 12px;
   }
 }
 
 @media (min-width: 1440px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-bottom: 12px;
   }
 }
 
 @media (min-width: 360px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-left: 16px;
   }
 }
 
 @media (min-width: 744px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-left: 16px;
   }
 }
 
 @media (min-width: 1440px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-left: 16px;
   }
 }
 
 @media (min-width: 360px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-right: calc(2.86458vw + 33.6875px);
   }
 }
 
 @media (min-width: 744px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-right: calc(.143678vw + 53.931px);
   }
 }
 
 @media (min-width: 1440px) {
-  #buttonArrow span {
+  .buttonArrowRef span {
     margin-right: 56px;
   }
 }
 
-#buttonArrow .center {
+.buttonArrowRef .center {
   z-index: 10;
   margin-left: auto;
   margin-right: auto;
 }
 
-#buttonArrow .buttonGrey {
+.buttonArrowRef .buttonGrey {
   color: #04000a;
   margin-left: 0 !important;
 }
 
-#buttonArrow .buttonCircle {
+.buttonArrowRef .buttonCircle {
   width: 80px;
   height: 80px;
   border-radius: 50%;
 }
 
-#buttonArrow .buttonGreyAnimation {
+.buttonArrowRef .buttonGreyAnimation {
   z-index: 3;
   color: #fff;
   background-color: #afabba;
@@ -411,7 +411,7 @@
   left: 100%;
 }
 
-#buttonArrow .circleGroup {
+.buttonArrowRef .circleGroup {
   width: 28px;
   height: 28px;
   justify-content: space-evenly;
@@ -421,7 +421,7 @@
   right: 18px;
 }
 
-#buttonArrow .circle {
+.buttonArrowRef .circle {
   width: 100%;
   height: 100%;
   background-color: #ff9300;
@@ -430,7 +430,7 @@
   inset: 0;
 }
 
-#buttonArrow .arrow {
+.buttonArrowRef .arrow {
   z-index: 2;
   width: 10px;
   position: absolute;

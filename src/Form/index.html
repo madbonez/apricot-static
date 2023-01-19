@@ -6,109 +6,97 @@
 
         <div class="">
             <div class="formInputBox input-animation">
-                <input id="inputName" onInput="e => nameHandler(e)" value="name" onBlur="e => blurHandler(e)"
-                       class="{{ false ? 'checked' : ''}}" name="name" type="text"/>
+                <input id="inputName"
+                       name="name" type="text"/>
                 <label htmlfor="inputName">{{block.name_title}}</label>
-                <if condition="false">
-            <span class="right">
+
+                    <span class="right rightName">
                          <img src="{{path_to_image}}/form/1.svg"/>
                     </span>
-                </if>
-                <if condition="false">
-        <span class="wrong">
+
+
+                    <span class="wrong wrongName">
                         <img src="{{path_to_image}}/form/2.svg"/>
                     </span>
-                </if>
-                <div class="errorMessage {{ false ? 'show' : ''}} small-text">
 
+                <div class="errorMessage errorMessageName small-text" >
+                    {{block.required_error}}
                 </div>
             </div>
             <div class="formInputBox input-animation">
-                <input onBlur="e => blurHandler(e)" onInput="e => companyHandler(e)" id="inputCompany"
-                       value="company"
-                       class="{{false ? 'checked' : ''}}" name="company" type="text"/>
+                <input  id="inputCompany" name="company" type="text"/>
                 <label htmlFor="inputCompany">
                     {{block.company_title}}
                 </label>
-                <if condition="false">
-                    <span class="right">
+
+                    <span class="right rightCompany">
                         <img src="{{path_to_image}}/form/1.svg"/>
                     </span>
-                </if>
-                <if condition="false">
-                    <span class="wrong">
-                            <img src="{{path_to_image}}/form/2.svg`"/>
+
+
+                    <span class="wrong wrongCompany">
+                            <img src="{{path_to_image}}/form/2.svg"/>
                     </span>
-                </if>
 
-                <div
-                        class="errorMessage {{ false ? styles.show :''}} small-text">
 
+                <div class="errorMessage errorMessageCompany small-text">
+                    {{block.required_error}}
                 </div>
             </div>
             <div class="formInputBox input-animation">
-                <input onBlur="e => blurHandler(e)" onInput="e => emailHandler(e)" id="inputEmail"
-                       value="email"
-                       class="{{ false ? styles.checked : ''}}" name="email" type="text"/>
+                <input  id="inputEmail" name="email" type="text"/>
                 <label htmlFor="inputEmail">
                     {{block.email_title}}
                 </label>
-                <if condition="false">
-                <span class="right">
+
+                <span class="right  rightEmail">
                 <img src="{{path_to_image}}/form/1.svg"/>
                 </span>
-                </if>
-                <if condition="false">
- <span class="wrong">
+
+
+ <span class="wrong wrongEmail">
                         <img src="{{path_to_image}}/form/2.svg"/>
                     </span>
-                </if>
 
-                <div class="errorMessage {{ false ? 'show' : ''}} small-text">
+
+                <div class="errorMessage errorMessageEmail small-text">
 
                 </div>
             </div>
             <div class="formInputBox input-animation">
-                <input onBlur="e => blurHandler(e)" onInput="e => phoneHandler(e)" id="inputPhone"
-                       value="phone"
-                       class="{{ false ? 'checked' : ''}}" name="phone" type="text"/>
+                <input  id="inputPhone" name="phone" type="text"/>
                 <label htmlFor="inputPhone">
                     {{block.phone_title}}
                 </label>
-                <if condition="false">
-        <span class="right">
+
+        <span class="right rightPhone">
                         <img src="{{path_to_image}}/form/1.svg"/>
         </span>
-                </if>
-                <if condition="false">
-        <span class="wrong">
+
+        <span class="wrong wrongPhone">
                         <img src="{{path_to_image}}/form/2.svg"/>
         </span>
-                </if>
-                <div class="errorMessage {{false ? 'show' : ''}} small-text">
+
+                <div class="errorMessage errorMessagePhone small-text">
 
                 </div>
             </div>
             <div class="formInputBox input-animation">
-    <input onBlur="e => blurHandler(e)" onInput="e => projectDetailsHandler(e)"
-              id="inputProjectDetails"
-              value="projectDetails"
-
-              class="{{ false ? 'checked' : ''}}" name="projectDetails"/>
+    <input id="inputProjectDetails" name="projectDetails"/>
                 <label htmlFor="inputProjectDetails">{{block.project_details_title}}</label>
 
-                <if condition="false">
-        <span class="right">
+
+        <span class="right rightProjectDetails">
                         <img src="{{path_to_image}}/form/1.svg"/>
         </span>
-                </if>
+
             </div>
             <div class="policy policy-animation">
                 {{block.policy_text_1}}
                 <a href={{block.policy_link}}>{{block.policy_text_2}}</a>
             </div>
         </div>
-        <div class="thanks {{ false ? 'thanksVisible' : ''}}">
+        <div class="thanks">
             <div class="containerImage">
                 <img src="{{path_to_image}}/form/3.png"/>
             </div>

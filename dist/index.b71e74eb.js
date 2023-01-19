@@ -906,7 +906,6 @@ function main() {
             [screenId]: screen11Trigger
         };
         (0, _state.updateOneState)("scrollTriggers", scrollTriggers);
-    // setScrollTriggers(scrollTriggers);
     }
     function initScreensPositions() {
         let offsetAccumulator = 0;
@@ -953,15 +952,14 @@ function main() {
     // const [formSended, setFormSended] = useState(false)
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
-    // if (!bodyScrollBar) {
-    //     return
-    // }
-    // if (burger) {
-    //     bodyScrollBar.updatePluginOptions('modal', {open: true})
-    // } else {
-    //     bodyScrollBar.updatePluginOptions('modal', {open: false})
-    // }
-    topContainerRef = (0, _dom.el)("#topContainerRef");
+    /*     if (!bodyScrollBar) {
+        return
+     }
+     if (getState().burger) {
+         bodyScrollBar.updatePluginOptions('modal', {open: true})
+     } else {
+         bodyScrollBar.updatePluginOptions('modal', {open: false})
+   }*/ topContainerRef = (0, _dom.el)("#topContainerRef");
     scrollContainerRef = (0, _dom.el)("#scrollContainerRef");
     ghostRef = (0, _dom.el)("#ghostRef");
     headerRef = (0, _dom.el)("#header");
@@ -969,7 +967,8 @@ function main() {
     screen1Ref = (0, _dom.el)("#screen1");
     screen2Ref = (0, _dom.el)("#screen2");
     screen3Ref = (0, _dom.el)("#screen3");
-    screen3SliderRef = (0, _dom.el)("#screen3 .slider");
+    screen3SliderRef = (0, _dom.el)("#screen3 .sliderRef");
+    let screen3circle = (0, _dom.el)("#screen3 .circle");
     headerScreen3Ref = (0, _dom.el)("#screen3 #headerScreen");
     screen4Ref = (0, _dom.el)("#screen4");
     screen5Ref = (0, _dom.el)("#screen5");
@@ -977,7 +976,7 @@ function main() {
     screen6Ref = (0, _dom.el)("#screen6");
     screen7Ref = (0, _dom.el)("#screen7");
     screen8Ref = (0, _dom.el)("#screen8");
-    screen8SliderRef = (0, _dom.el)("#screen8 .slider");
+    screen8SliderRef = (0, _dom.el)("#screen8 .sliderRef");
     screen9Ref = (0, _dom.el)("#screen9");
     screen10Ref = (0, _dom.el)("#screen10");
     screen11Ref = (0, _dom.el)("#screen11");
@@ -992,26 +991,26 @@ function main() {
     //     setPopupScreen(screen);
     // }
     /*     const nextPopupId = (screen) => {
-                 setPopupId((id) => {
-                     if (id + 1 < cmsData.block_8.elements.length) {
-                         return id + 1;
-                     } else {
-                         return 0;
-                     }
-                 });
-                 setPopupScreen(screen);
-             }
+             setPopupId((id) => {
+                 if (id + 1 < cmsData.block_8.elements.length) {
+                     return id + 1;
+                 } else {
+                     return 0;
+                 }
+             });
+             setPopupScreen(screen);
+         }
 
-             const previousPopupId = (screen) => {
-                 setPopupId((id) => {
-                     if (id === 0) {
-                         return cmsData.block_8.elements.length - 1;
-                     } else {
-                         return id - 1;
-                     }
-                 });
-                 setPopupScreen(screen);
-             }*/ onScrollToSection = (section)=>{
+         const previousPopupId = (screen) => {
+             setPopupId((id) => {
+                 if (id === 0) {
+                     return cmsData.block_8.elements.length - 1;
+                 } else {
+                     return id - 1;
+                 }
+             });
+             setPopupScreen(screen);
+         }*/ onScrollToSection = (section)=>{
         const duration = 2000;
         switch(section){
             case "about":
@@ -1043,14 +1042,15 @@ function main() {
                 break;
         }
     };
-    /*  topContainerRef.current.addEventListener('mousemove', (e) => handleCursorFolowMove(e), false);*/ /*     const handleCursorFolowMove = (e) => {
-            const target = e.target
-            if (!target) return
-            followCursorRef.current.style.left = +e.pageX + 'px'
-            followCursorRef.current.style.top = ghostRef.current.scrollTop + e.pageY + 'px'
-        }*/ initWindowStaff();
-    bodyScrollBar = (0, _initSmoothScrollbar.initSmoothScrollbar)(topContainerRef);
-    footerScreens = [
+    (0, _state.selectState)((newState)=>{
+        onScrollToSection((0, _state.getState)().scrollPage);
+    }, "scrollPage");
+    /*    topContainerRef.addEventListener('mousemove', (e) => handleCursorFolowMove(e), false);*/ /*     const handleCursorFolowMove = (e) => {
+             const target = e.target
+             if (!target) return
+             followCursorRef.style.left = +e.pageX + 'px'
+             followCursorRef.style.top = ghostRef.scrollTop + e.pageY + 'px'
+         }*/ footerScreens = [
         screen11Ref,
         footerRef,
         submitButtonRef
@@ -1071,19 +1071,25 @@ function main() {
         ...commonScreens,
         ...footerScreens
     ];
-    let ctx = (0, _gsap.gsap).context(()=>{
+    initWindowStaff();
+    bodyScrollBar = (0, _initSmoothScrollbar.initSmoothScrollbar)(topContainerRef);
+    (0, _gsap.gsap).context(()=>{
         viewportHeight = window.innerHeight;
         initScrollTriggers();
         initScreensPositions();
         (0, _scrollTrigger1.scrollDebug)(bodyScrollBar);
     }, topContainerRef.current);
     (0, _heights.resizeDetector)(allScreens.map((screenRef)=>screenRef));
-// bodyScrollBar.updatePluginOptions('modal', {open: false});
-/*  bodyScrollBar.updatePluginOptions('screenStop', {points: Array.from(startScreenNavigationPositions.values())});
-*/ }
+    bodyScrollBar.updatePluginOptions("modal", {
+        open: false
+    });
+    bodyScrollBar.updatePluginOptions("screenStop", {
+        points: Array.from(startScreenNavigationPositions.values())
+    });
+}
 (0, _utils.onDomReady)(main);
 
-},{"./utils/utils":"ea5wt","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","gsap/dist/ScrollTrigger":"CiOCQ","gsap":"fPSuC","./utils/initSmoothScrollbar":"i9rfN","./utils/scrollTrigger":"jD6i0","./utils/heights":"7tcvy","./utils/dom":"8THqZ","./state/state":"8LIzr"}],"ea5wt":[function(require,module,exports) {
+},{"./utils/utils":"ea5wt","gsap/dist/ScrollTrigger":"CiOCQ","./utils/initSmoothScrollbar":"i9rfN","./utils/scrollTrigger":"jD6i0","./utils/heights":"7tcvy","./state/state":"8LIzr","./utils/dom":"8THqZ","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ea5wt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "onDomReady", ()=>onDomReady);
@@ -3180,7 +3186,2700 @@ exports.export = function(dest, destName, get) {
     else delete window.default;
 });
 
-},{}],"fPSuC":[function(require,module,exports) {
+},{}],"i9rfN":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initSmoothScrollbar", ()=>initSmoothScrollbar);
+var _smoothScrollbar = require("smooth-scrollbar");
+var _smoothScrollbarDefault = parcelHelpers.interopDefault(_smoothScrollbar);
+var _scrollTrigger = require("gsap/dist/ScrollTrigger");
+var _scrollbarModalPlugin = require("./ScrollbarModalPlugin");
+var _scrollbarScreenStopPlugin = require("./ScrollbarScreenStopPlugin");
+function initSmoothScrollbar(topContainerRef, disabledFirst = true) {
+    if (!document || !topContainerRef) return;
+    (0, _smoothScrollbarDefault.default).use((0, _scrollbarModalPlugin.ScrollbarModalPlugin));
+    (0, _smoothScrollbarDefault.default).use((0, _scrollbarScreenStopPlugin.ScrollbarScreenStopPlugin));
+    const bodyScrollBar = (0, _smoothScrollbarDefault.default).init(topContainerRef, {
+        damping: 0.03,
+        // delegateTo: document,
+        alwaysShowTracks: true,
+        continuousScrolling: false,
+        renderByPixels: true,
+        plugins: {
+            modal: {
+                open: disabledFirst
+            }
+        }
+    });
+    (0, _scrollTrigger.ScrollTrigger).scrollerProxy(topContainerRef, {
+        scrollTop (value) {
+            if (arguments.length) bodyScrollBar.scrollTop = value;
+            return bodyScrollBar.scrollTop;
+        }
+    });
+    bodyScrollBar.addListener((0, _scrollTrigger.ScrollTrigger).update);
+    (0, _scrollTrigger.ScrollTrigger).defaults({
+        scroller: topContainerRef
+    });
+    return bodyScrollBar;
+}
+
+},{"smooth-scrollbar":"7azJf","gsap/dist/ScrollTrigger":"CiOCQ","./ScrollbarModalPlugin":"dp9pL","./ScrollbarScreenStopPlugin":"l9NP1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7azJf":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ScrollbarPlugin", ()=>(0, _plugin.ScrollbarPlugin));
+var _tslib = require("tslib");
+var _polyfills = require("./polyfills");
+var _scrollbar = require("./scrollbar");
+var _plugin = require("./plugin");
+var _style = require("./style");
+/**
+ * cast `I.Scrollbar` to `Scrollbar` to avoid error
+ *
+ * `I.Scrollbar` is not assignable to `Scrollbar`:
+ *     "privateProp" is missing in `I.Scrollbar`
+ *
+ * @see https://github.com/Microsoft/TypeScript/issues/2672
+ */ var SmoothScrollbar = /** @class */ function(_super) {
+    (0, _tslib.__extends)(SmoothScrollbar, _super);
+    function SmoothScrollbar() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    /**
+     * Initializes a scrollbar on the given element.
+     *
+     * @param elem The DOM element that you want to initialize scrollbar to
+     * @param [options] Initial options
+     */ SmoothScrollbar.init = function(elem, options) {
+        if (!elem || elem.nodeType !== 1) throw new TypeError("expect element to be DOM Element, but got " + elem);
+        // attach stylesheet
+        (0, _style.attachStyle)();
+        if ((0, _scrollbar.scrollbarMap).has(elem)) return (0, _scrollbar.scrollbarMap).get(elem);
+        return new (0, _scrollbar.Scrollbar)(elem, options);
+    };
+    /**
+     * Automatically init scrollbar on all elements base on the selector `[data-scrollbar]`
+     *
+     * @param options Initial options
+     */ SmoothScrollbar.initAll = function(options) {
+        return Array.from(document.querySelectorAll("[data-scrollbar]"), function(elem) {
+            return SmoothScrollbar.init(elem, options);
+        });
+    };
+    /**
+     * Check if there is a scrollbar on given element
+     *
+     * @param elem The DOM element that you want to check
+     */ SmoothScrollbar.has = function(elem) {
+        return (0, _scrollbar.scrollbarMap).has(elem);
+    };
+    /**
+     * Gets scrollbar on the given element.
+     * If no scrollbar instance exsits, returns `undefined`
+     *
+     * @param elem The DOM element that you want to check.
+     */ SmoothScrollbar.get = function(elem) {
+        return (0, _scrollbar.scrollbarMap).get(elem);
+    };
+    /**
+     * Returns an array that contains all scrollbar instances
+     */ SmoothScrollbar.getAll = function() {
+        return Array.from((0, _scrollbar.scrollbarMap).values());
+    };
+    /**
+     * Removes scrollbar on the given element
+     */ SmoothScrollbar.destroy = function(elem) {
+        var scrollbar = (0, _scrollbar.scrollbarMap).get(elem);
+        if (scrollbar) scrollbar.destroy();
+    };
+    /**
+     * Removes all scrollbar instances from current document
+     */ SmoothScrollbar.destroyAll = function() {
+        (0, _scrollbar.scrollbarMap).forEach(function(scrollbar) {
+            scrollbar.destroy();
+        });
+    };
+    /**
+     * Attaches plugins to scrollbars
+     *
+     * @param ...Plugins Scrollbar plugin classes
+     */ SmoothScrollbar.use = function() {
+        var Plugins = [];
+        for(var _i = 0; _i < arguments.length; _i++)Plugins[_i] = arguments[_i];
+        return (0, _plugin.addPlugins).apply(void 0, Plugins);
+    };
+    /**
+     * Attaches default style sheets to current document.
+     * You don't need to call this method manually unless
+     * you removed the default styles via `Scrollbar.detachStyle()`
+     */ SmoothScrollbar.attachStyle = function() {
+        return (0, _style.attachStyle)();
+    };
+    /**
+     * Removes default styles from current document.
+     * Use this method when you want to use your own css for scrollbars.
+     */ SmoothScrollbar.detachStyle = function() {
+        return (0, _style.detachStyle)();
+    };
+    SmoothScrollbar.version = "8.8.1";
+    SmoothScrollbar.ScrollbarPlugin = (0, _plugin.ScrollbarPlugin);
+    return SmoothScrollbar;
+}((0, _scrollbar.Scrollbar));
+exports.default = SmoothScrollbar;
+
+},{"tslib":"euOof","./polyfills":"jyKyC","./scrollbar":"l2IRH","./plugin":"bSKNu","./style":"7J5rq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"euOof":[function(require,module,exports) {
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */ /* global Reflect, Promise */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "__extends", ()=>__extends);
+parcelHelpers.export(exports, "__assign", ()=>__assign);
+parcelHelpers.export(exports, "__rest", ()=>__rest);
+parcelHelpers.export(exports, "__decorate", ()=>__decorate);
+parcelHelpers.export(exports, "__param", ()=>__param);
+parcelHelpers.export(exports, "__metadata", ()=>__metadata);
+parcelHelpers.export(exports, "__awaiter", ()=>__awaiter);
+parcelHelpers.export(exports, "__generator", ()=>__generator);
+parcelHelpers.export(exports, "__createBinding", ()=>__createBinding);
+parcelHelpers.export(exports, "__exportStar", ()=>__exportStar);
+parcelHelpers.export(exports, "__values", ()=>__values);
+parcelHelpers.export(exports, "__read", ()=>__read);
+parcelHelpers.export(exports, "__spread", ()=>__spread);
+parcelHelpers.export(exports, "__spreadArrays", ()=>__spreadArrays);
+parcelHelpers.export(exports, "__await", ()=>__await);
+parcelHelpers.export(exports, "__asyncGenerator", ()=>__asyncGenerator);
+parcelHelpers.export(exports, "__asyncDelegator", ()=>__asyncDelegator);
+parcelHelpers.export(exports, "__asyncValues", ()=>__asyncValues);
+parcelHelpers.export(exports, "__makeTemplateObject", ()=>__makeTemplateObject);
+parcelHelpers.export(exports, "__importStar", ()=>__importStar);
+parcelHelpers.export(exports, "__importDefault", ()=>__importDefault);
+parcelHelpers.export(exports, "__classPrivateFieldGet", ()=>__classPrivateFieldGet);
+parcelHelpers.export(exports, "__classPrivateFieldSet", ()=>__classPrivateFieldSet);
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf || ({
+        __proto__: []
+    }) instanceof Array && function(d, b) {
+        d.__proto__ = b;
+    } || function(d, b) {
+        for(var p in b)if (b.hasOwnProperty(p)) d[p] = b[p];
+    };
+    return extendStatics(d, b);
+};
+function __extends(d, b) {
+    extendStatics(d, b);
+    function __() {
+        this.constructor = d;
+    }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for(var s, i = 1, n = arguments.length; i < n; i++){
+            s = arguments[i];
+            for(var p in s)if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+function __rest(s, e) {
+    var t = {};
+    for(var p in s)if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function") {
+        for(var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++)if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+    }
+    return t;
+}
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+function __param(paramIndex, decorator) {
+    return function(target, key) {
+        decorator(target, key, paramIndex);
+    };
+}
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) {
+        return value instanceof P ? value : new P(function(resolve) {
+            resolve(value);
+        });
+    }
+    return new (P || (P = Promise))(function(resolve, reject) {
+        function fulfilled(value) {
+            try {
+                step(generator.next(value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function rejected(value) {
+            try {
+                step(generator["throw"](value));
+            } catch (e) {
+                reject(e);
+            }
+        }
+        function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+        }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+function __generator(thisArg, body) {
+    var _ = {
+        label: 0,
+        sent: function() {
+            if (t[0] & 1) throw t[1];
+            return t[1];
+        },
+        trys: [],
+        ops: []
+    }, f, y, t, g;
+    return g = {
+        next: verb(0),
+        "throw": verb(1),
+        "return": verb(2)
+    }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
+        return this;
+    }), g;
+    function verb(n) {
+        return function(v) {
+            return step([
+                n,
+                v
+            ]);
+        };
+    }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while(_)try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [
+                op[0] & 2,
+                t.value
+            ];
+            switch(op[0]){
+                case 0:
+                case 1:
+                    t = op;
+                    break;
+                case 4:
+                    _.label++;
+                    return {
+                        value: op[1],
+                        done: false
+                    };
+                case 5:
+                    _.label++;
+                    y = op[1];
+                    op = [
+                        0
+                    ];
+                    continue;
+                case 7:
+                    op = _.ops.pop();
+                    _.trys.pop();
+                    continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                        _ = 0;
+                        continue;
+                    }
+                    if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+                        _.label = op[1];
+                        break;
+                    }
+                    if (op[0] === 6 && _.label < t[1]) {
+                        _.label = t[1];
+                        t = op;
+                        break;
+                    }
+                    if (t && _.label < t[2]) {
+                        _.label = t[2];
+                        _.ops.push(op);
+                        break;
+                    }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop();
+                    continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) {
+            op = [
+                6,
+                e
+            ];
+            y = 0;
+        } finally{
+            f = t = 0;
+        }
+        if (op[0] & 5) throw op[1];
+        return {
+            value: op[0] ? op[1] : void 0,
+            done: true
+        };
+    }
+}
+function __createBinding(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}
+function __exportStar(m, exports) {
+    for(var p in m)if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
+}
+function __values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function() {
+            if (o && i >= o.length) o = void 0;
+            return {
+                value: o && o[i++],
+                done: !o
+            };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while((n === void 0 || n-- > 0) && !(r = i.next()).done)ar.push(r.value);
+    } catch (error) {
+        e = {
+            error: error
+        };
+    } finally{
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        } finally{
+            if (e) throw e.error;
+        }
+    }
+    return ar;
+}
+function __spread() {
+    for(var ar = [], i = 0; i < arguments.length; i++)ar = ar.concat(__read(arguments[i]));
+    return ar;
+}
+function __spreadArrays() {
+    for(var s = 0, i = 0, il = arguments.length; i < il; i++)s += arguments[i].length;
+    for(var r = Array(s), k = 0, i = 0; i < il; i++)for(var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)r[k] = a[j];
+    return r;
+}
+function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+        return this;
+    }, i;
+    function verb(n) {
+        if (g[n]) i[n] = function(v) {
+            return new Promise(function(a, b) {
+                q.push([
+                    n,
+                    v,
+                    a,
+                    b
+                ]) > 1 || resume(n, v);
+            });
+        };
+    }
+    function resume(n, v) {
+        try {
+            step(g[n](v));
+        } catch (e) {
+            settle(q[0][3], e);
+        }
+    }
+    function step(r) {
+        r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+    }
+    function fulfill(value) {
+        resume("next", value);
+    }
+    function reject(value) {
+        resume("throw", value);
+    }
+    function settle(f, v) {
+        if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
+    }
+}
+function __asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function(e) {
+        throw e;
+    }), verb("return"), i[Symbol.iterator] = function() {
+        return this;
+    }, i;
+    function verb(n, f) {
+        i[n] = o[n] ? function(v) {
+            return (p = !p) ? {
+                value: __await(o[n](v)),
+                done: n === "return"
+            } : f ? f(v) : v;
+        } : f;
+    }
+}
+function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
+        return this;
+    }, i);
+    function verb(n) {
+        i[n] = o[n] && function(v) {
+            return new Promise(function(resolve, reject) {
+                v = o[n](v), settle(resolve, reject, v.done, v.value);
+            });
+        };
+    }
+    function settle(resolve, reject, d, v) {
+        Promise.resolve(v).then(function(v) {
+            resolve({
+                value: v,
+                done: d
+            });
+        }, reject);
+    }
+}
+function __makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) Object.defineProperty(cooked, "raw", {
+        value: raw
+    });
+    else cooked.raw = raw;
+    return cooked;
+}
+function __importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) {
+        for(var k in mod)if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    }
+    result.default = mod;
+    return result;
+}
+function __importDefault(mod) {
+    return mod && mod.__esModule ? mod : {
+        default: mod
+    };
+}
+function __classPrivateFieldGet(receiver, privateMap) {
+    if (!privateMap.has(receiver)) throw new TypeError("attempted to get private field on non-instance");
+    return privateMap.get(receiver);
+}
+function __classPrivateFieldSet(receiver, privateMap, value) {
+    if (!privateMap.has(receiver)) throw new TypeError("attempted to set private field on non-instance");
+    privateMap.set(receiver, value);
+    return value;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jyKyC":[function(require,module,exports) {
+
+},{}],"l2IRH":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "scrollbarMap", ()=>scrollbarMap);
+parcelHelpers.export(exports, "Scrollbar", ()=>Scrollbar);
+var _tslib = require("tslib");
+var _lodashClamp = require("lodash.clamp");
+var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
+var _options = require("./options");
+var _ = require("./utils/");
+var _1 = require("./decorators/");
+var _2 = require("./track/");
+var _3 = require("./geometry/");
+var _4 = require("./scrolling/");
+var _plugin = require("./plugin");
+var _5 = require("./events/");
+var scrollbarMap = new Map();
+var Scrollbar = /** @class */ function() {
+    function Scrollbar(containerEl, options) {
+        var _this = this;
+        /**
+         * Current scrolling offsets
+         */ this.offset = {
+            x: 0,
+            y: 0
+        };
+        /**
+         * Max-allowed scrolling offsets
+         */ this.limit = {
+            x: Infinity,
+            y: Infinity
+        };
+        /**
+         * Container bounding rect
+         */ this.bounding = {
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0
+        };
+        // private _observer: ResizeObserver;
+        this._plugins = [];
+        this._momentum = {
+            x: 0,
+            y: 0
+        };
+        this._listeners = new Set();
+        this.containerEl = containerEl;
+        var contentEl = this.contentEl = document.createElement("div");
+        this.options = new (0, _options.Options)(options);
+        // mark as a scroll element
+        containerEl.setAttribute("data-scrollbar", "true");
+        // make container focusable
+        containerEl.setAttribute("tabindex", "-1");
+        (0, _.setStyle)(containerEl, {
+            overflow: "hidden",
+            outline: "none"
+        });
+        // enable touch event capturing in IE, see:
+        // https://github.com/idiotWu/smooth-scrollbar/issues/39
+        if (window.navigator.msPointerEnabled) containerEl.style.msTouchAction = "none";
+        // mount content
+        contentEl.className = "scroll-content";
+        Array.from(containerEl.childNodes).forEach(function(node) {
+            contentEl.appendChild(node);
+        });
+        containerEl.appendChild(contentEl);
+        // attach track
+        this.track = new (0, _2.TrackController)(this);
+        // initial measuring
+        this.size = this.getSize();
+        // init plugins
+        this._plugins = (0, _plugin.initPlugins)(this, this.options.plugins);
+        // preserve scroll offset
+        var scrollLeft = containerEl.scrollLeft, scrollTop = containerEl.scrollTop;
+        containerEl.scrollLeft = containerEl.scrollTop = 0;
+        this.setPosition(scrollLeft, scrollTop, {
+            withoutCallbacks: true
+        });
+        // FIXME: update typescript
+        var ResizeObserver = window.ResizeObserver;
+        // observe
+        if (typeof ResizeObserver === "function") {
+            this._observer = new ResizeObserver(function() {
+                _this.update();
+            });
+            this._observer.observe(contentEl);
+        }
+        scrollbarMap.set(containerEl, this);
+        // wait for DOM ready
+        requestAnimationFrame(function() {
+            _this._init();
+        });
+    }
+    Object.defineProperty(Scrollbar.prototype, "parent", {
+        /**
+         * Parent scrollbar
+         */ get: function() {
+            var elem = this.containerEl.parentElement;
+            while(elem){
+                var parentScrollbar = scrollbarMap.get(elem);
+                if (parentScrollbar) return parentScrollbar;
+                elem = elem.parentElement;
+            }
+            return null;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Scrollbar.prototype, "scrollTop", {
+        /**
+         * Gets or sets `scrollbar.offset.y`
+         */ get: function() {
+            return this.offset.y;
+        },
+        set: function(y) {
+            this.setPosition(this.scrollLeft, y);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(Scrollbar.prototype, "scrollLeft", {
+        /**
+         * Gets or sets `scrollbar.offset.x`
+         */ get: function() {
+            return this.offset.x;
+        },
+        set: function(x) {
+            this.setPosition(x, this.scrollTop);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    /**
+     * Returns the size of the scrollbar container element
+     * and the content wrapper element
+     */ Scrollbar.prototype.getSize = function() {
+        return (0, _3.getSize)(this);
+    };
+    /**
+     * Forces scrollbar to update geometry infomation.
+     *
+     * By default, scrollbars are automatically updated with `100ms` debounce (or `MutationObserver` fires).
+     * You can call this method to force an update when you modified contents
+     */ Scrollbar.prototype.update = function() {
+        (0, _3.update)(this);
+        this._plugins.forEach(function(plugin) {
+            plugin.onUpdate();
+        });
+    };
+    /**
+     * Checks if an element is visible in the current view area
+     */ Scrollbar.prototype.isVisible = function(elem) {
+        return (0, _3.isVisible)(this, elem);
+    };
+    /**
+     * Sets the scrollbar to the given offset without easing
+     */ Scrollbar.prototype.setPosition = function(x, y, options) {
+        var _this = this;
+        if (x === void 0) x = this.offset.x;
+        if (y === void 0) y = this.offset.y;
+        if (options === void 0) options = {};
+        var status = (0, _4.setPosition)(this, x, y);
+        if (!status || options.withoutCallbacks) return;
+        this._listeners.forEach(function(fn) {
+            fn.call(_this, status);
+        });
+    };
+    /**
+     * Scrolls to given position with easing function
+     */ Scrollbar.prototype.scrollTo = function(x, y, duration, options) {
+        if (x === void 0) x = this.offset.x;
+        if (y === void 0) y = this.offset.y;
+        if (duration === void 0) duration = 0;
+        if (options === void 0) options = {};
+        (0, _4.scrollTo)(this, x, y, duration, options);
+    };
+    /**
+     * Scrolls the target element into visible area of scrollbar,
+     * likes the DOM method `element.scrollIntoView().
+     */ Scrollbar.prototype.scrollIntoView = function(elem, options) {
+        if (options === void 0) options = {};
+        (0, _4.scrollIntoView)(this, elem, options);
+    };
+    /**
+     * Adds scrolling listener
+     */ Scrollbar.prototype.addListener = function(fn) {
+        if (typeof fn !== "function") throw new TypeError("[smooth-scrollbar] scrolling listener should be a function");
+        this._listeners.add(fn);
+    };
+    /**
+     * Removes listener previously registered with `scrollbar.addListener()`
+     */ Scrollbar.prototype.removeListener = function(fn) {
+        this._listeners.delete(fn);
+    };
+    /**
+     * Adds momentum and applys delta transformers.
+     */ Scrollbar.prototype.addTransformableMomentum = function(x, y, fromEvent, callback) {
+        this._updateDebounced();
+        var finalDelta = this._plugins.reduce(function(delta, plugin) {
+            return plugin.transformDelta(delta, fromEvent) || delta;
+        }, {
+            x: x,
+            y: y
+        });
+        var willScroll = !this._shouldPropagateMomentum(finalDelta.x, finalDelta.y);
+        if (willScroll) this.addMomentum(finalDelta.x, finalDelta.y);
+        if (callback) callback.call(this, willScroll);
+    };
+    /**
+     * Increases scrollbar's momentum
+     */ Scrollbar.prototype.addMomentum = function(x, y) {
+        this.setMomentum(this._momentum.x + x, this._momentum.y + y);
+    };
+    /**
+     * Sets scrollbar's momentum to given value
+     */ Scrollbar.prototype.setMomentum = function(x, y) {
+        if (this.limit.x === 0) x = 0;
+        if (this.limit.y === 0) y = 0;
+        if (this.options.renderByPixels) {
+            x = Math.round(x);
+            y = Math.round(y);
+        }
+        this._momentum.x = x;
+        this._momentum.y = y;
+    };
+    /**
+     * Update options for specific plugin
+     *
+     * @param pluginName Name of the plugin
+     * @param [options] An object includes the properties that you want to update
+     */ Scrollbar.prototype.updatePluginOptions = function(pluginName, options) {
+        this._plugins.forEach(function(plugin) {
+            if (plugin.name === pluginName) Object.assign(plugin.options, options);
+        });
+    };
+    Scrollbar.prototype.destroy = function() {
+        var _a = this, containerEl = _a.containerEl, contentEl = _a.contentEl;
+        (0, _.clearEventsOn)(this);
+        this._listeners.clear();
+        this.setMomentum(0, 0);
+        cancelAnimationFrame(this._renderID);
+        if (this._observer) this._observer.disconnect();
+        scrollbarMap.delete(this.containerEl);
+        // restore contents
+        var childNodes = Array.from(contentEl.childNodes);
+        while(containerEl.firstChild)containerEl.removeChild(containerEl.firstChild);
+        childNodes.forEach(function(el) {
+            containerEl.appendChild(el);
+        });
+        // reset scroll position
+        (0, _.setStyle)(containerEl, {
+            overflow: ""
+        });
+        containerEl.scrollTop = this.scrollTop;
+        containerEl.scrollLeft = this.scrollLeft;
+        // invoke plugin.onDestroy
+        this._plugins.forEach(function(plugin) {
+            plugin.onDestroy();
+        });
+        this._plugins.length = 0;
+    };
+    Scrollbar.prototype._init = function() {
+        var _this = this;
+        this.update();
+        // init evet handlers
+        Object.keys(_5).forEach(function(prop) {
+            _5[prop](_this);
+        });
+        // invoke `plugin.onInit`
+        this._plugins.forEach(function(plugin) {
+            plugin.onInit();
+        });
+        this._render();
+    };
+    Scrollbar.prototype._updateDebounced = function() {
+        this.update();
+    };
+    // check whether to propagate monmentum to parent scrollbar
+    // the following situations are considered as `true`:
+    //         1. continuous scrolling is enabled (automatically disabled when overscroll is enabled)
+    //         2. scrollbar reaches one side and is not about to scroll on the other direction
+    Scrollbar.prototype._shouldPropagateMomentum = function(deltaX, deltaY) {
+        if (deltaX === void 0) deltaX = 0;
+        if (deltaY === void 0) deltaY = 0;
+        var _a = this, options = _a.options, offset = _a.offset, limit = _a.limit;
+        if (!options.continuousScrolling) return false;
+        // force an update when scrollbar is "unscrollable", see #106
+        if (limit.x === 0 && limit.y === 0) this._updateDebounced();
+        var destX = (0, _lodashClampDefault.default)(deltaX + offset.x, 0, limit.x);
+        var destY = (0, _lodashClampDefault.default)(deltaY + offset.y, 0, limit.y);
+        var res = true;
+        // offsets are not about to change
+        // `&=` operator is not allowed for boolean types
+        res = res && destX === offset.x;
+        res = res && destY === offset.y;
+        // current offsets are on the edge
+        res = res && (offset.x === limit.x || offset.x === 0 || offset.y === limit.y || offset.y === 0);
+        return res;
+    };
+    Scrollbar.prototype._render = function() {
+        var _momentum = this._momentum;
+        if (_momentum.x || _momentum.y) {
+            var nextX = this._nextTick("x");
+            var nextY = this._nextTick("y");
+            _momentum.x = nextX.momentum;
+            _momentum.y = nextY.momentum;
+            this.setPosition(nextX.position, nextY.position);
+        }
+        var remain = (0, _tslib.__assign)({}, this._momentum);
+        this._plugins.forEach(function(plugin) {
+            plugin.onRender(remain);
+        });
+        this._renderID = requestAnimationFrame(this._render.bind(this));
+    };
+    Scrollbar.prototype._nextTick = function(direction) {
+        var _a = this, options = _a.options, offset = _a.offset, _momentum = _a._momentum;
+        var current = offset[direction];
+        var remain = _momentum[direction];
+        if (Math.abs(remain) <= 0.1) return {
+            momentum: 0,
+            position: current + remain
+        };
+        var nextMomentum = remain * (1 - options.damping);
+        if (options.renderByPixels) nextMomentum |= 0;
+        return {
+            momentum: nextMomentum,
+            position: current + remain - nextMomentum
+        };
+    };
+    (0, _tslib.__decorate)([
+        (0, _1.debounce)(100, {
+            leading: true
+        })
+    ], Scrollbar.prototype, "_updateDebounced", null);
+    return Scrollbar;
+}();
+
+},{"tslib":"euOof","lodash.clamp":"bTHty","./options":"kuzUS","./utils/":"jzGiI","./decorators/":"bvgNp","./track/":"iNFGO","./geometry/":"jBiTP","./scrolling/":"jsAOK","./plugin":"bSKNu","./events/":"cHe8H","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bTHty":[function(require,module,exports) {
+/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */ /** Used as references for various `Number` constants. */ var NAN = 0 / 0;
+/** `Object#toString` result references. */ var symbolTag = "[object Symbol]";
+/** Used to match leading and trailing whitespace. */ var reTrim = /^\s+|\s+$/g;
+/** Used to detect bad signed hexadecimal string values. */ var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+/** Used to detect binary string values. */ var reIsBinary = /^0b[01]+$/i;
+/** Used to detect octal string values. */ var reIsOctal = /^0o[0-7]+$/i;
+/** Built-in method references without a dependency on `root`. */ var freeParseInt = parseInt;
+/** Used for built-in method references. */ var objectProto = Object.prototype;
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */ var objectToString = objectProto.toString;
+/**
+ * The base implementation of `_.clamp` which doesn't coerce arguments.
+ *
+ * @private
+ * @param {number} number The number to clamp.
+ * @param {number} [lower] The lower bound.
+ * @param {number} upper The upper bound.
+ * @returns {number} Returns the clamped number.
+ */ function baseClamp(number, lower, upper) {
+    if (number === number) {
+        if (upper !== undefined) number = number <= upper ? number : upper;
+        if (lower !== undefined) number = number >= lower ? number : lower;
+    }
+    return number;
+}
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */ function isObject(value) {
+    var type = typeof value;
+    return !!value && (type == "object" || type == "function");
+}
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */ function isObjectLike(value) {
+    return !!value && typeof value == "object";
+}
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */ function isSymbol(value) {
+    return typeof value == "symbol" || isObjectLike(value) && objectToString.call(value) == symbolTag;
+}
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */ function toNumber(value) {
+    if (typeof value == "number") return value;
+    if (isSymbol(value)) return NAN;
+    if (isObject(value)) {
+        var other = typeof value.valueOf == "function" ? value.valueOf() : value;
+        value = isObject(other) ? other + "" : other;
+    }
+    if (typeof value != "string") return value === 0 ? value : +value;
+    value = value.replace(reTrim, "");
+    var isBinary = reIsBinary.test(value);
+    return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+}
+/**
+ * Clamps `number` within the inclusive `lower` and `upper` bounds.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Number
+ * @param {number} number The number to clamp.
+ * @param {number} [lower] The lower bound.
+ * @param {number} upper The upper bound.
+ * @returns {number} Returns the clamped number.
+ * @example
+ *
+ * _.clamp(-10, -5, 5);
+ * // => -5
+ *
+ * _.clamp(10, -5, 5);
+ * // => 5
+ */ function clamp(number, lower, upper) {
+    if (upper === undefined) {
+        upper = lower;
+        lower = undefined;
+    }
+    if (upper !== undefined) {
+        upper = toNumber(upper);
+        upper = upper === upper ? upper : 0;
+    }
+    if (lower !== undefined) {
+        lower = toNumber(lower);
+        lower = lower === lower ? lower : 0;
+    }
+    return baseClamp(toNumber(number), lower, upper);
+}
+module.exports = clamp;
+
+},{}],"kuzUS":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Options", ()=>Options);
+var _tslib = require("tslib");
+var _ = require("./decorators/");
+var Options = /** @class */ function() {
+    function Options(config) {
+        var _this = this;
+        if (config === void 0) config = {};
+        /**
+         * Momentum reduction damping factor, a float value between `(0, 1)`.
+         * The lower the value is, the more smooth the scrolling will be
+         * (also the more paint frames).
+         */ this.damping = 0.1;
+        /**
+         * Minimal size for scrollbar thumbs.
+         */ this.thumbMinSize = 20;
+        /**
+         * Render every frame in integer pixel values
+         * set to `true` to improve scrolling performance.
+         */ this.renderByPixels = true;
+        /**
+         * Keep scrollbar tracks visible
+         */ this.alwaysShowTracks = false;
+        /**
+         * Set to `true` to allow outer scrollbars continue scrolling
+         * when current scrollbar reaches edge.
+         */ this.continuousScrolling = true;
+        /**
+         * Delegate wheel events and touch events to the given element.
+         * By default, the container element is used.
+         * This option will be useful for dealing with fixed elements.
+         */ this.delegateTo = null;
+        /**
+         * Options for plugins. Syntax:
+         *   plugins[pluginName] = pluginOptions: any
+         */ this.plugins = {};
+        Object.keys(config).forEach(function(prop) {
+            _this[prop] = config[prop];
+        });
+    }
+    Object.defineProperty(Options.prototype, "wheelEventTarget", {
+        get: function() {
+            return this.delegateTo;
+        },
+        set: function(el) {
+            console.warn("[smooth-scrollbar]: `options.wheelEventTarget` is deprecated and will be removed in the future, use `options.delegateTo` instead.");
+            this.delegateTo = el;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    (0, _tslib.__decorate)([
+        (0, _.range)(0, 1)
+    ], Options.prototype, "damping", void 0);
+    (0, _tslib.__decorate)([
+        (0, _.range)(0, Infinity)
+    ], Options.prototype, "thumbMinSize", void 0);
+    (0, _tslib.__decorate)([
+        (0, _.boolean)
+    ], Options.prototype, "renderByPixels", void 0);
+    (0, _tslib.__decorate)([
+        (0, _.boolean)
+    ], Options.prototype, "alwaysShowTracks", void 0);
+    (0, _tslib.__decorate)([
+        (0, _.boolean)
+    ], Options.prototype, "continuousScrolling", void 0);
+    return Options;
+}();
+
+},{"tslib":"euOof","./decorators/":"bvgNp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bvgNp":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _range = require("./range");
+parcelHelpers.exportAll(_range, exports);
+var _boolean = require("./boolean");
+parcelHelpers.exportAll(_boolean, exports);
+var _debounce = require("./debounce");
+parcelHelpers.exportAll(_debounce, exports);
+
+},{"./range":"4vMHW","./boolean":"kWgZJ","./debounce":"ccT4N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4vMHW":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "range", ()=>range);
+var _lodashClamp = require("lodash.clamp");
+var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
+function range(min, max) {
+    if (min === void 0) min = -Infinity;
+    if (max === void 0) max = Infinity;
+    return function(proto, key) {
+        var alias = "_" + key;
+        Object.defineProperty(proto, key, {
+            get: function() {
+                return this[alias];
+            },
+            set: function(val) {
+                Object.defineProperty(this, alias, {
+                    value: (0, _lodashClampDefault.default)(val, min, max),
+                    enumerable: false,
+                    writable: true,
+                    configurable: true
+                });
+            },
+            enumerable: true,
+            configurable: true
+        });
+    };
+}
+
+},{"lodash.clamp":"bTHty","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kWgZJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "boolean", ()=>boolean);
+function boolean(proto, key) {
+    var alias = "_" + key;
+    Object.defineProperty(proto, key, {
+        get: function() {
+            return this[alias];
+        },
+        set: function(val) {
+            Object.defineProperty(this, alias, {
+                value: !!val,
+                enumerable: false,
+                writable: true,
+                configurable: true
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ccT4N":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "debounce", ()=>debounce);
+var _tslib = require("tslib");
+var _lodashDebounce = require("lodash.debounce");
+var _lodashDebounceDefault = parcelHelpers.interopDefault(_lodashDebounce);
+function debounce() {
+    var options = [];
+    for(var _i = 0; _i < arguments.length; _i++)options[_i] = arguments[_i];
+    return function(_proto, key, descriptor) {
+        var fn = descriptor.value;
+        return {
+            get: function() {
+                if (!this.hasOwnProperty(key)) Object.defineProperty(this, key, {
+                    value: (0, _lodashDebounceDefault.default).apply(void 0, (0, _tslib.__spreadArrays)([
+                        fn
+                    ], options))
+                });
+                return this[key];
+            }
+        };
+    };
+}
+
+},{"tslib":"euOof","lodash.debounce":"3JP5n","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3JP5n":[function(require,module,exports) {
+/**
+ * lodash (Custom Build) <https://lodash.com/>
+ * Build: `lodash modularize exports="npm" -o ./`
+ * Copyright jQuery Foundation and other contributors <https://jquery.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */ /** Used as the `TypeError` message for "Functions" methods. */ var global = arguments[3];
+var FUNC_ERROR_TEXT = "Expected a function";
+/** Used as references for various `Number` constants. */ var NAN = 0 / 0;
+/** `Object#toString` result references. */ var symbolTag = "[object Symbol]";
+/** Used to match leading and trailing whitespace. */ var reTrim = /^\s+|\s+$/g;
+/** Used to detect bad signed hexadecimal string values. */ var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
+/** Used to detect binary string values. */ var reIsBinary = /^0b[01]+$/i;
+/** Used to detect octal string values. */ var reIsOctal = /^0o[0-7]+$/i;
+/** Built-in method references without a dependency on `root`. */ var freeParseInt = parseInt;
+/** Detect free variable `global` from Node.js. */ var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
+/** Detect free variable `self`. */ var freeSelf = typeof self == "object" && self && self.Object === Object && self;
+/** Used as a reference to the global object. */ var root = freeGlobal || freeSelf || Function("return this")();
+/** Used for built-in method references. */ var objectProto = Object.prototype;
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */ var objectToString = objectProto.toString;
+/* Built-in method references for those with the same name as other `lodash` methods. */ var nativeMax = Math.max, nativeMin = Math.min;
+/**
+ * Gets the timestamp of the number of milliseconds that have elapsed since
+ * the Unix epoch (1 January 1970 00:00:00 UTC).
+ *
+ * @static
+ * @memberOf _
+ * @since 2.4.0
+ * @category Date
+ * @returns {number} Returns the timestamp.
+ * @example
+ *
+ * _.defer(function(stamp) {
+ *   console.log(_.now() - stamp);
+ * }, _.now());
+ * // => Logs the number of milliseconds it took for the deferred invocation.
+ */ var now = function() {
+    return root.Date.now();
+};
+/**
+ * Creates a debounced function that delays invoking `func` until after `wait`
+ * milliseconds have elapsed since the last time the debounced function was
+ * invoked. The debounced function comes with a `cancel` method to cancel
+ * delayed `func` invocations and a `flush` method to immediately invoke them.
+ * Provide `options` to indicate whether `func` should be invoked on the
+ * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
+ * with the last arguments provided to the debounced function. Subsequent
+ * calls to the debounced function return the result of the last `func`
+ * invocation.
+ *
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is
+ * invoked on the trailing edge of the timeout only if the debounced function
+ * is invoked more than once during the `wait` timeout.
+ *
+ * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
+ * until to the next tick, similar to `setTimeout` with a timeout of `0`.
+ *
+ * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
+ * for details over the differences between `_.debounce` and `_.throttle`.
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Function
+ * @param {Function} func The function to debounce.
+ * @param {number} [wait=0] The number of milliseconds to delay.
+ * @param {Object} [options={}] The options object.
+ * @param {boolean} [options.leading=false]
+ *  Specify invoking on the leading edge of the timeout.
+ * @param {number} [options.maxWait]
+ *  The maximum time `func` is allowed to be delayed before it's invoked.
+ * @param {boolean} [options.trailing=true]
+ *  Specify invoking on the trailing edge of the timeout.
+ * @returns {Function} Returns the new debounced function.
+ * @example
+ *
+ * // Avoid costly calculations while the window size is in flux.
+ * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
+ *
+ * // Invoke `sendMail` when clicked, debouncing subsequent calls.
+ * jQuery(element).on('click', _.debounce(sendMail, 300, {
+ *   'leading': true,
+ *   'trailing': false
+ * }));
+ *
+ * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
+ * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
+ * var source = new EventSource('/stream');
+ * jQuery(source).on('message', debounced);
+ *
+ * // Cancel the trailing debounced invocation.
+ * jQuery(window).on('popstate', debounced.cancel);
+ */ function debounce(func, wait, options) {
+    var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
+    if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
+    wait = toNumber(wait) || 0;
+    if (isObject(options)) {
+        leading = !!options.leading;
+        maxing = "maxWait" in options;
+        maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
+        trailing = "trailing" in options ? !!options.trailing : trailing;
+    }
+    function invokeFunc(time) {
+        var args = lastArgs, thisArg = lastThis;
+        lastArgs = lastThis = undefined;
+        lastInvokeTime = time;
+        result = func.apply(thisArg, args);
+        return result;
+    }
+    function leadingEdge(time) {
+        // Reset any `maxWait` timer.
+        lastInvokeTime = time;
+        // Start the timer for the trailing edge.
+        timerId = setTimeout(timerExpired, wait);
+        // Invoke the leading edge.
+        return leading ? invokeFunc(time) : result;
+    }
+    function remainingWait(time) {
+        var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime, result = wait - timeSinceLastCall;
+        return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
+    }
+    function shouldInvoke(time) {
+        var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime;
+        // Either this is the first call, activity has stopped and we're at the
+        // trailing edge, the system time has gone backwards and we're treating
+        // it as the trailing edge, or we've hit the `maxWait` limit.
+        return lastCallTime === undefined || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
+    }
+    function timerExpired() {
+        var time = now();
+        if (shouldInvoke(time)) return trailingEdge(time);
+        // Restart the timer.
+        timerId = setTimeout(timerExpired, remainingWait(time));
+    }
+    function trailingEdge(time) {
+        timerId = undefined;
+        // Only invoke if we have `lastArgs` which means `func` has been
+        // debounced at least once.
+        if (trailing && lastArgs) return invokeFunc(time);
+        lastArgs = lastThis = undefined;
+        return result;
+    }
+    function cancel() {
+        if (timerId !== undefined) clearTimeout(timerId);
+        lastInvokeTime = 0;
+        lastArgs = lastCallTime = lastThis = timerId = undefined;
+    }
+    function flush() {
+        return timerId === undefined ? result : trailingEdge(now());
+    }
+    function debounced() {
+        var time = now(), isInvoking = shouldInvoke(time);
+        lastArgs = arguments;
+        lastThis = this;
+        lastCallTime = time;
+        if (isInvoking) {
+            if (timerId === undefined) return leadingEdge(lastCallTime);
+            if (maxing) {
+                // Handle invocations in a tight loop.
+                timerId = setTimeout(timerExpired, wait);
+                return invokeFunc(lastCallTime);
+            }
+        }
+        if (timerId === undefined) timerId = setTimeout(timerExpired, wait);
+        return result;
+    }
+    debounced.cancel = cancel;
+    debounced.flush = flush;
+    return debounced;
+}
+/**
+ * Checks if `value` is the
+ * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
+ * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
+ *
+ * @static
+ * @memberOf _
+ * @since 0.1.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is an object, else `false`.
+ * @example
+ *
+ * _.isObject({});
+ * // => true
+ *
+ * _.isObject([1, 2, 3]);
+ * // => true
+ *
+ * _.isObject(_.noop);
+ * // => true
+ *
+ * _.isObject(null);
+ * // => false
+ */ function isObject(value) {
+    var type = typeof value;
+    return !!value && (type == "object" || type == "function");
+}
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */ function isObjectLike(value) {
+    return !!value && typeof value == "object";
+}
+/**
+ * Checks if `value` is classified as a `Symbol` primitive or object.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
+ * @example
+ *
+ * _.isSymbol(Symbol.iterator);
+ * // => true
+ *
+ * _.isSymbol('abc');
+ * // => false
+ */ function isSymbol(value) {
+    return typeof value == "symbol" || isObjectLike(value) && objectToString.call(value) == symbolTag;
+}
+/**
+ * Converts `value` to a number.
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to process.
+ * @returns {number} Returns the number.
+ * @example
+ *
+ * _.toNumber(3.2);
+ * // => 3.2
+ *
+ * _.toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * _.toNumber(Infinity);
+ * // => Infinity
+ *
+ * _.toNumber('3.2');
+ * // => 3.2
+ */ function toNumber(value) {
+    if (typeof value == "number") return value;
+    if (isSymbol(value)) return NAN;
+    if (isObject(value)) {
+        var other = typeof value.valueOf == "function" ? value.valueOf() : value;
+        value = isObject(other) ? other + "" : other;
+    }
+    if (typeof value != "string") return value === 0 ? value : +value;
+    value = value.replace(reTrim, "");
+    var isBinary = reIsBinary.test(value);
+    return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
+}
+module.exports = debounce;
+
+},{}],"jzGiI":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _eventHub = require("./event-hub");
+parcelHelpers.exportAll(_eventHub, exports);
+var _getPointerData = require("./get-pointer-data");
+parcelHelpers.exportAll(_getPointerData, exports);
+var _getPosition = require("./get-position");
+parcelHelpers.exportAll(_getPosition, exports);
+var _isOneOf = require("./is-one-of");
+parcelHelpers.exportAll(_isOneOf, exports);
+var _setStyle = require("./set-style");
+parcelHelpers.exportAll(_setStyle, exports);
+var _touchRecord = require("./touch-record");
+parcelHelpers.exportAll(_touchRecord, exports);
+
+},{"./event-hub":"3PIA4","./get-pointer-data":"l3sLH","./get-position":"6WLv8","./is-one-of":"8RovI","./set-style":"7lys4","./touch-record":"ezxNx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3PIA4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "eventScope", ()=>eventScope);
+parcelHelpers.export(exports, "clearEventsOn", ()=>clearEventsOn);
+var eventListenerOptions;
+var eventMap = new WeakMap();
+function getOptions() {
+    if (eventListenerOptions !== undefined) return eventListenerOptions;
+    var supportPassiveEvent = false;
+    try {
+        var noop = function() {};
+        var options = Object.defineProperty({}, "passive", {
+            get: function() {
+                supportPassiveEvent = true;
+            }
+        });
+        window.addEventListener("testPassive", noop, options);
+        window.removeEventListener("testPassive", noop, options);
+    } catch (e) {}
+    eventListenerOptions = supportPassiveEvent ? {
+        passive: false
+    } : false;
+    return eventListenerOptions;
+}
+function eventScope(scrollbar) {
+    var configs = eventMap.get(scrollbar) || [];
+    eventMap.set(scrollbar, configs);
+    return function addEvent(elem, events, fn) {
+        function handler(event) {
+            // ignore default prevented events
+            if (event.defaultPrevented) return;
+            fn(event);
+        }
+        events.split(/\s+/g).forEach(function(eventName) {
+            configs.push({
+                elem: elem,
+                eventName: eventName,
+                handler: handler
+            });
+            elem.addEventListener(eventName, handler, getOptions());
+        });
+    };
+}
+function clearEventsOn(scrollbar) {
+    var configs = eventMap.get(scrollbar);
+    if (!configs) return;
+    configs.forEach(function(_a) {
+        var elem = _a.elem, eventName = _a.eventName, handler = _a.handler;
+        elem.removeEventListener(eventName, handler, getOptions());
+    });
+    eventMap.delete(scrollbar);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l3sLH":[function(require,module,exports) {
+/**
+ * Get pointer/touch data
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getPointerData", ()=>getPointerData);
+function getPointerData(evt) {
+    // if is touch event, return last item in touchList
+    // else return original event
+    return evt.touches ? evt.touches[evt.touches.length - 1] : evt;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6WLv8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+/**
+ * Get pointer/finger position
+ */ parcelHelpers.export(exports, "getPosition", ()=>getPosition);
+var _getPointerData = require("./get-pointer-data");
+function getPosition(evt) {
+    var data = (0, _getPointerData.getPointerData)(evt);
+    return {
+        x: data.clientX,
+        y: data.clientY
+    };
+}
+
+},{"./get-pointer-data":"l3sLH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8RovI":[function(require,module,exports) {
+/**
+ * Check if `a` is one of `[...b]`
+ */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isOneOf", ()=>isOneOf);
+function isOneOf(a, b) {
+    if (b === void 0) b = [];
+    return b.some(function(v) {
+        return a === v;
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7lys4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "setStyle", ()=>setStyle);
+var VENDOR_PREFIX = [
+    "webkit",
+    "moz",
+    "ms",
+    "o"
+];
+var RE = new RegExp("^-(?!(?:" + VENDOR_PREFIX.join("|") + ")-)");
+function autoPrefix(styles) {
+    var res = {};
+    Object.keys(styles).forEach(function(prop) {
+        if (!RE.test(prop)) {
+            res[prop] = styles[prop];
+            return;
+        }
+        var val = styles[prop];
+        prop = prop.replace(/^-/, "");
+        res[prop] = val;
+        VENDOR_PREFIX.forEach(function(prefix) {
+            res["-" + prefix + "-" + prop] = val;
+        });
+    });
+    return res;
+}
+function setStyle(elem, styles) {
+    styles = autoPrefix(styles);
+    Object.keys(styles).forEach(function(prop) {
+        var cssProp = prop.replace(/^-/, "").replace(/-([a-z])/g, function(_, $1) {
+            return $1.toUpperCase();
+        });
+        elem.style[cssProp] = styles[prop];
+    });
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ezxNx":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "Tracker", ()=>Tracker);
+parcelHelpers.export(exports, "TouchRecord", ()=>TouchRecord);
+var _tslib = require("tslib");
+var _getPosition = require("./get-position");
+var Tracker = /** @class */ function() {
+    function Tracker(touch) {
+        this.velocityMultiplier = window.devicePixelRatio;
+        this.updateTime = Date.now();
+        this.delta = {
+            x: 0,
+            y: 0
+        };
+        this.velocity = {
+            x: 0,
+            y: 0
+        };
+        this.lastPosition = {
+            x: 0,
+            y: 0
+        };
+        this.lastPosition = (0, _getPosition.getPosition)(touch);
+    }
+    Tracker.prototype.update = function(touch) {
+        var _a = this, velocity = _a.velocity, updateTime = _a.updateTime, lastPosition = _a.lastPosition;
+        var now = Date.now();
+        var position = (0, _getPosition.getPosition)(touch);
+        var delta = {
+            x: -(position.x - lastPosition.x),
+            y: -(position.y - lastPosition.y)
+        };
+        var duration = now - updateTime || 16.7;
+        var vx = delta.x / duration * 16.7;
+        var vy = delta.y / duration * 16.7;
+        velocity.x = vx * this.velocityMultiplier;
+        velocity.y = vy * this.velocityMultiplier;
+        this.delta = delta;
+        this.updateTime = now;
+        this.lastPosition = position;
+    };
+    return Tracker;
+}();
+var TouchRecord = /** @class */ function() {
+    function TouchRecord() {
+        this._touchList = {};
+    }
+    Object.defineProperty(TouchRecord.prototype, "_primitiveValue", {
+        get: function() {
+            return {
+                x: 0,
+                y: 0
+            };
+        },
+        enumerable: true,
+        configurable: true
+    });
+    TouchRecord.prototype.isActive = function() {
+        return this._activeTouchID !== undefined;
+    };
+    TouchRecord.prototype.getDelta = function() {
+        var tracker = this._getActiveTracker();
+        if (!tracker) return this._primitiveValue;
+        return (0, _tslib.__assign)({}, tracker.delta);
+    };
+    TouchRecord.prototype.getVelocity = function() {
+        var tracker = this._getActiveTracker();
+        if (!tracker) return this._primitiveValue;
+        return (0, _tslib.__assign)({}, tracker.velocity);
+    };
+    TouchRecord.prototype.getEasingDistance = function(damping) {
+        var deAcceleration = 1 - damping;
+        var distance = {
+            x: 0,
+            y: 0
+        };
+        var vel = this.getVelocity();
+        Object.keys(vel).forEach(function(dir) {
+            // ignore small velocity
+            var v = Math.abs(vel[dir]) <= 10 ? 0 : vel[dir];
+            while(v !== 0){
+                distance[dir] += v;
+                v = v * deAcceleration | 0;
+            }
+        });
+        return distance;
+    };
+    TouchRecord.prototype.track = function(evt) {
+        var _this = this;
+        var targetTouches = evt.targetTouches;
+        Array.from(targetTouches).forEach(function(touch) {
+            _this._add(touch);
+        });
+        return this._touchList;
+    };
+    TouchRecord.prototype.update = function(evt) {
+        var _this = this;
+        var touches = evt.touches, changedTouches = evt.changedTouches;
+        Array.from(touches).forEach(function(touch) {
+            _this._renew(touch);
+        });
+        this._setActiveID(changedTouches);
+        return this._touchList;
+    };
+    TouchRecord.prototype.release = function(evt) {
+        var _this = this;
+        delete this._activeTouchID;
+        Array.from(evt.changedTouches).forEach(function(touch) {
+            _this._delete(touch);
+        });
+    };
+    TouchRecord.prototype._add = function(touch) {
+        if (this._has(touch)) // reset tracker
+        this._delete(touch);
+        var tracker = new Tracker(touch);
+        this._touchList[touch.identifier] = tracker;
+    };
+    TouchRecord.prototype._renew = function(touch) {
+        if (!this._has(touch)) return;
+        var tracker = this._touchList[touch.identifier];
+        tracker.update(touch);
+    };
+    TouchRecord.prototype._delete = function(touch) {
+        delete this._touchList[touch.identifier];
+    };
+    TouchRecord.prototype._has = function(touch) {
+        return this._touchList.hasOwnProperty(touch.identifier);
+    };
+    TouchRecord.prototype._setActiveID = function(touches) {
+        this._activeTouchID = touches[touches.length - 1].identifier;
+    };
+    TouchRecord.prototype._getActiveTracker = function() {
+        var _a = this, _touchList = _a._touchList, _activeTouchID = _a._activeTouchID;
+        return _touchList[_activeTouchID];
+    };
+    return TouchRecord;
+}();
+
+},{"tslib":"euOof","./get-position":"6WLv8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iNFGO":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TrackController", ()=>TrackController);
+var _tslib = require("tslib");
+var _track = require("./track");
+var _direction = require("./direction");
+var _ = require("../decorators/");
+var TrackController = /** @class */ function() {
+    function TrackController(_scrollbar) {
+        this._scrollbar = _scrollbar;
+        var thumbMinSize = _scrollbar.options.thumbMinSize;
+        this.xAxis = new (0, _track.ScrollbarTrack)((0, _direction.TrackDirection).X, thumbMinSize);
+        this.yAxis = new (0, _track.ScrollbarTrack)((0, _direction.TrackDirection).Y, thumbMinSize);
+        this.xAxis.attachTo(_scrollbar.containerEl);
+        this.yAxis.attachTo(_scrollbar.containerEl);
+        if (_scrollbar.options.alwaysShowTracks) {
+            this.xAxis.show();
+            this.yAxis.show();
+        }
+    }
+    /**
+     * Updates track appearance
+     */ TrackController.prototype.update = function() {
+        var _a = this._scrollbar, size = _a.size, offset = _a.offset;
+        this.xAxis.update(offset.x, size.container.width, size.content.width);
+        this.yAxis.update(offset.y, size.container.height, size.content.height);
+    };
+    /**
+     * Automatically hide tracks when scrollbar is in idle state
+     */ TrackController.prototype.autoHideOnIdle = function() {
+        if (this._scrollbar.options.alwaysShowTracks) return;
+        this.xAxis.hide();
+        this.yAxis.hide();
+    };
+    (0, _tslib.__decorate)([
+        (0, _.debounce)(300)
+    ], TrackController.prototype, "autoHideOnIdle", null);
+    return TrackController;
+}();
+
+},{"tslib":"euOof","./track":"6WVpd","./direction":"dYSG8","../decorators/":"bvgNp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6WVpd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ScrollbarTrack", ()=>ScrollbarTrack);
+var _thumb = require("./thumb");
+var _ = require("../utils/");
+var ScrollbarTrack = /** @class */ function() {
+    function ScrollbarTrack(direction, thumbMinSize) {
+        if (thumbMinSize === void 0) thumbMinSize = 0;
+        /**
+         * Track element
+         */ this.element = document.createElement("div");
+        this._isShown = false;
+        this.element.className = "scrollbar-track scrollbar-track-" + direction;
+        this.thumb = new (0, _thumb.ScrollbarThumb)(direction, thumbMinSize);
+        this.thumb.attachTo(this.element);
+    }
+    /**
+     * Attach to scrollbar container element
+     *
+     * @param scrollbarContainer Scrollbar container element
+     */ ScrollbarTrack.prototype.attachTo = function(scrollbarContainer) {
+        scrollbarContainer.appendChild(this.element);
+    };
+    /**
+     * Show track immediately
+     */ ScrollbarTrack.prototype.show = function() {
+        if (this._isShown) return;
+        this._isShown = true;
+        this.element.classList.add("show");
+    };
+    /**
+     * Hide track immediately
+     */ ScrollbarTrack.prototype.hide = function() {
+        if (!this._isShown) return;
+        this._isShown = false;
+        this.element.classList.remove("show");
+    };
+    ScrollbarTrack.prototype.update = function(scrollOffset, containerSize, pageSize) {
+        (0, _.setStyle)(this.element, {
+            display: pageSize <= containerSize ? "none" : "block"
+        });
+        this.thumb.update(scrollOffset, containerSize, pageSize);
+    };
+    return ScrollbarTrack;
+}();
+
+},{"./thumb":"jszc2","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jszc2":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ScrollbarThumb", ()=>ScrollbarThumb);
+var _direction = require("./direction");
+var _ = require("../utils/");
+var ScrollbarThumb = /** @class */ function() {
+    function ScrollbarThumb(_direction, _minSize) {
+        if (_minSize === void 0) _minSize = 0;
+        this._direction = _direction;
+        this._minSize = _minSize;
+        /**
+         * Thumb element
+         */ this.element = document.createElement("div");
+        /**
+         * Display size of the thumb
+         * will always be greater than `scrollbar.options.thumbMinSize`
+         */ this.displaySize = 0;
+        /**
+         * Actual size of the thumb
+         */ this.realSize = 0;
+        /**
+         * Thumb offset to the top
+         */ this.offset = 0;
+        this.element.className = "scrollbar-thumb scrollbar-thumb-" + _direction;
+    }
+    /**
+     * Attach to track element
+     *
+     * @param trackEl Track element
+     */ ScrollbarThumb.prototype.attachTo = function(trackEl) {
+        trackEl.appendChild(this.element);
+    };
+    ScrollbarThumb.prototype.update = function(scrollOffset, containerSize, pageSize) {
+        // calculate thumb size
+        // pageSize > containerSize -> scrollable
+        this.realSize = Math.min(containerSize / pageSize, 1) * containerSize;
+        this.displaySize = Math.max(this.realSize, this._minSize);
+        // calculate thumb offset
+        this.offset = scrollOffset / pageSize * (containerSize + (this.realSize - this.displaySize));
+        (0, _.setStyle)(this.element, this._getStyle());
+    };
+    ScrollbarThumb.prototype._getStyle = function() {
+        switch(this._direction){
+            case (0, _direction.TrackDirection).X:
+                return {
+                    width: this.displaySize + "px",
+                    "-transform": "translate3d(" + this.offset + "px, 0, 0)"
+                };
+            case (0, _direction.TrackDirection).Y:
+                return {
+                    height: this.displaySize + "px",
+                    "-transform": "translate3d(0, " + this.offset + "px, 0)"
+                };
+            default:
+                return null;
+        }
+    };
+    return ScrollbarThumb;
+}();
+
+},{"./direction":"dYSG8","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dYSG8":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "TrackDirection", ()=>TrackDirection);
+var TrackDirection;
+(function(TrackDirection) {
+    TrackDirection["X"] = "x";
+    TrackDirection["Y"] = "y";
+})(TrackDirection || (TrackDirection = {}));
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jBiTP":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _getSize = require("./get-size");
+parcelHelpers.exportAll(_getSize, exports);
+var _isVisible = require("./is-visible");
+parcelHelpers.exportAll(_isVisible, exports);
+var _update = require("./update");
+parcelHelpers.exportAll(_update, exports);
+
+},{"./get-size":"eohy0","./is-visible":"99mev","./update":"kBOIE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eohy0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "getSize", ()=>getSize);
+function getSize(scrollbar) {
+    var containerEl = scrollbar.containerEl, contentEl = scrollbar.contentEl;
+    var containerStyles = getComputedStyle(containerEl);
+    var paddings = [
+        "paddingTop",
+        "paddingBottom",
+        "paddingLeft",
+        "paddingRight"
+    ].map(function(prop) {
+        return containerStyles[prop] ? parseFloat(containerStyles[prop]) : 0;
+    });
+    var verticalPadding = paddings[0] + paddings[1];
+    var horizontalPadding = paddings[2] + paddings[3];
+    return {
+        container: {
+            // requires `overflow: hidden`
+            width: containerEl.clientWidth,
+            height: containerEl.clientHeight
+        },
+        content: {
+            // border width and paddings should be included
+            width: contentEl.offsetWidth - contentEl.clientWidth + contentEl.scrollWidth + horizontalPadding,
+            height: contentEl.offsetHeight - contentEl.clientHeight + contentEl.scrollHeight + verticalPadding
+        }
+    };
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"99mev":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "isVisible", ()=>isVisible);
+function isVisible(scrollbar, elem) {
+    var bounding = scrollbar.bounding;
+    var targetBounding = elem.getBoundingClientRect();
+    // check overlapping
+    var top = Math.max(bounding.top, targetBounding.top);
+    var left = Math.max(bounding.left, targetBounding.left);
+    var right = Math.min(bounding.right, targetBounding.right);
+    var bottom = Math.min(bounding.bottom, targetBounding.bottom);
+    return top < bottom && left < right;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kBOIE":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "update", ()=>update);
+function update(scrollbar) {
+    var newSize = scrollbar.getSize();
+    var limit = {
+        x: Math.max(newSize.content.width - newSize.container.width, 0),
+        y: Math.max(newSize.content.height - newSize.container.height, 0)
+    };
+    // metrics
+    var containerBounding = scrollbar.containerEl.getBoundingClientRect();
+    var bounding = {
+        top: Math.max(containerBounding.top, 0),
+        right: Math.min(containerBounding.right, window.innerWidth),
+        bottom: Math.min(containerBounding.bottom, window.innerHeight),
+        left: Math.max(containerBounding.left, 0)
+    };
+    // assign props
+    scrollbar.size = newSize;
+    scrollbar.limit = limit;
+    scrollbar.bounding = bounding;
+    // update tracks
+    scrollbar.track.update();
+    // re-positioning
+    scrollbar.setPosition();
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jsAOK":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _setPosition = require("./set-position");
+parcelHelpers.exportAll(_setPosition, exports);
+var _scrollTo = require("./scroll-to");
+parcelHelpers.exportAll(_scrollTo, exports);
+var _scrollIntoView = require("./scroll-into-view");
+parcelHelpers.exportAll(_scrollIntoView, exports);
+
+},{"./set-position":"kNGmM","./scroll-to":"6bZgF","./scroll-into-view":"69B3G","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kNGmM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "setPosition", ()=>setPosition);
+var _tslib = require("tslib");
+var _lodashClamp = require("lodash.clamp");
+var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
+var _ = require("../utils/");
+function setPosition(scrollbar, x, y) {
+    var options = scrollbar.options, offset = scrollbar.offset, limit = scrollbar.limit, track = scrollbar.track, contentEl = scrollbar.contentEl;
+    if (options.renderByPixels) {
+        x = Math.round(x);
+        y = Math.round(y);
+    }
+    x = (0, _lodashClampDefault.default)(x, 0, limit.x);
+    y = (0, _lodashClampDefault.default)(y, 0, limit.y);
+    // position changed -> show track for 300ms
+    if (x !== offset.x) track.xAxis.show();
+    if (y !== offset.y) track.yAxis.show();
+    if (!options.alwaysShowTracks) track.autoHideOnIdle();
+    if (x === offset.x && y === offset.y) return null;
+    offset.x = x;
+    offset.y = y;
+    (0, _.setStyle)(contentEl, {
+        "-transform": "translate3d(" + -x + "px, " + -y + "px, 0)"
+    });
+    track.update();
+    return {
+        offset: (0, _tslib.__assign)({}, offset),
+        limit: (0, _tslib.__assign)({}, limit)
+    };
+}
+
+},{"tslib":"euOof","lodash.clamp":"bTHty","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6bZgF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "scrollTo", ()=>scrollTo);
+var _lodashClamp = require("lodash.clamp");
+var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
+var animationIDStorage = new WeakMap();
+function scrollTo(scrollbar, x, y, duration, _a) {
+    if (duration === void 0) duration = 0;
+    var _b = _a === void 0 ? {} : _a, _c = _b.easing, easing = _c === void 0 ? defaultEasing : _c, callback = _b.callback;
+    var options = scrollbar.options, offset = scrollbar.offset, limit = scrollbar.limit;
+    if (options.renderByPixels) {
+        // ensure resolved with integer
+        x = Math.round(x);
+        y = Math.round(y);
+    }
+    var startX = offset.x;
+    var startY = offset.y;
+    var disX = (0, _lodashClampDefault.default)(x, 0, limit.x) - startX;
+    var disY = (0, _lodashClampDefault.default)(y, 0, limit.y) - startY;
+    var start = Date.now();
+    function scroll() {
+        var elapse = Date.now() - start;
+        var progress = duration ? easing(Math.min(elapse / duration, 1)) : 1;
+        scrollbar.setPosition(startX + disX * progress, startY + disY * progress);
+        if (elapse >= duration) {
+            if (typeof callback === "function") callback.call(scrollbar);
+        } else {
+            var animationID = requestAnimationFrame(scroll);
+            animationIDStorage.set(scrollbar, animationID);
+        }
+    }
+    cancelAnimationFrame(animationIDStorage.get(scrollbar));
+    scroll();
+}
+/**
+ * easeOutCubic
+ */ function defaultEasing(t) {
+    return Math.pow(t - 1, 3) + 1;
+}
+
+},{"lodash.clamp":"bTHty","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"69B3G":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "scrollIntoView", ()=>scrollIntoView);
+var _lodashClamp = require("lodash.clamp");
+var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
+function scrollIntoView(scrollbar, elem, _a) {
+    var _b = _a === void 0 ? {} : _a, _c = _b.alignToTop, alignToTop = _c === void 0 ? true : _c, _d = _b.onlyScrollIfNeeded, onlyScrollIfNeeded = _d === void 0 ? false : _d, _e = _b.offsetTop, offsetTop = _e === void 0 ? 0 : _e, _f = _b.offsetLeft, offsetLeft = _f === void 0 ? 0 : _f, _g = _b.offsetBottom, offsetBottom = _g === void 0 ? 0 : _g;
+    var containerEl = scrollbar.containerEl, bounding = scrollbar.bounding, offset = scrollbar.offset, limit = scrollbar.limit;
+    if (!elem || !containerEl.contains(elem)) return;
+    var targetBounding = elem.getBoundingClientRect();
+    if (onlyScrollIfNeeded && scrollbar.isVisible(elem)) return;
+    var delta = alignToTop ? targetBounding.top - bounding.top - offsetTop : targetBounding.bottom - bounding.bottom + offsetBottom;
+    scrollbar.setMomentum(targetBounding.left - bounding.left - offsetLeft, (0, _lodashClampDefault.default)(delta, -offset.y, limit.y - offset.y));
+}
+
+},{"lodash.clamp":"bTHty","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bSKNu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ScrollbarPlugin", ()=>ScrollbarPlugin);
+parcelHelpers.export(exports, "globalPlugins", ()=>globalPlugins);
+parcelHelpers.export(exports, "addPlugins", ()=>addPlugins);
+parcelHelpers.export(exports, "initPlugins", ()=>initPlugins);
+var _tslib = require("tslib");
+var ScrollbarPlugin = /** @class */ function() {
+    function ScrollbarPlugin(scrollbar, options) {
+        var _newTarget = this.constructor;
+        this.scrollbar = scrollbar;
+        this.name = _newTarget.pluginName;
+        this.options = (0, _tslib.__assign)((0, _tslib.__assign)({}, _newTarget.defaultOptions), options);
+    }
+    ScrollbarPlugin.prototype.onInit = function() {};
+    ScrollbarPlugin.prototype.onDestroy = function() {};
+    ScrollbarPlugin.prototype.onUpdate = function() {};
+    ScrollbarPlugin.prototype.onRender = function(_remainMomentum) {};
+    ScrollbarPlugin.prototype.transformDelta = function(delta, _evt) {
+        return (0, _tslib.__assign)({}, delta);
+    };
+    ScrollbarPlugin.pluginName = "";
+    ScrollbarPlugin.defaultOptions = {};
+    return ScrollbarPlugin;
+}();
+var globalPlugins = {
+    order: new Set(),
+    constructors: {}
+};
+function addPlugins() {
+    var Plugins = [];
+    for(var _i = 0; _i < arguments.length; _i++)Plugins[_i] = arguments[_i];
+    Plugins.forEach(function(P) {
+        var pluginName = P.pluginName;
+        if (!pluginName) throw new TypeError("plugin name is required");
+        globalPlugins.order.add(pluginName);
+        globalPlugins.constructors[pluginName] = P;
+    });
+}
+function initPlugins(scrollbar, options) {
+    return Array.from(globalPlugins.order).filter(function(pluginName) {
+        return options[pluginName] !== false;
+    }).map(function(pluginName) {
+        var Plugin = globalPlugins.constructors[pluginName];
+        var instance = new Plugin(scrollbar, options[pluginName]);
+        // bind plugin options to `scrollbar.options`
+        options[pluginName] = instance.options;
+        return instance;
+    });
+}
+
+},{"tslib":"euOof","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cHe8H":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _keyboard = require("./keyboard");
+parcelHelpers.exportAll(_keyboard, exports);
+var _mouse = require("./mouse");
+parcelHelpers.exportAll(_mouse, exports);
+var _resize = require("./resize");
+parcelHelpers.exportAll(_resize, exports);
+var _select = require("./select");
+parcelHelpers.exportAll(_select, exports);
+var _touch = require("./touch");
+parcelHelpers.exportAll(_touch, exports);
+var _wheel = require("./wheel");
+parcelHelpers.exportAll(_wheel, exports);
+
+},{"./keyboard":"3O3aj","./mouse":"u2dyQ","./resize":"gCciD","./select":"2fmgh","./touch":"gsvLM","./wheel":"8pCgR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3O3aj":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "keyboardHandler", ()=>keyboardHandler);
+var _ = require("../utils/");
+var KEY_CODE;
+(function(KEY_CODE) {
+    KEY_CODE[KEY_CODE["TAB"] = 9] = "TAB";
+    KEY_CODE[KEY_CODE["SPACE"] = 32] = "SPACE";
+    KEY_CODE[KEY_CODE["PAGE_UP"] = 33] = "PAGE_UP";
+    KEY_CODE[KEY_CODE["PAGE_DOWN"] = 34] = "PAGE_DOWN";
+    KEY_CODE[KEY_CODE["END"] = 35] = "END";
+    KEY_CODE[KEY_CODE["HOME"] = 36] = "HOME";
+    KEY_CODE[KEY_CODE["LEFT"] = 37] = "LEFT";
+    KEY_CODE[KEY_CODE["UP"] = 38] = "UP";
+    KEY_CODE[KEY_CODE["RIGHT"] = 39] = "RIGHT";
+    KEY_CODE[KEY_CODE["DOWN"] = 40] = "DOWN";
+})(KEY_CODE || (KEY_CODE = {}));
+function keyboardHandler(scrollbar) {
+    var addEvent = (0, _.eventScope)(scrollbar);
+    var container = scrollbar.containerEl;
+    addEvent(container, "keydown", function(evt) {
+        var activeElement = document.activeElement;
+        if (activeElement !== container && !container.contains(activeElement)) return;
+        if (isEditable(activeElement)) return;
+        var delta = getKeyDelta(scrollbar, evt.keyCode || evt.which);
+        if (!delta) return;
+        var x = delta[0], y = delta[1];
+        scrollbar.addTransformableMomentum(x, y, evt, function(willScroll) {
+            if (willScroll) evt.preventDefault();
+            else {
+                scrollbar.containerEl.blur();
+                if (scrollbar.parent) scrollbar.parent.containerEl.focus();
+            }
+        });
+    });
+}
+function getKeyDelta(scrollbar, keyCode) {
+    var size = scrollbar.size, limit = scrollbar.limit, offset = scrollbar.offset;
+    switch(keyCode){
+        case KEY_CODE.TAB:
+            return handleTabKey(scrollbar);
+        case KEY_CODE.SPACE:
+            return [
+                0,
+                200
+            ];
+        case KEY_CODE.PAGE_UP:
+            return [
+                0,
+                -size.container.height + 40
+            ];
+        case KEY_CODE.PAGE_DOWN:
+            return [
+                0,
+                size.container.height - 40
+            ];
+        case KEY_CODE.END:
+            return [
+                0,
+                limit.y - offset.y
+            ];
+        case KEY_CODE.HOME:
+            return [
+                0,
+                -offset.y
+            ];
+        case KEY_CODE.LEFT:
+            return [
+                -40,
+                0
+            ];
+        case KEY_CODE.UP:
+            return [
+                0,
+                -40
+            ];
+        case KEY_CODE.RIGHT:
+            return [
+                40,
+                0
+            ];
+        case KEY_CODE.DOWN:
+            return [
+                0,
+                40
+            ];
+        default:
+            return null;
+    }
+}
+function handleTabKey(scrollbar) {
+    // handle in next frame
+    requestAnimationFrame(function() {
+        scrollbar.scrollIntoView(document.activeElement, {
+            offsetTop: scrollbar.size.container.height / 2,
+            offsetLeft: scrollbar.size.container.width / 2,
+            onlyScrollIfNeeded: true
+        });
+    });
+}
+function isEditable(elem) {
+    if (elem.tagName === "INPUT" || elem.tagName === "SELECT" || elem.tagName === "TEXTAREA" || elem.isContentEditable) return !elem.disabled;
+    return false;
+}
+
+},{"../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"u2dyQ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "mouseHandler", ()=>mouseHandler);
+var _lodashClamp = require("lodash.clamp");
+var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
+var _ = require("../utils/");
+var Direction;
+(function(Direction) {
+    Direction[Direction["X"] = 0] = "X";
+    Direction[Direction["Y"] = 1] = "Y";
+})(Direction || (Direction = {}));
+function mouseHandler(scrollbar) {
+    var addEvent = (0, _.eventScope)(scrollbar);
+    var container = scrollbar.containerEl;
+    var _a = scrollbar.track, xAxis = _a.xAxis, yAxis = _a.yAxis;
+    function calcMomentum(direction, clickPosition) {
+        var size = scrollbar.size, limit = scrollbar.limit, offset = scrollbar.offset;
+        if (direction === Direction.X) {
+            var totalWidth = size.container.width + (xAxis.thumb.realSize - xAxis.thumb.displaySize);
+            return (0, _lodashClampDefault.default)(clickPosition / totalWidth * size.content.width, 0, limit.x) - offset.x;
+        }
+        if (direction === Direction.Y) {
+            var totalHeight = size.container.height + (yAxis.thumb.realSize - yAxis.thumb.displaySize);
+            return (0, _lodashClampDefault.default)(clickPosition / totalHeight * size.content.height, 0, limit.y) - offset.y;
+        }
+        return 0;
+    }
+    function getTrackDirection(elem) {
+        if ((0, _.isOneOf)(elem, [
+            xAxis.element,
+            xAxis.thumb.element
+        ])) return Direction.X;
+        if ((0, _.isOneOf)(elem, [
+            yAxis.element,
+            yAxis.thumb.element
+        ])) return Direction.Y;
+        return void 0;
+    }
+    var isMouseDown;
+    var isMouseMoving;
+    var startOffsetToThumb;
+    var trackDirection;
+    var containerRect;
+    addEvent(container, "click", function(evt) {
+        if (isMouseMoving || !(0, _.isOneOf)(evt.target, [
+            xAxis.element,
+            yAxis.element
+        ])) return;
+        var track = evt.target;
+        var direction = getTrackDirection(track);
+        var rect = track.getBoundingClientRect();
+        var clickPos = (0, _.getPosition)(evt);
+        if (direction === Direction.X) {
+            var offsetOnTrack = clickPos.x - rect.left - xAxis.thumb.displaySize / 2;
+            scrollbar.setMomentum(calcMomentum(direction, offsetOnTrack), 0);
+        }
+        if (direction === Direction.Y) {
+            var offsetOnTrack = clickPos.y - rect.top - yAxis.thumb.displaySize / 2;
+            scrollbar.setMomentum(0, calcMomentum(direction, offsetOnTrack));
+        }
+    });
+    addEvent(container, "mousedown", function(evt) {
+        if (!(0, _.isOneOf)(evt.target, [
+            xAxis.thumb.element,
+            yAxis.thumb.element
+        ])) return;
+        isMouseDown = true;
+        var thumb = evt.target;
+        var cursorPos = (0, _.getPosition)(evt);
+        var thumbRect = thumb.getBoundingClientRect();
+        trackDirection = getTrackDirection(thumb);
+        // pointer offset to thumb
+        startOffsetToThumb = {
+            x: cursorPos.x - thumbRect.left,
+            y: cursorPos.y - thumbRect.top
+        };
+        // container bounding rectangle
+        containerRect = container.getBoundingClientRect();
+        // prevent selection, see:
+        // https://github.com/idiotWu/smooth-scrollbar/issues/48
+        (0, _.setStyle)(scrollbar.containerEl, {
+            "-user-select": "none"
+        });
+    });
+    addEvent(window, "mousemove", function(evt) {
+        if (!isMouseDown) return;
+        isMouseMoving = true;
+        var cursorPos = (0, _.getPosition)(evt);
+        if (trackDirection === Direction.X) {
+            // get percentage of pointer position in track
+            // then tranform to px
+            // don't need easing
+            var offsetOnTrack = cursorPos.x - startOffsetToThumb.x - containerRect.left;
+            scrollbar.setMomentum(calcMomentum(trackDirection, offsetOnTrack), 0);
+        }
+        if (trackDirection === Direction.Y) {
+            var offsetOnTrack = cursorPos.y - startOffsetToThumb.y - containerRect.top;
+            scrollbar.setMomentum(0, calcMomentum(trackDirection, offsetOnTrack));
+        }
+    });
+    addEvent(window, "mouseup blur", function() {
+        isMouseDown = isMouseMoving = false;
+        (0, _.setStyle)(scrollbar.containerEl, {
+            "-user-select": ""
+        });
+    });
+}
+
+},{"lodash.clamp":"bTHty","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gCciD":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "resizeHandler", ()=>resizeHandler);
+var _lodashDebounce = require("lodash.debounce");
+var _lodashDebounceDefault = parcelHelpers.interopDefault(_lodashDebounce);
+var _ = require("../utils/");
+function resizeHandler(scrollbar) {
+    var addEvent = (0, _.eventScope)(scrollbar);
+    addEvent(window, "resize", (0, _lodashDebounceDefault.default)(scrollbar.update.bind(scrollbar), 300));
+}
+
+},{"lodash.debounce":"3JP5n","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2fmgh":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "selectHandler", ()=>selectHandler);
+var _lodashClamp = require("lodash.clamp");
+var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
+var _ = require("../utils/");
+function selectHandler(scrollbar) {
+    var addEvent = (0, _.eventScope)(scrollbar);
+    var containerEl = scrollbar.containerEl, contentEl = scrollbar.contentEl;
+    var isSelected = false;
+    var isContextMenuOpened = false; // flag to prevent selection when context menu is opened
+    var animationID;
+    function scroll(_a) {
+        var x = _a.x, y = _a.y;
+        if (!x && !y) return;
+        var offset = scrollbar.offset, limit = scrollbar.limit;
+        // DISALLOW delta transformation
+        scrollbar.setMomentum((0, _lodashClampDefault.default)(offset.x + x, 0, limit.x) - offset.x, (0, _lodashClampDefault.default)(offset.y + y, 0, limit.y) - offset.y);
+        animationID = requestAnimationFrame(function() {
+            scroll({
+                x: x,
+                y: y
+            });
+        });
+    }
+    addEvent(window, "mousemove", function(evt) {
+        if (!isSelected) return;
+        cancelAnimationFrame(animationID);
+        var dir = calcMomentum(scrollbar, evt);
+        scroll(dir);
+    });
+    // prevent scrolling when context menu is opened
+    // NOTE: `contextmenu` event may be fired
+    //          1. BEFORE `selectstart`: when user right-clicks on the text content -> prevent future scrolling,
+    //          2. AFTER `selectstart`: when user right-clicks on the blank area -> cancel current scrolling,
+    //        so we need to both set the flag and cancel current scrolling
+    addEvent(contentEl, "contextmenu", function() {
+        // set the flag to prevent future scrolling
+        isContextMenuOpened = true;
+        // stop current scrolling
+        cancelAnimationFrame(animationID);
+        isSelected = false;
+    });
+    // reset context menu flag on mouse down
+    // to ensure the scrolling is allowed in the next selection
+    addEvent(contentEl, "mousedown", function() {
+        isContextMenuOpened = false;
+    });
+    addEvent(contentEl, "selectstart", function() {
+        if (isContextMenuOpened) return;
+        cancelAnimationFrame(animationID);
+        isSelected = true;
+    });
+    addEvent(window, "mouseup blur", function() {
+        cancelAnimationFrame(animationID);
+        isSelected = false;
+        isContextMenuOpened = false;
+    });
+    // patch for touch devices
+    addEvent(containerEl, "scroll", function(evt) {
+        evt.preventDefault();
+        containerEl.scrollTop = containerEl.scrollLeft = 0;
+    });
+}
+function calcMomentum(scrollbar, evt) {
+    var _a = scrollbar.bounding, top = _a.top, right = _a.right, bottom = _a.bottom, left = _a.left;
+    var _b = (0, _.getPosition)(evt), x = _b.x, y = _b.y;
+    var res = {
+        x: 0,
+        y: 0
+    };
+    var padding = 20;
+    if (x === 0 && y === 0) return res;
+    if (x > right - padding) res.x = x - right + padding;
+    else if (x < left + padding) res.x = x - left - padding;
+    if (y > bottom - padding) res.y = y - bottom + padding;
+    else if (y < top + padding) res.y = y - top - padding;
+    res.x *= 2;
+    res.y *= 2;
+    return res;
+}
+
+},{"lodash.clamp":"bTHty","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gsvLM":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "touchHandler", ()=>touchHandler);
+var _ = require("../utils/");
+var activeScrollbar;
+function touchHandler(scrollbar) {
+    var target = scrollbar.options.delegateTo || scrollbar.containerEl;
+    var touchRecord = new (0, _.TouchRecord)();
+    var addEvent = (0, _.eventScope)(scrollbar);
+    var damping;
+    var pointerCount = 0;
+    addEvent(target, "touchstart", function(evt) {
+        // start records
+        touchRecord.track(evt);
+        // stop scrolling
+        scrollbar.setMomentum(0, 0);
+        // save damping
+        if (pointerCount === 0) {
+            damping = scrollbar.options.damping;
+            scrollbar.options.damping = Math.max(damping, 0.5); // less frames on touchmove
+        }
+        pointerCount++;
+    });
+    addEvent(target, "touchmove", function(evt) {
+        if (activeScrollbar && activeScrollbar !== scrollbar) return;
+        touchRecord.update(evt);
+        var _a = touchRecord.getDelta(), x = _a.x, y = _a.y;
+        scrollbar.addTransformableMomentum(x, y, evt, function(willScroll) {
+            if (willScroll && evt.cancelable) {
+                evt.preventDefault();
+                activeScrollbar = scrollbar;
+            }
+        });
+    });
+    addEvent(target, "touchcancel touchend", function(evt) {
+        var delta = touchRecord.getEasingDistance(damping);
+        scrollbar.addTransformableMomentum(delta.x, delta.y, evt);
+        pointerCount--;
+        // restore damping
+        if (pointerCount === 0) scrollbar.options.damping = damping;
+        touchRecord.release(evt);
+        activeScrollbar = null;
+    });
+}
+
+},{"../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8pCgR":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "wheelHandler", ()=>wheelHandler);
+var _ = require("../utils/");
+function wheelHandler(scrollbar) {
+    var addEvent = (0, _.eventScope)(scrollbar);
+    var target = scrollbar.options.delegateTo || scrollbar.containerEl;
+    var eventName = "onwheel" in window || document.implementation.hasFeature("Events.wheel", "3.0") ? "wheel" : "mousewheel";
+    addEvent(target, eventName, function(evt) {
+        var _a = normalizeDelta(evt), x = _a.x, y = _a.y;
+        scrollbar.addTransformableMomentum(x, y, evt, function(willScroll) {
+            if (willScroll) evt.preventDefault();
+        });
+    });
+}
+// Normalizing wheel delta
+var DELTA_SCALE = {
+    STANDARD: 1,
+    OTHERS: -3
+};
+var DELTA_MODE = [
+    1.0,
+    28.0,
+    500.0
+];
+var getDeltaMode = function(mode) {
+    return DELTA_MODE[mode] || DELTA_MODE[0];
+};
+function normalizeDelta(evt) {
+    if ("deltaX" in evt) {
+        var mode = getDeltaMode(evt.deltaMode);
+        return {
+            x: evt.deltaX / DELTA_SCALE.STANDARD * mode,
+            y: evt.deltaY / DELTA_SCALE.STANDARD * mode
+        };
+    }
+    if ("wheelDeltaX" in evt) return {
+        x: evt.wheelDeltaX / DELTA_SCALE.OTHERS,
+        y: evt.wheelDeltaY / DELTA_SCALE.OTHERS
+    };
+    // ie with touchpad
+    return {
+        x: 0,
+        y: evt.wheelDelta / DELTA_SCALE.OTHERS
+    };
+}
+
+},{"../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7J5rq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "attachStyle", ()=>attachStyle);
+parcelHelpers.export(exports, "detachStyle", ()=>detachStyle);
+var TRACK_BG = "rgba(222, 222, 222, .75)";
+var THUMB_BG = "rgba(0, 0, 0, .5)";
+// sets content's display type to `flow-root` to suppress margin collapsing
+var SCROLLBAR_STYLE = "\n[data-scrollbar] {\n  display: block;\n  position: relative;\n}\n\n.scroll-content {\n  display: flow-root;\n  -webkit-transform: translate3d(0, 0, 0);\n          transform: translate3d(0, 0, 0);\n}\n\n.scrollbar-track {\n  position: absolute;\n  opacity: 0;\n  z-index: 1;\n  background: " + TRACK_BG + ";\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-transition: opacity 0.5s 0.5s ease-out;\n          transition: opacity 0.5s 0.5s ease-out;\n}\n.scrollbar-track.show,\n.scrollbar-track:hover {\n  opacity: 1;\n  -webkit-transition-delay: 0s;\n          transition-delay: 0s;\n}\n\n.scrollbar-track-x {\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 8px;\n}\n.scrollbar-track-y {\n  top: 0;\n  right: 0;\n  width: 8px;\n  height: 100%;\n}\n.scrollbar-thumb {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 8px;\n  height: 8px;\n  background: " + THUMB_BG + ";\n  border-radius: 4px;\n}\n";
+var STYLE_ID = "smooth-scrollbar-style";
+var isStyleAttached = false;
+function attachStyle() {
+    if (isStyleAttached || typeof window === "undefined") return;
+    var styleEl = document.createElement("style");
+    styleEl.id = STYLE_ID;
+    styleEl.textContent = SCROLLBAR_STYLE;
+    if (document.head) document.head.appendChild(styleEl);
+    isStyleAttached = true;
+}
+function detachStyle() {
+    if (!isStyleAttached || typeof window === "undefined") return;
+    var styleEl = document.getElementById(STYLE_ID);
+    if (!styleEl || !styleEl.parentNode) return;
+    styleEl.parentNode.removeChild(styleEl);
+    isStyleAttached = false;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dp9pL":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ScrollbarModalPlugin", ()=>ScrollbarModalPlugin);
+var _smoothScrollbar = require("smooth-scrollbar");
+class ScrollbarModalPlugin extends (0, _smoothScrollbar.ScrollbarPlugin) {
+    static pluginName = "modal";
+    static defaultOptions = {
+        open: false
+    };
+    transformDelta(delta) {
+        return this.options.open ? {
+            x: 0,
+            y: 0
+        } : delta;
+    }
+}
+
+},{"smooth-scrollbar":"7azJf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l9NP1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "ScrollbarScreenStopPlugin", ()=>ScrollbarScreenStopPlugin);
+var _smoothScrollbar = require("smooth-scrollbar");
+class ScrollbarScreenStopPlugin extends (0, _smoothScrollbar.ScrollbarPlugin) {
+    static pluginName = "screenStop";
+    static defaultOptions = {
+        points: []
+    };
+    onRender(remainMomentum) {
+        // remainMomentum {x: 0, y: 0}
+        if (!remainMomentum.y) return;
+        const direction = remainMomentum.y / Math.abs(remainMomentum.y);
+        let nextPointMatch;
+        this.options.points.forEach((p, index)=>{
+            if (direction === 1) {
+                if (this.scrollbar.scrollTop < p && index === 0) nextPointMatch = p;
+                if (this.scrollbar.scrollTop < p && this.scrollbar.scrollTop > this.options.points[index - 1]) nextPointMatch = p;
+            } else {
+                if (this.scrollbar.scrollTop > p && index === this.options.points.length - 1) nextPointMatch = p;
+                if (this.scrollbar.scrollTop < p && this.scrollbar.scrollTop > this.options.points[index - 1]) nextPointMatch = this.options.points[index - 1];
+            }
+        });
+        if (!nextPointMatch) return;
+        if (direction === 1 && this.scrollbar.scrollTop + remainMomentum.y >= nextPointMatch) this.scrollbar.setMomentum(0, direction * (nextPointMatch - this.scrollbar.scrollTop));
+        if (direction === -1 && this.scrollbar.scrollTop + remainMomentum.y <= nextPointMatch) this.scrollbar.setMomentum(0, direction * (this.scrollbar.scrollTop - nextPointMatch));
+    }
+}
+
+},{"smooth-scrollbar":"7azJf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jD6i0":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "scrollTriggerFactory", ()=>scrollTriggerFactory);
+parcelHelpers.export(exports, "scrollDebug", ()=>scrollDebug);
+var _scrollTrigger = require("gsap/dist/ScrollTrigger");
+var _gsap = require("gsap");
+let isDebugMode = false;
+if (typeof window !== "undefined") isDebugMode = !!localStorage?.getItem("isDebugMode");
+function scrollTriggerFactory(scrollerEl, triggerEl, updateHandler) {
+    return (id, startFromTop, endFromTop, scrollerStart = "top", scrollerEnd = "top", elStart = "top", elEnd = "top")=>{
+        const trigger = (0, _scrollTrigger.ScrollTrigger).create({
+            id: id,
+            markers: isDebugMode && id.indexOf("Horizontal") === -1 ? {
+                startColor: "red",
+                endColor: "orange",
+                fontSize: "18px"
+            } : false,
+            scroller: scrollerEl,
+            trigger: triggerEl,
+            start: `${elStart}+=${startFromTop} ${scrollerStart}`,
+            end: `${elEnd}+=${endFromTop} ${scrollerEnd}`,
+            onUpdate: updateHandler,
+            invalidateOnRefresh: true,
+            fastScrollEnd: true,
+            // leads to bug with Slider do not uncomment it
+            // preventOverlaps: true,
+            anticipatePin: true
+        });
+        // scrollDistance
+        return trigger;
+    };
+}
+function scrollDebug(bodyScrollBar) {
+    if (isDebugMode) bodyScrollBar.addListener(({ offset  })=>{
+        (0, _gsap.gsap).set([
+            ...document.querySelectorAll(".gsap-marker-end"),
+            ...document.querySelectorAll(".gsap-marker-start"),
+            ...document.querySelectorAll(".gsap-marker-scroller-start"),
+            ...document.querySelectorAll(".gsap-marker-scroller-end")
+        ], {
+            marginTop: -offset.y
+        });
+    });
+}
+
+},{"gsap/dist/ScrollTrigger":"CiOCQ","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fPSuC":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "gsap", ()=>gsapWithCSS);
@@ -7156,2700 +9855,7 @@ var CSSPlugin = {
 });
 (0, _gsapCoreJs.gsap).registerPlugin(CSSPlugin);
 
-},{"./gsap-core.js":"05eeC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"i9rfN":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initSmoothScrollbar", ()=>initSmoothScrollbar);
-var _smoothScrollbar = require("smooth-scrollbar");
-var _smoothScrollbarDefault = parcelHelpers.interopDefault(_smoothScrollbar);
-var _scrollTrigger = require("gsap/dist/ScrollTrigger");
-var _scrollbarModalPlugin = require("./ScrollbarModalPlugin");
-var _scrollbarScreenStopPlugin = require("./ScrollbarScreenStopPlugin");
-function initSmoothScrollbar(topContainerRef, disabledFirst = true) {
-    if (!document || !topContainerRef.current) return;
-    (0, _smoothScrollbarDefault.default).use((0, _scrollbarModalPlugin.ScrollbarModalPlugin));
-    (0, _smoothScrollbarDefault.default).use((0, _scrollbarScreenStopPlugin.ScrollbarScreenStopPlugin));
-    const bodyScrollBar = (0, _smoothScrollbarDefault.default).init(topContainerRef.current, {
-        damping: 0.03,
-        // delegateTo: document,
-        alwaysShowTracks: true,
-        continuousScrolling: false,
-        renderByPixels: true,
-        plugins: {
-            modal: {
-                open: disabledFirst
-            }
-        }
-    });
-    (0, _scrollTrigger.ScrollTrigger).scrollerProxy(topContainerRef.current, {
-        scrollTop (value) {
-            if (arguments.length) bodyScrollBar.scrollTop = value;
-            return bodyScrollBar.scrollTop;
-        }
-    });
-    bodyScrollBar.addListener((0, _scrollTrigger.ScrollTrigger).update);
-    (0, _scrollTrigger.ScrollTrigger).defaults({
-        scroller: topContainerRef.current
-    });
-    return bodyScrollBar;
-}
-
-},{"smooth-scrollbar":"7azJf","gsap/dist/ScrollTrigger":"CiOCQ","./ScrollbarModalPlugin":"dp9pL","./ScrollbarScreenStopPlugin":"l9NP1","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7azJf":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ScrollbarPlugin", ()=>(0, _plugin.ScrollbarPlugin));
-var _tslib = require("tslib");
-var _polyfills = require("./polyfills");
-var _scrollbar = require("./scrollbar");
-var _plugin = require("./plugin");
-var _style = require("./style");
-/**
- * cast `I.Scrollbar` to `Scrollbar` to avoid error
- *
- * `I.Scrollbar` is not assignable to `Scrollbar`:
- *     "privateProp" is missing in `I.Scrollbar`
- *
- * @see https://github.com/Microsoft/TypeScript/issues/2672
- */ var SmoothScrollbar = /** @class */ function(_super) {
-    (0, _tslib.__extends)(SmoothScrollbar, _super);
-    function SmoothScrollbar() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    /**
-     * Initializes a scrollbar on the given element.
-     *
-     * @param elem The DOM element that you want to initialize scrollbar to
-     * @param [options] Initial options
-     */ SmoothScrollbar.init = function(elem, options) {
-        if (!elem || elem.nodeType !== 1) throw new TypeError("expect element to be DOM Element, but got " + elem);
-        // attach stylesheet
-        (0, _style.attachStyle)();
-        if ((0, _scrollbar.scrollbarMap).has(elem)) return (0, _scrollbar.scrollbarMap).get(elem);
-        return new (0, _scrollbar.Scrollbar)(elem, options);
-    };
-    /**
-     * Automatically init scrollbar on all elements base on the selector `[data-scrollbar]`
-     *
-     * @param options Initial options
-     */ SmoothScrollbar.initAll = function(options) {
-        return Array.from(document.querySelectorAll("[data-scrollbar]"), function(elem) {
-            return SmoothScrollbar.init(elem, options);
-        });
-    };
-    /**
-     * Check if there is a scrollbar on given element
-     *
-     * @param elem The DOM element that you want to check
-     */ SmoothScrollbar.has = function(elem) {
-        return (0, _scrollbar.scrollbarMap).has(elem);
-    };
-    /**
-     * Gets scrollbar on the given element.
-     * If no scrollbar instance exsits, returns `undefined`
-     *
-     * @param elem The DOM element that you want to check.
-     */ SmoothScrollbar.get = function(elem) {
-        return (0, _scrollbar.scrollbarMap).get(elem);
-    };
-    /**
-     * Returns an array that contains all scrollbar instances
-     */ SmoothScrollbar.getAll = function() {
-        return Array.from((0, _scrollbar.scrollbarMap).values());
-    };
-    /**
-     * Removes scrollbar on the given element
-     */ SmoothScrollbar.destroy = function(elem) {
-        var scrollbar = (0, _scrollbar.scrollbarMap).get(elem);
-        if (scrollbar) scrollbar.destroy();
-    };
-    /**
-     * Removes all scrollbar instances from current document
-     */ SmoothScrollbar.destroyAll = function() {
-        (0, _scrollbar.scrollbarMap).forEach(function(scrollbar) {
-            scrollbar.destroy();
-        });
-    };
-    /**
-     * Attaches plugins to scrollbars
-     *
-     * @param ...Plugins Scrollbar plugin classes
-     */ SmoothScrollbar.use = function() {
-        var Plugins = [];
-        for(var _i = 0; _i < arguments.length; _i++)Plugins[_i] = arguments[_i];
-        return (0, _plugin.addPlugins).apply(void 0, Plugins);
-    };
-    /**
-     * Attaches default style sheets to current document.
-     * You don't need to call this method manually unless
-     * you removed the default styles via `Scrollbar.detachStyle()`
-     */ SmoothScrollbar.attachStyle = function() {
-        return (0, _style.attachStyle)();
-    };
-    /**
-     * Removes default styles from current document.
-     * Use this method when you want to use your own css for scrollbars.
-     */ SmoothScrollbar.detachStyle = function() {
-        return (0, _style.detachStyle)();
-    };
-    SmoothScrollbar.version = "8.8.1";
-    SmoothScrollbar.ScrollbarPlugin = (0, _plugin.ScrollbarPlugin);
-    return SmoothScrollbar;
-}((0, _scrollbar.Scrollbar));
-exports.default = SmoothScrollbar;
-
-},{"tslib":"euOof","./polyfills":"jyKyC","./scrollbar":"l2IRH","./plugin":"bSKNu","./style":"7J5rq","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"euOof":[function(require,module,exports) {
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */ /* global Reflect, Promise */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "__extends", ()=>__extends);
-parcelHelpers.export(exports, "__assign", ()=>__assign);
-parcelHelpers.export(exports, "__rest", ()=>__rest);
-parcelHelpers.export(exports, "__decorate", ()=>__decorate);
-parcelHelpers.export(exports, "__param", ()=>__param);
-parcelHelpers.export(exports, "__metadata", ()=>__metadata);
-parcelHelpers.export(exports, "__awaiter", ()=>__awaiter);
-parcelHelpers.export(exports, "__generator", ()=>__generator);
-parcelHelpers.export(exports, "__createBinding", ()=>__createBinding);
-parcelHelpers.export(exports, "__exportStar", ()=>__exportStar);
-parcelHelpers.export(exports, "__values", ()=>__values);
-parcelHelpers.export(exports, "__read", ()=>__read);
-parcelHelpers.export(exports, "__spread", ()=>__spread);
-parcelHelpers.export(exports, "__spreadArrays", ()=>__spreadArrays);
-parcelHelpers.export(exports, "__await", ()=>__await);
-parcelHelpers.export(exports, "__asyncGenerator", ()=>__asyncGenerator);
-parcelHelpers.export(exports, "__asyncDelegator", ()=>__asyncDelegator);
-parcelHelpers.export(exports, "__asyncValues", ()=>__asyncValues);
-parcelHelpers.export(exports, "__makeTemplateObject", ()=>__makeTemplateObject);
-parcelHelpers.export(exports, "__importStar", ()=>__importStar);
-parcelHelpers.export(exports, "__importDefault", ()=>__importDefault);
-parcelHelpers.export(exports, "__classPrivateFieldGet", ()=>__classPrivateFieldGet);
-parcelHelpers.export(exports, "__classPrivateFieldSet", ()=>__classPrivateFieldSet);
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf || ({
-        __proto__: []
-    }) instanceof Array && function(d, b) {
-        d.__proto__ = b;
-    } || function(d, b) {
-        for(var p in b)if (b.hasOwnProperty(p)) d[p] = b[p];
-    };
-    return extendStatics(d, b);
-};
-function __extends(d, b) {
-    extendStatics(d, b);
-    function __() {
-        this.constructor = d;
-    }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for(var s, i = 1, n = arguments.length; i < n; i++){
-            s = arguments[i];
-            for(var p in s)if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
-function __rest(s, e) {
-    var t = {};
-    for(var p in s)if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function") {
-        for(var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++)if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
-    }
-    return t;
-}
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for(var i = decorators.length - 1; i >= 0; i--)if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-function __param(paramIndex, decorator) {
-    return function(target, key) {
-        decorator(target, key, paramIndex);
-    };
-}
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) {
-        return value instanceof P ? value : new P(function(resolve) {
-            resolve(value);
-        });
-    }
-    return new (P || (P = Promise))(function(resolve, reject) {
-        function fulfilled(value) {
-            try {
-                step(generator.next(value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function rejected(value) {
-            try {
-                step(generator["throw"](value));
-            } catch (e) {
-                reject(e);
-            }
-        }
-        function step(result) {
-            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-        }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-}
-function __generator(thisArg, body) {
-    var _ = {
-        label: 0,
-        sent: function() {
-            if (t[0] & 1) throw t[1];
-            return t[1];
-        },
-        trys: [],
-        ops: []
-    }, f, y, t, g;
-    return g = {
-        next: verb(0),
-        "throw": verb(1),
-        "return": verb(2)
-    }, typeof Symbol === "function" && (g[Symbol.iterator] = function() {
-        return this;
-    }), g;
-    function verb(n) {
-        return function(v) {
-            return step([
-                n,
-                v
-            ]);
-        };
-    }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while(_)try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [
-                op[0] & 2,
-                t.value
-            ];
-            switch(op[0]){
-                case 0:
-                case 1:
-                    t = op;
-                    break;
-                case 4:
-                    _.label++;
-                    return {
-                        value: op[1],
-                        done: false
-                    };
-                case 5:
-                    _.label++;
-                    y = op[1];
-                    op = [
-                        0
-                    ];
-                    continue;
-                case 7:
-                    op = _.ops.pop();
-                    _.trys.pop();
-                    continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                        _ = 0;
-                        continue;
-                    }
-                    if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-                        _.label = op[1];
-                        break;
-                    }
-                    if (op[0] === 6 && _.label < t[1]) {
-                        _.label = t[1];
-                        t = op;
-                        break;
-                    }
-                    if (t && _.label < t[2]) {
-                        _.label = t[2];
-                        _.ops.push(op);
-                        break;
-                    }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop();
-                    continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) {
-            op = [
-                6,
-                e
-            ];
-            y = 0;
-        } finally{
-            f = t = 0;
-        }
-        if (op[0] & 5) throw op[1];
-        return {
-            value: op[0] ? op[1] : void 0,
-            done: true
-        };
-    }
-}
-function __createBinding(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}
-function __exportStar(m, exports) {
-    for(var p in m)if (p !== "default" && !exports.hasOwnProperty(p)) exports[p] = m[p];
-}
-function __values(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function() {
-            if (o && i >= o.length) o = void 0;
-            return {
-                value: o && o[i++],
-                done: !o
-            };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-}
-function __read(o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while((n === void 0 || n-- > 0) && !(r = i.next()).done)ar.push(r.value);
-    } catch (error) {
-        e = {
-            error: error
-        };
-    } finally{
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        } finally{
-            if (e) throw e.error;
-        }
-    }
-    return ar;
-}
-function __spread() {
-    for(var ar = [], i = 0; i < arguments.length; i++)ar = ar.concat(__read(arguments[i]));
-    return ar;
-}
-function __spreadArrays() {
-    for(var s = 0, i = 0, il = arguments.length; i < il; i++)s += arguments[i].length;
-    for(var r = Array(s), k = 0, i = 0; i < il; i++)for(var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)r[k] = a[j];
-    return r;
-}
-function __await(v) {
-    return this instanceof __await ? (this.v = v, this) : new __await(v);
-}
-function __asyncGenerator(thisArg, _arguments, generator) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var g = generator.apply(thisArg, _arguments || []), i, q = [];
-    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
-        return this;
-    }, i;
-    function verb(n) {
-        if (g[n]) i[n] = function(v) {
-            return new Promise(function(a, b) {
-                q.push([
-                    n,
-                    v,
-                    a,
-                    b
-                ]) > 1 || resume(n, v);
-            });
-        };
-    }
-    function resume(n, v) {
-        try {
-            step(g[n](v));
-        } catch (e) {
-            settle(q[0][3], e);
-        }
-    }
-    function step(r) {
-        r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
-    }
-    function fulfill(value) {
-        resume("next", value);
-    }
-    function reject(value) {
-        resume("throw", value);
-    }
-    function settle(f, v) {
-        if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
-    }
-}
-function __asyncDelegator(o) {
-    var i, p;
-    return i = {}, verb("next"), verb("throw", function(e) {
-        throw e;
-    }), verb("return"), i[Symbol.iterator] = function() {
-        return this;
-    }, i;
-    function verb(n, f) {
-        i[n] = o[n] ? function(v) {
-            return (p = !p) ? {
-                value: __await(o[n](v)),
-                done: n === "return"
-            } : f ? f(v) : v;
-        } : f;
-    }
-}
-function __asyncValues(o) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function() {
-        return this;
-    }, i);
-    function verb(n) {
-        i[n] = o[n] && function(v) {
-            return new Promise(function(resolve, reject) {
-                v = o[n](v), settle(resolve, reject, v.done, v.value);
-            });
-        };
-    }
-    function settle(resolve, reject, d, v) {
-        Promise.resolve(v).then(function(v) {
-            resolve({
-                value: v,
-                done: d
-            });
-        }, reject);
-    }
-}
-function __makeTemplateObject(cooked, raw) {
-    if (Object.defineProperty) Object.defineProperty(cooked, "raw", {
-        value: raw
-    });
-    else cooked.raw = raw;
-    return cooked;
-}
-function __importStar(mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) {
-        for(var k in mod)if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    }
-    result.default = mod;
-    return result;
-}
-function __importDefault(mod) {
-    return mod && mod.__esModule ? mod : {
-        default: mod
-    };
-}
-function __classPrivateFieldGet(receiver, privateMap) {
-    if (!privateMap.has(receiver)) throw new TypeError("attempted to get private field on non-instance");
-    return privateMap.get(receiver);
-}
-function __classPrivateFieldSet(receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) throw new TypeError("attempted to set private field on non-instance");
-    privateMap.set(receiver, value);
-    return value;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jyKyC":[function(require,module,exports) {
-
-},{}],"l2IRH":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "scrollbarMap", ()=>scrollbarMap);
-parcelHelpers.export(exports, "Scrollbar", ()=>Scrollbar);
-var _tslib = require("tslib");
-var _lodashClamp = require("lodash.clamp");
-var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
-var _options = require("./options");
-var _ = require("./utils/");
-var _1 = require("./decorators/");
-var _2 = require("./track/");
-var _3 = require("./geometry/");
-var _4 = require("./scrolling/");
-var _plugin = require("./plugin");
-var _5 = require("./events/");
-var scrollbarMap = new Map();
-var Scrollbar = /** @class */ function() {
-    function Scrollbar(containerEl, options) {
-        var _this = this;
-        /**
-         * Current scrolling offsets
-         */ this.offset = {
-            x: 0,
-            y: 0
-        };
-        /**
-         * Max-allowed scrolling offsets
-         */ this.limit = {
-            x: Infinity,
-            y: Infinity
-        };
-        /**
-         * Container bounding rect
-         */ this.bounding = {
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0
-        };
-        // private _observer: ResizeObserver;
-        this._plugins = [];
-        this._momentum = {
-            x: 0,
-            y: 0
-        };
-        this._listeners = new Set();
-        this.containerEl = containerEl;
-        var contentEl = this.contentEl = document.createElement("div");
-        this.options = new (0, _options.Options)(options);
-        // mark as a scroll element
-        containerEl.setAttribute("data-scrollbar", "true");
-        // make container focusable
-        containerEl.setAttribute("tabindex", "-1");
-        (0, _.setStyle)(containerEl, {
-            overflow: "hidden",
-            outline: "none"
-        });
-        // enable touch event capturing in IE, see:
-        // https://github.com/idiotWu/smooth-scrollbar/issues/39
-        if (window.navigator.msPointerEnabled) containerEl.style.msTouchAction = "none";
-        // mount content
-        contentEl.className = "scroll-content";
-        Array.from(containerEl.childNodes).forEach(function(node) {
-            contentEl.appendChild(node);
-        });
-        containerEl.appendChild(contentEl);
-        // attach track
-        this.track = new (0, _2.TrackController)(this);
-        // initial measuring
-        this.size = this.getSize();
-        // init plugins
-        this._plugins = (0, _plugin.initPlugins)(this, this.options.plugins);
-        // preserve scroll offset
-        var scrollLeft = containerEl.scrollLeft, scrollTop = containerEl.scrollTop;
-        containerEl.scrollLeft = containerEl.scrollTop = 0;
-        this.setPosition(scrollLeft, scrollTop, {
-            withoutCallbacks: true
-        });
-        // FIXME: update typescript
-        var ResizeObserver = window.ResizeObserver;
-        // observe
-        if (typeof ResizeObserver === "function") {
-            this._observer = new ResizeObserver(function() {
-                _this.update();
-            });
-            this._observer.observe(contentEl);
-        }
-        scrollbarMap.set(containerEl, this);
-        // wait for DOM ready
-        requestAnimationFrame(function() {
-            _this._init();
-        });
-    }
-    Object.defineProperty(Scrollbar.prototype, "parent", {
-        /**
-         * Parent scrollbar
-         */ get: function() {
-            var elem = this.containerEl.parentElement;
-            while(elem){
-                var parentScrollbar = scrollbarMap.get(elem);
-                if (parentScrollbar) return parentScrollbar;
-                elem = elem.parentElement;
-            }
-            return null;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Scrollbar.prototype, "scrollTop", {
-        /**
-         * Gets or sets `scrollbar.offset.y`
-         */ get: function() {
-            return this.offset.y;
-        },
-        set: function(y) {
-            this.setPosition(this.scrollLeft, y);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(Scrollbar.prototype, "scrollLeft", {
-        /**
-         * Gets or sets `scrollbar.offset.x`
-         */ get: function() {
-            return this.offset.x;
-        },
-        set: function(x) {
-            this.setPosition(x, this.scrollTop);
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Returns the size of the scrollbar container element
-     * and the content wrapper element
-     */ Scrollbar.prototype.getSize = function() {
-        return (0, _3.getSize)(this);
-    };
-    /**
-     * Forces scrollbar to update geometry infomation.
-     *
-     * By default, scrollbars are automatically updated with `100ms` debounce (or `MutationObserver` fires).
-     * You can call this method to force an update when you modified contents
-     */ Scrollbar.prototype.update = function() {
-        (0, _3.update)(this);
-        this._plugins.forEach(function(plugin) {
-            plugin.onUpdate();
-        });
-    };
-    /**
-     * Checks if an element is visible in the current view area
-     */ Scrollbar.prototype.isVisible = function(elem) {
-        return (0, _3.isVisible)(this, elem);
-    };
-    /**
-     * Sets the scrollbar to the given offset without easing
-     */ Scrollbar.prototype.setPosition = function(x, y, options) {
-        var _this = this;
-        if (x === void 0) x = this.offset.x;
-        if (y === void 0) y = this.offset.y;
-        if (options === void 0) options = {};
-        var status = (0, _4.setPosition)(this, x, y);
-        if (!status || options.withoutCallbacks) return;
-        this._listeners.forEach(function(fn) {
-            fn.call(_this, status);
-        });
-    };
-    /**
-     * Scrolls to given position with easing function
-     */ Scrollbar.prototype.scrollTo = function(x, y, duration, options) {
-        if (x === void 0) x = this.offset.x;
-        if (y === void 0) y = this.offset.y;
-        if (duration === void 0) duration = 0;
-        if (options === void 0) options = {};
-        (0, _4.scrollTo)(this, x, y, duration, options);
-    };
-    /**
-     * Scrolls the target element into visible area of scrollbar,
-     * likes the DOM method `element.scrollIntoView().
-     */ Scrollbar.prototype.scrollIntoView = function(elem, options) {
-        if (options === void 0) options = {};
-        (0, _4.scrollIntoView)(this, elem, options);
-    };
-    /**
-     * Adds scrolling listener
-     */ Scrollbar.prototype.addListener = function(fn) {
-        if (typeof fn !== "function") throw new TypeError("[smooth-scrollbar] scrolling listener should be a function");
-        this._listeners.add(fn);
-    };
-    /**
-     * Removes listener previously registered with `scrollbar.addListener()`
-     */ Scrollbar.prototype.removeListener = function(fn) {
-        this._listeners.delete(fn);
-    };
-    /**
-     * Adds momentum and applys delta transformers.
-     */ Scrollbar.prototype.addTransformableMomentum = function(x, y, fromEvent, callback) {
-        this._updateDebounced();
-        var finalDelta = this._plugins.reduce(function(delta, plugin) {
-            return plugin.transformDelta(delta, fromEvent) || delta;
-        }, {
-            x: x,
-            y: y
-        });
-        var willScroll = !this._shouldPropagateMomentum(finalDelta.x, finalDelta.y);
-        if (willScroll) this.addMomentum(finalDelta.x, finalDelta.y);
-        if (callback) callback.call(this, willScroll);
-    };
-    /**
-     * Increases scrollbar's momentum
-     */ Scrollbar.prototype.addMomentum = function(x, y) {
-        this.setMomentum(this._momentum.x + x, this._momentum.y + y);
-    };
-    /**
-     * Sets scrollbar's momentum to given value
-     */ Scrollbar.prototype.setMomentum = function(x, y) {
-        if (this.limit.x === 0) x = 0;
-        if (this.limit.y === 0) y = 0;
-        if (this.options.renderByPixels) {
-            x = Math.round(x);
-            y = Math.round(y);
-        }
-        this._momentum.x = x;
-        this._momentum.y = y;
-    };
-    /**
-     * Update options for specific plugin
-     *
-     * @param pluginName Name of the plugin
-     * @param [options] An object includes the properties that you want to update
-     */ Scrollbar.prototype.updatePluginOptions = function(pluginName, options) {
-        this._plugins.forEach(function(plugin) {
-            if (plugin.name === pluginName) Object.assign(plugin.options, options);
-        });
-    };
-    Scrollbar.prototype.destroy = function() {
-        var _a = this, containerEl = _a.containerEl, contentEl = _a.contentEl;
-        (0, _.clearEventsOn)(this);
-        this._listeners.clear();
-        this.setMomentum(0, 0);
-        cancelAnimationFrame(this._renderID);
-        if (this._observer) this._observer.disconnect();
-        scrollbarMap.delete(this.containerEl);
-        // restore contents
-        var childNodes = Array.from(contentEl.childNodes);
-        while(containerEl.firstChild)containerEl.removeChild(containerEl.firstChild);
-        childNodes.forEach(function(el) {
-            containerEl.appendChild(el);
-        });
-        // reset scroll position
-        (0, _.setStyle)(containerEl, {
-            overflow: ""
-        });
-        containerEl.scrollTop = this.scrollTop;
-        containerEl.scrollLeft = this.scrollLeft;
-        // invoke plugin.onDestroy
-        this._plugins.forEach(function(plugin) {
-            plugin.onDestroy();
-        });
-        this._plugins.length = 0;
-    };
-    Scrollbar.prototype._init = function() {
-        var _this = this;
-        this.update();
-        // init evet handlers
-        Object.keys(_5).forEach(function(prop) {
-            _5[prop](_this);
-        });
-        // invoke `plugin.onInit`
-        this._plugins.forEach(function(plugin) {
-            plugin.onInit();
-        });
-        this._render();
-    };
-    Scrollbar.prototype._updateDebounced = function() {
-        this.update();
-    };
-    // check whether to propagate monmentum to parent scrollbar
-    // the following situations are considered as `true`:
-    //         1. continuous scrolling is enabled (automatically disabled when overscroll is enabled)
-    //         2. scrollbar reaches one side and is not about to scroll on the other direction
-    Scrollbar.prototype._shouldPropagateMomentum = function(deltaX, deltaY) {
-        if (deltaX === void 0) deltaX = 0;
-        if (deltaY === void 0) deltaY = 0;
-        var _a = this, options = _a.options, offset = _a.offset, limit = _a.limit;
-        if (!options.continuousScrolling) return false;
-        // force an update when scrollbar is "unscrollable", see #106
-        if (limit.x === 0 && limit.y === 0) this._updateDebounced();
-        var destX = (0, _lodashClampDefault.default)(deltaX + offset.x, 0, limit.x);
-        var destY = (0, _lodashClampDefault.default)(deltaY + offset.y, 0, limit.y);
-        var res = true;
-        // offsets are not about to change
-        // `&=` operator is not allowed for boolean types
-        res = res && destX === offset.x;
-        res = res && destY === offset.y;
-        // current offsets are on the edge
-        res = res && (offset.x === limit.x || offset.x === 0 || offset.y === limit.y || offset.y === 0);
-        return res;
-    };
-    Scrollbar.prototype._render = function() {
-        var _momentum = this._momentum;
-        if (_momentum.x || _momentum.y) {
-            var nextX = this._nextTick("x");
-            var nextY = this._nextTick("y");
-            _momentum.x = nextX.momentum;
-            _momentum.y = nextY.momentum;
-            this.setPosition(nextX.position, nextY.position);
-        }
-        var remain = (0, _tslib.__assign)({}, this._momentum);
-        this._plugins.forEach(function(plugin) {
-            plugin.onRender(remain);
-        });
-        this._renderID = requestAnimationFrame(this._render.bind(this));
-    };
-    Scrollbar.prototype._nextTick = function(direction) {
-        var _a = this, options = _a.options, offset = _a.offset, _momentum = _a._momentum;
-        var current = offset[direction];
-        var remain = _momentum[direction];
-        if (Math.abs(remain) <= 0.1) return {
-            momentum: 0,
-            position: current + remain
-        };
-        var nextMomentum = remain * (1 - options.damping);
-        if (options.renderByPixels) nextMomentum |= 0;
-        return {
-            momentum: nextMomentum,
-            position: current + remain - nextMomentum
-        };
-    };
-    (0, _tslib.__decorate)([
-        (0, _1.debounce)(100, {
-            leading: true
-        })
-    ], Scrollbar.prototype, "_updateDebounced", null);
-    return Scrollbar;
-}();
-
-},{"tslib":"euOof","lodash.clamp":"bTHty","./options":"kuzUS","./utils/":"jzGiI","./decorators/":"bvgNp","./track/":"iNFGO","./geometry/":"jBiTP","./scrolling/":"jsAOK","./plugin":"bSKNu","./events/":"cHe8H","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bTHty":[function(require,module,exports) {
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */ /** Used as references for various `Number` constants. */ var NAN = 0 / 0;
-/** `Object#toString` result references. */ var symbolTag = "[object Symbol]";
-/** Used to match leading and trailing whitespace. */ var reTrim = /^\s+|\s+$/g;
-/** Used to detect bad signed hexadecimal string values. */ var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-/** Used to detect binary string values. */ var reIsBinary = /^0b[01]+$/i;
-/** Used to detect octal string values. */ var reIsOctal = /^0o[0-7]+$/i;
-/** Built-in method references without a dependency on `root`. */ var freeParseInt = parseInt;
-/** Used for built-in method references. */ var objectProto = Object.prototype;
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */ var objectToString = objectProto.toString;
-/**
- * The base implementation of `_.clamp` which doesn't coerce arguments.
- *
- * @private
- * @param {number} number The number to clamp.
- * @param {number} [lower] The lower bound.
- * @param {number} upper The upper bound.
- * @returns {number} Returns the clamped number.
- */ function baseClamp(number, lower, upper) {
-    if (number === number) {
-        if (upper !== undefined) number = number <= upper ? number : upper;
-        if (lower !== undefined) number = number >= lower ? number : lower;
-    }
-    return number;
-}
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */ function isObject(value) {
-    var type = typeof value;
-    return !!value && (type == "object" || type == "function");
-}
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */ function isObjectLike(value) {
-    return !!value && typeof value == "object";
-}
-/**
- * Checks if `value` is classified as a `Symbol` primitive or object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
- * @example
- *
- * _.isSymbol(Symbol.iterator);
- * // => true
- *
- * _.isSymbol('abc');
- * // => false
- */ function isSymbol(value) {
-    return typeof value == "symbol" || isObjectLike(value) && objectToString.call(value) == symbolTag;
-}
-/**
- * Converts `value` to a number.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to process.
- * @returns {number} Returns the number.
- * @example
- *
- * _.toNumber(3.2);
- * // => 3.2
- *
- * _.toNumber(Number.MIN_VALUE);
- * // => 5e-324
- *
- * _.toNumber(Infinity);
- * // => Infinity
- *
- * _.toNumber('3.2');
- * // => 3.2
- */ function toNumber(value) {
-    if (typeof value == "number") return value;
-    if (isSymbol(value)) return NAN;
-    if (isObject(value)) {
-        var other = typeof value.valueOf == "function" ? value.valueOf() : value;
-        value = isObject(other) ? other + "" : other;
-    }
-    if (typeof value != "string") return value === 0 ? value : +value;
-    value = value.replace(reTrim, "");
-    var isBinary = reIsBinary.test(value);
-    return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
-}
-/**
- * Clamps `number` within the inclusive `lower` and `upper` bounds.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Number
- * @param {number} number The number to clamp.
- * @param {number} [lower] The lower bound.
- * @param {number} upper The upper bound.
- * @returns {number} Returns the clamped number.
- * @example
- *
- * _.clamp(-10, -5, 5);
- * // => -5
- *
- * _.clamp(10, -5, 5);
- * // => 5
- */ function clamp(number, lower, upper) {
-    if (upper === undefined) {
-        upper = lower;
-        lower = undefined;
-    }
-    if (upper !== undefined) {
-        upper = toNumber(upper);
-        upper = upper === upper ? upper : 0;
-    }
-    if (lower !== undefined) {
-        lower = toNumber(lower);
-        lower = lower === lower ? lower : 0;
-    }
-    return baseClamp(toNumber(number), lower, upper);
-}
-module.exports = clamp;
-
-},{}],"kuzUS":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Options", ()=>Options);
-var _tslib = require("tslib");
-var _ = require("./decorators/");
-var Options = /** @class */ function() {
-    function Options(config) {
-        var _this = this;
-        if (config === void 0) config = {};
-        /**
-         * Momentum reduction damping factor, a float value between `(0, 1)`.
-         * The lower the value is, the more smooth the scrolling will be
-         * (also the more paint frames).
-         */ this.damping = 0.1;
-        /**
-         * Minimal size for scrollbar thumbs.
-         */ this.thumbMinSize = 20;
-        /**
-         * Render every frame in integer pixel values
-         * set to `true` to improve scrolling performance.
-         */ this.renderByPixels = true;
-        /**
-         * Keep scrollbar tracks visible
-         */ this.alwaysShowTracks = false;
-        /**
-         * Set to `true` to allow outer scrollbars continue scrolling
-         * when current scrollbar reaches edge.
-         */ this.continuousScrolling = true;
-        /**
-         * Delegate wheel events and touch events to the given element.
-         * By default, the container element is used.
-         * This option will be useful for dealing with fixed elements.
-         */ this.delegateTo = null;
-        /**
-         * Options for plugins. Syntax:
-         *   plugins[pluginName] = pluginOptions: any
-         */ this.plugins = {};
-        Object.keys(config).forEach(function(prop) {
-            _this[prop] = config[prop];
-        });
-    }
-    Object.defineProperty(Options.prototype, "wheelEventTarget", {
-        get: function() {
-            return this.delegateTo;
-        },
-        set: function(el) {
-            console.warn("[smooth-scrollbar]: `options.wheelEventTarget` is deprecated and will be removed in the future, use `options.delegateTo` instead.");
-            this.delegateTo = el;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    (0, _tslib.__decorate)([
-        (0, _.range)(0, 1)
-    ], Options.prototype, "damping", void 0);
-    (0, _tslib.__decorate)([
-        (0, _.range)(0, Infinity)
-    ], Options.prototype, "thumbMinSize", void 0);
-    (0, _tslib.__decorate)([
-        (0, _.boolean)
-    ], Options.prototype, "renderByPixels", void 0);
-    (0, _tslib.__decorate)([
-        (0, _.boolean)
-    ], Options.prototype, "alwaysShowTracks", void 0);
-    (0, _tslib.__decorate)([
-        (0, _.boolean)
-    ], Options.prototype, "continuousScrolling", void 0);
-    return Options;
-}();
-
-},{"tslib":"euOof","./decorators/":"bvgNp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bvgNp":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _range = require("./range");
-parcelHelpers.exportAll(_range, exports);
-var _boolean = require("./boolean");
-parcelHelpers.exportAll(_boolean, exports);
-var _debounce = require("./debounce");
-parcelHelpers.exportAll(_debounce, exports);
-
-},{"./range":"4vMHW","./boolean":"kWgZJ","./debounce":"ccT4N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4vMHW":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "range", ()=>range);
-var _lodashClamp = require("lodash.clamp");
-var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
-function range(min, max) {
-    if (min === void 0) min = -Infinity;
-    if (max === void 0) max = Infinity;
-    return function(proto, key) {
-        var alias = "_" + key;
-        Object.defineProperty(proto, key, {
-            get: function() {
-                return this[alias];
-            },
-            set: function(val) {
-                Object.defineProperty(this, alias, {
-                    value: (0, _lodashClampDefault.default)(val, min, max),
-                    enumerable: false,
-                    writable: true,
-                    configurable: true
-                });
-            },
-            enumerable: true,
-            configurable: true
-        });
-    };
-}
-
-},{"lodash.clamp":"bTHty","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kWgZJ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "boolean", ()=>boolean);
-function boolean(proto, key) {
-    var alias = "_" + key;
-    Object.defineProperty(proto, key, {
-        get: function() {
-            return this[alias];
-        },
-        set: function(val) {
-            Object.defineProperty(this, alias, {
-                value: !!val,
-                enumerable: false,
-                writable: true,
-                configurable: true
-            });
-        },
-        enumerable: true,
-        configurable: true
-    });
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ccT4N":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "debounce", ()=>debounce);
-var _tslib = require("tslib");
-var _lodashDebounce = require("lodash.debounce");
-var _lodashDebounceDefault = parcelHelpers.interopDefault(_lodashDebounce);
-function debounce() {
-    var options = [];
-    for(var _i = 0; _i < arguments.length; _i++)options[_i] = arguments[_i];
-    return function(_proto, key, descriptor) {
-        var fn = descriptor.value;
-        return {
-            get: function() {
-                if (!this.hasOwnProperty(key)) Object.defineProperty(this, key, {
-                    value: (0, _lodashDebounceDefault.default).apply(void 0, (0, _tslib.__spreadArrays)([
-                        fn
-                    ], options))
-                });
-                return this[key];
-            }
-        };
-    };
-}
-
-},{"tslib":"euOof","lodash.debounce":"3JP5n","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3JP5n":[function(require,module,exports) {
-/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */ /** Used as the `TypeError` message for "Functions" methods. */ var global = arguments[3];
-var FUNC_ERROR_TEXT = "Expected a function";
-/** Used as references for various `Number` constants. */ var NAN = 0 / 0;
-/** `Object#toString` result references. */ var symbolTag = "[object Symbol]";
-/** Used to match leading and trailing whitespace. */ var reTrim = /^\s+|\s+$/g;
-/** Used to detect bad signed hexadecimal string values. */ var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-/** Used to detect binary string values. */ var reIsBinary = /^0b[01]+$/i;
-/** Used to detect octal string values. */ var reIsOctal = /^0o[0-7]+$/i;
-/** Built-in method references without a dependency on `root`. */ var freeParseInt = parseInt;
-/** Detect free variable `global` from Node.js. */ var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
-/** Detect free variable `self`. */ var freeSelf = typeof self == "object" && self && self.Object === Object && self;
-/** Used as a reference to the global object. */ var root = freeGlobal || freeSelf || Function("return this")();
-/** Used for built-in method references. */ var objectProto = Object.prototype;
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */ var objectToString = objectProto.toString;
-/* Built-in method references for those with the same name as other `lodash` methods. */ var nativeMax = Math.max, nativeMin = Math.min;
-/**
- * Gets the timestamp of the number of milliseconds that have elapsed since
- * the Unix epoch (1 January 1970 00:00:00 UTC).
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Date
- * @returns {number} Returns the timestamp.
- * @example
- *
- * _.defer(function(stamp) {
- *   console.log(_.now() - stamp);
- * }, _.now());
- * // => Logs the number of milliseconds it took for the deferred invocation.
- */ var now = function() {
-    return root.Date.now();
-};
-/**
- * Creates a debounced function that delays invoking `func` until after `wait`
- * milliseconds have elapsed since the last time the debounced function was
- * invoked. The debounced function comes with a `cancel` method to cancel
- * delayed `func` invocations and a `flush` method to immediately invoke them.
- * Provide `options` to indicate whether `func` should be invoked on the
- * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
- * with the last arguments provided to the debounced function. Subsequent
- * calls to the debounced function return the result of the last `func`
- * invocation.
- *
- * **Note:** If `leading` and `trailing` options are `true`, `func` is
- * invoked on the trailing edge of the timeout only if the debounced function
- * is invoked more than once during the `wait` timeout.
- *
- * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
- * until to the next tick, similar to `setTimeout` with a timeout of `0`.
- *
- * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
- * for details over the differences between `_.debounce` and `_.throttle`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to debounce.
- * @param {number} [wait=0] The number of milliseconds to delay.
- * @param {Object} [options={}] The options object.
- * @param {boolean} [options.leading=false]
- *  Specify invoking on the leading edge of the timeout.
- * @param {number} [options.maxWait]
- *  The maximum time `func` is allowed to be delayed before it's invoked.
- * @param {boolean} [options.trailing=true]
- *  Specify invoking on the trailing edge of the timeout.
- * @returns {Function} Returns the new debounced function.
- * @example
- *
- * // Avoid costly calculations while the window size is in flux.
- * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
- *
- * // Invoke `sendMail` when clicked, debouncing subsequent calls.
- * jQuery(element).on('click', _.debounce(sendMail, 300, {
- *   'leading': true,
- *   'trailing': false
- * }));
- *
- * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
- * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
- * var source = new EventSource('/stream');
- * jQuery(source).on('message', debounced);
- *
- * // Cancel the trailing debounced invocation.
- * jQuery(window).on('popstate', debounced.cancel);
- */ function debounce(func, wait, options) {
-    var lastArgs, lastThis, maxWait, result, timerId, lastCallTime, lastInvokeTime = 0, leading = false, maxing = false, trailing = true;
-    if (typeof func != "function") throw new TypeError(FUNC_ERROR_TEXT);
-    wait = toNumber(wait) || 0;
-    if (isObject(options)) {
-        leading = !!options.leading;
-        maxing = "maxWait" in options;
-        maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
-        trailing = "trailing" in options ? !!options.trailing : trailing;
-    }
-    function invokeFunc(time) {
-        var args = lastArgs, thisArg = lastThis;
-        lastArgs = lastThis = undefined;
-        lastInvokeTime = time;
-        result = func.apply(thisArg, args);
-        return result;
-    }
-    function leadingEdge(time) {
-        // Reset any `maxWait` timer.
-        lastInvokeTime = time;
-        // Start the timer for the trailing edge.
-        timerId = setTimeout(timerExpired, wait);
-        // Invoke the leading edge.
-        return leading ? invokeFunc(time) : result;
-    }
-    function remainingWait(time) {
-        var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime, result = wait - timeSinceLastCall;
-        return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
-    }
-    function shouldInvoke(time) {
-        var timeSinceLastCall = time - lastCallTime, timeSinceLastInvoke = time - lastInvokeTime;
-        // Either this is the first call, activity has stopped and we're at the
-        // trailing edge, the system time has gone backwards and we're treating
-        // it as the trailing edge, or we've hit the `maxWait` limit.
-        return lastCallTime === undefined || timeSinceLastCall >= wait || timeSinceLastCall < 0 || maxing && timeSinceLastInvoke >= maxWait;
-    }
-    function timerExpired() {
-        var time = now();
-        if (shouldInvoke(time)) return trailingEdge(time);
-        // Restart the timer.
-        timerId = setTimeout(timerExpired, remainingWait(time));
-    }
-    function trailingEdge(time) {
-        timerId = undefined;
-        // Only invoke if we have `lastArgs` which means `func` has been
-        // debounced at least once.
-        if (trailing && lastArgs) return invokeFunc(time);
-        lastArgs = lastThis = undefined;
-        return result;
-    }
-    function cancel() {
-        if (timerId !== undefined) clearTimeout(timerId);
-        lastInvokeTime = 0;
-        lastArgs = lastCallTime = lastThis = timerId = undefined;
-    }
-    function flush() {
-        return timerId === undefined ? result : trailingEdge(now());
-    }
-    function debounced() {
-        var time = now(), isInvoking = shouldInvoke(time);
-        lastArgs = arguments;
-        lastThis = this;
-        lastCallTime = time;
-        if (isInvoking) {
-            if (timerId === undefined) return leadingEdge(lastCallTime);
-            if (maxing) {
-                // Handle invocations in a tight loop.
-                timerId = setTimeout(timerExpired, wait);
-                return invokeFunc(lastCallTime);
-            }
-        }
-        if (timerId === undefined) timerId = setTimeout(timerExpired, wait);
-        return result;
-    }
-    debounced.cancel = cancel;
-    debounced.flush = flush;
-    return debounced;
-}
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */ function isObject(value) {
-    var type = typeof value;
-    return !!value && (type == "object" || type == "function");
-}
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */ function isObjectLike(value) {
-    return !!value && typeof value == "object";
-}
-/**
- * Checks if `value` is classified as a `Symbol` primitive or object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
- * @example
- *
- * _.isSymbol(Symbol.iterator);
- * // => true
- *
- * _.isSymbol('abc');
- * // => false
- */ function isSymbol(value) {
-    return typeof value == "symbol" || isObjectLike(value) && objectToString.call(value) == symbolTag;
-}
-/**
- * Converts `value` to a number.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to process.
- * @returns {number} Returns the number.
- * @example
- *
- * _.toNumber(3.2);
- * // => 3.2
- *
- * _.toNumber(Number.MIN_VALUE);
- * // => 5e-324
- *
- * _.toNumber(Infinity);
- * // => Infinity
- *
- * _.toNumber('3.2');
- * // => 3.2
- */ function toNumber(value) {
-    if (typeof value == "number") return value;
-    if (isSymbol(value)) return NAN;
-    if (isObject(value)) {
-        var other = typeof value.valueOf == "function" ? value.valueOf() : value;
-        value = isObject(other) ? other + "" : other;
-    }
-    if (typeof value != "string") return value === 0 ? value : +value;
-    value = value.replace(reTrim, "");
-    var isBinary = reIsBinary.test(value);
-    return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NAN : +value;
-}
-module.exports = debounce;
-
-},{}],"jzGiI":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _eventHub = require("./event-hub");
-parcelHelpers.exportAll(_eventHub, exports);
-var _getPointerData = require("./get-pointer-data");
-parcelHelpers.exportAll(_getPointerData, exports);
-var _getPosition = require("./get-position");
-parcelHelpers.exportAll(_getPosition, exports);
-var _isOneOf = require("./is-one-of");
-parcelHelpers.exportAll(_isOneOf, exports);
-var _setStyle = require("./set-style");
-parcelHelpers.exportAll(_setStyle, exports);
-var _touchRecord = require("./touch-record");
-parcelHelpers.exportAll(_touchRecord, exports);
-
-},{"./event-hub":"3PIA4","./get-pointer-data":"l3sLH","./get-position":"6WLv8","./is-one-of":"8RovI","./set-style":"7lys4","./touch-record":"ezxNx","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3PIA4":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "eventScope", ()=>eventScope);
-parcelHelpers.export(exports, "clearEventsOn", ()=>clearEventsOn);
-var eventListenerOptions;
-var eventMap = new WeakMap();
-function getOptions() {
-    if (eventListenerOptions !== undefined) return eventListenerOptions;
-    var supportPassiveEvent = false;
-    try {
-        var noop = function() {};
-        var options = Object.defineProperty({}, "passive", {
-            get: function() {
-                supportPassiveEvent = true;
-            }
-        });
-        window.addEventListener("testPassive", noop, options);
-        window.removeEventListener("testPassive", noop, options);
-    } catch (e) {}
-    eventListenerOptions = supportPassiveEvent ? {
-        passive: false
-    } : false;
-    return eventListenerOptions;
-}
-function eventScope(scrollbar) {
-    var configs = eventMap.get(scrollbar) || [];
-    eventMap.set(scrollbar, configs);
-    return function addEvent(elem, events, fn) {
-        function handler(event) {
-            // ignore default prevented events
-            if (event.defaultPrevented) return;
-            fn(event);
-        }
-        events.split(/\s+/g).forEach(function(eventName) {
-            configs.push({
-                elem: elem,
-                eventName: eventName,
-                handler: handler
-            });
-            elem.addEventListener(eventName, handler, getOptions());
-        });
-    };
-}
-function clearEventsOn(scrollbar) {
-    var configs = eventMap.get(scrollbar);
-    if (!configs) return;
-    configs.forEach(function(_a) {
-        var elem = _a.elem, eventName = _a.eventName, handler = _a.handler;
-        elem.removeEventListener(eventName, handler, getOptions());
-    });
-    eventMap.delete(scrollbar);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l3sLH":[function(require,module,exports) {
-/**
- * Get pointer/touch data
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getPointerData", ()=>getPointerData);
-function getPointerData(evt) {
-    // if is touch event, return last item in touchList
-    // else return original event
-    return evt.touches ? evt.touches[evt.touches.length - 1] : evt;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6WLv8":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-/**
- * Get pointer/finger position
- */ parcelHelpers.export(exports, "getPosition", ()=>getPosition);
-var _getPointerData = require("./get-pointer-data");
-function getPosition(evt) {
-    var data = (0, _getPointerData.getPointerData)(evt);
-    return {
-        x: data.clientX,
-        y: data.clientY
-    };
-}
-
-},{"./get-pointer-data":"l3sLH","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8RovI":[function(require,module,exports) {
-/**
- * Check if `a` is one of `[...b]`
- */ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "isOneOf", ()=>isOneOf);
-function isOneOf(a, b) {
-    if (b === void 0) b = [];
-    return b.some(function(v) {
-        return a === v;
-    });
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7lys4":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "setStyle", ()=>setStyle);
-var VENDOR_PREFIX = [
-    "webkit",
-    "moz",
-    "ms",
-    "o"
-];
-var RE = new RegExp("^-(?!(?:" + VENDOR_PREFIX.join("|") + ")-)");
-function autoPrefix(styles) {
-    var res = {};
-    Object.keys(styles).forEach(function(prop) {
-        if (!RE.test(prop)) {
-            res[prop] = styles[prop];
-            return;
-        }
-        var val = styles[prop];
-        prop = prop.replace(/^-/, "");
-        res[prop] = val;
-        VENDOR_PREFIX.forEach(function(prefix) {
-            res["-" + prefix + "-" + prop] = val;
-        });
-    });
-    return res;
-}
-function setStyle(elem, styles) {
-    styles = autoPrefix(styles);
-    Object.keys(styles).forEach(function(prop) {
-        var cssProp = prop.replace(/^-/, "").replace(/-([a-z])/g, function(_, $1) {
-            return $1.toUpperCase();
-        });
-        elem.style[cssProp] = styles[prop];
-    });
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ezxNx":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Tracker", ()=>Tracker);
-parcelHelpers.export(exports, "TouchRecord", ()=>TouchRecord);
-var _tslib = require("tslib");
-var _getPosition = require("./get-position");
-var Tracker = /** @class */ function() {
-    function Tracker(touch) {
-        this.velocityMultiplier = window.devicePixelRatio;
-        this.updateTime = Date.now();
-        this.delta = {
-            x: 0,
-            y: 0
-        };
-        this.velocity = {
-            x: 0,
-            y: 0
-        };
-        this.lastPosition = {
-            x: 0,
-            y: 0
-        };
-        this.lastPosition = (0, _getPosition.getPosition)(touch);
-    }
-    Tracker.prototype.update = function(touch) {
-        var _a = this, velocity = _a.velocity, updateTime = _a.updateTime, lastPosition = _a.lastPosition;
-        var now = Date.now();
-        var position = (0, _getPosition.getPosition)(touch);
-        var delta = {
-            x: -(position.x - lastPosition.x),
-            y: -(position.y - lastPosition.y)
-        };
-        var duration = now - updateTime || 16.7;
-        var vx = delta.x / duration * 16.7;
-        var vy = delta.y / duration * 16.7;
-        velocity.x = vx * this.velocityMultiplier;
-        velocity.y = vy * this.velocityMultiplier;
-        this.delta = delta;
-        this.updateTime = now;
-        this.lastPosition = position;
-    };
-    return Tracker;
-}();
-var TouchRecord = /** @class */ function() {
-    function TouchRecord() {
-        this._touchList = {};
-    }
-    Object.defineProperty(TouchRecord.prototype, "_primitiveValue", {
-        get: function() {
-            return {
-                x: 0,
-                y: 0
-            };
-        },
-        enumerable: true,
-        configurable: true
-    });
-    TouchRecord.prototype.isActive = function() {
-        return this._activeTouchID !== undefined;
-    };
-    TouchRecord.prototype.getDelta = function() {
-        var tracker = this._getActiveTracker();
-        if (!tracker) return this._primitiveValue;
-        return (0, _tslib.__assign)({}, tracker.delta);
-    };
-    TouchRecord.prototype.getVelocity = function() {
-        var tracker = this._getActiveTracker();
-        if (!tracker) return this._primitiveValue;
-        return (0, _tslib.__assign)({}, tracker.velocity);
-    };
-    TouchRecord.prototype.getEasingDistance = function(damping) {
-        var deAcceleration = 1 - damping;
-        var distance = {
-            x: 0,
-            y: 0
-        };
-        var vel = this.getVelocity();
-        Object.keys(vel).forEach(function(dir) {
-            // ignore small velocity
-            var v = Math.abs(vel[dir]) <= 10 ? 0 : vel[dir];
-            while(v !== 0){
-                distance[dir] += v;
-                v = v * deAcceleration | 0;
-            }
-        });
-        return distance;
-    };
-    TouchRecord.prototype.track = function(evt) {
-        var _this = this;
-        var targetTouches = evt.targetTouches;
-        Array.from(targetTouches).forEach(function(touch) {
-            _this._add(touch);
-        });
-        return this._touchList;
-    };
-    TouchRecord.prototype.update = function(evt) {
-        var _this = this;
-        var touches = evt.touches, changedTouches = evt.changedTouches;
-        Array.from(touches).forEach(function(touch) {
-            _this._renew(touch);
-        });
-        this._setActiveID(changedTouches);
-        return this._touchList;
-    };
-    TouchRecord.prototype.release = function(evt) {
-        var _this = this;
-        delete this._activeTouchID;
-        Array.from(evt.changedTouches).forEach(function(touch) {
-            _this._delete(touch);
-        });
-    };
-    TouchRecord.prototype._add = function(touch) {
-        if (this._has(touch)) // reset tracker
-        this._delete(touch);
-        var tracker = new Tracker(touch);
-        this._touchList[touch.identifier] = tracker;
-    };
-    TouchRecord.prototype._renew = function(touch) {
-        if (!this._has(touch)) return;
-        var tracker = this._touchList[touch.identifier];
-        tracker.update(touch);
-    };
-    TouchRecord.prototype._delete = function(touch) {
-        delete this._touchList[touch.identifier];
-    };
-    TouchRecord.prototype._has = function(touch) {
-        return this._touchList.hasOwnProperty(touch.identifier);
-    };
-    TouchRecord.prototype._setActiveID = function(touches) {
-        this._activeTouchID = touches[touches.length - 1].identifier;
-    };
-    TouchRecord.prototype._getActiveTracker = function() {
-        var _a = this, _touchList = _a._touchList, _activeTouchID = _a._activeTouchID;
-        return _touchList[_activeTouchID];
-    };
-    return TouchRecord;
-}();
-
-},{"tslib":"euOof","./get-position":"6WLv8","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iNFGO":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "TrackController", ()=>TrackController);
-var _tslib = require("tslib");
-var _track = require("./track");
-var _direction = require("./direction");
-var _ = require("../decorators/");
-var TrackController = /** @class */ function() {
-    function TrackController(_scrollbar) {
-        this._scrollbar = _scrollbar;
-        var thumbMinSize = _scrollbar.options.thumbMinSize;
-        this.xAxis = new (0, _track.ScrollbarTrack)((0, _direction.TrackDirection).X, thumbMinSize);
-        this.yAxis = new (0, _track.ScrollbarTrack)((0, _direction.TrackDirection).Y, thumbMinSize);
-        this.xAxis.attachTo(_scrollbar.containerEl);
-        this.yAxis.attachTo(_scrollbar.containerEl);
-        if (_scrollbar.options.alwaysShowTracks) {
-            this.xAxis.show();
-            this.yAxis.show();
-        }
-    }
-    /**
-     * Updates track appearance
-     */ TrackController.prototype.update = function() {
-        var _a = this._scrollbar, size = _a.size, offset = _a.offset;
-        this.xAxis.update(offset.x, size.container.width, size.content.width);
-        this.yAxis.update(offset.y, size.container.height, size.content.height);
-    };
-    /**
-     * Automatically hide tracks when scrollbar is in idle state
-     */ TrackController.prototype.autoHideOnIdle = function() {
-        if (this._scrollbar.options.alwaysShowTracks) return;
-        this.xAxis.hide();
-        this.yAxis.hide();
-    };
-    (0, _tslib.__decorate)([
-        (0, _.debounce)(300)
-    ], TrackController.prototype, "autoHideOnIdle", null);
-    return TrackController;
-}();
-
-},{"tslib":"euOof","./track":"6WVpd","./direction":"dYSG8","../decorators/":"bvgNp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6WVpd":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ScrollbarTrack", ()=>ScrollbarTrack);
-var _thumb = require("./thumb");
-var _ = require("../utils/");
-var ScrollbarTrack = /** @class */ function() {
-    function ScrollbarTrack(direction, thumbMinSize) {
-        if (thumbMinSize === void 0) thumbMinSize = 0;
-        /**
-         * Track element
-         */ this.element = document.createElement("div");
-        this._isShown = false;
-        this.element.className = "scrollbar-track scrollbar-track-" + direction;
-        this.thumb = new (0, _thumb.ScrollbarThumb)(direction, thumbMinSize);
-        this.thumb.attachTo(this.element);
-    }
-    /**
-     * Attach to scrollbar container element
-     *
-     * @param scrollbarContainer Scrollbar container element
-     */ ScrollbarTrack.prototype.attachTo = function(scrollbarContainer) {
-        scrollbarContainer.appendChild(this.element);
-    };
-    /**
-     * Show track immediately
-     */ ScrollbarTrack.prototype.show = function() {
-        if (this._isShown) return;
-        this._isShown = true;
-        this.element.classList.add("show");
-    };
-    /**
-     * Hide track immediately
-     */ ScrollbarTrack.prototype.hide = function() {
-        if (!this._isShown) return;
-        this._isShown = false;
-        this.element.classList.remove("show");
-    };
-    ScrollbarTrack.prototype.update = function(scrollOffset, containerSize, pageSize) {
-        (0, _.setStyle)(this.element, {
-            display: pageSize <= containerSize ? "none" : "block"
-        });
-        this.thumb.update(scrollOffset, containerSize, pageSize);
-    };
-    return ScrollbarTrack;
-}();
-
-},{"./thumb":"jszc2","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jszc2":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ScrollbarThumb", ()=>ScrollbarThumb);
-var _direction = require("./direction");
-var _ = require("../utils/");
-var ScrollbarThumb = /** @class */ function() {
-    function ScrollbarThumb(_direction, _minSize) {
-        if (_minSize === void 0) _minSize = 0;
-        this._direction = _direction;
-        this._minSize = _minSize;
-        /**
-         * Thumb element
-         */ this.element = document.createElement("div");
-        /**
-         * Display size of the thumb
-         * will always be greater than `scrollbar.options.thumbMinSize`
-         */ this.displaySize = 0;
-        /**
-         * Actual size of the thumb
-         */ this.realSize = 0;
-        /**
-         * Thumb offset to the top
-         */ this.offset = 0;
-        this.element.className = "scrollbar-thumb scrollbar-thumb-" + _direction;
-    }
-    /**
-     * Attach to track element
-     *
-     * @param trackEl Track element
-     */ ScrollbarThumb.prototype.attachTo = function(trackEl) {
-        trackEl.appendChild(this.element);
-    };
-    ScrollbarThumb.prototype.update = function(scrollOffset, containerSize, pageSize) {
-        // calculate thumb size
-        // pageSize > containerSize -> scrollable
-        this.realSize = Math.min(containerSize / pageSize, 1) * containerSize;
-        this.displaySize = Math.max(this.realSize, this._minSize);
-        // calculate thumb offset
-        this.offset = scrollOffset / pageSize * (containerSize + (this.realSize - this.displaySize));
-        (0, _.setStyle)(this.element, this._getStyle());
-    };
-    ScrollbarThumb.prototype._getStyle = function() {
-        switch(this._direction){
-            case (0, _direction.TrackDirection).X:
-                return {
-                    width: this.displaySize + "px",
-                    "-transform": "translate3d(" + this.offset + "px, 0, 0)"
-                };
-            case (0, _direction.TrackDirection).Y:
-                return {
-                    height: this.displaySize + "px",
-                    "-transform": "translate3d(0, " + this.offset + "px, 0)"
-                };
-            default:
-                return null;
-        }
-    };
-    return ScrollbarThumb;
-}();
-
-},{"./direction":"dYSG8","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dYSG8":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "TrackDirection", ()=>TrackDirection);
-var TrackDirection;
-(function(TrackDirection) {
-    TrackDirection["X"] = "x";
-    TrackDirection["Y"] = "y";
-})(TrackDirection || (TrackDirection = {}));
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jBiTP":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _getSize = require("./get-size");
-parcelHelpers.exportAll(_getSize, exports);
-var _isVisible = require("./is-visible");
-parcelHelpers.exportAll(_isVisible, exports);
-var _update = require("./update");
-parcelHelpers.exportAll(_update, exports);
-
-},{"./get-size":"eohy0","./is-visible":"99mev","./update":"kBOIE","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"eohy0":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "getSize", ()=>getSize);
-function getSize(scrollbar) {
-    var containerEl = scrollbar.containerEl, contentEl = scrollbar.contentEl;
-    var containerStyles = getComputedStyle(containerEl);
-    var paddings = [
-        "paddingTop",
-        "paddingBottom",
-        "paddingLeft",
-        "paddingRight"
-    ].map(function(prop) {
-        return containerStyles[prop] ? parseFloat(containerStyles[prop]) : 0;
-    });
-    var verticalPadding = paddings[0] + paddings[1];
-    var horizontalPadding = paddings[2] + paddings[3];
-    return {
-        container: {
-            // requires `overflow: hidden`
-            width: containerEl.clientWidth,
-            height: containerEl.clientHeight
-        },
-        content: {
-            // border width and paddings should be included
-            width: contentEl.offsetWidth - contentEl.clientWidth + contentEl.scrollWidth + horizontalPadding,
-            height: contentEl.offsetHeight - contentEl.clientHeight + contentEl.scrollHeight + verticalPadding
-        }
-    };
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"99mev":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "isVisible", ()=>isVisible);
-function isVisible(scrollbar, elem) {
-    var bounding = scrollbar.bounding;
-    var targetBounding = elem.getBoundingClientRect();
-    // check overlapping
-    var top = Math.max(bounding.top, targetBounding.top);
-    var left = Math.max(bounding.left, targetBounding.left);
-    var right = Math.min(bounding.right, targetBounding.right);
-    var bottom = Math.min(bounding.bottom, targetBounding.bottom);
-    return top < bottom && left < right;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kBOIE":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "update", ()=>update);
-function update(scrollbar) {
-    var newSize = scrollbar.getSize();
-    var limit = {
-        x: Math.max(newSize.content.width - newSize.container.width, 0),
-        y: Math.max(newSize.content.height - newSize.container.height, 0)
-    };
-    // metrics
-    var containerBounding = scrollbar.containerEl.getBoundingClientRect();
-    var bounding = {
-        top: Math.max(containerBounding.top, 0),
-        right: Math.min(containerBounding.right, window.innerWidth),
-        bottom: Math.min(containerBounding.bottom, window.innerHeight),
-        left: Math.max(containerBounding.left, 0)
-    };
-    // assign props
-    scrollbar.size = newSize;
-    scrollbar.limit = limit;
-    scrollbar.bounding = bounding;
-    // update tracks
-    scrollbar.track.update();
-    // re-positioning
-    scrollbar.setPosition();
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jsAOK":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _setPosition = require("./set-position");
-parcelHelpers.exportAll(_setPosition, exports);
-var _scrollTo = require("./scroll-to");
-parcelHelpers.exportAll(_scrollTo, exports);
-var _scrollIntoView = require("./scroll-into-view");
-parcelHelpers.exportAll(_scrollIntoView, exports);
-
-},{"./set-position":"kNGmM","./scroll-to":"6bZgF","./scroll-into-view":"69B3G","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"kNGmM":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "setPosition", ()=>setPosition);
-var _tslib = require("tslib");
-var _lodashClamp = require("lodash.clamp");
-var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
-var _ = require("../utils/");
-function setPosition(scrollbar, x, y) {
-    var options = scrollbar.options, offset = scrollbar.offset, limit = scrollbar.limit, track = scrollbar.track, contentEl = scrollbar.contentEl;
-    if (options.renderByPixels) {
-        x = Math.round(x);
-        y = Math.round(y);
-    }
-    x = (0, _lodashClampDefault.default)(x, 0, limit.x);
-    y = (0, _lodashClampDefault.default)(y, 0, limit.y);
-    // position changed -> show track for 300ms
-    if (x !== offset.x) track.xAxis.show();
-    if (y !== offset.y) track.yAxis.show();
-    if (!options.alwaysShowTracks) track.autoHideOnIdle();
-    if (x === offset.x && y === offset.y) return null;
-    offset.x = x;
-    offset.y = y;
-    (0, _.setStyle)(contentEl, {
-        "-transform": "translate3d(" + -x + "px, " + -y + "px, 0)"
-    });
-    track.update();
-    return {
-        offset: (0, _tslib.__assign)({}, offset),
-        limit: (0, _tslib.__assign)({}, limit)
-    };
-}
-
-},{"tslib":"euOof","lodash.clamp":"bTHty","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6bZgF":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "scrollTo", ()=>scrollTo);
-var _lodashClamp = require("lodash.clamp");
-var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
-var animationIDStorage = new WeakMap();
-function scrollTo(scrollbar, x, y, duration, _a) {
-    if (duration === void 0) duration = 0;
-    var _b = _a === void 0 ? {} : _a, _c = _b.easing, easing = _c === void 0 ? defaultEasing : _c, callback = _b.callback;
-    var options = scrollbar.options, offset = scrollbar.offset, limit = scrollbar.limit;
-    if (options.renderByPixels) {
-        // ensure resolved with integer
-        x = Math.round(x);
-        y = Math.round(y);
-    }
-    var startX = offset.x;
-    var startY = offset.y;
-    var disX = (0, _lodashClampDefault.default)(x, 0, limit.x) - startX;
-    var disY = (0, _lodashClampDefault.default)(y, 0, limit.y) - startY;
-    var start = Date.now();
-    function scroll() {
-        var elapse = Date.now() - start;
-        var progress = duration ? easing(Math.min(elapse / duration, 1)) : 1;
-        scrollbar.setPosition(startX + disX * progress, startY + disY * progress);
-        if (elapse >= duration) {
-            if (typeof callback === "function") callback.call(scrollbar);
-        } else {
-            var animationID = requestAnimationFrame(scroll);
-            animationIDStorage.set(scrollbar, animationID);
-        }
-    }
-    cancelAnimationFrame(animationIDStorage.get(scrollbar));
-    scroll();
-}
-/**
- * easeOutCubic
- */ function defaultEasing(t) {
-    return Math.pow(t - 1, 3) + 1;
-}
-
-},{"lodash.clamp":"bTHty","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"69B3G":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "scrollIntoView", ()=>scrollIntoView);
-var _lodashClamp = require("lodash.clamp");
-var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
-function scrollIntoView(scrollbar, elem, _a) {
-    var _b = _a === void 0 ? {} : _a, _c = _b.alignToTop, alignToTop = _c === void 0 ? true : _c, _d = _b.onlyScrollIfNeeded, onlyScrollIfNeeded = _d === void 0 ? false : _d, _e = _b.offsetTop, offsetTop = _e === void 0 ? 0 : _e, _f = _b.offsetLeft, offsetLeft = _f === void 0 ? 0 : _f, _g = _b.offsetBottom, offsetBottom = _g === void 0 ? 0 : _g;
-    var containerEl = scrollbar.containerEl, bounding = scrollbar.bounding, offset = scrollbar.offset, limit = scrollbar.limit;
-    if (!elem || !containerEl.contains(elem)) return;
-    var targetBounding = elem.getBoundingClientRect();
-    if (onlyScrollIfNeeded && scrollbar.isVisible(elem)) return;
-    var delta = alignToTop ? targetBounding.top - bounding.top - offsetTop : targetBounding.bottom - bounding.bottom + offsetBottom;
-    scrollbar.setMomentum(targetBounding.left - bounding.left - offsetLeft, (0, _lodashClampDefault.default)(delta, -offset.y, limit.y - offset.y));
-}
-
-},{"lodash.clamp":"bTHty","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"bSKNu":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ScrollbarPlugin", ()=>ScrollbarPlugin);
-parcelHelpers.export(exports, "globalPlugins", ()=>globalPlugins);
-parcelHelpers.export(exports, "addPlugins", ()=>addPlugins);
-parcelHelpers.export(exports, "initPlugins", ()=>initPlugins);
-var _tslib = require("tslib");
-var ScrollbarPlugin = /** @class */ function() {
-    function ScrollbarPlugin(scrollbar, options) {
-        var _newTarget = this.constructor;
-        this.scrollbar = scrollbar;
-        this.name = _newTarget.pluginName;
-        this.options = (0, _tslib.__assign)((0, _tslib.__assign)({}, _newTarget.defaultOptions), options);
-    }
-    ScrollbarPlugin.prototype.onInit = function() {};
-    ScrollbarPlugin.prototype.onDestroy = function() {};
-    ScrollbarPlugin.prototype.onUpdate = function() {};
-    ScrollbarPlugin.prototype.onRender = function(_remainMomentum) {};
-    ScrollbarPlugin.prototype.transformDelta = function(delta, _evt) {
-        return (0, _tslib.__assign)({}, delta);
-    };
-    ScrollbarPlugin.pluginName = "";
-    ScrollbarPlugin.defaultOptions = {};
-    return ScrollbarPlugin;
-}();
-var globalPlugins = {
-    order: new Set(),
-    constructors: {}
-};
-function addPlugins() {
-    var Plugins = [];
-    for(var _i = 0; _i < arguments.length; _i++)Plugins[_i] = arguments[_i];
-    Plugins.forEach(function(P) {
-        var pluginName = P.pluginName;
-        if (!pluginName) throw new TypeError("plugin name is required");
-        globalPlugins.order.add(pluginName);
-        globalPlugins.constructors[pluginName] = P;
-    });
-}
-function initPlugins(scrollbar, options) {
-    return Array.from(globalPlugins.order).filter(function(pluginName) {
-        return options[pluginName] !== false;
-    }).map(function(pluginName) {
-        var Plugin = globalPlugins.constructors[pluginName];
-        var instance = new Plugin(scrollbar, options[pluginName]);
-        // bind plugin options to `scrollbar.options`
-        options[pluginName] = instance.options;
-        return instance;
-    });
-}
-
-},{"tslib":"euOof","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"cHe8H":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-var _keyboard = require("./keyboard");
-parcelHelpers.exportAll(_keyboard, exports);
-var _mouse = require("./mouse");
-parcelHelpers.exportAll(_mouse, exports);
-var _resize = require("./resize");
-parcelHelpers.exportAll(_resize, exports);
-var _select = require("./select");
-parcelHelpers.exportAll(_select, exports);
-var _touch = require("./touch");
-parcelHelpers.exportAll(_touch, exports);
-var _wheel = require("./wheel");
-parcelHelpers.exportAll(_wheel, exports);
-
-},{"./keyboard":"3O3aj","./mouse":"u2dyQ","./resize":"gCciD","./select":"2fmgh","./touch":"gsvLM","./wheel":"8pCgR","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"3O3aj":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "keyboardHandler", ()=>keyboardHandler);
-var _ = require("../utils/");
-var KEY_CODE;
-(function(KEY_CODE) {
-    KEY_CODE[KEY_CODE["TAB"] = 9] = "TAB";
-    KEY_CODE[KEY_CODE["SPACE"] = 32] = "SPACE";
-    KEY_CODE[KEY_CODE["PAGE_UP"] = 33] = "PAGE_UP";
-    KEY_CODE[KEY_CODE["PAGE_DOWN"] = 34] = "PAGE_DOWN";
-    KEY_CODE[KEY_CODE["END"] = 35] = "END";
-    KEY_CODE[KEY_CODE["HOME"] = 36] = "HOME";
-    KEY_CODE[KEY_CODE["LEFT"] = 37] = "LEFT";
-    KEY_CODE[KEY_CODE["UP"] = 38] = "UP";
-    KEY_CODE[KEY_CODE["RIGHT"] = 39] = "RIGHT";
-    KEY_CODE[KEY_CODE["DOWN"] = 40] = "DOWN";
-})(KEY_CODE || (KEY_CODE = {}));
-function keyboardHandler(scrollbar) {
-    var addEvent = (0, _.eventScope)(scrollbar);
-    var container = scrollbar.containerEl;
-    addEvent(container, "keydown", function(evt) {
-        var activeElement = document.activeElement;
-        if (activeElement !== container && !container.contains(activeElement)) return;
-        if (isEditable(activeElement)) return;
-        var delta = getKeyDelta(scrollbar, evt.keyCode || evt.which);
-        if (!delta) return;
-        var x = delta[0], y = delta[1];
-        scrollbar.addTransformableMomentum(x, y, evt, function(willScroll) {
-            if (willScroll) evt.preventDefault();
-            else {
-                scrollbar.containerEl.blur();
-                if (scrollbar.parent) scrollbar.parent.containerEl.focus();
-            }
-        });
-    });
-}
-function getKeyDelta(scrollbar, keyCode) {
-    var size = scrollbar.size, limit = scrollbar.limit, offset = scrollbar.offset;
-    switch(keyCode){
-        case KEY_CODE.TAB:
-            return handleTabKey(scrollbar);
-        case KEY_CODE.SPACE:
-            return [
-                0,
-                200
-            ];
-        case KEY_CODE.PAGE_UP:
-            return [
-                0,
-                -size.container.height + 40
-            ];
-        case KEY_CODE.PAGE_DOWN:
-            return [
-                0,
-                size.container.height - 40
-            ];
-        case KEY_CODE.END:
-            return [
-                0,
-                limit.y - offset.y
-            ];
-        case KEY_CODE.HOME:
-            return [
-                0,
-                -offset.y
-            ];
-        case KEY_CODE.LEFT:
-            return [
-                -40,
-                0
-            ];
-        case KEY_CODE.UP:
-            return [
-                0,
-                -40
-            ];
-        case KEY_CODE.RIGHT:
-            return [
-                40,
-                0
-            ];
-        case KEY_CODE.DOWN:
-            return [
-                0,
-                40
-            ];
-        default:
-            return null;
-    }
-}
-function handleTabKey(scrollbar) {
-    // handle in next frame
-    requestAnimationFrame(function() {
-        scrollbar.scrollIntoView(document.activeElement, {
-            offsetTop: scrollbar.size.container.height / 2,
-            offsetLeft: scrollbar.size.container.width / 2,
-            onlyScrollIfNeeded: true
-        });
-    });
-}
-function isEditable(elem) {
-    if (elem.tagName === "INPUT" || elem.tagName === "SELECT" || elem.tagName === "TEXTAREA" || elem.isContentEditable) return !elem.disabled;
-    return false;
-}
-
-},{"../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"u2dyQ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "mouseHandler", ()=>mouseHandler);
-var _lodashClamp = require("lodash.clamp");
-var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
-var _ = require("../utils/");
-var Direction;
-(function(Direction) {
-    Direction[Direction["X"] = 0] = "X";
-    Direction[Direction["Y"] = 1] = "Y";
-})(Direction || (Direction = {}));
-function mouseHandler(scrollbar) {
-    var addEvent = (0, _.eventScope)(scrollbar);
-    var container = scrollbar.containerEl;
-    var _a = scrollbar.track, xAxis = _a.xAxis, yAxis = _a.yAxis;
-    function calcMomentum(direction, clickPosition) {
-        var size = scrollbar.size, limit = scrollbar.limit, offset = scrollbar.offset;
-        if (direction === Direction.X) {
-            var totalWidth = size.container.width + (xAxis.thumb.realSize - xAxis.thumb.displaySize);
-            return (0, _lodashClampDefault.default)(clickPosition / totalWidth * size.content.width, 0, limit.x) - offset.x;
-        }
-        if (direction === Direction.Y) {
-            var totalHeight = size.container.height + (yAxis.thumb.realSize - yAxis.thumb.displaySize);
-            return (0, _lodashClampDefault.default)(clickPosition / totalHeight * size.content.height, 0, limit.y) - offset.y;
-        }
-        return 0;
-    }
-    function getTrackDirection(elem) {
-        if ((0, _.isOneOf)(elem, [
-            xAxis.element,
-            xAxis.thumb.element
-        ])) return Direction.X;
-        if ((0, _.isOneOf)(elem, [
-            yAxis.element,
-            yAxis.thumb.element
-        ])) return Direction.Y;
-        return void 0;
-    }
-    var isMouseDown;
-    var isMouseMoving;
-    var startOffsetToThumb;
-    var trackDirection;
-    var containerRect;
-    addEvent(container, "click", function(evt) {
-        if (isMouseMoving || !(0, _.isOneOf)(evt.target, [
-            xAxis.element,
-            yAxis.element
-        ])) return;
-        var track = evt.target;
-        var direction = getTrackDirection(track);
-        var rect = track.getBoundingClientRect();
-        var clickPos = (0, _.getPosition)(evt);
-        if (direction === Direction.X) {
-            var offsetOnTrack = clickPos.x - rect.left - xAxis.thumb.displaySize / 2;
-            scrollbar.setMomentum(calcMomentum(direction, offsetOnTrack), 0);
-        }
-        if (direction === Direction.Y) {
-            var offsetOnTrack = clickPos.y - rect.top - yAxis.thumb.displaySize / 2;
-            scrollbar.setMomentum(0, calcMomentum(direction, offsetOnTrack));
-        }
-    });
-    addEvent(container, "mousedown", function(evt) {
-        if (!(0, _.isOneOf)(evt.target, [
-            xAxis.thumb.element,
-            yAxis.thumb.element
-        ])) return;
-        isMouseDown = true;
-        var thumb = evt.target;
-        var cursorPos = (0, _.getPosition)(evt);
-        var thumbRect = thumb.getBoundingClientRect();
-        trackDirection = getTrackDirection(thumb);
-        // pointer offset to thumb
-        startOffsetToThumb = {
-            x: cursorPos.x - thumbRect.left,
-            y: cursorPos.y - thumbRect.top
-        };
-        // container bounding rectangle
-        containerRect = container.getBoundingClientRect();
-        // prevent selection, see:
-        // https://github.com/idiotWu/smooth-scrollbar/issues/48
-        (0, _.setStyle)(scrollbar.containerEl, {
-            "-user-select": "none"
-        });
-    });
-    addEvent(window, "mousemove", function(evt) {
-        if (!isMouseDown) return;
-        isMouseMoving = true;
-        var cursorPos = (0, _.getPosition)(evt);
-        if (trackDirection === Direction.X) {
-            // get percentage of pointer position in track
-            // then tranform to px
-            // don't need easing
-            var offsetOnTrack = cursorPos.x - startOffsetToThumb.x - containerRect.left;
-            scrollbar.setMomentum(calcMomentum(trackDirection, offsetOnTrack), 0);
-        }
-        if (trackDirection === Direction.Y) {
-            var offsetOnTrack = cursorPos.y - startOffsetToThumb.y - containerRect.top;
-            scrollbar.setMomentum(0, calcMomentum(trackDirection, offsetOnTrack));
-        }
-    });
-    addEvent(window, "mouseup blur", function() {
-        isMouseDown = isMouseMoving = false;
-        (0, _.setStyle)(scrollbar.containerEl, {
-            "-user-select": ""
-        });
-    });
-}
-
-},{"lodash.clamp":"bTHty","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gCciD":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "resizeHandler", ()=>resizeHandler);
-var _lodashDebounce = require("lodash.debounce");
-var _lodashDebounceDefault = parcelHelpers.interopDefault(_lodashDebounce);
-var _ = require("../utils/");
-function resizeHandler(scrollbar) {
-    var addEvent = (0, _.eventScope)(scrollbar);
-    addEvent(window, "resize", (0, _lodashDebounceDefault.default)(scrollbar.update.bind(scrollbar), 300));
-}
-
-},{"lodash.debounce":"3JP5n","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2fmgh":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "selectHandler", ()=>selectHandler);
-var _lodashClamp = require("lodash.clamp");
-var _lodashClampDefault = parcelHelpers.interopDefault(_lodashClamp);
-var _ = require("../utils/");
-function selectHandler(scrollbar) {
-    var addEvent = (0, _.eventScope)(scrollbar);
-    var containerEl = scrollbar.containerEl, contentEl = scrollbar.contentEl;
-    var isSelected = false;
-    var isContextMenuOpened = false; // flag to prevent selection when context menu is opened
-    var animationID;
-    function scroll(_a) {
-        var x = _a.x, y = _a.y;
-        if (!x && !y) return;
-        var offset = scrollbar.offset, limit = scrollbar.limit;
-        // DISALLOW delta transformation
-        scrollbar.setMomentum((0, _lodashClampDefault.default)(offset.x + x, 0, limit.x) - offset.x, (0, _lodashClampDefault.default)(offset.y + y, 0, limit.y) - offset.y);
-        animationID = requestAnimationFrame(function() {
-            scroll({
-                x: x,
-                y: y
-            });
-        });
-    }
-    addEvent(window, "mousemove", function(evt) {
-        if (!isSelected) return;
-        cancelAnimationFrame(animationID);
-        var dir = calcMomentum(scrollbar, evt);
-        scroll(dir);
-    });
-    // prevent scrolling when context menu is opened
-    // NOTE: `contextmenu` event may be fired
-    //          1. BEFORE `selectstart`: when user right-clicks on the text content -> prevent future scrolling,
-    //          2. AFTER `selectstart`: when user right-clicks on the blank area -> cancel current scrolling,
-    //        so we need to both set the flag and cancel current scrolling
-    addEvent(contentEl, "contextmenu", function() {
-        // set the flag to prevent future scrolling
-        isContextMenuOpened = true;
-        // stop current scrolling
-        cancelAnimationFrame(animationID);
-        isSelected = false;
-    });
-    // reset context menu flag on mouse down
-    // to ensure the scrolling is allowed in the next selection
-    addEvent(contentEl, "mousedown", function() {
-        isContextMenuOpened = false;
-    });
-    addEvent(contentEl, "selectstart", function() {
-        if (isContextMenuOpened) return;
-        cancelAnimationFrame(animationID);
-        isSelected = true;
-    });
-    addEvent(window, "mouseup blur", function() {
-        cancelAnimationFrame(animationID);
-        isSelected = false;
-        isContextMenuOpened = false;
-    });
-    // patch for touch devices
-    addEvent(containerEl, "scroll", function(evt) {
-        evt.preventDefault();
-        containerEl.scrollTop = containerEl.scrollLeft = 0;
-    });
-}
-function calcMomentum(scrollbar, evt) {
-    var _a = scrollbar.bounding, top = _a.top, right = _a.right, bottom = _a.bottom, left = _a.left;
-    var _b = (0, _.getPosition)(evt), x = _b.x, y = _b.y;
-    var res = {
-        x: 0,
-        y: 0
-    };
-    var padding = 20;
-    if (x === 0 && y === 0) return res;
-    if (x > right - padding) res.x = x - right + padding;
-    else if (x < left + padding) res.x = x - left - padding;
-    if (y > bottom - padding) res.y = y - bottom + padding;
-    else if (y < top + padding) res.y = y - top - padding;
-    res.x *= 2;
-    res.y *= 2;
-    return res;
-}
-
-},{"lodash.clamp":"bTHty","../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gsvLM":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "touchHandler", ()=>touchHandler);
-var _ = require("../utils/");
-var activeScrollbar;
-function touchHandler(scrollbar) {
-    var target = scrollbar.options.delegateTo || scrollbar.containerEl;
-    var touchRecord = new (0, _.TouchRecord)();
-    var addEvent = (0, _.eventScope)(scrollbar);
-    var damping;
-    var pointerCount = 0;
-    addEvent(target, "touchstart", function(evt) {
-        // start records
-        touchRecord.track(evt);
-        // stop scrolling
-        scrollbar.setMomentum(0, 0);
-        // save damping
-        if (pointerCount === 0) {
-            damping = scrollbar.options.damping;
-            scrollbar.options.damping = Math.max(damping, 0.5); // less frames on touchmove
-        }
-        pointerCount++;
-    });
-    addEvent(target, "touchmove", function(evt) {
-        if (activeScrollbar && activeScrollbar !== scrollbar) return;
-        touchRecord.update(evt);
-        var _a = touchRecord.getDelta(), x = _a.x, y = _a.y;
-        scrollbar.addTransformableMomentum(x, y, evt, function(willScroll) {
-            if (willScroll && evt.cancelable) {
-                evt.preventDefault();
-                activeScrollbar = scrollbar;
-            }
-        });
-    });
-    addEvent(target, "touchcancel touchend", function(evt) {
-        var delta = touchRecord.getEasingDistance(damping);
-        scrollbar.addTransformableMomentum(delta.x, delta.y, evt);
-        pointerCount--;
-        // restore damping
-        if (pointerCount === 0) scrollbar.options.damping = damping;
-        touchRecord.release(evt);
-        activeScrollbar = null;
-    });
-}
-
-},{"../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8pCgR":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "wheelHandler", ()=>wheelHandler);
-var _ = require("../utils/");
-function wheelHandler(scrollbar) {
-    var addEvent = (0, _.eventScope)(scrollbar);
-    var target = scrollbar.options.delegateTo || scrollbar.containerEl;
-    var eventName = "onwheel" in window || document.implementation.hasFeature("Events.wheel", "3.0") ? "wheel" : "mousewheel";
-    addEvent(target, eventName, function(evt) {
-        var _a = normalizeDelta(evt), x = _a.x, y = _a.y;
-        scrollbar.addTransformableMomentum(x, y, evt, function(willScroll) {
-            if (willScroll) evt.preventDefault();
-        });
-    });
-}
-// Normalizing wheel delta
-var DELTA_SCALE = {
-    STANDARD: 1,
-    OTHERS: -3
-};
-var DELTA_MODE = [
-    1.0,
-    28.0,
-    500.0
-];
-var getDeltaMode = function(mode) {
-    return DELTA_MODE[mode] || DELTA_MODE[0];
-};
-function normalizeDelta(evt) {
-    if ("deltaX" in evt) {
-        var mode = getDeltaMode(evt.deltaMode);
-        return {
-            x: evt.deltaX / DELTA_SCALE.STANDARD * mode,
-            y: evt.deltaY / DELTA_SCALE.STANDARD * mode
-        };
-    }
-    if ("wheelDeltaX" in evt) return {
-        x: evt.wheelDeltaX / DELTA_SCALE.OTHERS,
-        y: evt.wheelDeltaY / DELTA_SCALE.OTHERS
-    };
-    // ie with touchpad
-    return {
-        x: 0,
-        y: evt.wheelDelta / DELTA_SCALE.OTHERS
-    };
-}
-
-},{"../utils/":"jzGiI","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7J5rq":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "attachStyle", ()=>attachStyle);
-parcelHelpers.export(exports, "detachStyle", ()=>detachStyle);
-var TRACK_BG = "rgba(222, 222, 222, .75)";
-var THUMB_BG = "rgba(0, 0, 0, .5)";
-// sets content's display type to `flow-root` to suppress margin collapsing
-var SCROLLBAR_STYLE = "\n[data-scrollbar] {\n  display: block;\n  position: relative;\n}\n\n.scroll-content {\n  display: flow-root;\n  -webkit-transform: translate3d(0, 0, 0);\n          transform: translate3d(0, 0, 0);\n}\n\n.scrollbar-track {\n  position: absolute;\n  opacity: 0;\n  z-index: 1;\n  background: " + TRACK_BG + ";\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n  -webkit-transition: opacity 0.5s 0.5s ease-out;\n          transition: opacity 0.5s 0.5s ease-out;\n}\n.scrollbar-track.show,\n.scrollbar-track:hover {\n  opacity: 1;\n  -webkit-transition-delay: 0s;\n          transition-delay: 0s;\n}\n\n.scrollbar-track-x {\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 8px;\n}\n.scrollbar-track-y {\n  top: 0;\n  right: 0;\n  width: 8px;\n  height: 100%;\n}\n.scrollbar-thumb {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 8px;\n  height: 8px;\n  background: " + THUMB_BG + ";\n  border-radius: 4px;\n}\n";
-var STYLE_ID = "smooth-scrollbar-style";
-var isStyleAttached = false;
-function attachStyle() {
-    if (isStyleAttached || typeof window === "undefined") return;
-    var styleEl = document.createElement("style");
-    styleEl.id = STYLE_ID;
-    styleEl.textContent = SCROLLBAR_STYLE;
-    if (document.head) document.head.appendChild(styleEl);
-    isStyleAttached = true;
-}
-function detachStyle() {
-    if (!isStyleAttached || typeof window === "undefined") return;
-    var styleEl = document.getElementById(STYLE_ID);
-    if (!styleEl || !styleEl.parentNode) return;
-    styleEl.parentNode.removeChild(styleEl);
-    isStyleAttached = false;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"dp9pL":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ScrollbarModalPlugin", ()=>ScrollbarModalPlugin);
-var _smoothScrollbar = require("smooth-scrollbar");
-class ScrollbarModalPlugin extends (0, _smoothScrollbar.ScrollbarPlugin) {
-    static pluginName = "modal";
-    static defaultOptions = {
-        open: false
-    };
-    transformDelta(delta) {
-        return this.options.open ? {
-            x: 0,
-            y: 0
-        } : delta;
-    }
-}
-
-},{"smooth-scrollbar":"7azJf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"l9NP1":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "ScrollbarScreenStopPlugin", ()=>ScrollbarScreenStopPlugin);
-var _smoothScrollbar = require("smooth-scrollbar");
-class ScrollbarScreenStopPlugin extends (0, _smoothScrollbar.ScrollbarPlugin) {
-    static pluginName = "screenStop";
-    static defaultOptions = {
-        points: []
-    };
-    onRender(remainMomentum) {
-        // remainMomentum {x: 0, y: 0}
-        if (!remainMomentum.y) return;
-        const direction = remainMomentum.y / Math.abs(remainMomentum.y);
-        let nextPointMatch;
-        this.options.points.forEach((p, index)=>{
-            if (direction === 1) {
-                if (this.scrollbar.scrollTop < p && index === 0) nextPointMatch = p;
-                if (this.scrollbar.scrollTop < p && this.scrollbar.scrollTop > this.options.points[index - 1]) nextPointMatch = p;
-            } else {
-                if (this.scrollbar.scrollTop > p && index === this.options.points.length - 1) nextPointMatch = p;
-                if (this.scrollbar.scrollTop < p && this.scrollbar.scrollTop > this.options.points[index - 1]) nextPointMatch = this.options.points[index - 1];
-            }
-        });
-        if (!nextPointMatch) return;
-        if (direction === 1 && this.scrollbar.scrollTop + remainMomentum.y >= nextPointMatch) this.scrollbar.setMomentum(0, direction * (nextPointMatch - this.scrollbar.scrollTop));
-        if (direction === -1 && this.scrollbar.scrollTop + remainMomentum.y <= nextPointMatch) this.scrollbar.setMomentum(0, direction * (this.scrollbar.scrollTop - nextPointMatch));
-    }
-}
-
-},{"smooth-scrollbar":"7azJf","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jD6i0":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "scrollTriggerFactory", ()=>scrollTriggerFactory);
-parcelHelpers.export(exports, "scrollDebug", ()=>scrollDebug);
-var _scrollTrigger = require("gsap/dist/ScrollTrigger");
-var _gsap = require("gsap");
-let isDebugMode = false;
-if (typeof window !== "undefined") isDebugMode = !!localStorage?.getItem("isDebugMode");
-function scrollTriggerFactory(scrollerEl, triggerEl, updateHandler) {
-    return (id, startFromTop, endFromTop, scrollerStart = "top", scrollerEnd = "top", elStart = "top", elEnd = "top")=>{
-        const trigger = (0, _scrollTrigger.ScrollTrigger).create({
-            id: id,
-            markers: isDebugMode && id.indexOf("Horizontal") === -1 ? {
-                startColor: "red",
-                endColor: "orange",
-                fontSize: "18px"
-            } : false,
-            scroller: scrollerEl,
-            trigger: triggerEl,
-            start: `${elStart}+=${startFromTop} ${scrollerStart}`,
-            end: `${elEnd}+=${endFromTop} ${scrollerEnd}`,
-            onUpdate: updateHandler,
-            invalidateOnRefresh: true,
-            fastScrollEnd: true,
-            // leads to bug with Slider do not uncomment it
-            // preventOverlaps: true,
-            anticipatePin: true
-        });
-        // scrollDistance
-        return trigger;
-    };
-}
-function scrollDebug(bodyScrollBar) {
-    if (isDebugMode) bodyScrollBar.addListener(({ offset  })=>{
-        (0, _gsap.gsap).set([
-            ...document.querySelectorAll(".gsap-marker-end"),
-            ...document.querySelectorAll(".gsap-marker-start"),
-            ...document.querySelectorAll(".gsap-marker-scroller-start"),
-            ...document.querySelectorAll(".gsap-marker-scroller-end")
-        ], {
-            marginTop: -offset.y
-        });
-    });
-}
-
-},{"gsap/dist/ScrollTrigger":"CiOCQ","gsap":"fPSuC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7tcvy":[function(require,module,exports) {
+},{"./gsap-core.js":"05eeC","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"7tcvy":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "getHeightsSum", ()=>getHeightsSum);
@@ -9875,18 +9881,6 @@ function resizeDetector(allScreensEl) {
     };
     resizeDetectorFn = resizeDetectorFn.bind(null, getHeightsSum(allScreensEl));
     setTimeout(resizeDetectorFn, 2000);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8THqZ":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "el", ()=>el);
-parcelHelpers.export(exports, "els", ()=>els);
-function el(selector) {
-    return document.querySelector(selector);
-}
-function els(selector) {
-    return document.querySelectorAll(selector);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8LIzr":[function(require,module,exports) {
@@ -10339,29 +10333,108 @@ let globalState = {
             "to_top_button_title": "Back to top"
         }
     },
-    activePopupId: null
+    activePopupId: null,
+    activePopupScreen: null,
+    cursorState: null,
+    scroll3width: 0,
+    scroll8width: 0,
+    burger: false,
+    scrollPage: "",
+    activeRowIndex: 0,
+    imageNumber: 0,
+    formValid: true,
+    buttonClick: 0,
+    formSended: false,
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    projectDetails: "",
+    nameDirty: false,
+    companyDirty: false,
+    emailDirty: false,
+    phoneDirty: false,
+    projectDetailsDirty: false,
+    nameError: "Required field!",
+    companyError: "Required field!",
+    emailError: "Required field!",
+    phoneError: "Required field!"
 };
-const listeners = [];
+const listeners = {
+    all: [],
+    scrollTriggers: [],
+    counter: [],
+    cmsData: [],
+    activePopupId: [],
+    activePopupScreen: [],
+    cursorState: [],
+    scroll3width: [],
+    scroll8width: [],
+    burger: [],
+    scrollPage: [],
+    activeRowIndex: [],
+    imageNumber: [],
+    formValid: [],
+    buttonClick: [],
+    formSended: [],
+    name: [],
+    company: [],
+    email: [],
+    phone: [],
+    projectDetails: [],
+    nameDirty: [],
+    companyDirty: [],
+    emailDirty: [],
+    phoneDirty: [],
+    projectDetailsDirty: [],
+    nameError: [],
+    companyError: [],
+    emailError: [],
+    phoneError: []
+};
 function updateState(newState) {
     globalState = {
         ...newState
     };
-    listeners.forEach((fn)=>fn(globalState));
+    listeners.all.forEach((fn)=>fn(globalState));
 }
 function updateOneState(key, object) {
-    globalState[key] = object, listeners.forEach((fn)=>fn(globalState));
+    globalState[key] = object, listeners[key].forEach((fn)=>fn(globalState));
 }
 function getState() {
     return globalState;
 }
-function selectState(fn, key) {
-    if (listeners.indexOf(fn) === -1) listeners.push(fn);
-    if (key) fn(globalState[key]);
-    else fn(globalState);
+function selectState(fn, ...keys) {
+    if (keys) for (let item of keys){
+        if (listeners[item].indexOf(fn) === -1) listeners[item].push(fn);
+        fn(globalState[item]);
+    }
+    else {
+        if (listeners.all.indexOf(fn) === -1) listeners.all.push(fn);
+        fn(globalState);
+    }
 }
-function unsubscribe(fn) {
-    const index = listeners.indexOf(fn);
-    if (index !== -1) listeners.splice(index, 1);
+function unsubscribe(fn, ...keys) {
+    if (keys) for (let key of keys){
+        const index = listeners[key].indexOf(fn);
+        if (index !== -1) listeners[key].splice(index, 1);
+    }
+    else {
+        const index1 = listeners.all.indexOf(fn);
+        if (index1 !== -1) listeners.all.splice(index1, 1);
+    }
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8THqZ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "el", ()=>el);
+parcelHelpers.export(exports, "els", ()=>els);
+function el(selector) {
+    return document.querySelector(selector);
+}
+function els(selector) {
+    return document.querySelectorAll(selector);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["iJYvl","h7u1C"], "h7u1C", "parcelRequireb921")

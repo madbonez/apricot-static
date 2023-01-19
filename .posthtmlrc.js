@@ -14,9 +14,10 @@ const plugins = {
             "header": [{
                 "logo": "A|Apricot",
 
-                "menu": [{",title": "About us", "link": "about"}, {"title": "Technology", "link": "technology"}, {
-                    "title": "Applying",
-                    "link": "applying"
+                "menu": [
+                    {"title": "About us", "link": "about"},
+                    {"title": "Technology", "link": "technology"},
+                    {"title": "Applying", "link": "applying"
                 }, {"title": "Bennefits", "link": "bennefits"}, {"title": "Projects", "link": "projects"}, {
                     "title": "Steps",
                     "link": "steps"
@@ -35,7 +36,7 @@ const plugins = {
                     }
                 ],
                 "button_title": "Get in touch",
-                "button_title_mobile": "Get <br\/> in touch"
+                "button_title_mobile": "Get in touch"
             }],
             "block_1": [{
                 "title_1": "Own",
@@ -48,6 +49,7 @@ const plugins = {
                 "video_preview_image": "./public/image/screen2/1.png"
             }],
             "block_3" : [{
+                "block_index": "3",
                 "title": "About us",
                 "text": "Apricot is a startup in the field of Immersive Technologies",
                 "slides": [{
@@ -62,6 +64,7 @@ const plugins = {
                 }]
             }],
             "block_4" : [{
+                "block_index": "4",
                 "title": "Our Goals",
                 "text": "Creation of breakthrough technologies in the field of training simulators and Industry 4.0"
             }],
@@ -195,6 +198,7 @@ const plugins = {
                 }]
             }],
             "block_8": [{
+                "block_index": "8",
                 "title": "Benefits",
                 "slides": [{
                     "text": "Achieving a significant economic effect in the process of training and operation",
@@ -260,6 +264,7 @@ const plugins = {
                 }]
             }],
             "block_10": [{
+                "block_index": "10",
                 "title": "Steps",
         "text" : "Step-by-step process from application, information exchange, technical assignment, contract and finished product",
                 "elements": [{"text": "Application form"}, {"text": "Initial call with discussion of the task"}, {"text": "Exchange of materials (drawings, models, photos, videos)"}, {"text": "Technical description"}, {"text": "Approval of the terms of reference"}, {"text": "Commercial offer and contract signing"}, {"text": "Completing the task"}]

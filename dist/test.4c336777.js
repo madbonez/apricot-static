@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"5OCld":[function(require,module,exports) {
+})({"3BI3J":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "33004fee30b2d7e4";
+module.bundle.HMR_BUNDLE_ID = "4127b72c4c336777";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -531,116 +531,12 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"hhrN8":[function(require,module,exports) {
+},{}],"ksoBN":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "main", ()=>main);
-var _utils = require("../utils/utils");
-var _state = require("../state/state");
-var _gsap = require("gsap");
-var _dom = require("../utils/dom");
-const id = "#footer";
-function main() {
-    const orangeText = (0, _dom.el)("#footer .orangeText");
-    const socialAnimation = (0, _dom.els)("#footer .socialAnimation");
-    const infoLinks = (0, _dom.el)("#footer .infoLinksInnerDiv");
-    const buttonBack = (0, _dom.el)("#footer .buttonBack");
-    orangeText.addEventListener("mouseover", (e)=>onMouseOverOrangeText(e));
-    orangeText.addEventListener("mouseleave", (e)=>onMouseLeaveOrangeText(e));
-    for(let i = 0; i < socialAnimation.length; i++){
-        socialAnimation[i].addEventListener("mouseover", (e)=>onMouseOverSocial(socialAnimation[i].dataset.index));
-        socialAnimation[i].addEventListener("mouseleave", (e)=>onMouseLeaveSocial(socialAnimation[i].dataset.index));
-    }
-    infoLinks.addEventListener("mouseover", ()=>onMouseOverLinks());
-    infoLinks.addEventListener("mouseleave", ()=>onMouseLeaveLinks());
-    buttonBack.addEventListener("mouseover", ()=>onMouseOverTop());
-    buttonBack.addEventListener("mouseleave", ()=>onMouseLeaveTop());
-    buttonBack.addEventListener("click", ()=>(0, _state.updateOneState)("scrollPage", "top"));
-    const onMouseOverOrangeText = (e)=>{
-        (0, _gsap.gsap).timeline().to(e.target, {
-            color: getComputedStyle(window.document.body).getPropertyValue("--orange"),
-            duration: 0.8,
-            ease: "power4.out"
-        });
-    };
-    const onMouseLeaveOrangeText = (e)=>{
-        (0, _gsap.gsap).timeline().to(e.target, {
-            color: getComputedStyle(window.document.body).getPropertyValue("--white"),
-            duration: 0.8,
-            ease: "power4.out"
-        });
-    };
-    const onMouseOverSocial = (id)=>{
-        (0, _gsap.gsap).timeline().to(`.socialAnimation${id} svg`, {
-            color: getComputedStyle(window.document.body).getPropertyValue("--orange"),
-            duration: 0.4,
-            ease: "power4.out"
-        });
-    };
-    const onMouseLeaveSocial = (id)=>{
-        (0, _gsap.gsap).timeline().to(`.socialAnimation${id} svg`, {
-            color: getComputedStyle(window.document.body).getPropertyValue("--white"),
-            duration: 0.4,
-            ease: "power4.out"
-        });
-    };
-    const onMouseOverTop = ()=>{
-        (0, _gsap.gsap).timeline().to(".arrow", {
-            y: -30,
-            duration: 0.6,
-            ease: "power4.out"
-        }).to(".textToTop", {
-            color: getComputedStyle(window.document.body).getPropertyValue("--orange"),
-            duration: 0.6,
-            ease: "power4.out"
-        }, "<").to(".arrowAnimation", {
-            y: -30,
-            duration: 0.6,
-            ease: "power4.out"
-        }, "<");
-    };
-    const onMouseLeaveTop = ()=>{
-        (0, _gsap.gsap).timeline().to(".arrow", {
-            y: 0,
-            duration: 0.6,
-            ease: "power4.out"
-        }).to(".textToTop", {
-            color: getComputedStyle(window.document.body).getPropertyValue("--white"),
-            duration: 0.6,
-            ease: "power4.out"
-        }, "<").to(".arrowAnimation", {
-            y: 0,
-            duration: 0.6,
-            ease: "power4.out"
-        }, "<");
-    };
-    const onMouseOverLinks = ()=>{
-        (0, _gsap.gsap).timeline().to(".infoLink", {
-            y: -25,
-            duration: 0.6,
-            ease: "power4.out",
-            color: getComputedStyle(window.document.body).getPropertyValue("--orange")
-        }).to(".actionInfoLinks", {
-            y: -20,
-            duration: 0.6,
-            ease: "power4.out"
-        }, "<");
-    };
-    const onMouseLeaveLinks = ()=>{
-        (0, _gsap.gsap).timeline().to(".infoLink", {
-            y: 0,
-            duration: 0.6,
-            ease: "power4.out",
-            color: getComputedStyle(window.document.body).getPropertyValue("--white")
-        }).to(".actionInfoLinks", {
-            y: 0,
-            duration: 0.6,
-            ease: "power4.out"
-        }, "<");
-    };
-}
-(0, _utils.onDomReady)(main);
+parcelHelpers.export(exports, "ABC", ()=>ABC);
+const ABC = Date.now();
 
-},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["5OCld","hhrN8"], "hhrN8", "parcelRequireb921")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["3BI3J"], null, "parcelRequireb921")
 
-//# sourceMappingURL=index.30b2d7e4.js.map
+//# sourceMappingURL=test.4c336777.js.map

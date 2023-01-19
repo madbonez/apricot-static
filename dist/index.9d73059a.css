@@ -388,6 +388,14 @@
   }
 }
 
+#screen6 .imageContainer .imageRef {
+  display: none;
+}
+
+#screen6 .imageContainer .imageRef.visible {
+  display: block;
+}
+
 #screen6 .imageContainer img {
   max-width: unset;
   width: 100%;
@@ -493,10 +501,6 @@
   }
 }
 
-#screen6 .accordion > li > ul.itemlistactive {
-  height: auto;
-}
-
 #screen6 .accordion > li > ul > li {
   padding-bottom: 16px;
 }
@@ -524,6 +528,7 @@
 }
 
 #screen6 .accordion > li.active > ul {
+  height: auto;
   max-height: unset;
   padding-bottom: 1px;
   overflow: hidden;

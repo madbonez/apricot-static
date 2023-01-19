@@ -1,6 +1,6 @@
 @import "./src/styles/utils";
 
-#slider {
+.slider {
   .fixedContainer {
     // @include padding-x(270px,56px, 20px);
     overflow: scroll;
@@ -15,13 +15,13 @@
     display: none;
   }
 
-  .slider {
+  .sliderRef {
     min-height: 320px;
     max-height: 560px;
     height: min(560px, 55vh);
     position: relative;
     margin-left: calc(100vw / 2 - 600px);
- //   transform: translateX(100%);
+    transform: translateX(100%);
     cursor: none !important;
   }
 
@@ -91,7 +91,7 @@
 
 
   @media all and (max-width: 1200px) {
-    .slider {
+    .sliderRef {
       height: min(460px, 55vh);
       @include margin-l(120px, 56px,20px)
     }
@@ -105,7 +105,7 @@
     .fixedContainer {
       cursor: auto !important;
     }
-    .slider {
+    .sliderRef {
       cursor: move !important;
     }
   }
@@ -116,7 +116,7 @@
       @include margin-l(120px, 56px,20px)
     }
 
-    .slider {
+    .sliderRef {
       height: min(350px, 55vh);
     }
     .circle {
@@ -126,7 +126,7 @@
   }
 
   @media all and (max-width: 640px) {
-    .slider {
+    .sliderRef {
       height: min(300px, 50vh);
     }
     .circle {
