@@ -579,7 +579,6 @@ function main() {
     //   previousPopupId(9);
     };
     (0, _state.selectState)((newState)=>{
-        console.log((0, _state.getState)().activePopupId, (0, _state.getState)().activePopupScreen);
         if ((0, _state.getState)().activePopupId !== null) {
             popupRef.classList.add("active");
             if ((0, _state.getState)().activePopupScreen === "7") {

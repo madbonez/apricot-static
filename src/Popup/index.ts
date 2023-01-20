@@ -54,7 +54,7 @@ export function main() {
     }
 
     selectState((newState: GlobalState) => {
-            console.log(getState().activePopupId, getState().activePopupScreen)
+
             if (getState().activePopupId !== null ){
                 popupRef.classList.add('active')
                 if (getState().activePopupScreen === '7'){

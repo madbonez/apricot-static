@@ -46,8 +46,6 @@ export function main() {
         }
 
         const onClickHandler = () => {
-            console.log('asdasd')
-
             gsap.to(circle, {
                 scale: 12,
                 duration: 0.6,

@@ -567,7 +567,6 @@ function main() {
         const index = el('.contentBlock').dataset.block;
     }
 
-    console.log(index)
 
     const scrollTriggers = getState().scrollTriggers[`screen${index}Enter`]*/ }
 (0, _utils.onDomReady)(main);

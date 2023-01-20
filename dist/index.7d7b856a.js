@@ -552,7 +552,7 @@ function main() {
     let FontFaceObserver = require("5cd20d596cadbb0d");
     let font = new FontFaceObserver("Inter-SemiBold");
     font.load(null, 30000).then(()=>{
-        const heightGradient = screen11Ref.getBoundingClientRect().bottom - lqButtonRef.getBoundingClientRect().top;
+        let heightGradient = screen11Ref.getBoundingClientRect().bottom - lqButtonRef.getBoundingClientRect().top;
         let size, radius, font;
         if (window.innerWidth > 1400) {
             size = 500;
@@ -579,6 +579,7 @@ function main() {
                 fontFamily: "Inter-SemiBold"
             };
         }
+        if (window.innerWidth <= 640) heightGradient = 0;
         let lqButton = new (0, _lqButton.LqButton)(lqButtonRef, innerRef.dataset.text, false, color1, "0xffffff", heightGradient, font, size, radius);
     });
 }

@@ -815,7 +815,18 @@ function main() {
         // next
         let deltaStart3 = (0, _utils.height)(screen3Ref) > viewportHeight + 120 ? (0, _utils.height)(screen3Ref) - viewportHeight - 120 : 0;
         let startScreen3Horizontal = endScreen1 + (0, _utils.height)(screen2Ref) - 2 * videoOverlap / 3 + deltaStart3;
-        let endScreen3Horizontal = window.innerWidth > 900 && !(0, _utils.isTouchDevice)() ? startScreen3Horizontal + (0, _utils.scrollWidth)(screen3SliderRef) - (0, _utils.height)(screen3SliderRef) : startScreen3Horizontal;
+        let screen3Circles = (0, _dom.els)("#screen3 .slider .circle");
+        let screen3CircleWidth = screen3Circles[0].offsetHeight;
+        let screen3Overlap = screen3CircleWidth * 0.1 > 60 ? 60 : screen3CircleWidth * 0.1;
+        let screen3Accumulator = 0;
+        screen3Circles.forEach((circle, index)=>{
+            let offset = index === 0 ? 0 : screen3Overlap;
+            (0, _gsap.gsap).set(circle, {
+                x: screen3CircleWidth * index - offset * index
+            });
+            screen3Accumulator += screen3CircleWidth - offset;
+        });
+        let endScreen3Horizontal = window.innerWidth > 900 && !(0, _utils.isTouchDevice)() ? startScreen3Horizontal + screen3Accumulator - (0, _utils.height)(screen3SliderRef) : startScreen3Horizontal;
         const screen3HorizontalTrigger = createScrollTrigger("screen3Horizontal", startScreen3Horizontal, endScreen3Horizontal);
         scrollTriggers = {
             ...scrollTriggers,
@@ -855,7 +866,18 @@ function main() {
                 const screenIdHorizontal = `${screenId}Horizontal`;
                 startScreenHorizontalTrigger = lastEndScrollTrigger;
                 if (screenId === "screen8") startScreenHorizontalTrigger += deltaStart8;
-                const distance = screenId === "screen5" ? (0, _utils.height)(screen5SliderRef) : window.innerWidth > 900 && !(0, _utils.isTouchDevice)() ? (0, _utils.scrollWidth)(screen8SliderRef) - (0, _utils.height)(screen3SliderRef) : 0;
+                let screen8Circles = (0, _dom.els)("#screen8 .slider .circle");
+                let screen8CircleWidth = screen8Circles[0].offsetHeight;
+                let screen8Overlap = screen8CircleWidth * 0.1 > 60 ? 60 : screen8CircleWidth * 0.1;
+                let screen8Accumulator = 0;
+                screen8Circles.forEach((circle, index)=>{
+                    let offset = index === 0 ? 0 : screen8Overlap;
+                    (0, _gsap.gsap).set(circle, {
+                        x: screen8CircleWidth * index - offset * index
+                    });
+                    screen8Accumulator += screen8CircleWidth - offset;
+                });
+                const distance = screenId === "screen5" ? (0, _utils.height)(screen5SliderRef) : window.innerWidth > 900 && !(0, _utils.isTouchDevice)() ? screen8Accumulator - (0, _utils.height)(screen3SliderRef) : 0;
                 endScrollHorizontalTrigger = startScreenHorizontalTrigger + distance;
                 const screenHorizontalTrigger = createScrollTrigger(screenIdHorizontal, startScreenHorizontalTrigger, endScrollHorizontalTrigger);
                 const horizontalDistance = endScrollHorizontalTrigger - startScreenHorizontalTrigger;
@@ -974,35 +996,7 @@ function main() {
     footerRef = (0, _dom.el)("#footer");
     submitButtonRef = (0, _dom.el)("#submit-button");
     followCursorRef = (0, _dom.el)("#cursor");
-    // const changeCursorState = (state) => {
-    //     setCursorState(state);
-    // }
-    //
-    // const changePopupId = (id, screen) => {
-    //     setPopupId(id);
-    //     setPopupScreen(screen);
-    // }
-    /*     const nextPopupId = (screen) => {
-             setPopupId((id) => {
-                 if (id + 1 < cmsData.block_8.elements.length) {
-                     return id + 1;
-                 } else {
-                     return 0;
-                 }
-             });
-             setPopupScreen(screen);
-         }
-
-         const previousPopupId = (screen) => {
-             setPopupId((id) => {
-                 if (id === 0) {
-                     return cmsData.block_8.elements.length - 1;
-                 } else {
-                     return id - 1;
-                 }
-             });
-             setPopupScreen(screen);
-         }*/ onScrollToSection = (section)=>{
+    onScrollToSection = (section)=>{
         const duration = 2000;
         switch(section){
             case "about":

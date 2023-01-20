@@ -575,7 +575,6 @@ function main() {
             });
         };
         const onClickHandler = ()=>{
-            console.log("asdasd");
             (0, _gsap.gsap).to(circle, {
                 scale: 12,
                 duration: 0.6,

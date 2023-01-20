@@ -548,6 +548,7 @@ function main() {
     const inputEmail = (0, _dom.el)("#inputEmail");
     const inputPhone = (0, _dom.el)("#inputPhone");
     const inputProjectDetails = (0, _dom.el)("#inputProjectDetails");
+    const submitButtonMob = (0, _dom.el)("#formRef .submitButton");
     inputNames.addEventListener("input", (e)=>nameHandler(e));
     inputNames.addEventListener("blur", (e)=>blurHandler(e));
     inputCompany.addEventListener("input", (e)=>companyHandler(e));
@@ -558,6 +559,9 @@ function main() {
     inputPhone.addEventListener("blur", (e)=>blurHandler(e));
     inputProjectDetails.addEventListener("input", (e)=>projectDetailsHandler(e));
     inputProjectDetails.addEventListener("blur", (e)=>blurHandler(e));
+    submitButtonMob.addEventListener("click", ()=>{
+        (0, _state.updateOneState)("buttonClick", (0, _state.getState)().buttonClick + 1);
+    });
     (0, _state.selectState)((newState)=>{
         if ((0, _state.getState)().nameDirty) inputNames.classList.add("checked");
         else inputNames.classList.remove("checked");
@@ -567,7 +571,6 @@ function main() {
         else inputCompany.classList.remove("checked");
     }, "companyDirty");
     (0, _state.selectState)((newState)=>{
-        console.log("emailDirty");
         if ((0, _state.getState)().emailDirty) inputEmail.classList.add("checked");
         else inputEmail.classList.remove("checked");
     }, "emailDirty");
@@ -706,7 +709,7 @@ function main() {
             (0, _state.updateOneState)("companyDirty", true);
             (0, _state.updateOneState)("emailDirty", true);
             (0, _state.updateOneState)("phoneDirty", true);
-            (0, _state.updateOneState)("projectdetailsDirty", true);
+            (0, _state.updateOneState)("projectDetailsDirty", true);
         }
     };
     const nameHandler = (e)=>{

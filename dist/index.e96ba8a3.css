@@ -437,7 +437,7 @@
 }
 
 @media (max-width: 640px) {
-  #buttonArrow .circleGroup {
+  .buttonArrowRef .circleGroup {
     width: 20px;
     height: 20px;
     right: 16px;

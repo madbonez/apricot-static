@@ -4,7 +4,7 @@ import {initSmoothScrollbar} from "./utils/initSmoothScrollbar";
 import {scrollDebug, scrollTriggerFactory} from "./utils/scrollTrigger";
 import {resizeDetector} from "./utils/heights";
 import {getState, GlobalState, selectState, updateOneState} from './state/state';
-import {el} from "./utils/dom";
+import {el, els} from "./utils/dom";
 import {gsap} from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -345,7 +345,18 @@ export function main() {
         // next
         let deltaStart3 = height(screen3Ref) > viewportHeight + 120 ? height(screen3Ref) - viewportHeight - 120 : 0
         let startScreen3Horizontal = endScreen1 + height(screen2Ref) - 2 * videoOverlap / 3 + deltaStart3;
-        let endScreen3Horizontal = (window.innerWidth > 900 && !isTouchDevice()) ? startScreen3Horizontal + scrollWidth(screen3SliderRef) - height(screen3SliderRef) : startScreen3Horizontal;
+        let screen3Circles = els('#screen3 .slider .circle')
+        let screen3CircleWidth = screen3Circles[0].offsetHeight;
+        let screen3Overlap = screen3CircleWidth * 0.1 > 60 ? 60 : screen3CircleWidth * 0.1;
+        let screen3Accumulator = 0;
+        screen3Circles.forEach((circle: any, index) => {
+            let offset = index === 0 ? 0 : screen3Overlap;
+            gsap.set(circle, {
+                x: screen3CircleWidth  * index - offset * index,
+            })
+            screen3Accumulator += screen3CircleWidth  - offset;
+        })
+        let endScreen3Horizontal = (window.innerWidth > 900 && !isTouchDevice()) ? startScreen3Horizontal + screen3Accumulator - height(screen3SliderRef) : startScreen3Horizontal;
         const screen3HorizontalTrigger = createScrollTrigger('screen3Horizontal', startScreen3Horizontal, endScreen3Horizontal);
 
         scrollTriggers = {
@@ -401,7 +412,18 @@ export function main() {
                 if (screenId === 'screen8') {
                     startScreenHorizontalTrigger += deltaStart8
                 }
-                const distance = screenId === 'screen5' ? height(screen5SliderRef) : (window.innerWidth > 900 && !isTouchDevice()) ? scrollWidth(screen8SliderRef) - height(screen3SliderRef) : 0;
+                let screen8Circles = els('#screen8 .slider .circle')
+                let screen8CircleWidth = screen8Circles[0].offsetHeight;
+                let screen8Overlap = screen8CircleWidth * 0.1 > 60 ? 60 : screen8CircleWidth * 0.1;
+                let screen8Accumulator = 0;
+                screen8Circles.forEach((circle: any, index) => {
+                    let offset = index === 0 ? 0 : screen8Overlap;
+                    gsap.set(circle, {
+                        x: screen8CircleWidth  * index - offset * index,
+                    })
+                    screen8Accumulator += screen8CircleWidth  - offset;
+                })
+                const distance = screenId === 'screen5' ? height(screen5SliderRef) : (window.innerWidth > 900 && !isTouchDevice()) ? screen8Accumulator - height(screen3SliderRef) : 0;
                 endScrollHorizontalTrigger = startScreenHorizontalTrigger + distance;
 
                 const screenHorizontalTrigger = createScrollTrigger(
@@ -555,37 +577,6 @@ export function main() {
     submitButtonRef = el("#submit-button");
     followCursorRef = el("#cursor");
 
-    // const changeCursorState = (state) => {
-    //     setCursorState(state);
-    // }
-    //
-    // const changePopupId = (id, screen) => {
-    //     setPopupId(id);
-    //     setPopupScreen(screen);
-    // }
-
-    /*     const nextPopupId = (screen) => {
-             setPopupId((id) => {
-                 if (id + 1 < cmsData.block_8.elements.length) {
-                     return id + 1;
-                 } else {
-                     return 0;
-                 }
-             });
-             setPopupScreen(screen);
-         }
-
-         const previousPopupId = (screen) => {
-             setPopupId((id) => {
-                 if (id === 0) {
-                     return cmsData.block_8.elements.length - 1;
-                 } else {
-                     return id - 1;
-                 }
-             });
-             setPopupScreen(screen);
-         }*/
-
     onScrollToSection = (section) => {
         const duration = 2000;
         switch (section) {
@@ -656,8 +647,6 @@ export function main() {
         ...commonScreens,
         ...footerScreens,
     ];
-
-
 
     initWindowStaff();
     bodyScrollBar = initSmoothScrollbar(topContainerRef);

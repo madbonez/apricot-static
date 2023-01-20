@@ -6,7 +6,7 @@ import {el, els} from "../utils/dom";
 const id = '#footer'
 export function main() {
 
-    const orangeText = el('#footer .orangeText')
+    const orangeText = el('#footer .orangeText a')
     const socialAnimation = els('#footer .socialAnimation')
     const infoLinks = el('#footer .infoLinksInnerDiv')
     const buttonBack = el('#footer .buttonBack')

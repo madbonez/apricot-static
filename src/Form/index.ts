@@ -14,6 +14,7 @@ export function main() {
     const inputEmail = el('#inputEmail')
     const inputPhone = el('#inputPhone')
     const inputProjectDetails = el('#inputProjectDetails')
+    const submitButtonMob = el ('#formRef .submitButton')
 
     inputNames.addEventListener('input', e => nameHandler(e))
     inputNames.addEventListener('blur', e => blurHandler(e))
@@ -25,6 +26,7 @@ export function main() {
     inputPhone.addEventListener('blur', e => blurHandler(e))
     inputProjectDetails.addEventListener('input', e => projectDetailsHandler(e))
     inputProjectDetails.addEventListener('blur', e => blurHandler(e))
+    submitButtonMob.addEventListener('click', ()=>{updateOneState('buttonClick', getState().buttonClick +1)})
 
     selectState((newState: GlobalState) =>  {
         if (getState().nameDirty){
@@ -43,7 +45,6 @@ export function main() {
     }, 'companyDirty')
 
     selectState((newState: GlobalState) =>  {
-        console.log('emailDirty')
         if (getState().emailDirty){
             inputEmail.classList.add('checked')
         } else {
@@ -218,9 +219,8 @@ export function main() {
             updateOneState('companyDirty', true)
             updateOneState('emailDirty', true)
             updateOneState('phoneDirty', true)
-            updateOneState('projectdetailsDirty', true)
+            updateOneState('projectDetailsDirty', true)
         }
-
     }
 
     const nameHandler = (e) => {

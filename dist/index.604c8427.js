@@ -543,7 +543,6 @@ var _draggable = require("gsap/dist/Draggable");
 var _dom = require("../utils/dom");
 function main() {
     const sliders = (0, _dom.els)(".slider");
-    console.log(sliders);
     for(let ii = 0; ii < sliders.length; ii++){
         const slider = sliders[ii];
         const slides = slider.querySelectorAll(".circleImage");
@@ -571,7 +570,6 @@ function main() {
         (0, _gsap.gsap).context(()=>{
             let allCircles = (0, _gsap.gsap).utils.toArray(slider.querySelectorAll(".circle"));
             circleWidth = allCircles[0].offsetHeight;
-            console.log(circleWidth);
             overlap = circleWidth * 0.1 > 60 ? 60 : circleWidth * 0.1;
             let accumulator = 0;
             allCircles.forEach((circle, index)=>{
@@ -591,14 +589,10 @@ function main() {
             sliderRef.addEventListener("mouseleave", (e)=>handleCursorFolowLeave(e), false);
         }
         const handleCursorFolowEnter = (e)=>{
-            console.log("slider enter");
             (0, _state.updateOneState)("cursorState", "enter");
-            console.log((0, _state.getState)().cursorState);
         };
         const handleCursorFolowLeave = (e)=>{
-            console.log("slider leave");
             (0, _state.updateOneState)("cursorState", "leave");
-            console.log((0, _state.getState)().cursorState);
         };
         const indicatorChange = (id)=>{
             (0, _gsap.gsap).context(()=>{
@@ -853,7 +847,6 @@ function main() {
             const mapperX = window.innerWidth > 900 && !(0, _utils.isTouchDevice)() ? (0, _gsap.gsap).utils.mapRange(0, scrollTrigger?.end - scrollTrigger?.start, 0, 1) : (0, _gsap.gsap).utils.mapRange(0, (circleWidth - overlap) * (slides.length * 2 - 1), 0, 1);
             const startDragHandle = (e)=>{
                 if (endDragTween?.isActive()) return;
-                console.log("slider drag");
                 (0, _state.updateOneState)("cursorState", "toSmall");
                 startDrag = e.clientX ? e.clientX : e.changedTouches?.[0]?.clientX;
                 progress = timeline.progress();

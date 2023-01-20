@@ -5,8 +5,8 @@
     position: absolute;
     //   top: calc(var(--vh, 1vh) * 100);
     z-index: 100;
-    width: 400px;
-    height: 400px;
+    width: 420px;
+    height: 420px;
     right: 120px;
   }
 
@@ -36,7 +36,7 @@
 
   @media all and (max-width: 1440px) {
      &.submit-button_container{
-      right:  0px
+      right:  40px
     }
   }
 

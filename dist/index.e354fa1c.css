@@ -286,8 +286,8 @@
 
 #submit-button.submit-button_container {
   z-index: 100;
-  width: 400px;
-  height: 400px;
+  width: 420px;
+  height: 420px;
   position: absolute;
   right: 120px;
 }
@@ -317,7 +317,7 @@
 
 @media (max-width: 1440px) {
   #submit-button.submit-button_container {
-    right: 0;
+    right: 40px;
   }
 }
 

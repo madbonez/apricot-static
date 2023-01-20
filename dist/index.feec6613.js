@@ -575,7 +575,6 @@ function main() {
         else imageRef[i].classList.remove("visible");
     }, "imageNumber");
     const handleClick = (index)=>{
-        console.log("click");
         (0, _state.updateOneState)("imageNumber", (0, _utils.getRandomInt)(4));
         index === (0, _state.getState)().activeRowIndex ? (0, _state.updateOneState)("activeRowIndex", undefined) : (0, _state.updateOneState)("activeRowIndex", index);
     };

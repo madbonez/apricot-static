@@ -57,7 +57,6 @@ export function main() {
     }, 'imageNumber')
 
     const handleClick = (index) => {
-        console.log('click')
         updateOneState('imageNumber', getRandomInt(4));
         index === getState().activeRowIndex ? updateOneState('activeRowIndex', undefined) : updateOneState('activeRowIndex', index)
     }

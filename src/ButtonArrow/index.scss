@@ -42,7 +42,6 @@
     margin-left: auto;
   }
 
-
   .buttonGrey {
     color: $black;
     margin-left: 0 !important;
@@ -91,7 +90,7 @@
   }
 }
 @media all and (max-width: 640px) {
-  #buttonArrow{
+  .buttonArrowRef{
     .circleGroup  {
       width: 20px;
       height: 20px;

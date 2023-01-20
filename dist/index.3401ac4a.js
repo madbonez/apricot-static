@@ -549,7 +549,6 @@ function main() {
     let activeStep = 0;
     const xStart = stepContainer.getBoundingClientRect().x;
     const changeActiveStep = ()=>{
-        console.log("slede10 to small");
         (0, _state.updateOneState)("cursorState", "toSmall");
         if (activeStep <= Math.floor((xStart + 20 - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width)) activeStep = Math.floor((xStart + 20 - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width);
         if (activeStep > Math.floor((xStart - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width)) activeStep = Math.floor((xStart - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width) + 1;
@@ -580,11 +579,9 @@ function main() {
         innerRef.addEventListener("mouseleave", (e)=>handleCursorFolowLeave(e), false);
     }
     const handleCursorFolowMove = (e)=>{
-        console.log("slede10 enter");
         (0, _state.updateOneState)("cursorState", "enter");
     };
     const handleCursorFolowLeave = (e)=>{
-        console.log("leave");
         (0, _state.updateOneState)("cursorState", "leave");
     };
     (0, _gsap.gsap).context(()=>{

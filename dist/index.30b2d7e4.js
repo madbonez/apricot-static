@@ -541,7 +541,7 @@ var _gsap = require("gsap");
 var _dom = require("../utils/dom");
 const id = "#footer";
 function main() {
-    const orangeText = (0, _dom.el)("#footer .orangeText");
+    const orangeText = (0, _dom.el)("#footer .orangeText a");
     const socialAnimation = (0, _dom.els)("#footer .socialAnimation");
     const infoLinks = (0, _dom.el)("#footer .infoLinksInnerDiv");
     const buttonBack = (0, _dom.el)("#footer .buttonBack");

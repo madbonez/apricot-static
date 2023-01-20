@@ -10,8 +10,6 @@ export function main() {
 
 
     const sliders = els('.slider')
-    console.log(sliders);
-
     for (let ii: number = 0; ii < sliders.length; ii++) {
         const slider = sliders[ii];
         const slides = slider.querySelectorAll('.circleImage')
@@ -27,9 +25,6 @@ export function main() {
         let scrollTrigger = getState().scrollTriggers[`screen${slider.dataset.block}Horizontal`]
         let enterScrollTrigger = getState().scrollTriggers[`screen${slider.dataset.block}Enter`]
         const indicators = slider.querySelectorAll('.indicators')
-
-
-
 
         const targetToString = (arr1, arr2) => {
             const result = arr1.map((item) => {
@@ -48,7 +43,6 @@ export function main() {
         gsap.context(() => {
             let allCircles: any = gsap.utils.toArray(slider.querySelectorAll(".circle"));
             circleWidth = allCircles[0].offsetHeight;
-            console.log(circleWidth)
             overlap = circleWidth * 0.1 > 60 ? 60 : circleWidth * 0.1;
             let accumulator = 0;
             allCircles.forEach((circle: any, index) => {
@@ -75,15 +69,10 @@ export function main() {
 
 
         const handleCursorFolowEnter = (e) => {
-            console.log('slider enter')
             updateOneState('cursorState', 'enter')
-            console.log(getState().cursorState)
-
         }
         const handleCursorFolowLeave = (e) => {
-            console.log('slider leave')
             updateOneState('cursorState', 'leave')
-            console.log(getState().cursorState)
         }
 
         const indicatorChange = (id) => {
@@ -346,7 +335,6 @@ export function main() {
                 if (endDragTween?.isActive()) {
                     return;
                 }
-                console.log('slider drag')
                 updateOneState('cursorState', 'toSmall')
                 startDrag = e.clientX ? e.clientX : e.changedTouches?.[0]?.clientX;
                 progress = timeline.progress();
@@ -408,6 +396,7 @@ export function main() {
                                         ease: 'power1.out',
                                         duration: 0.8,
                                         onComplete: () => {
+
                                             scrollTrigger.scroll(breakpoints[j])
                                             indicatorUpdate()
                                         }

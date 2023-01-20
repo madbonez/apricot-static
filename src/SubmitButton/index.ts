@@ -19,7 +19,7 @@ export function main() {
     let font = new FontFaceObserver('Inter-SemiBold');
 
     font.load(null, 30000).then(() => {
-        const heightGradient = screen11Ref.getBoundingClientRect().bottom - lqButtonRef.getBoundingClientRect().top
+        let heightGradient = screen11Ref.getBoundingClientRect().bottom - lqButtonRef.getBoundingClientRect().top
         let size, radius, font
         if (window.innerWidth > 1400) {
             size = 500;
@@ -35,6 +35,10 @@ export function main() {
                 radius = 100;
                 font = {size: 28, lineHeight: 36, fontFamily: 'Inter-SemiBold'};
             }
+        }
+
+        if (window.innerWidth <= 640) {
+            heightGradient = 0;
         }
 
         let lqButton = new LqButton(
