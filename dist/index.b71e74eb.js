@@ -941,15 +941,6 @@ function main() {
             height: `${getScreenNavigationPosition("screen11") + (0, _utils.height)(screen11Ref) + (0, _utils.height)(footerRef)}px`
         });
     }
-    // const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-    // const [popupId, setPopupId] = useState(null);
-    // const [cursorState, setCursorState] = useState(null);
-    // const [popupScreen, setPopupScreen] = useState(null);
-    // const [burger, setBurger] = useState(false);
-    // const [formValid, setFormValid] = useState(false);
-    // const [buttonClick, setButtonClick] = useState(0);
-    // const [scrollTriggers, setScrollTriggers] = useState({});
-    // const [formSended, setFormSended] = useState(false)
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
     /*     if (!bodyScrollBar) {
@@ -982,7 +973,8 @@ function main() {
     screen11Ref = (0, _dom.el)("#screen11");
     footerRef = (0, _dom.el)("#footer");
     submitButtonRef = (0, _dom.el)("#submit-button");
-    /*   followCursorRef = el("#followCursorRef")*/ // const changeCursorState = (state) => {
+    followCursorRef = (0, _dom.el)("#cursor");
+    // const changeCursorState = (state) => {
     //     setCursorState(state);
     // }
     //
@@ -1045,12 +1037,14 @@ function main() {
     (0, _state.selectState)((newState)=>{
         onScrollToSection((0, _state.getState)().scrollPage);
     }, "scrollPage");
-    /*    topContainerRef.addEventListener('mousemove', (e) => handleCursorFolowMove(e), false);*/ /*     const handleCursorFolowMove = (e) => {
-             const target = e.target
-             if (!target) return
-             followCursorRef.style.left = +e.pageX + 'px'
-             followCursorRef.style.top = ghostRef.scrollTop + e.pageY + 'px'
-         }*/ footerScreens = [
+    topContainerRef.addEventListener("mousemove", (e)=>handleCursorFolowMove(e), false);
+    const handleCursorFolowMove = (e)=>{
+        const target = e.target;
+        if (!target) return;
+        followCursorRef.style.left = +e.pageX + "px";
+        followCursorRef.style.top = ghostRef.scrollTop + e.pageY + "px";
+    };
+    footerScreens = [
         screen11Ref,
         footerRef,
         submitButtonRef
@@ -9891,6 +9885,7 @@ parcelHelpers.export(exports, "updateOneState", ()=>updateOneState);
 parcelHelpers.export(exports, "getState", ()=>getState);
 parcelHelpers.export(exports, "selectState", ()=>selectState);
 parcelHelpers.export(exports, "unsubscribe", ()=>unsubscribe);
+var _dom = require("../utils/dom");
 let globalState = {
     scrollTriggers: {},
     cmsData: {
@@ -10355,10 +10350,10 @@ let globalState = {
     emailDirty: false,
     phoneDirty: false,
     projectDetailsDirty: false,
-    nameError: "Required field!",
-    companyError: "Required field!",
-    emailError: "Required field!",
-    phoneError: "Required field!"
+    nameError: (0, _dom.el)("#formRef .errorMessageName").dataset.error_required,
+    companyError: (0, _dom.el)("#formRef .errorMessageCompany").dataset.error_required,
+    emailError: (0, _dom.el)("#formRef .errorMessageEmail").dataset.error_required,
+    phoneError: (0, _dom.el)("#formRef .errorMessagePhone").dataset.error_required
 };
 const listeners = {
     all: [],
@@ -10399,7 +10394,8 @@ function updateState(newState) {
     listeners.all.forEach((fn)=>fn(globalState));
 }
 function updateOneState(key, object) {
-    globalState[key] = object, listeners[key].forEach((fn)=>fn(globalState));
+    globalState[key] = object;
+    listeners[key].forEach((fn)=>fn(globalState));
 }
 function getState() {
     return globalState;
@@ -10425,7 +10421,7 @@ function unsubscribe(fn, ...keys) {
     }
 }
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8THqZ":[function(require,module,exports) {
+},{"../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"8THqZ":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "el", ()=>el);

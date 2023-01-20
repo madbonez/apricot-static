@@ -17,6 +17,7 @@ export function main() {
     const xStart = stepContainer.getBoundingClientRect().x
 
     const changeActiveStep = () => {
+        console.log('slede10 to small')
         updateOneState('cursorState', 'toSmall')
         if (activeStep <= Math.floor((xStart + 20 - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width)) {
             activeStep = Math.floor((xStart + 20 - stepContainer.getBoundingClientRect().x) / stepBlock[0].getBoundingClientRect().width)
@@ -62,9 +63,11 @@ export function main() {
     }
 
     const handleCursorFolowMove = (e) => {
+        console.log('slede10 enter')
         updateOneState('cursorState', 'enter')
     }
     const handleCursorFolowLeave = (e) => {
+        console.log('leave')
         updateOneState('cursorState', 'leave')
     }
 

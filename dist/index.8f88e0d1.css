@@ -1,0 +1,447 @@
+.header1 {
+  text-align: center;
+  letter-spacing: -.06em;
+  font-family: Inter-SemiBold, "sans-serif";
+  font-size: 46px;
+  line-height: 55px;
+}
+
+@media (min-width: 360px) {
+  .header1 {
+    font-size: calc(11.9792vw + 2.875px);
+    line-height: calc(9.11458vw + 22.1875px);
+  }
+}
+
+@media (min-width: 744px) {
+  .header1 {
+    font-size: calc(9.77012vw + 19.3103px);
+    line-height: calc(14.9425vw - 21.1724px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .header1 {
+    font-size: 160px;
+    line-height: 194px;
+  }
+}
+
+.header2 {
+  text-align: left;
+  letter-spacing: -.05em;
+  font-family: Inter-SemiBold, "sans-serif";
+  font-size: 36px;
+  line-height: 44px;
+}
+
+@media (min-width: 360px) {
+  .header2 {
+    font-size: calc(7.29167vw + 9.75px);
+    line-height: calc(7.29167vw + 17.75px);
+  }
+}
+
+@media (min-width: 744px) {
+  .header2 {
+    font-size: calc(4.5977vw + 29.7931px);
+    line-height: calc(4.02299vw + 42.069px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .header2 {
+    font-size: 96px;
+    line-height: 100px;
+  }
+}
+
+.header3 {
+  text-align: left;
+  letter-spacing: -.03em;
+  font-family: Inter-Medium, "sans-serif";
+  font-size: 26px;
+  line-height: 32px;
+}
+
+@media (min-width: 360px) {
+  .header3 {
+    font-size: calc(3.64583vw + 12.875px);
+    line-height: calc(3.64583vw + 18.875px);
+  }
+}
+
+@media (min-width: 744px) {
+  .header3 {
+    font-size: calc(1.72414vw + 27.1724px);
+    line-height: calc(1.72414vw + 33.1724px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .header3 {
+    font-size: 52px;
+    line-height: 58px;
+  }
+}
+
+.header4 {
+  text-align: left;
+  font-family: Inter-SemiBold, "sans-serif";
+  font-size: 18px;
+  line-height: 20px;
+}
+
+@media (min-width: 360px) {
+  .header4 {
+    font-size: calc(2.60417vw + 8.625px);
+    line-height: calc(4.16667vw + 5px);
+  }
+}
+
+@media (min-width: 744px) {
+  .header4 {
+    font-size: calc(1.14943vw + 19.4483px);
+    line-height: calc(1.14943vw + 27.4483px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .header4 {
+    font-size: 36px;
+    line-height: 44px;
+  }
+}
+
+.logo-text {
+  font-family: Inter-SemiBold, "sans-serif";
+  font-size: 16px;
+  line-height: 20px;
+}
+
+@media (min-width: 360px) {
+  .logo-text {
+    font-size: calc(1.30208vw + 11.3125px);
+    line-height: calc(1.5625vw + 14.375px);
+  }
+}
+
+@media (min-width: 744px) {
+  .logo-text {
+    font-size: calc(1.2931vw + 11.3793px);
+    line-height: calc(3.16092vw + 2.48276px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .logo-text {
+    font-size: 30px;
+    line-height: 48px;
+  }
+}
+
+.block-name {
+  text-align: left;
+  letter-spacing: -.03em;
+  color: #afabba;
+  font-family: Inter-SemiBold, "sans-serif";
+  font-size: 14px;
+  line-height: 14px;
+}
+
+@media (min-width: 360px) {
+  .block-name {
+    font-size: calc(.520833vw + 12.125px);
+    line-height: calc(.520833vw + 12.125px);
+  }
+}
+
+@media (min-width: 744px) {
+  .block-name {
+    font-size: calc(1.14943vw + 7.44828px);
+    line-height: calc(2.01149vw + 1.03448px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .block-name {
+    font-size: 24px;
+    line-height: 30px;
+  }
+}
+
+.menu-text {
+  text-align: center;
+  letter-spacing: -.02em;
+  font-family: Inter-Regular, "sans-serif";
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@media (min-width: 360px) {
+  .menu-text {
+    font-size: calc(1.04167vw + 8.25px);
+    line-height: calc(1.5625vw + 12.375px);
+  }
+}
+
+@media (min-width: 744px) {
+  .menu-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .menu-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.button-text, .buttonGreyRef.buttonArrow {
+  text-align: center;
+  letter-spacing: -.02em;
+  font-family: Inter-Medium, "sans-serif";
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@media (min-width: 360px) {
+  .button-text, .buttonGreyRef.buttonArrow {
+    font-size: calc(1.04167vw + 8.25px);
+    line-height: calc(1.5625vw + 12.375px);
+  }
+}
+
+@media (min-width: 744px) {
+  .button-text, .buttonGreyRef.buttonArrow {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .button-text, .buttonGreyRef.buttonArrow {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.normal-text {
+  letter-spacing: -.03em;
+  font-family: Inter-Regular, "sans-serif";
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@media (min-width: 360px) {
+  .normal-text {
+    font-size: calc(1.04167vw + 8.25px);
+    line-height: calc(1.5625vw + 12.375px);
+  }
+}
+
+@media (min-width: 744px) {
+  .normal-text {
+    font-size: calc(.862069vw + 9.58621px);
+    line-height: calc(.862069vw + 17.5862px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .normal-text {
+    font-size: 22px;
+    line-height: 30px;
+  }
+}
+
+.small-text {
+  text-align: center;
+  font-family: Inter-Regular, "sans-serif";
+  font-size: 10px;
+  line-height: 16px;
+}
+
+@media (min-width: 360px) {
+  .small-text {
+    font-size: calc(.520833vw + 8.125px);
+    line-height: calc(.520833vw + 14.125px);
+  }
+}
+
+@media (min-width: 744px) {
+  .small-text {
+    font-size: calc(.574713vw + 7.72414px);
+    line-height: calc(.862069vw + 11.5862px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .small-text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.buttonGreyRef.buttonArrow {
+  min-width: 127px;
+  -khtml-border-radius: 25px;
+  color: #fff;
+  background-color: #04000a;
+  border-radius: 25px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 19px;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(circle, #fff 100%, #04000a 100%);
+}
+
+.buttonGreyRef.buttonArrow.light {
+  background-color: #eef1fa;
+}
+
+.buttonGreyRef.buttonArrow.grey {
+  background-color: #dfdde3;
+}
+
+.buttonGreyRef.buttonArrow span {
+  width: 100%;
+  z-index: 2;
+  margin: 9px 44px 9px 16px;
+  position: relative;
+}
+
+@media (min-width: 360px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-top: calc(.78125vw + 6.1875px);
+  }
+}
+
+@media (min-width: 744px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-top: 12px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-top: 12px;
+  }
+}
+
+@media (min-width: 360px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-bottom: calc(.78125vw + 6.1875px);
+  }
+}
+
+@media (min-width: 744px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-bottom: 12px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-bottom: 12px;
+  }
+}
+
+@media (min-width: 360px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-left: 16px;
+  }
+}
+
+@media (min-width: 744px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-left: 16px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-left: 16px;
+  }
+}
+
+@media (min-width: 360px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-right: calc(2.86458vw + 33.6875px);
+  }
+}
+
+@media (min-width: 744px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-right: calc(.143678vw + 53.931px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .buttonGreyRef.buttonArrow span {
+    margin-right: 56px;
+  }
+}
+
+.buttonGreyRef.buttonArrow .center {
+  z-index: 10;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.buttonGreyRef.buttonGrey {
+  color: #04000a;
+  margin-left: 0 !important;
+}
+
+.buttonGreyRef .buttonCircle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.buttonGreyRef .buttonGreyAnimation {
+  z-index: 3;
+  color: #fff;
+  background-color: #afabba;
+  position: absolute;
+  left: 100%;
+}
+
+.buttonGreyRef .circleGroup {
+  width: 28px;
+  height: 28px;
+  justify-content: space-evenly;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  right: 18px;
+}
+
+.buttonGreyRef .circle {
+  width: 100%;
+  height: 100%;
+  background-color: #ff9300;
+  border-radius: 50%;
+  position: absolute;
+  inset: 0;
+}
+
+.buttonGreyRef .arrow {
+  z-index: 2;
+  width: 10px;
+  position: absolute;
+}
+
+@media (max-width: 640px) {
+  .buttonGreyRef .circleGroup {
+    width: 20px;
+    height: 20px;
+    right: 16px;
+  }
+}
+
+/*# sourceMappingURL=index.8f88e0d1.css.map */

@@ -12,8 +12,8 @@ export function main() {
 
     for(let i=0; i<projectBlock.length; i++) {
         projectBlock[i].addEventListener('click', ()=>{
-            updateOneState('activePopupId' , projectBlock[i].dataset.popup )
             updateOneState('activePopupScreen' , '9' )
+            updateOneState('activePopupId' , projectBlock[i].dataset.popup )
         })
         projectBlock[i].addEventListener('mouseenter', ()=>onMouseEnter(projectBlock[i].dataset.popup))
         projectBlock[i].addEventListener('mouseleave', ()=>onMouseLeave(projectBlock[i].dataset.popup))

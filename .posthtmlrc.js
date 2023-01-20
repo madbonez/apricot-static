@@ -122,11 +122,11 @@ const plugins = {
                     "detail": {
                         "title": "Training",
                         "topText": "Applying the technology of virtual reality in industry primarily serves for efficient training. Immersive simulators effectively translate skills and knowledge to personnel, reducing the time it takes them to attain a high level of expertise. In a safe immersive environment, specialists learn and practice basic skills for plant operation and maintenance, and learn proven action plans for a variety of situations.",
-                        "image": "image/screen7/1.png",
+                        "image": "./public/image/screen7/1.png",
                         "sub_title": "These can include accident prevention training at a plant, synchronization of multiple employees operations - infrequent, but critical procedures.",
-                        "rightBottomText": "Thanks to virtual reality, a person not only formally memorizes the sequence of actions but also visually drills out the order of actions at each stage of work for both planned and emergency situations. VR technology enables the training of a large number of people and the creation of comprehensive industry-related courses. Immersive training is implemented both at the level of VR simulator to work with specific equipment, and at the level of an entire virtual plant. Here, the possibilities are only limited by the company&amp;#39;s budget.",
+                        "rightBottomText": "Thanks to virtual reality, a person not only formally memorizes the sequence of actions but also visually drills out the order of actions at each stage of work for both planned and emergency situations. VR technology enables the training of a large number of people and the creation of comprehensive industry-related courses. Immersive training is implemented both at the level of VR simulator to work with specific equipment, and at the level of an entire virtual plant. Here, the possibilities are only limited by the company`s budget.",
                         "leftBottomText": "",
-                        "list": [null]
+                        "list": []
                     }
                 }, {
                     "preview": {
@@ -136,9 +136,9 @@ const plugins = {
                     "detail": {
                         "title": "Designing",
                         "topText": "AR and VR technologies are presently used to provide easier solutions for a variety of problems, from designing new industrial lines and end products to training personnel and assisting with repair work. These technologies allow companies to reduce mishandling risks, as well as minimize human error in working at hazardous sites.",
-                        "image": "image/screen7/2.png",
+                        "image": "./public/image/screen7/2.png",
                         "sub_title": "The possibility of visualizing the future production facility or a manufactured product is one of the greatest advantages offered by Immersive Technologies. This is achieved by 3D design with subsequent visualization of the generated 3D models in augmented or virtual reality. This brings the quality and speed of industrial design to a whole new level, and also allows for eliminating errors both in methods of execution and in ergonomics.",
-                        "rightBottomText": "VR enables visualizing and interacting with aircraft CAD geometry because it provides an environment that is identical to the inside of the physical mockups which is built for each aircraft during the design phase. Likewise, apart from the visualization of CAD representations of parts, it\u2019s possible to move elements around their installed position, reach around obstacles, etc. It has the most beneficial impact on: \u2013 flight deck design\u2013 maintainability or accessibility verification assembly planning&#8221;\n",
+                        "rightBottomText": "VR enables visualizing and interacting with aircraft CAD geometry because it provides an environment that is identical to the inside of the physical mockups which is built for each aircraft during the design phase. Likewise, apart from the visualization of CAD representations of parts, it's possible to move elements around their installed position, reach around obstacles, etc. It has the most beneficial impact on: \u2013 flight deck design\u2013 maintainability or accessibility verification assembly planning&#8221;\n",
                         "leftBottomText": "",
                         "list": []
                     }
@@ -150,7 +150,7 @@ const plugins = {
                     "detail": {
                         "title": "Military",
                         "topText": "A virtual reality simulation enables them to do so but without the risk of death or a serious injury. They can re-enact a particular scenario, for example engagement with an enemy in an environment in which they experience this but without the real world risks. This has proven to be safer and less costly than traditional training methods.",
-                        "image": "image/screen7/3.png",
+                        "image": "./public/image/screen7/3.png",
                         "sub_title": "Immersive technologies has been adopted by the military \u2014 this includes all three services (army, navy and air force) \u2014 where it is used for training purposes. This is particularly useful for training soldiers for combat situations or other dangerous settings where they have to learn how to react in an appropriate manner.",
                         "leftBottomText": "",
                         "rightBottomText": "",
@@ -169,15 +169,15 @@ const plugins = {
                     }
                 }, {
                     "preview": {
-                        "title": "Engineers\u2019 learning tool",
+                        "title": "Engineers' learning tool",
                         "text": "Immersive technologies has been adopted by the military \u2013 this includes all three services (army, navy and air force) \u2013 where it is used for training purposes."
                     },
                     "detail": {
-                        "title": "Engineers\u2019 learning tool",
+                        "title": "Engineers' learning tool",
                         "topText": "",
-                        "image": "image/screen7/4.png",
+                        "image": "./public/image/screen7/4.png",
                         "sub_title": "",
-                        "leftBottomText": "Engineers don\u2019t have accessible that many studying materials. They often need to wait for some complex structure to become available as a learning tool With the help of VR technology, their learning process would go much faster since it creates a virtual environment that allows engineers to view that composite structures and learn how to manage them well.&#8221;",
+                        "leftBottomText": "Engineers don't have accessible that many studying materials. They often need to wait for some complex structure to become available as a learning tool With the help of VR technology, their learning process would go much faster since it creates a virtual environment that allows engineers to view that composite structures and learn how to manage them well.&#8221;",
                         "rightBottomText": "",
                         "list": []
                     }
@@ -188,12 +188,12 @@ const plugins = {
                     },
                     "detail": {
                         "title": "Maintenance",
-                        "topText": "The use of Immersive Technologies significantly increases the efficiency of repair work control. AR glasses, phone or tablet allow quick access to technical documentation, ongoing production data, and repair knowledge bases at the break location, thus increasing the quality of maintenance operations, reducing the repair time, and hence any downtime loss. As example it\u2019s an AR application that overlays the machine with its own 3D model in real-time.",
-                        "image": "image/screen7/5.png",
+                        "topText": "The use of Immersive Technologies significantly increases the efficiency of repair work control. AR glasses, phone or tablet allow quick access to technical documentation, ongoing production data, and repair knowledge bases at the break location, thus increasing the quality of maintenance operations, reducing the repair time, and hence any downtime loss. As example it's an AR application that overlays the machine with its own 3D model in real-time.",
+                        "image": "./public/image/screen7/5.png",
                         "sub_title": "The technology brings into sight everything that is under the equipment framework: from specific pieces to internal processes. This speeds up the technical maintenance service, as you will no longer need to keep multi-page manuals or seek high-cost professional advice",
                         "leftBottomText": "",
                         "rightBottomText": "The use of Immersive Technologies significantly increases the efficiency of repair work control. AR glasses, phone or tablet allow quick access to technical documentation, ongoing production data, and repair knowledge bases at the break location, thus increasing the quality of maintenance operations, reducing the repair time, and hence any downtime loss. As example it’s an AR application that overlays the machine with its own 3D model in real-time.",
-                        "list": ""
+                        "list": []
                     }
                 }]
             }],
@@ -217,8 +217,8 @@ const plugins = {
             "block_9": [{
                 "block_name": "Completed projects",
                 "tags": ["IT sector", "production", "training", "factories", "universities", "schools", "entertainment", "retail"],
-                "button_previous_text": "Previous",
-                "button_next_title": "Next",
+                "button_grey_title": "Previous",
+                "button_title": "Next",
                 "elements": [{
                     "preview": {
                         "title": "Biochemical laboratory",
@@ -270,7 +270,7 @@ const plugins = {
                 "elements": [{"text": "Application form"}, {"text": "Initial call with discussion of the task"}, {"text": "Exchange of materials (drawings, models, photos, videos)"}, {"text": "Technical description"}, {"text": "Approval of the terms of reference"}, {"text": "Commercial offer and contract signing"}, {"text": "Completing the task"}]
             }],
             "block_11": [{
-                "title": "Let\u2019s start a project",
+                "title": "Let's start a project",
                 "name_title": "Name",
                 "company_title": "Company",
                 "email_title": "Email",

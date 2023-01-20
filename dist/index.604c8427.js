@@ -591,10 +591,14 @@ function main() {
             sliderRef.addEventListener("mouseleave", (e)=>handleCursorFolowLeave(e), false);
         }
         const handleCursorFolowEnter = (e)=>{
+            console.log("slider enter");
             (0, _state.updateOneState)("cursorState", "enter");
+            console.log((0, _state.getState)().cursorState);
         };
         const handleCursorFolowLeave = (e)=>{
+            console.log("slider leave");
             (0, _state.updateOneState)("cursorState", "leave");
+            console.log((0, _state.getState)().cursorState);
         };
         const indicatorChange = (id)=>{
             (0, _gsap.gsap).context(()=>{
@@ -849,7 +853,7 @@ function main() {
             const mapperX = window.innerWidth > 900 && !(0, _utils.isTouchDevice)() ? (0, _gsap.gsap).utils.mapRange(0, scrollTrigger?.end - scrollTrigger?.start, 0, 1) : (0, _gsap.gsap).utils.mapRange(0, (circleWidth - overlap) * (slides.length * 2 - 1), 0, 1);
             const startDragHandle = (e)=>{
                 if (endDragTween?.isActive()) return;
-                console.log("startDragHandle");
+                console.log("slider drag");
                 (0, _state.updateOneState)("cursorState", "toSmall");
                 startDrag = e.clientX ? e.clientX : e.changedTouches?.[0]?.clientX;
                 progress = timeline.progress();
@@ -857,7 +861,6 @@ function main() {
             };
             const updateTimeline = (e)=>{
                 if (endDragTween?.isActive()) return;
-                console.log("updateTimeline");
                 let moveDrag = e.clientX ? e.clientX : e.changedTouches?.[0]?.clientX;
                 const moveDelta = moveDrag - startDrag;
                 let nextPosition = window.innerWidth > 900 && !(0, _utils.isTouchDevice)() ? scrollProgress - moveDelta : progress - mapperX(moveDelta);
@@ -882,7 +885,6 @@ function main() {
             };
             const endDragHandle = (e)=>{
                 if (endDragTween?.isActive()) return;
-                console.log("endDragHandle");
                 if (e.clientX - startDrag > 0) {
                     if (window.innerWidth > 900 && !(0, _utils.isTouchDevice)()) {
                         for(let j = 0; j < breakpoints.length; j++)if (scrollTrigger.scroll() > breakpoints[j] && scrollTrigger.scroll() < breakpoints[j + 1]) endDragTween = (0, _gsap.gsap).to(timeline, {

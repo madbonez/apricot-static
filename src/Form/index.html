@@ -19,7 +19,7 @@
                         <img src="{{path_to_image}}/form/2.svg"/>
                     </span>
 
-                <div class="errorMessage errorMessageName small-text" >
+                <div class="errorMessage errorMessageName small-text" data-error_required = "{{block.required_error}}">
                     {{block.required_error}}
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     </span>
 
 
-                <div class="errorMessage errorMessageCompany small-text">
+                <div class="errorMessage errorMessageCompany small-text" data-error_required = "{{block.required_error}}">
                     {{block.required_error}}
                 </div>
             </div>
@@ -59,7 +59,8 @@
                     </span>
 
 
-                <div class="errorMessage errorMessageEmail small-text">
+                <div class="errorMessage errorMessageEmail small-text" data-error_required = "{{block.required_error}}"
+                     data-error_email = "{{block.email_error}}" >
 
                 </div>
             </div>
@@ -77,7 +78,8 @@
                         <img src="{{path_to_image}}/form/2.svg"/>
         </span>
 
-                <div class="errorMessage errorMessagePhone small-text">
+                <div class="errorMessage errorMessagePhone small-text" data-error_required = "{{block.required_error}}"
+                     data-error_phone = "{{block.phone_error}}">
 
                 </div>
             </div>

@@ -142,13 +142,13 @@
       this[globalName] = mainExports;
     }
   }
-})({"5pDXk":[function(require,module,exports) {
+})({"kGMmt":[function(require,module,exports) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "d6ea1d42532a7575";
-module.bundle.HMR_BUNDLE_ID = "e09b8e4da51ad20b";
+module.bundle.HMR_BUNDLE_ID = "c443efabf1c28b8d";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_ENV_HASH, HMR_SECURE, chrome, browser, globalThis, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -531,7 +531,7 @@ function hmrAcceptRun(bundle, id) {
     acceptedAssets[id] = true;
 }
 
-},{}],"9tCfy":[function(require,module,exports) {
+},{}],"2VK3Q":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "main", ()=>main);
@@ -539,230 +539,43 @@ var _utils = require("../utils/utils");
 var _state = require("../state/state");
 var _gsap = require("gsap");
 var _dom = require("../utils/dom");
-const id = "form";
 function main() {
-    const scrollTrigger = (0, _state.getState)().scrollTriggers[`screen11Enter`];
-    const formRef = (0, _dom.el)("#formRef");
-    const inputNames = (0, _dom.el)("#inputName");
-    const inputCompany = (0, _dom.el)("#inputCompany");
-    const inputEmail = (0, _dom.el)("#inputEmail");
-    const inputPhone = (0, _dom.el)("#inputPhone");
-    const inputProjectDetails = (0, _dom.el)("#inputProjectDetails");
-    inputNames.addEventListener("input", (e)=>nameHandler(e));
-    inputNames.addEventListener("blur", (e)=>blurHandler(e));
-    inputCompany.addEventListener("input", (e)=>companyHandler(e));
-    inputCompany.addEventListener("blur", (e)=>blurHandler(e));
-    inputEmail.addEventListener("input", (e)=>emailHandler(e));
-    inputEmail.addEventListener("blur", (e)=>blurHandler(e));
-    inputPhone.addEventListener("input", (e)=>phoneHandler(e));
-    inputPhone.addEventListener("blur", (e)=>blurHandler(e));
-    inputProjectDetails.addEventListener("input", (e)=>projectDetailsHandler(e));
-    inputProjectDetails.addEventListener("blur", (e)=>blurHandler(e));
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().nameDirty) inputNames.classList.add("checked");
-        else inputNames.classList.remove("checked");
-    }, "nameDirty");
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().companyDirty) inputCompany.classList.add("checked");
-        else inputCompany.classList.remove("checked");
-    }, "companyDirty");
-    (0, _state.selectState)((newState)=>{
-        console.log("emailDirty");
-        if ((0, _state.getState)().emailDirty) inputEmail.classList.add("checked");
-        else inputEmail.classList.remove("checked");
-    }, "emailDirty");
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().phoneDirty) inputPhone.classList.add("checked");
-        else inputPhone.classList.remove("checked");
-    }, "phoneDirty");
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().projectDetailsDirty) inputProjectDetails.classList.add("checked");
-        else inputProjectDetails.classList.remove("checked");
-    }, "projectDetailsDirty");
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().nameDirty && (0, _state.getState)().nameError) {
-            (0, _dom.el)(".wrongName").classList.add("visible");
-            (0, _dom.el)(".rightName").classList.remove("visible");
-            (0, _dom.el)(".errorMessageName").classList.add("show");
-        } else {
-            (0, _dom.el)(".errorMessageName").classList.remove("show");
-            if ((0, _state.getState)().nameDirty && !(0, _state.getState)().nameError) {
-                (0, _dom.el)(".rightName").classList.add("visible");
-                (0, _dom.el)(".wrongName").classList.remove("visible");
-            } else {
-                (0, _dom.el)(".rightName").classList.remove("visible");
-                (0, _dom.el)(".wrongName").classList.remove("visible");
-            }
-        }
-    }, "nameDirty", "nameError");
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().companyDirty && (0, _state.getState)().companyError) {
-            (0, _dom.el)(".wrongCompany").classList.add("visible");
-            (0, _dom.el)(".rightCompany").classList.remove("visible");
-            (0, _dom.el)(".errorMessageCompany").classList.add("show");
-        } else {
-            (0, _dom.el)(".errorMessageCompany").classList.remove("show");
-            if ((0, _state.getState)().companyDirty && !(0, _state.getState)().companyError) {
-                (0, _dom.el)(".rightCompany").classList.add("visible");
-                (0, _dom.el)(".wrongCompany").classList.remove("visible");
-            } else {
-                (0, _dom.el)(".rightCompany").classList.remove("visible");
-                (0, _dom.el)(".wrongCompany").classList.remove("visible");
-            }
-        }
-    }, "companyDirty", "companyError");
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().emailDirty && (0, _state.getState)().emailError) {
-            (0, _dom.el)(".wrongEmail").classList.add("visible");
-            (0, _dom.el)(".rightEmail").classList.remove("visible");
-            (0, _dom.el)(".errorMessageEmail").classList.add("show");
-        } else {
-            (0, _dom.el)(".errorMessageEmail").classList.remove("show");
-            if ((0, _state.getState)().emailDirty && !(0, _state.getState)().emailError) {
-                (0, _dom.el)(".rightEmail").classList.add("visible");
-                (0, _dom.el)(".wrongEmail").classList.remove("visible");
-            } else {
-                (0, _dom.el)(".rightEmail").classList.remove("visible");
-                (0, _dom.el)(".wrongEmail").classList.remove("visible");
-            }
-        }
-    }, "emailDirty", "emailError");
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().phoneDirty && (0, _state.getState)().phoneError) {
-            (0, _dom.el)(".wrongPhone").classList.add("visible");
-            (0, _dom.el)(".rightPhone").classList.remove("visible");
-            (0, _dom.el)(".errorMessagePhone").classList.add("show");
-        } else {
-            (0, _dom.el)(".errorMessagePhone").classList.remove("show");
-            if ((0, _state.getState)().phoneDirty && !(0, _state.getState)().phoneError) {
-                (0, _dom.el)(".rightPhone").classList.add("visible");
-                (0, _dom.el)(".wrongPhone").classList.remove("visible");
-            } else {
-                (0, _dom.el)(".rightPhone").classList.remove("visible");
-                (0, _dom.el)(".wrongPhone").classList.remove("visible");
-            }
-        }
-    }, "phoneDirty", "phoneError");
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().projectDetailsDirty && (0, _state.getState)().projectDetails) (0, _dom.el)(".rightProjectDetails").classList.add("visible");
-        else (0, _dom.el)(".rightProjectDetails").classList.remove("visible");
-    }, "projectDetailsDirty", "projectDetails");
-    if (!scrollTrigger) return;
-    (0, _gsap.gsap).context(()=>{
-        scrollTrigger.toggleActions = "play none none reset";
-        const tl = (0, _gsap.gsap).timeline({
-            scrollTrigger,
-            paused: true
-        }).from(formRef, {
-            y: 70,
-            duration: 1,
+    const buttonGreyRef = (0, _dom.els)(".buttonGreyRef");
+    const onMouseOverGreyButton = ()=>{
+        const tl = (0, _gsap.gsap).timeline({}).to(".buttonGreyAnimation", {
+            duration: 0.5,
             ease: "power4.out",
-            opacity: 0
-        }).from([
-            `.input-animation`,
-            ".policy-animation"
-        ], {
-            duration: 1,
-            ease: "power4.out",
-            marginTop: "+=50"
-        }, "<0.4");
-    }, formRef);
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().nameError || (0, _state.getState)().companyError || (0, _state.getState)().emailError || (0, _state.getState)().phoneError) (0, _state.updateOneState)("formValid", false);
-        else (0, _state.updateOneState)("formValid", true);
-    }, "nameError", "companyError", "emailError", "phoneError");
-    (0, _state.selectState)((newState)=>{
-        if ((0, _state.getState)().buttonClick > 0) formSend();
-    }, "buttonClick");
-    const formSend = async ()=>{
-        if ((0, _state.getState)().formValid) {
-            let formData = {
-                name: (0, _state.getState)().name,
-                company: (0, _state.getState)().company,
-                email: (0, _state.getState)().email,
-                phone: (0, _state.getState)().phone,
-                project_details: (0, _state.getState)().projectDetails,
-                action: "callback_action",
-                nonce: window["callback_object"]?.nonce
-            };
-            const fd = new FormData();
-            Object.keys(formData).forEach((key)=>{
-                fd.append(key, formData[key]);
-            });
-            let response = await fetch(window["callback_object"]?.url, {
-                method: "POST",
-                body: fd
-            });
-            if (response.ok) {
-                (0, _state.updateOneState)("formSended", true);
-                (0, _state.updateOneState)("name", "");
-                (0, _state.updateOneState)("company", "");
-                (0, _state.updateOneState)("email", "");
-                (0, _state.updateOneState)("phone", "");
-                (0, _state.updateOneState)("projectdetails", "");
-            }
-        } else {
-            (0, _state.updateOneState)("nameDirty", true);
-            (0, _state.updateOneState)("companyDirty", true);
-            (0, _state.updateOneState)("emailDirty", true);
-            (0, _state.updateOneState)("phoneDirty", true);
-            (0, _state.updateOneState)("projectdetailsDirty", true);
-        }
+            left: 0,
+            width: 228,
+            height: 228
+        }).to(".buttonGrey", {
+            duration: 0.5,
+            color: getComputedStyle(window.document.body).getPropertyValue("--white")
+        }, "<");
     };
-    const nameHandler = (e)=>{
-        (0, _state.updateOneState)("name", e.target.value);
-        (0, _state.updateOneState)("nameDirty", true);
-        e.target.value ? (0, _state.updateOneState)("nameError", "") : (0, _state.updateOneState)("nameError", (0, _dom.el)("#formRef .errorMessageName").dataset.error_required);
+    const onMouseLeaveGreyButton = ()=>{
+        const tl = (0, _gsap.gsap).timeline({}).to(".buttonGreyAnimation", {
+            left: "100%",
+            duration: 0.5,
+            ease: "power4.out"
+        }).to(".buttonGrey", {
+            duration: 0.5,
+            color: getComputedStyle(window.document.body).getPropertyValue("--black")
+        }, "<");
     };
-    const companyHandler = (e)=>{
-        (0, _state.updateOneState)("company", e.target.value);
-        (0, _state.updateOneState)("companyDirty", true);
-        e.target.value ? (0, _state.updateOneState)("companyError", "") : (0, _state.updateOneState)("companyError", (0, _dom.el)("#formRef .errorMessageCompany").dataset.error_required);
+    const popup9 = (0, _dom.els)("#screen9 .projectBlock").length;
+    const popup7 = (0, _dom.els)("#screen7 .blockAnimation").length;
+    const calcPreviousePopup = (id)=>{
+        id = id - 1;
+        if (id < popup7) id = popup7 + popup9 - 1;
+        return id;
     };
-    const emailHandler = (e)=>{
-        (0, _state.updateOneState)("email", e.target.value);
-        (0, _state.updateOneState)("emailDirty", true);
-        const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-        if (e.target.value) {
-            if (!re.test(String(e.target.value).toLowerCase())) (0, _state.updateOneState)("emailError", (0, _dom.el)("#formRef .errorMessageEmail").dataset.error_email);
-            else (0, _state.updateOneState)("emailError", "");
-        } else (0, _state.updateOneState)("emailError", (0, _dom.el)("#formRef .errorMessageEmail").dataset.error_required);
-    };
-    const phoneHandler = (e)=>{
-        (0, _state.updateOneState)("phone", e.target.value);
-        (0, _state.updateOneState)("phoneDirty", true);
-        const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
-        if (e.target.value) {
-            if (!re.test(String(e.target.value).toLowerCase())) (0, _state.updateOneState)("phoneError", (0, _dom.el)("#formRef .errorMessagePhone").dataset.error_phone);
-            else (0, _state.updateOneState)("phoneError", "");
-        } else (0, _state.updateOneState)("phoneError", (0, _dom.el)("#formRef .errorMessagePhone").dataset.error_required);
-    };
-    const projectDetailsHandler = (e)=>{
-        (0, _state.updateOneState)("projectDetails", e.target.value);
-        (0, _state.updateOneState)("projectDetailsDirty", true);
-    };
-    const blurHandler = (e)=>{
-        switch(e.target.name){
-            case "name":
-                (0, _state.updateOneState)("nameDirty", true);
-                break;
-            case "company":
-                (0, _state.updateOneState)("companyDirty", true);
-                break;
-            case "email":
-                (0, _state.updateOneState)("emailDirty", true);
-                break;
-            case "phone":
-                (0, _state.updateOneState)("phoneDirty", true);
-                break;
-            case "project details":
-                (0, _state.updateOneState)("projectDetailsDirty", true);
-                break;
-        }
-    };
+    buttonGreyRef.forEach((item)=>item.addEventListener("click", (e)=>(0, _state.updateOneState)("activePopupId", calcPreviousePopup((0, _state.getState)().activePopupId))));
+    buttonGreyRef.forEach((item)=>item.addEventListener("mouseover", ()=>onMouseOverGreyButton()));
+    buttonGreyRef.forEach((item)=>item.addEventListener("mouseleave", ()=>onMouseLeaveGreyButton()));
 }
 (0, _utils.onDomReady)(main);
 
-},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["5pDXk","9tCfy"], "9tCfy", "parcelRequireb921")
+},{"../utils/utils":"ea5wt","../state/state":"8LIzr","gsap":"fPSuC","../utils/dom":"8THqZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["kGMmt","2VK3Q"], "2VK3Q", "parcelRequireb921")
 
-//# sourceMappingURL=index.a51ad20b.js.map
+//# sourceMappingURL=index.f1c28b8d.js.map

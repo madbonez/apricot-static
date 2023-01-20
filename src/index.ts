@@ -518,16 +518,6 @@ export function main() {
     }
 
 
-    // const [isHeaderVisible, setIsHeaderVisible] = useState(true);
-    // const [popupId, setPopupId] = useState(null);
-    // const [cursorState, setCursorState] = useState(null);
-    // const [popupScreen, setPopupScreen] = useState(null);
-    // const [burger, setBurger] = useState(false);
-    // const [formValid, setFormValid] = useState(false);
-    // const [buttonClick, setButtonClick] = useState(0);
-    // const [scrollTriggers, setScrollTriggers] = useState({});
-    // const [formSended, setFormSended] = useState(false)
-
     let vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
 
@@ -563,7 +553,7 @@ export function main() {
     screen11Ref = el("#screen11");
     footerRef = el("#footer");
     submitButtonRef = el("#submit-button");
-    /*   followCursorRef = el("#followCursorRef")*/
+    followCursorRef = el("#cursor");
 
     // const changeCursorState = (state) => {
     //     setCursorState(state);
@@ -634,16 +624,14 @@ export function main() {
     }, 'scrollPage')
 
 
-  /*    topContainerRef.addEventListener('mousemove', (e) => handleCursorFolowMove(e), false);*/
+      topContainerRef.addEventListener('mousemove', (e) => handleCursorFolowMove(e), false);
 
-    /*     const handleCursorFolowMove = (e) => {
+        const handleCursorFolowMove = (e) => {
              const target = e.target
              if (!target) return
              followCursorRef.style.left = +e.pageX + 'px'
              followCursorRef.style.top = ghostRef.scrollTop + e.pageY + 'px'
-         }*/
-
-
+         }
 
     footerScreens = [
         screen11Ref,

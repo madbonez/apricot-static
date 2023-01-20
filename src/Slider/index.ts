@@ -75,10 +75,15 @@ export function main() {
 
 
         const handleCursorFolowEnter = (e) => {
+            console.log('slider enter')
             updateOneState('cursorState', 'enter')
+            console.log(getState().cursorState)
+
         }
         const handleCursorFolowLeave = (e) => {
+            console.log('slider leave')
             updateOneState('cursorState', 'leave')
+            console.log(getState().cursorState)
         }
 
         const indicatorChange = (id) => {
@@ -116,8 +121,6 @@ export function main() {
         indicatorChange(0)
         onScrollTriggersReady()
         function onScrollTriggersReady() {
-
-
 
             const handlerIndicatorMouseEnter = (id) => {
                 if (window.innerWidth > 900 && !isTouchDevice() && id !== indicatorActive) {
@@ -175,8 +178,6 @@ export function main() {
                     indicatorChange(breakpointsNorm.length - 2)
                 }
             }
-
-
 
             function calcBreakpoints( slides, circleWidth, overlap) {
                 if (breakpoints.length || !scrollTrigger) {
@@ -345,7 +346,7 @@ export function main() {
                 if (endDragTween?.isActive()) {
                     return;
                 }
-                console.log('startDragHandle')
+                console.log('slider drag')
                 updateOneState('cursorState', 'toSmall')
                 startDrag = e.clientX ? e.clientX : e.changedTouches?.[0]?.clientX;
                 progress = timeline.progress();
@@ -357,7 +358,6 @@ export function main() {
                 if (endDragTween?.isActive()) {
                     return;
                 }
-                console.log('updateTimeline')
                 let moveDrag = e.clientX ? e.clientX : e.changedTouches?.[0]?.clientX;
                 const moveDelta = (moveDrag - startDrag);
                 let nextPosition = (window.innerWidth > 900 && !isTouchDevice()) ? scrollProgress - moveDelta : progress - mapperX(moveDelta);
@@ -398,7 +398,6 @@ export function main() {
                 if (endDragTween?.isActive()) {
                     return;
                 }
-                console.log('endDragHandle')
                 if (e.clientX - startDrag > 0) {
                     if ((window.innerWidth > 900 && !isTouchDevice())) {
                         for (let j = 0; j < breakpoints.length; j++) {
@@ -499,12 +498,7 @@ export function main() {
                 onDrag: (e) => updateTimeline(e),
                 onDragEnd: (e) => endDragHandle(e),
             });
-
-
         }
-
-
-
 
         enterScrollTrigger.scrub = false;
         enterScrollTrigger.toggleActions = 'play none none reset';
@@ -517,14 +511,7 @@ export function main() {
                 ease: 'back.out(1.7)',
                 duration: 0.8
             })
-
-
-
     }
-
-
-
-
 }
 
 onDomReady(main);

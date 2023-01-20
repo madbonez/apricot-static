@@ -546,8 +546,8 @@ function main() {
     const block = (0, _dom.els)("#screen7 .block");
     for(let i = 0; i < block.length; i++){
         block[i].addEventListener("click", ()=>{
-            (0, _state.updateOneState)("activePopupId", block[i].dataset.popup);
             (0, _state.updateOneState)("activePopupScreen", "7");
+            (0, _state.updateOneState)("activePopupId", block[i].dataset.popup);
         });
         block[i].addEventListener("mouseover", ()=>onMouseOverButton(block[i].dataset.popup));
         block[i].addEventListener("mouseleave", ()=>onMouseLeaveButton(block[i].dataset.popup));

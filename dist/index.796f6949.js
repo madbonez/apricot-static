@@ -546,8 +546,8 @@ function main() {
     const projectBlock = (0, _dom.els)("#screen9 .projectBlock");
     for(let i = 0; i < projectBlock.length; i++){
         projectBlock[i].addEventListener("click", ()=>{
-            (0, _state.updateOneState)("activePopupId", projectBlock[i].dataset.popup);
             (0, _state.updateOneState)("activePopupScreen", "9");
+            (0, _state.updateOneState)("activePopupId", projectBlock[i].dataset.popup);
         });
         projectBlock[i].addEventListener("mouseenter", ()=>onMouseEnter(projectBlock[i].dataset.popup));
         projectBlock[i].addEventListener("mouseleave", ()=>onMouseLeave(projectBlock[i].dataset.popup));

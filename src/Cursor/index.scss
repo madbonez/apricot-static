@@ -1,0 +1,41 @@
+@import "./src/styles/utils";
+
+
+#cursor {
+  .cursorText, .cursorArrow {
+    font-family: $inter-semiBold;
+    @include fluidFontSize(18px, 20px, 18px, 20px, 18px, 20px);
+    color: $white;
+    font-weight: 600;
+  }
+
+  .cursorArrow {
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 10px;
+    opacity: 0;
+  }
+
+  .cursorText {
+    display: none;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  &.followCursor {
+    display: none;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+    background-color: $orange;
+    border-radius: 50%;
+    transform: translateY(-50%) translateX(-50%); /* центрируем кружок */
+    position: fixed; /* задаём абсолютное позиционирование, чтобы элемент не влиял на остальные элементы и его можно было бы позиционировать следом за курсором */
+    z-index: 998; /* чтобы элемент был над остальными элементами */
+    pointer-events: none; /* чтобы сквозь элемент можно было взаимодействовать с элементами, находящимися под ним */
+  }
+}

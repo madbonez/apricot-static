@@ -7,11 +7,8 @@ const id = 'form'
 
 export function main() {
 
-    /*    formValid,
-        buttonClick,
-        formSended,*/
     const scrollTrigger = getState().scrollTriggers[`screen11Enter`]
-    const formRef = el('#form');
+    const formRef = el('#formRef');
     const inputNames = el('#inputName')
     const inputCompany = el('#inputCompany')
     const inputEmail = el('#inputEmail')
@@ -46,6 +43,7 @@ export function main() {
     }, 'companyDirty')
 
     selectState((newState: GlobalState) =>  {
+        console.log('emailDirty')
         if (getState().emailDirty){
             inputEmail.classList.add('checked')
         } else {
@@ -105,6 +103,7 @@ export function main() {
 
     selectState((newState: GlobalState) =>  {
         if (getState().emailDirty && getState().emailError){
+
             el('.wrongEmail').classList.add('visible')
             el('.rightEmail').classList.remove('visible')
             el('.errorMessageEmail').classList.add('show')
@@ -228,14 +227,14 @@ export function main() {
         updateOneState('name', e.target.value)
         updateOneState('nameDirty', true)
 
-        e.target.value ? updateOneState('nameError', '') : updateOneState('nameError', 'Required field!')
+        e.target.value ? updateOneState('nameError', '') : updateOneState('nameError', el('#formRef .errorMessageName').dataset.error_required)
     }
 
     const companyHandler = (e) => {
         updateOneState('company', e.target.value)
         updateOneState('companyDirty', true)
 
-        e.target.value ? updateOneState('companyError', '') : updateOneState('companyError', 'Required field!')
+        e.target.value ? updateOneState('companyError', '') : updateOneState('companyError', el('#formRef .errorMessageCompany').dataset.error_required)
     }
     const emailHandler = (e) => {
         updateOneState('email', e.target.value)
@@ -244,12 +243,12 @@ export function main() {
         const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
         if (e.target.value) {
             if (!re.test(String(e.target.value).toLowerCase())) {
-                updateOneState('emailError', "Wrong email, please enter a valid one")
+                updateOneState('emailError', el('#formRef .errorMessageEmail').dataset.error_email,)
             } else {
                 updateOneState('emailError', "")
             }
         } else {
-            updateOneState('emailError', 'Required field!')
+            updateOneState('emailError', el('#formRef .errorMessageEmail').dataset.error_required)
         }
 
     }
@@ -259,12 +258,12 @@ export function main() {
         const re = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
         if (e.target.value) {
             if (!re.test(String(e.target.value).toLowerCase())) {
-                updateOneState('phoneError', "Wrong phone number, please enter a valid one")
+                updateOneState('phoneError', el('#formRef .errorMessagePhone').dataset.error_phone)
             } else {
                 updateOneState('phoneError', "")
             }
         } else {
-            updateOneState('phoneError', 'Required field!')
+            updateOneState('phoneError', el('#formRef .errorMessagePhone').dataset.error_required)
         }
 
     }

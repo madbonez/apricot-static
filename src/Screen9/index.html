@@ -14,12 +14,7 @@
             </div>
             <div class="projectWrapper">
                 <each loop="item, index in block.elements">
-                    <div class="projectBlock"  data-popup="{{index}}">
-                        <!--         onClick={() => callback(index, 9)}
-                         onMouseEnter={()=>onMouseEnter(index)}
-                         onMouseLeave={()=>onMouseLeave(index)}
-                         key={index}-->
-
+                    <div class="projectBlock"  data-popup="{{index+block_7[0].elements.length}}">
                         <div class="imageContainer">
                             <video class="video" data-text="play"
                                    data-video={{item.preview.video_link}}

@@ -1,3 +1,5 @@
+import {el} from "../utils/dom";
+
 export interface GlobalState {
     scrollTriggers: object;
     counter?: number;
@@ -345,15 +347,15 @@ let globalState: GlobalState = {
     email: '',
     phone: '',
     projectDetails: '',
-    nameDirty:  false,
-    companyDirty:  false,
-    emailDirty:  false,
-    phoneDirty:  false,
+    nameDirty: false,
+    companyDirty: false,
+    emailDirty: false,
+    phoneDirty: false,
     projectDetailsDirty: false,
-    nameError: 'Required field!',
-    companyError: 'Required field!',
-    emailError: 'Required field!',
-    phoneError: 'Required field!',
+    nameError: el('#formRef .errorMessageName').dataset.error_required,
+    companyError: el('#formRef .errorMessageCompany').dataset.error_required,
+    emailError: el('#formRef .errorMessageEmail').dataset.error_required,
+    phoneError: el('#formRef .errorMessagePhone').dataset.error_required,
 
 };
 const listeners = {
@@ -380,13 +382,13 @@ const listeners = {
     email: [],
     phone: [],
     projectDetails: [],
-    nameDirty:   [],
-    companyDirty:   [],
-    emailDirty:   [],
-    phoneDirty:   [],
-    projectDetailsDirty:  [],
+    nameDirty: [],
+    companyDirty: [],
+    emailDirty: [],
+    phoneDirty: [],
+    projectDetailsDirty: [],
     nameError: [],
-    companyError:[],
+    companyError: [],
     emailError: [],
     phoneError: [],
 };
@@ -400,17 +402,15 @@ export function updateState(newState: GlobalState) {
 }
 
 export function updateOneState(key: string, object: any) {
-    globalState[key] = object,
-        listeners[key].forEach(fn => fn(globalState))
+    globalState[key] = object;
+    listeners[key].forEach(fn => fn(globalState));
 }
 
 export function getState(): GlobalState {
     return globalState;
 }
 
-export function selectState(fn: (newState: GlobalState) => void , ...keys:[string]) {
-
-
+export function selectState(fn: (newState: GlobalState) => void, ...keys: [string]) {
     if (keys) {
         for (let item of keys) {
             if (listeners[item].indexOf(fn) === -1) {
